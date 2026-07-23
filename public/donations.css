@@ -1,0 +1,940 @@
+/* ==========================================================================
+   PART 6: DESIGN TOKENS, CORE GLASSMORPHISM ELEMENTS & GLOBAL RESET
+   ========================================================================== */
+/* ==========================================================================
+   REPLACED PART 6: VIBRANT HIGH-CONTRAST DESIGN TOKENS & LIQUID BG SETUP
+   ========================================================================== */
+:root {
+    --bg-main: #0a0e17;
+    --bg-surface: rgba(17, 24, 39, 0.85);
+    --bg-card: rgba(31, 41, 55, 0.6);
+    --border-glass: rgba(255, 255, 255, 0.12);
+    --border-glass-glow: rgba(59, 130, 246, 0.5);
+    
+    /* Vibrant Cool Accent Palette */
+    --accent-blue: #00d2ff;       /* Electric Neon Blue */
+    --accent-green: #00f2fe;      /* Vibrant Teal Cyan */
+    --accent-success: #10b981;    /* Bright Crisp Emerald */
+    --accent-red: #ff3366;        /* High-Visibility Crimson */
+    --accent-yellow: #ffb800;     /* Intense Amber Gold */
+    
+    /* Text Contrast Tuning */
+    --text-pure: #ffffff;
+    --text-body: #e2e8f0;
+    --text-muted: #94a3b8;
+    
+    --shadow-blur: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(0, 210, 255, 0.18) 0px, transparent 45%),
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 45%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.9) 0px, transparent 100%);
+    background-attachment: fixed;
+    color: var(--text-body);
+    min-height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.finance-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Enhanced Glassmorphism Panel Layer */
+.structural-glass {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-blur);
+    transition: var(--transition);
+}
+
+/* Reactive Hover Glow States */
+.structural-glass:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 12px 40px 0 rgba(0, 210, 255, 0.25);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeInUp 0.4s ease-out forwards;
+}
+
+/* ==========================================================================
+   PART 7: SECURE MONITORING BAR, WORKSPACE HEADER & NAVIGATION MENUS
+   ========================================================================== */
+.secure-auth-bar {
+    width: 100%;
+    padding: 0.75rem 2rem;
+    background: rgba(11, 15, 25, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-glass);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+.bar-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.role-indicator {
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.role-main-admin { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); border: 1px solid rgba(59, 130, 246, 0.3); }
+.role-sub-admin { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+.role-unverified { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
+
+.restriction-hint {
+    font-size: 0.85rem;
+    color: var(--accent-yellow);
+}
+
+.bar-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+}
+
+.exit-gate-btn {
+    background: none;
+    border: 1px solid var(--border-glass);
+    color: var(--text-body);
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.exit-gate-btn:hover {
+    background: var(--accent-red);
+    color: var(--text-pure);
+    border-color: var(--accent-red);
+}
+
+/* WORKSPACE HEADER BLOCK */
+.finance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-glass);
+}
+
+.header-left h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-pure);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.header-left h1 i {
+    color: var(--accent-blue);
+}
+
+.header-left p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.25rem;
+}
+
+.cms-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    color: var(--text-body);
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.cms-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-pure);
+    transform: translateY(-2px);
+}
+
+/* SCROLLING WORKSPACE VIEW NAVIGATION */
+.finance-nav {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    background: var(--bg-surface);
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-glass);
+}
+
+.finance-nav::-webkit-scrollbar {
+    height: 4px;
+}
+
+.finance-nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--text-pure);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.nav-link.active {
+    color: var(--text-pure);
+    background: var(--accent-blue);
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+}
+/* ==========================================================================
+   PART 8: METRIC BLOCKS, ACTION PANELS & COMPONENT GRID LAYOUTS
+   ========================================================================== */
+/* MASTER CARD GRID LAYOUTS */
+.finance-cards, .account-grid, .fund-grid, .welfare-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+}
+
+/* HIGH-GLOW KPI ANALYTIC CONTAINERS */
+.glass-panel-glow {
+    background: var(--bg-surface);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 135px;
+    box-shadow: var(--shadow-blur);
+    transition: var(--transition);
+}
+
+.glass-panel-glow:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.metric-bg-icon {
+    position: absolute;
+    right: 1.25rem;
+    top: 1.25rem;
+    font-size: 2.25rem;
+    opacity: 0.05;
+    color: var(--text-pure);
+}
+
+.glass-panel-glow h4 {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.glass-panel-glow h2 {
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    letter-spacing: -0.02em;
+    color: var(--text-pure);
+}
+
+/* Dynamic Color Accent Modifiers */
+#currentBalance { color: var(--accent-green); }
+#expenseTotal { color: var(--accent-red); }
+#pendingPayments { color: var(--accent-yellow); }
+
+/* OPERATIONAL QUICK ACTION CONTROLS */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem;
+}
+
+.btn-action {
+    background: var(--bg-surface);
+    color: var(--text-body);
+    border: 1px solid var(--border-glass);
+    padding: 1.25rem 1rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: var(--shadow-blur);
+    transition: var(--transition);
+}
+
+.btn-action i {
+    font-size: 1.65rem;
+    transition: transform 0.2s ease;
+}
+
+.btn-action:hover {
+    transform: translateY(-4px);
+    color: var(--text-pure);
+    background: var(--bg-card);
+}
+
+.btn-action:hover i {
+    transform: scale(1.15);
+}
+
+#addIncome:hover { border-color: var(--accent-green); box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15); }
+#addExpense:hover { border-color: var(--accent-red); box-shadow: 0 4px 20px rgba(239, 68, 68, 0.15); }
+#transferFunds:hover { border-color: var(--accent-blue); box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15); }
+
+/* COMPONENT VIEW BLOCK WRAPPERS */
+.accounts-section, .funds-section, .welfare-section, .transactions-section, .activity-section, .summary-section, .reports-section {
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    border: 1px solid var(--border-glass);
+    box-shadow: var(--shadow-blur);
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.75rem;
+}
+
+.section-title h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-pure);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.add-btn {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.add-btn:hover {
+    background: var(--accent-blue);
+    color: var(--text-pure);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* ACCOUNT SPECIFIC DECORATION ELEMENTS */
+.account-card {
+    padding: 1.5rem;
+}
+
+.account-card h3 {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.account-card h1 {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--text-pure);
+    margin-bottom: 0.5rem;
+}
+
+.account-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.bank-accent-border {
+    border-left: 4px solid var(--accent-blue);
+}
+
+.badge-link {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--accent-blue);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+}
+
+/* FUND PRESENTATION BLOCKS */
+.fund-card {
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 120px;
+}
+
+.fund-card i {
+    position: absolute;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    opacity: 0.25;
+}
+
+.fund-card h3 {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.fund-card h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-pure);
+}
+/* ==========================================================================
+   PART 9: LEDGER TABLES, ACTIVITY STREAM & FILTERS LAYOUT MATRIX
+   ========================================================================== */
+/* RESPONSIVE SECURE DATA TABLES */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    background: rgba(11, 19, 36, 0.4);
+    border: 1px solid var(--border-glass);
+}
+
+.secure-ledger-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.secure-ledger-table th {
+    background: rgba(22, 38, 67, 0.6);
+    color: var(--text-pure);
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    border-bottom: 2px solid var(--bg-main);
+    letter-spacing: 0.02em;
+}
+
+.secure-ledger-table td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-glass);
+    color: var(--text-body);
+    vertical-align: middle;
+}
+
+.secure-ledger-table tr:last-child td {
+    border-bottom: none;
+}
+
+.secure-ledger-table tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* CUSTOM LEDGER TRANSACTION BADGES */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.badge-income, .badge.income { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.2); }
+.badge-expense, .badge.expense { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.2); }
+
+/* SYSTEM STATUS PILLS */
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-completed::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-green);
+}
+
+/* INTERACTIVE EDIT ACTIONS ROW BUTTONS */
+.edit-row-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-glass);
+    color: var(--text-body);
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.edit-row-btn:hover {
+    background: var(--accent-blue);
+    color: var(--text-pure);
+    border-color: var(--accent-blue);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* ROLLING SECURE ACTIVITIES LOG STREAM */
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-glass);
+}
+
+.activity-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.act-icon {
+    font-size: 1.5rem;
+    margin-top: 0.25rem;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.income-icon { color: var(--accent-green); }
+.expense-icon { color: var(--accent-red); }
+.transfer-icon { color: var(--accent-blue); }
+.welfare-icon { color: var(--accent-yellow); }
+
+.activity-item h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-pure);
+}
+
+.activity-item p {
+    font-size: 0.9rem;
+    color: var(--text-body);
+    margin-top: 0.15rem;
+}
+
+.activity-item small {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 0.25rem;
+}
+
+/* REGULATORY FILTERS COMPONENT DESIGN MATRIX */
+.report-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    padding: 1.25rem;
+    background: rgba(11, 19, 36, 0.4);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-glass);
+}
+
+.filter-control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-control label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.report-filters input[type="date"],
+.report-filters select {
+    background: rgba(22, 38, 67, 0.8);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+    color: var(--text-pure);
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.report-filters input[type="date"]:focus,
+.report-filters select:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+/* ==========================================================================
+   PART 10: REPORT CARDS, SYSTEM FOOTER & SECURE OVERLAY MODALS
+   ========================================================================== */
+/* REPORT CARD SELECTION MATRIX */
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.report-card {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.report-card i {
+    font-size: 2rem;
+    color: var(--accent-blue);
+    margin-bottom: 0.25rem;
+}
+
+.report-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-pure);
+}
+
+.report-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    min-height: 40px;
+}
+
+.btn-generate {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-glass);
+    color: var(--text-pure);
+    padding: 0.65rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: auto;
+    transition: var(--transition);
+}
+
+.report-card:hover .btn-generate {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* DATA EXPORT CONTROLS ROW */
+.report-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btn-util {
+    background: rgba(22, 38, 67, 0.5);
+    border: 1px solid var(--border-glass);
+    color: var(--text-body);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.btn-util:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-pure);
+}
+
+#exportPDF:hover { border-color: var(--accent-red); color: var(--accent-red); }
+#exportExcel:hover { border-color: var(--accent-green); color: var(--accent-green); }
+#printReport:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+
+/* WORKSPACE OUTPUT CANVAS */
+.report-output-canvas {
+    background: rgba(11, 19, 36, 0.5);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+}
+
+.report-output-canvas h3 {
+    font-size: 1.1rem;
+    color: var(--text-pure);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-glass);
+}
+
+/* SYSTEM FOOTER SIGNATURE */
+.finance-footer {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-glass);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* MODAL SYSTEMS & OVERLAYS */
+.secure-auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(4, 7, 13, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none; /* Controlled via JS Engine */
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.secure-modal-body {
+    background: #0d1626;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+}
+
+.animate-scale-up {
+    animation: modalZoom 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes modalZoom {
+    from { transform: scale(0.92); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.secure-modal-title {
+    padding: 1.25rem 1.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--border-glass);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.secure-modal-title h3 {
+    font-size: 1.15rem;
+    color: var(--text-pure);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-modal-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-modal-close:hover { color: var(--text-pure); }
+
+.secure-modal-content {
+    padding: 1.75rem;
+}
+
+.modal-notice-text {
+    font-size: 0.9rem;
+    color: var(--text-body);
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+}
+
+/* INPUT COMPONENT FORM ELEMENTS */
+.form-element-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.form-element-block label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.form-element-block input,
+.form-element-block select {
+    background: rgba(18, 30, 53, 0.8);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+    color: var(--text-pure);
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-element-block input:focus,
+.form-element-block select:focus {
+    border-color: var(--accent-blue);
+}
+
+.auth-error-output {
+    color: var(--accent-red);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    min-height: 18px;
+}
+
+/* OVERLAY FOOTER ACTIONS */
+.secure-modal-actions {
+    padding: 1.25rem 1.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid var(--border-glass);
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.btn-modal-back {
+    background: none;
+    border: 1px solid var(--border-glass);
+    color: var(--text-body);
+    padding: 0.65rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-modal-back:hover { background: rgba(255,255,255,0.03); color: var(--text-pure); }
+
+.btn-modal-proceed {
+    background: var(--accent-blue);
+    border: none;
+    color: var(--text-pure);
+    padding: 0.65rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    transition: var(--transition);
+}
+
+.btn-modal-proceed:hover { background: #2563eb; transform: translateY(-1px); }
+.full-width-btn { width: 100%; text-align: center; }
+
+/* HIDDEN WRITER CONTROLS ON READ-ONLY MODE */
+.write-restricted-hidden {
+    opacity: 0.4 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+}

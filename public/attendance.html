@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Attendance | Kingdom Ways CMS</title>
+
+
+<link rel="stylesheet" href="attendance.css">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+
+<body>
+
+
+<div class="attendance-page">
+
+
+
+<!-- ================= HEADER ================= -->
+
+
+<header class="attendance-header">
+
+
+<a href="dashboard.html" class="home-btn">
+
+<i class="fas fa-home"></i>
+
+</a>
+
+
+
+<div class="header-title">
+
+<h1>
+
+<i class="fas fa-user-check"></i>
+
+Attendance Management
+
+</h1>
+
+
+<p>
+Track real member attendance activity
+</p>
+
+
+</div>
+
+
+
+<div class="date-box">
+
+<i class="fas fa-calendar-day"></i>
+
+<span id="todayDate"></span>
+
+
+</div>
+
+
+
+</header>
+
+
+
+
+
+
+
+<!-- ================= SUMMARY ================= -->
+
+
+<section class="summary-cards">
+
+
+
+<div class="card">
+
+<i class="fas fa-user-check"></i>
+
+<div>
+
+<h3>
+Present Today
+</h3>
+
+<h2 id="presentToday">
+0
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="card">
+
+
+<i class="fas fa-user-clock"></i>
+
+
+<div>
+
+<h3>
+Not Checked In
+</h3>
+
+
+<h2 id="notChecked">
+0
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<i class="fas fa-users"></i>
+
+
+<div>
+
+<h3>
+Total Approved Members
+</h3>
+
+
+<h2 id="approvedMembers">
+0
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================= CONTROLS ================= -->
+
+
+<section class="attendance-controls">
+
+
+<div>
+
+
+<label>
+Attendance Type
+</label>
+
+
+<select id="attendanceType">
+
+
+<option>
+Sunday Service
+</option>
+
+
+<option>
+Bible Study
+</option>
+
+
+<option>
+Prayer Meeting
+</option>
+
+
+<option>
+Youth Meeting
+</option>
+
+
+<option>
+Conference
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+
+<label>
+Select Date
+</label>
+
+
+<input 
+type="date"
+id="attendanceDate">
+
+
+</div>
+
+
+
+
+
+<button class="export-btn">
+
+<i class="fas fa-file-export"></i>
+
+Export Report
+
+</button>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================= TODAY ATTENDANCE ================= -->
+
+
+
+<section class="table-section">
+
+
+<h2>
+
+<i class="fas fa-users"></i>
+
+Members Attendance
+
+</h2>
+
+
+<p>
+Members who actually logged in today
+</p>
+
+
+
+
+
+<table>
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+#
+</th>
+
+
+<th>
+Member Name
+</th>
+
+
+<th>
+Time In
+</th>
+
+
+<th>
+Time Out
+</th>
+
+
+<th>
+Action
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody id="attendanceTable">
+
+
+<!-- Data comes from server later -->
+
+
+<tr>
+
+
+<td colspan="5">
+
+No attendance records today
+
+</td>
+
+
+</tr>
+
+
+
+</tbody>
+
+
+</table>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================= NOT AVAILABLE ================= -->
+
+
+
+<section class="table-section">
+
+
+<h2>
+
+<i class="fas fa-user-slash"></i>
+
+Approved Members Not Available Today
+
+</h2>
+
+
+<p>
+Approved members who have not logged in today
+</p>
+
+
+
+
+
+<table>
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+#
+</th>
+
+
+<th>
+Member Name
+</th>
+
+
+<th>
+Last Seen
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="offlineMembersTable">
+
+
+
+<tr>
+
+
+<td colspan="3">
+
+No unavailable members
+
+</td>
+
+
+</tr>
+
+
+
+</tbody>
+
+
+</table>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================= HISTORY ================= -->
+
+
+
+<section class="history-section">
+
+
+<h2>
+
+<i class="fas fa-history"></i>
+
+Attendance History
+
+</h2>
+
+
+
+
+
+<div class="history-card">
+
+
+<h3>
+Previous Attendance Records
+</h3>
+
+
+<p>
+View attendance from previous dates
+</p>
+
+
+
+<button>
+
+View History
+
+</button>
+
+
+
+</div>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================= PERCENTAGE ================= -->
+
+
+
+<section class="percentage-section">
+
+
+<h2>
+
+<i class="fas fa-chart-line"></i>
+
+Attendance Performance
+
+</h2>
+
+
+
+<div class="percentage-card">
+
+
+<h3>
+Monthly Attendance Rate
+</h3>
+
+
+<p id="attendanceRate">
+
+0%
+
+</p>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================= EXPORT ================= -->
+
+
+
+<section class="export-section">
+
+
+<button>
+
+<i class="fas fa-file-pdf"></i>
+
+Export PDF
+
+</button>
+
+
+
+<button>
+
+<i class="fas fa-file-excel"></i>
+
+Export Excel
+
+</button>
+
+
+
+</section>
+
+
+
+
+
+
+</div>
+
+
+<script src="attendance.js"></script>
+
+
+</body>
+
+</html>

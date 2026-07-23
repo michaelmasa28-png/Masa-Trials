@@ -1,0 +1,76 @@
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Boolean,
+    DateTime,
+    ForeignKey,
+    Table
+)
+from sqlalchemy.sql import func
+
+from app.database import Base
+
+admin_permissions = Table(
+    "admin_permissions",
+    Base.metadata,
+
+    Column(
+        "admin_id",
+        Integer,
+        ForeignKey("admins.id"),
+        primary_key=True
+    ),
+
+    Column(
+        "permission_id",
+        Integer,
+        ForeignKey("permissions.id"),
+        primary_key=True
+    )
+)
+
+class Admin(Base):
+    __tablename__ = "admins"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    full_name = Column(String(100), nullable=False)
+
+    username = Column(String(50), unique=True, nullable=False, index=True)
+
+    email = Column(String(120), unique=True, nullable=False)
+
+    phone = Column(String(20), unique=True, nullable=True)
+
+    password_hash = Column(String(255), nullable=False)
+
+    role = Column(String(50), nullable=False, default="admin")
+
+    is_active = Column(Boolean, default=True)
+
+    must_change_password = Column(Boolean, default=True)
+
+    created_by = Column(Integer, ForeignKey("admins.id"), nullable=True)
+
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    last_login = Column(DateTime(timezone=True), nullable=True)
+
+
+class Permission(Base):
+    __tablename__ = "permissions"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    name = Column(
+        String(100),
+        unique=True,
+        nullable=False
+    )
+
+    description = Column(
+        String(255),
+        nullable=True
+    )
+

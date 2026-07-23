@@ -1,0 +1,93 @@
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from app.permissions import check_permission
+from app.database import SessionLocal
+from app.models import Admin, Permission
+from app.schema import AdminCreate
+from app.auth import hash_password
+
+
+router = APIRouter()
+
+
+def get_db():
+
+    db = SessionLocal()
+
+    try:
+        yield db
+
+    finally:
+        db.close()
+
+
+
+    # Check username already exists
+
+    existing = (
+        db.query(Admin)
+        .filter(Admin.username == data.username)
+        .first()
+    )
+
+    if existing:
+
+        return {
+            "success": False,
+            "message": "Username already exists"
+        }
+
+
+    # Create admin
+
+    new_admin = Admin(
+
+        full_name=data.full_name,
+
+        username=data.username,
+
+        email=data.email,
+
+        phone=data.phone,
+
+        password_hash=hash_password(data.password),
+
+        role=data.role
+
+    )
+
+
+    # Attach permissions
+
+    permissions = (
+        db.query(Permission)
+        .filter(
+            Permission.id.in_(data.permissions)
+        )
+        .all()
+    )
+
+
+    new_admin.permissions = permissions
+
+
+    db.add(new_admin)
+
+    db.commit()
+
+    db.refresh(new_admin)
+
+
+    return {
+
+        "success": True,
+
+        "message": "Admin created successfully",
+
+        "admin_id": new_admin.id,
+
+        "permissions": [
+            p.name for p in permissions
+        ]
+
+    }

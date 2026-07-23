@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Members</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>Kingdom Ways CMS</h2>
+        </div>
+
+        <ul class="menu">
+           <li><a href="dashboard.html"><|<|</a></li>
+
+            <li><a href="members.html">👥 Members</a></li>
+            <li><a href="ministries.html">🙏 Ministries</a></li>
+            <li><a href="events.html">📅 Events</a></li>
+            <li><a href="sermons-admin.html">📖 Sermons</a></li>
+            <li><a href="galleryadmin.html">🖼 Gallery</a></li>
+            <li><a href="settings.html">⚙ Settings</a></li>
+            <li><a href="../login.html">🚪 Logout</a></li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+ 
+        <!-- Header -->
+        <header class="topbar">
+            <h1>Members Management</h1>
+
+            <div class="admin">
+                Welcome, Admin
+            </div>
+        </header>
+
+        <!-- Members Table -->
+        <section class="members-table">
+<button class="memberAdd-button" id="addMemberBtn">
+    + Add Member
+</button>
+            <h2>Church Members</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Photo</th>
+                        <th>Username</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                        <th>Ministry</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+<tbody id="membersTable">
+
+    <!-- Members will be loaded here from the database -->
+
+</tbody>
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+<script src="members.js"></script>
+
+</body>
+</html>

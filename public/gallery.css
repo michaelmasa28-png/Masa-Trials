@@ -1,0 +1,543 @@
+/* ==========================================
+   KINGDOM WAYS CHURCH
+   MODERN GALLERY CSS
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f7fb;
+    color:#333;
+    overflow-x:hidden;
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+header{
+
+    background:linear-gradient(135deg,#0b4f6c,#1c7c54);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    padding:20px 8%;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+
+}
+
+.logo h1{
+
+    font-size:2rem;
+
+    margin-bottom:6px;
+
+}
+
+.logo p{
+
+    opacity:.9;
+
+    font-size:.95rem;
+
+}
+
+nav{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+nav a{
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    transition:.3s;
+
+    font-weight:bold;
+
+}
+
+nav a:hover{
+
+    background:white;
+
+    color:#0b4f6c;
+
+}
+
+/* ==========================
+   HERO
+========================== */
+
+.hero{
+
+    height:45vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    color:white;
+
+    background:
+
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+
+    url("images/church.jpg") center/cover;
+
+}
+
+.hero h2{
+
+    font-size:3.2rem;
+
+    margin-bottom:15px;
+
+}
+
+.hero p{
+
+    max-width:700px;
+
+    line-height:1.8;
+
+    font-size:1.1rem;
+
+}
+
+/* ==========================
+   SEARCH
+========================== */
+
+.search-area{
+
+    padding:40px 20px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+#search{
+
+    width:100%;
+
+    max-width:650px;
+
+    padding:18px 25px;
+
+    border:none;
+
+    border-radius:50px;
+
+    font-size:16px;
+
+    outline:none;
+
+    background:white;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+    transition:.3s;
+
+}
+
+#search:focus{
+
+    transform:scale(1.02);
+
+    box-shadow:0 15px 35px rgba(11,79,108,.25);
+
+}
+
+/* ==========================
+   FILTER BUTTONS
+========================== */
+
+.filters{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    padding:0 20px 40px;
+
+}
+
+.filters button{
+
+    border:none;
+
+    cursor:pointer;
+
+    background:white;
+
+    color:#0b4f6c;
+
+    font-weight:bold;
+
+    padding:12px 24px;
+
+    border-radius:30px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.filters button:hover,
+
+.filters button.active{
+
+    background:#1c7c54;
+
+    color:white;
+
+    transform:translateY(-3px);
+
+}/* ==========================
+   GALLERY GRID
+========================== */
+
+.gallery{
+
+    width:90%;
+    max-width:1400px;
+    margin:0 auto 80px;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+
+}
+
+/* ==========================
+   GALLERY CARD
+========================== */
+
+.gallery-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.gallery-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.gallery-card img{
+
+    width:100%;
+
+    height:250px;
+
+    object-fit:cover;
+
+    transition:.4s;
+
+    cursor:pointer;
+
+}
+
+.gallery-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+.gallery-info{
+
+    padding:20px;
+
+}
+
+.gallery-info h3{
+
+    color:#0b4f6c;
+
+    margin-bottom:10px;
+
+    font-size:1.4rem;
+
+}
+
+.gallery-info p{
+
+    line-height:1.6;
+
+    color:#666;
+
+    margin-bottom:8px;
+
+}
+
+.gallery-category{
+
+    display:inline-block;
+
+    margin-top:12px;
+
+    padding:8px 16px;
+
+    border-radius:20px;
+
+    background:#1c7c54;
+
+    color:white;
+
+    font-size:.85rem;
+
+    font-weight:bold;
+
+}
+
+/* ==========================
+   LIGHTBOX
+========================== */
+
+#lightbox{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.92);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+    padding:30px;
+
+}
+
+#lightbox img{
+
+    max-width:90%;
+
+    max-height:90%;
+
+    border-radius:10px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.5);
+
+}
+
+#close{
+
+    position:absolute;
+
+    top:20px;
+
+    right:35px;
+
+    color:white;
+
+    font-size:45px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+#close:hover{
+
+    transform:rotate(90deg);
+
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+footer{
+
+    background:#0b4f6c;
+
+    color:white;
+
+    text-align:center;
+
+    padding:30px 20px;
+
+}
+
+/* ==========================
+   SCROLLBAR
+========================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#1c7c54;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#eee;
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:768px){
+
+header{
+
+    flex-direction:column;
+
+    text-align:center;
+
+    gap:20px;
+
+}
+
+.hero{
+
+    height:38vh;
+
+    padding:30px;
+
+}
+
+.hero h2{
+
+    font-size:2.2rem;
+
+}
+
+.hero p{
+
+    font-size:1rem;
+
+}
+
+.gallery{
+
+    grid-template-columns:1fr;
+
+}
+
+.gallery-card img{
+
+    height:220px;
+
+}
+
+.filters{
+
+    gap:10px;
+
+}
+
+.filters button{
+
+    padding:10px 18px;
+
+}
+
+#search{
+
+    width:95%;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.logo h1{
+
+    font-size:1.6rem;
+
+}
+
+.hero h2{
+
+    font-size:1.8rem;
+
+}
+
+.hero p{
+
+    font-size:.95rem;
+
+}
+
+.gallery-card img{
+
+    height:200px;
+
+}
+
+}

@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kingdom Ways CMS | Events</title>
+
+<link rel="stylesheet" href="events.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+<!-- ===========================
+SIDEBAR
+=========================== -->
+
+
+<aside class="sidebar">
+
+
+<div class="logo">
+
+<i class="fa-solid fa-church"></i>
+
+<div>
+
+<h2>Kingdom Ways</h2>
+
+<span>Church CMS</span>
+
+</div>
+
+</div>
+
+
+
+<nav>
+
+<a href="dashboard.html">
+
+<i class="fa-solid fa-house"></i>
+
+Dashboard
+
+</a>
+
+</nav>
+
+
+
+
+<div class="quote-box">
+
+
+<h4>
+
+<i class="fa-solid fa-heart"></i>
+
+Daily Encouragement
+
+</h4>
+
+
+<p id="quoteText">
+
+Trust in the Lord with all your heart.
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="version">
+
+CMS Version 2.0
+
+</div>
+
+
+
+</aside>
+
+
+
+
+
+<!-- ===========================
+MAIN CONTENT
+=========================== -->
+
+
+<main class="content">
+
+
+
+<header class="topbar">
+
+
+<div>
+
+<h1>
+
+<i class="fa-solid fa-calendar-days"></i>
+
+Events Management
+
+</h1>
+
+
+<p>
+
+Create, edit and publish church events for members.
+
+</p>
+
+
+</div>
+
+
+
+
+<button
+
+class="publishBtn"
+
+id="newEventBtn">
+
+
+<i class="fa-solid fa-plus"></i>
+
+New Event
+
+
+</button>
+
+
+
+</header>
+
+
+
+
+
+<!-- ===========================
+STATS
+=========================== -->
+
+
+<section class="stats">
+
+
+
+<div class="stat-card">
+
+
+<div class="icon blue">
+
+<i class="fa-solid fa-calendar-days"></i>
+
+</div>
+
+
+<div>
+
+<h2 id="totalEvents">
+
+0
+
+</h2>
+
+<span>
+
+Upcoming Events
+
+</span>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="stat-card">
+
+
+<div class="icon green">
+
+<i class="fa-solid fa-users"></i>
+
+</div>
+
+
+<div>
+
+<h2 id="totalGuests">
+
+0
+
+</h2>
+
+<span>
+
+Registered Guests
+
+</span>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="stat-card">
+
+
+<div class="icon orange">
+
+<i class="fa-solid fa-location-dot"></i>
+
+</div>
+
+
+<div>
+
+<h2 id="totalLocations">
+
+0
+
+</h2>
+
+<span>
+
+Locations
+
+</span>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="stat-card">
+
+
+<div class="icon purple">
+
+<i class="fa-solid fa-star"></i>
+
+</div>
+
+
+<div>
+
+<h2 id="featuredEvents">
+
+0
+
+</h2>
+
+
+<span>
+
+Featured Events
+
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+<!-- ===========================
+FORM + PREVIEW
+=========================== -->
+
+
+<section class="grid">
+
+
+
+<div class="card">
+
+
+<h2>
+
+<i class="fa-solid fa-calendar-plus"></i>
+
+Create New Event
+
+</h2>
+
+
+
+
+<form id="eventForm">
+
+
+
+<input type="hidden" id="eventId">
+
+
+
+
+
+<div class="input-group">
+
+
+<label>
+
+Event Title
+
+</label>
+
+
+
+<input
+
+type="text"
+
+id="eventTitle"
+
+placeholder="Sunday Worship Service"
+
+required>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="two-column">
+
+
+
+<div class="input-group">
+
+
+<label>
+
+Event Date
+
+</label>
+
+
+
+<input
+
+type="date"
+
+id="eventDate"
+
+required>
+
+
+
+</div>
+
+
+
+
+
+<div class="input-group">
+
+
+<label>
+
+Event Time
+
+</label>
+
+
+
+<input
+
+type="time"
+
+id="eventTime"
+
+required>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div class="input-group">
+
+
+<label>
+
+Venue
+
+</label>
+
+
+
+<input
+
+type="text"
+
+id="eventLocation"
+
+placeholder="Main Sanctuary"
+
+required>
+
+
+
+</div>
+
+
+
+
+
+<div class="input-group">
+
+
+<label>
+
+Speaker
+
+</label>
+
+
+
+<input
+
+type="text"
+
+id="eventSpeaker"
+
+placeholder="To be announced">
+
+
+
+</div>
+
+
+
+<!-- ===========================
+FIXED FIELD POSITIONS (GUESTS & FEATURED CHECKBOX)
+=========================== -->
+<div style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+margin-top:18px;
+margin-bottom:18px;
+">
+
+<div>
+
+<label style="
+display:block;
+font-weight:600;
+margin-bottom:8px;
+color:#374151;
+">
+
+<i class="fas fa-users"></i>
+
+Registered Guests
+
+</label>
+
+<input
+type="number"
+id="eventGuests"
+value="0"
+min="0"
+placeholder="Number of guests"
+
+style="
+width:100%;
+padding:13px;
+border:2px solid #dbeafe;
+border-radius:12px;
+font-size:15px;
+outline:none;
+transition:.3s;
+box-sizing: border-box;
+">
+
+</div>
+
+
+
+<div style="
+display:flex;
+align-items:center;
+justify-content:center;
+padding-top:25px;
+">
+
+<label style="
+display:flex;
+align-items:center;
+gap:12px;
+cursor:pointer;
+font-weight:600;
+font-size:16px;
+">
+
+<input
+
+type="checkbox"
+
+id="featuredEvent"
+
+style="
+width:22px;
+height:22px;
+cursor:pointer;
+accent-color:#2563eb;
+">
+
+⭐ Featured Event
+
+</label>
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="input-group">
+
+
+<label>
+
+Event Description
+
+</label>
+
+
+
+<textarea
+
+id="eventDescription"
+
+rows="6"
+
+placeholder="Write complete event details..."
+
+required></textarea>
+
+
+
+</div>
+
+<!-- ===========================
+BUTTONS
+=========================== -->
+
+
+<div class="button-group">
+
+
+<button
+
+type="submit"
+
+class="saveBtn"
+
+id="saveEventBtn">
+
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save Event
+
+
+</button>
+
+
+
+
+
+<button
+
+type="reset"
+
+class="cancelBtn"
+
+id="cancelBtn">
+
+
+<i class="fa-solid fa-xmark"></i>
+
+Clear
+
+
+</button>
+
+
+
+</div>
+
+
+
+</form>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ===========================
+LIVE PREVIEW
+=========================== -->
+
+
+<div class="card preview">
+
+
+<h2>
+
+<i class="fa-solid fa-eye"></i>
+
+Live Preview
+
+</h2>
+
+
+
+
+
+<div class="preview-card">
+
+
+
+<div class="preview-image">
+
+
+<img
+
+id="previewImage"
+
+src="images/default-event.jpg"
+
+alt="Event Preview">
+
+
+</div>
+
+
+
+
+
+
+<div class="preview-content">
+
+
+
+<span
+
+class="badge"
+
+id="previewStatus">
+
+
+Upcoming Event
+
+
+</span>
+
+
+
+
+
+<h3 id="previewTitle">
+
+Sunday Worship Service
+
+</h3>
+
+
+
+
+
+<p id="previewDescription">
+
+Your event description will appear here while typing.
+
+</p>
+
+
+
+
+
+
+
+<div class="preview-meta">
+
+
+
+
+
+<div>
+
+<i class="fa-solid fa-calendar-days"></i>
+
+<span id="previewDate">
+
+Select Date
+
+</span>
+
+</div>
+
+
+
+
+
+<div>
+
+<i class="fa-solid fa-clock"></i>
+
+<span id="previewTime">
+
+Select Time
+
+</span>
+
+</div>
+
+
+
+
+
+<div>
+
+<i class="fa-solid fa-location-dot"></i>
+
+<span id="previewVenue">
+
+Venue
+
+</span>
+
+</div>
+
+
+
+
+
+<div>
+
+<i class="fa-solid fa-microphone"></i>
+
+<span id="previewSpeaker">
+
+Speaker
+
+</span>
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+RECENT EVENTS
+=========================== -->
+
+
+
+<section class="card">
+
+
+
+<div class="section-header">
+
+
+
+<div>
+
+
+<h2>
+
+
+<i class="fa-solid fa-calendar-week"></i>
+
+
+Recent Events
+
+
+</h2>
+
+
+
+
+<p>
+
+Recently created and upcoming church events.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+<div class="search-box">
+
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+
+<input
+
+type="search"
+
+id="searchEvent"
+
+placeholder="Search events...">
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- JAVASCRIPT WILL LOAD EVENTS HERE -->
+
+
+
+<div
+
+class="events-list"
+
+id="eventsContainer">
+
+
+
+</div>
+
+
+
+
+</section>
+
+
+
+
+
+</main>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+GALLERY MODAL
+=========================== -->
+
+
+<div
+
+class="modal"
+
+id="galleryModal">
+
+
+
+<div class="modal-content">
+
+
+
+
+
+<div class="modal-header">
+
+
+<h2>
+
+<i class="fa-solid fa-images"></i>
+
+Church Gallery
+
+
+</h2>
+
+
+
+
+
+<button
+
+class="closeModal"
+
+id="closeGallery">
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<!-- ===========================
+GALLERY TOOLS
+=========================== -->
+
+<div style="
+padding:20px;
+background:#f8fafc;
+border-bottom:1px solid #e5e7eb;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:15px;
+">
+
+<div>
+
+<h3 style="
+margin:0;
+color:#1e3a8a;
+font-size:18px;
+">
+
+<i class="fas fa-image"></i>
+
+Choose Event Image
+
+</h3>
+
+<p style="
+margin:6px 0 0;
+font-size:13px;
+color:#64748b;
+">
+
+Click any gallery image to use it as the event banner.
+
+</p>
+
+</div>
+
+<button
+
+type="button"
+
+id="uploadImageBtn"
+
+style="
+padding:12px 22px;
+border:none;
+border-radius:12px;
+background:linear-gradient(135deg,#2563eb,#1d4ed8);
+color:white;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 10px 20px rgba(37,99,235,.25);
+transition:.3s;
+">
+
+<i class="fas fa-upload"></i>
+
+Upload New Image
+
+</button>
+
+<input
+type="file"
+id="eventImage"
+accept="image/*"
+style="display:none;">
+
+</div>
+
+<!-- ===========================
+GALLERY GRID
+=========================== -->
+
+<div
+
+class="galleryGrid"
+
+id="galleryGrid"
+
+style="
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+gap:18px;
+padding:22px;
+max-height:520px;
+overflow-y:auto;
+background:#f9fafb;
+">
+
+<div style="
+grid-column:1/-1;
+text-align:center;
+padding:60px 20px;
+color:#94a3b8;
+font-size:18px;
+">
+
+<i class="fas fa-spinner fa-spin"
+style="
+font-size:40px;
+margin-bottom:15px;
+display:block;
+"></i>
+
+Loading gallery...
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===========================
+TOAST
+=========================== -->
+
+<div
+
+id="toast"
+
+class="toast"
+
+style="
+position:fixed;
+top:25px;
+right:25px;
+padding:15px 24px;
+background:#2563eb;
+color:#fff;
+font-weight:600;
+border-radius:12px;
+box-shadow:0 18px 45px rgba(0,0,0,.2);
+display:none;
+z-index:99999;
+animation:fadeIn .35s ease;
+">
+
+Saved Successfully
+
+</div>
+
+<script src="events.js"></script>
+
+</body>
+
+</html>

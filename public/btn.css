@@ -1,0 +1,307 @@
+/* ==========================
+   RESET
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+    background:
+        linear-gradient(rgba(11,31,58,.82),rgba(11,31,58,.82)),
+        url(images/church.jpg);
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+/* ==========================
+   LOGO
+========================== */
+
+.logo{
+    position:absolute;
+    top:20px;
+    left:40px;
+}
+
+.logo img{
+    width:90px;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
+}
+
+/* ==========================
+   CONTAINER
+========================== */
+
+.button-container{
+    width:100%;
+    max-width:1200px;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+
+    gap:40px;
+}
+
+/* ==========================
+   FORM CARDS
+========================== */
+
+#signup,
+#signin{
+
+    background:rgba(255,255,255,.97);
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+
+    transition:.4s;
+
+    border:3px solid transparent;
+
+}
+
+#signup:hover,
+#signin:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#d4af37;
+
+    box-shadow:0 25px 50px rgba(0,0,0,.45);
+
+}
+
+/* ==========================
+   HEADINGS
+========================== */
+
+h1,
+h2{
+
+    color:#0b1f3a;
+
+    text-align:center;
+
+    margin-bottom:10px;
+
+}
+
+p{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    color:#555;
+
+}
+
+/* ==========================
+   LABELS
+========================== */
+
+label{
+
+    display:block;
+
+    margin:15px 0 8px;
+
+    color:#0b1f3a;
+
+    font-weight:bold;
+
+}
+
+/* ==========================
+   INPUTS
+========================== */
+
+input{
+
+    width:100%;
+
+    padding:15px;
+
+    border:2px solid #ddd;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+input:focus{
+
+    border-color:#d4af37;
+
+    box-shadow:0 0 12px rgba(212,175,55,.5);
+
+    transform:scale(1.02);
+
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+button{
+
+    width:100%;
+
+    margin-top:30px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:#d4af37;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.4s;
+
+}
+
+button:hover{
+
+    background:#0b1f3a;
+
+    transform:translateY(-4px) scale(1.05) rotate(-1deg);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+}
+
+button:active{
+
+    transform:scale(.96);
+
+}
+
+/* ==========================
+   CARD ANIMATION
+========================== */
+
+#signup{
+
+    animation:slideLeft .9s ease;
+
+}
+
+#signin{
+
+    animation:slideRight .9s ease;
+
+}
+
+@keyframes slideLeft{
+
+    from{
+        opacity:0;
+        transform:translateX(-60px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+
+}
+
+@keyframes slideRight{
+
+    from{
+        opacity:0;
+        transform:translateX(60px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:768px){
+
+    body{
+
+        padding:20px;
+
+        background-attachment:scroll;
+
+    }
+
+    .logo{
+
+        position:relative;
+
+        top:0;
+
+        left:0;
+
+        margin-bottom:20px;
+
+        text-align:center;
+
+    }
+
+    .logo img{
+
+        width:80px;
+
+    }
+
+    .button-container{
+
+        grid-template-columns:1fr;
+
+    }
+
+    #signup,
+    #signin{
+
+        padding:30px;
+
+    }
+
+}

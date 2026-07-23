@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Members Sign Up & Login</title>
+
+<link rel="stylesheet" href="btn.css">
+
+</head>
+
+
+<body>
+
+
+<div class="logo">
+    <img src="images/logo.png" alt="Church Logo">
+</div>
+
+
+
+<div class="button-container">
+
+
+<!-- ================= SIGN UP ================= -->
+
+<section id="signup">
+
+<h1>New Member Sign Up Here</h1>
+
+<p>
+Register and wait for admin approval
+</p>
+
+
+<form id="signupForm">
+
+
+<label>
+Full Name
+</label>
+
+
+<input
+type="text"
+id="fullName"
+placeholder="Enter Full Name"
+required>
+
+
+
+<label>
+Phone Number
+</label>
+
+
+<input
+type="tel"
+id="signupPhone"
+placeholder="Enter Phone Number"
+pattern="[0-9]{10,}"
+required>
+
+
+
+<button type="submit">
+Submit Registration
+</button>
+
+
+</form>
+
+
+<p id="signupMessage"></p>
+
+
+</section>
+
+
+
+
+
+<!-- ================= LOGIN ================= -->
+
+
+<section id="signin">
+
+
+<h2>
+Already Approved Member?
+</h2>
+
+
+<p>
+Login Here
+</p>
+
+
+
+<form id="loginForm">
+
+
+<label>
+Phone Number
+</label>
+
+
+<input
+type="tel"
+id="loginPhone"
+placeholder="Phone Number"
+required>
+
+
+
+<label>
+Username
+</label>
+
+
+<input
+type="text"
+id="loginUsername"
+placeholder="Your generated username"
+required>
+
+
+
+<button type="submit">
+Sign In
+</button>
+
+
+</form>
+
+
+<p id="loginMessage"></p>
+
+
+
+</section>
+
+
+
+</div>
+
+
+
+<script src="btn.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1034 @@
+// =====================================================
+// KINGDOM WAYS CMS
+// sermons-admin.js
+// PART 1 OF 4
+// =====================================================
+
+const API_URL = "http://127.0.0.1:8000/api/sermons";
+
+const sermonForm = document.getElementById("sermonForm");
+
+const sermonTable = document.getElementById("sermonTableBody");
+
+const thumbnailInput = document.getElementById("thumbnail");
+const thumbnailPreview = document.getElementById("thumbnailPreview");
+
+const videoInput = document.getElementById("video_file");
+const videoPreview = document.getElementById("videoPreview");
+
+const notesInput = document.getElementById("notes");
+
+let editingId = null;
+
+// =====================================
+// PAGE LOAD
+// =====================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    loadSermons();
+
+});
+
+// =====================================
+// THUMBNAIL PREVIEW
+// =====================================
+
+if (thumbnailInput) {
+
+    thumbnailInput.addEventListener("change", () => {
+
+        const file = thumbnailInput.files[0];
+
+        if (!file) return;
+
+        thumbnailPreview.src = URL.createObjectURL(file);
+
+    });
+
+}
+
+// =====================================
+// VIDEO PREVIEW
+// =====================================
+
+if (videoInput) {
+
+    videoInput.addEventListener("change", () => {
+
+        const file = videoInput.files[0];
+
+        if (!file) return;
+
+        videoPreview.src = URL.createObjectURL(file);
+
+        videoPreview.load();
+
+        videoPreview.style.display = "block";
+
+    });
+
+}
+
+// =====================================
+// FORM SUBMIT
+// =====================================
+
+sermonForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("title",
+        document.getElementById("title").value);
+
+    formData.append("preacher",
+        document.getElementById("preacher").value);
+
+    formData.append("bible_reading",
+        document.getElementById("bible_reading").value);
+
+    formData.append("description",
+        document.getElementById("description").value);
+
+    formData.append("sermon_date",
+        document.getElementById("sermon_date").value);
+
+    formData.append("youtube_url",
+        document.getElementById("youtube_url").value);
+
+    formData.append(
+        "featured",
+        document.getElementById("featured").checked
+    );
+
+    if (thumbnailInput.files.length > 0) {
+
+        formData.append(
+            "thumbnail",
+            thumbnailInput.files[0]
+        );
+
+    }
+
+    if (videoInput.files.length > 0) {
+
+        formData.append(
+            "video_file",
+            videoInput.files[0]
+        );
+
+    }
+
+    if (notesInput.files.length > 0) {
+
+        formData.append(
+            "notes",
+            notesInput.files[0]
+        );
+
+    }
+
+    try {
+
+        let response;
+
+        if (editingId === null) {
+
+            response = await fetch(API_URL + "/", {
+
+                method: "POST",
+
+                body: formData
+
+            });
+
+        } else {
+
+            response = await fetch(API_URL + "/" + editingId, {
+
+                method: "PUT",
+
+                body: formData
+
+            });
+
+        }
+
+        const result = await response.json();
+
+        if (!response.ok) {
+
+            alert(result.detail || "Unable to save sermon.");
+
+            return;
+
+        }
+
+        alert("Sermon saved successfully.");
+
+        sermonForm.reset();
+
+        thumbnailPreview.src = "/images/default-sermon.jpg";
+
+        videoPreview.pause();
+
+        videoPreview.removeAttribute("src");
+
+        videoPreview.style.display = "none";
+
+        editingId = null;
+
+        loadSermons();
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+        alert("Server connection failed.");
+
+    }
+
+});
+
+// ======================================
+// FORM SUBMIT
+// ======================================
+
+sermonForm.addEventListener("submit", async function (e) {
+
+    e.preventDefault();
+
+    const formData = new FormData(sermonForm);
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/api/sermons/",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        const result = await response.json();
+
+        if (response.ok) {
+
+            alert("Sermon saved successfully.");
+
+            sermonForm.reset();
+
+            thumbnailPreview.src =
+                "/images/default-sermon.jpg";
+
+            videoPreview.pause();
+            videoPreview.removeAttribute("src");
+            videoPreview.load();
+            videoPreview.style.display = "none";
+
+            loadSermons();
+
+        } else {
+
+            alert(result.detail || result.message);
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert("Unable to connect to server.");
+
+    }
+
+});
+
+
+// ======================================
+// LOAD SERMONS
+// ======================================
+
+async function loadSermons() {
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/api/sermons/"
+        );
+
+        const sermons = await response.json();
+
+        sermonTable.innerHTML = "";
+
+        sermons.forEach(addRow);
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+    }
+
+}
+
+
+// ======================================
+// ADD TABLE ROW
+// ======================================
+
+function addRow(sermon) {
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+
+        <td>${sermon.id}</td>
+
+        <td>${sermon.title}</td>
+
+        <td>${sermon.preacher}</td>
+
+        <td>${sermon.sermon_date || ""}</td>
+
+        <td>
+
+            ${sermon.featured
+                ? "<span style='color:green'>Yes</span>"
+                : "No"}
+
+        </td>
+
+        <td>
+
+            <button
+                class="edit-btn"
+                onclick="editSermon(${sermon.id})">
+
+                Edit
+
+            </button>
+
+            <button
+                class="delete-btn"
+                onclick="deleteSermon(${sermon.id})">
+
+                Delete
+
+            </button>
+
+        </td>
+
+    `;
+
+    sermonTable.appendChild(row);
+
+}
+
+
+// ======================================
+// DELETE SERMON
+// ======================================
+
+async function deleteSermon(id) {
+
+    if (!confirm("Delete this sermon?")) return;
+
+    const response = await fetch(
+
+        `http://127.0.0.1:8000/api/sermons/${id}`,
+
+        {
+
+            method: "DELETE"
+
+        }
+
+    );
+
+    if (response.ok) {
+
+        loadSermons();
+
+    } else {
+
+        alert("Unable to delete.");
+
+    }
+
+}
+
+// ==========================================
+// LOAD SERMONS
+// ==========================================
+
+async function loadSermons(){
+
+    try{
+
+        const response = await fetch("http://127.0.0.1:8000/api/sermons/");
+
+        const sermons = await response.json();
+
+        sermonTable.innerHTML = "";
+
+        if(sermons.length === 0){
+
+            sermonTable.innerHTML = `
+                <tr>
+                    <td colspan="8" style="text-align:center;">
+                        No sermons found.
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+        sermons.forEach(sermon=>{
+
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+
+                <td>${sermon.id}</td>
+
+                <td>
+
+                    ${
+                        sermon.thumbnail
+
+                        ?
+
+                        `<img
+                            src="${sermon.thumbnail}"
+                            width="70"
+                            style="border-radius:8px;">`
+
+                        :
+
+                        "No Image"
+                    }
+
+                </td>
+
+                <td>${sermon.title}</td>
+
+                <td>${sermon.preacher}</td>
+
+                <td>${sermon.sermon_date || "-"}</td>
+
+                <td>
+
+                    ${
+                        sermon.featured
+
+                        ?
+
+                        "<span class='featured'>YES</span>"
+
+                        :
+
+                        "NO"
+                    }
+
+                </td>
+
+                <td>
+
+                    ${
+                        sermon.video_file
+
+                        ?
+
+                        `<a href="${sermon.video_file}" target="_blank">
+                            Local Video
+                        </a>`
+
+                        :
+
+                        sermon.youtube_url
+
+                        ?
+
+                        `<a href="${sermon.youtube_url}" target="_blank">
+                            YouTube
+                        </a>`
+
+                        :
+
+                        "No Video"
+                    }
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="edit-btn"
+                        onclick="editSermon(${sermon.id})">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteSermon(${sermon.id})">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            `;
+
+            sermonTable.appendChild(row);
+
+        });
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        sermonTable.innerHTML = `
+            <tr>
+                <td colspan="8">
+                    Unable to load sermons.
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+
+
+// ==========================================
+// EDIT SERMON
+// ==========================================
+
+async function editSermon(id){
+
+    try{
+
+        const response = await fetch("http://127.0.0.1:8000/api/sermons/");
+
+        const sermons = await response.json();
+
+        const sermon = sermons.find(s=>s.id===id);
+
+        if(!sermon){
+
+            alert("Sermon not found.");
+
+            return;
+
+        }
+
+        document.getElementById("title").value =
+            sermon.title || "";
+
+        document.getElementById("preacher").value =
+            sermon.preacher || "";
+
+        document.getElementById("bible_reading").value =
+            sermon.bible_reading || "";
+
+        document.getElementById("description").value =
+            sermon.description || "";
+
+        document.getElementById("sermon_date").value =
+            sermon.sermon_date || "";
+
+        document.getElementById("youtube_url").value =
+            sermon.youtube_url || "";
+
+        document.getElementById("featured").checked =
+            sermon.featured;
+
+        currentEditId = id;
+
+        if(sermon.thumbnail){
+
+            thumbnailPreview.src = sermon.thumbnail;
+
+        }
+
+        if(sermon.video_file){
+
+            videoPreview.src = sermon.video_file;
+
+            videoPreview.style.display = "block";
+
+        }
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+
+
+// ==========================================
+// DELETE SERMON
+// ==========================================
+
+async function deleteSermon(id){
+
+    const ok = confirm(
+        "Delete this sermon permanently?"
+    );
+
+    if(!ok) return;
+
+    try{
+
+        const response = await fetch(
+
+            `http://127.0.0.1:8000/api/sermons/${id}`,
+
+            {
+
+                method:"DELETE"
+
+            }
+
+        );
+
+        if(response.ok){
+
+            alert("Deleted successfully.");
+
+            loadSermons();
+
+        }
+
+        else{
+
+            alert("Unable to delete.");
+
+        }
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+// ======================================
+// UPDATE SERMON
+// ======================================
+
+let currentEditId = null;
+
+async function updateSermon(){
+
+    if(currentEditId === null){
+        return;
+    }
+
+    const formData = new FormData(sermonForm);
+
+    try{
+
+        const response = await fetch(
+
+            `http://127.0.0.1:8000/api/sermons/${currentEditId}`,
+
+            {
+
+                method:"PUT",
+
+                body:formData
+
+            }
+
+        );
+
+        const result = await response.json();
+
+        if(response.ok){
+
+            alert("Sermon updated successfully.");
+
+            sermonForm.reset();
+
+            currentEditId = null;
+
+            thumbnailPreview.src =
+                "/images/default-sermon.jpg";
+
+            videoPreview.pause();
+
+            videoPreview.removeAttribute("src");
+
+            videoPreview.load();
+
+            videoPreview.style.display = "none";
+
+            loadSermons();
+
+        }
+
+        else{
+
+            alert(result.detail || result.message);
+
+        }
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert("Unable to update sermon.");
+
+    }
+
+}
+
+
+// ======================================
+// SEARCH
+// ======================================
+
+const searchInput =
+document.getElementById("searchInput");
+
+if(searchInput){
+
+searchInput.addEventListener("keyup",function(){
+
+const keyword =
+this.value.toLowerCase();
+
+const rows =
+sermonTable.querySelectorAll("tr");
+
+rows.forEach(row=>{
+
+const text =
+row.innerText.toLowerCase();
+
+row.style.display =
+text.includes(keyword)
+? ""
+: "none";
+
+});
+
+});
+
+}
+
+
+// ======================================
+// CANCEL EDIT
+// ======================================
+
+function cancelEdit(){
+
+currentEditId=null;
+
+sermonForm.reset();
+
+thumbnailPreview.src=
+"/images/default-sermon.jpg";
+
+videoPreview.pause();
+
+videoPreview.removeAttribute("src");
+
+videoPreview.load();
+
+videoPreview.style.display="none";
+
+}
+
+
+// ======================================
+// SAVE BUTTON
+// ======================================
+
+const saveBtn =
+document.getElementById("saveBtn");
+
+if(saveBtn){
+
+saveBtn.addEventListener("click",function(e){
+
+if(currentEditId!==null){
+
+e.preventDefault();
+
+updateSermon();
+
+}
+
+});
+
+}
+
+
+// ======================================
+// RESET BUTTON
+// ======================================
+
+const resetBtn=
+document.getElementById("resetBtn");
+
+if(resetBtn){
+
+resetBtn.addEventListener("click",function(){
+
+cancelEdit();
+
+});
+
+}
+
+
+// ======================================
+// REFRESH BUTTON
+// ======================================
+
+const refreshBtn=
+document.getElementById("refreshBtn");
+
+if(refreshBtn){
+
+refreshBtn.addEventListener("click",loadSermons);
+
+}
+
+
+// ======================================
+// ======================================
+// UPDATE SERMON
+// ======================================
+
+let currentEditId = null;
+
+async function updateSermon(){
+
+    if(currentEditId === null){
+        return;
+    }
+
+    const formData = new FormData(sermonForm);
+
+    try{
+
+        const response = await fetch(
+
+            `http://127.0.0.1:8000/api/sermons/${currentEditId}`,
+
+            {
+
+                method:"PUT",
+
+                body:formData
+
+            }
+
+        );
+
+        const result = await response.json();
+
+        if(response.ok){
+
+            alert("Sermon updated successfully.");
+
+            sermonForm.reset();
+
+            currentEditId = null;
+
+            thumbnailPreview.src =
+                "/images/default-sermon.jpg";
+
+            videoPreview.pause();
+
+            videoPreview.removeAttribute("src");
+
+            videoPreview.load();
+
+            videoPreview.style.display = "none";
+
+            loadSermons();
+
+        }
+
+        else{
+
+            alert(result.detail || result.message);
+
+        }
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert("Unable to update sermon.");
+
+    }
+
+}
+
+
+// ======================================
+// SEARCH
+// ======================================
+
+const searchInput =
+document.getElementById("searchInput");
+
+if(searchInput){
+
+searchInput.addEventListener("keyup",function(){
+
+const keyword =
+this.value.toLowerCase();
+
+const rows =
+sermonTable.querySelectorAll("tr");
+
+rows.forEach(row=>{
+
+const text =
+row.innerText.toLowerCase();
+
+row.style.display =
+text.includes(keyword)
+? ""
+: "none";
+
+});
+
+});
+
+}
+
+
+// ======================================
+// CANCEL EDIT
+// ======================================
+
+function cancelEdit(){
+
+currentEditId=null;
+
+sermonForm.reset();
+
+thumbnailPreview.src=
+"/images/default-sermon.jpg";
+
+videoPreview.pause();
+
+videoPreview.removeAttribute("src");
+
+videoPreview.load();
+
+videoPreview.style.display="none";
+
+}
+
+
+// ======================================
+// SAVE BUTTON
+// ======================================
+
+const saveBtn =
+document.getElementById("saveBtn");
+
+if(saveBtn){
+
+saveBtn.addEventListener("click",function(e){
+
+if(currentEditId!==null){
+
+e.preventDefault();
+
+updateSermon();
+
+}
+
+});
+
+}
+
+
+// ======================================
+// RESET BUTTON
+// ======================================
+
+const resetBtn=
+document.getElementById("resetBtn");
+
+if(resetBtn){
+
+resetBtn.addEventListener("click",function(){
+
+cancelEdit();
+
+});
+
+}
+
+
+// ======================================
+// REFRESH BUTTON
+// ======================================
+
+const refreshBtn=
+document.getElementById("refreshBtn");
+
+if(refreshBtn){
+
+refreshBtn.addEventListener("click",loadSermons);
+
+}
+
+
+// ======================================
+// START
+// ======================================
+
+loadSermons();
+
+console.log("Kingdom Ways Sermon Admin Loaded.");// START
+// ======================================
+
+loadSermons();
+
+console.log("Kingdom Ways Sermon Admin Loaded.");
+

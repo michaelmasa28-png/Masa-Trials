@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kingdom Ways CMS | Sermons</title>
+
+<link rel="stylesheet" href="sermons-admin.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>Kingdom Ways Church CMS</h1>
+
+    <p>Sermon Management</p>
+
+</header>
+
+
+
+<main>
+
+
+<section class="add-sermon">
+
+
+<h2>Add New Sermon</h2>
+
+
+
+<form id="sermonForm" enctype="multipart/form-data">
+
+
+
+<div class="form-group">
+
+<label>Sermon Title</label>
+
+<input 
+type="text" 
+id="title" 
+name="title" 
+required>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>Speaker</label>
+
+<input 
+type="text" 
+id="preacher" 
+name="preacher" 
+required>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>Date Preached</label>
+
+<input 
+type="date" 
+id="sermon_date" 
+name="sermon_date" 
+required>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>Bible Verse</label>
+
+<input 
+type="text" 
+id="bible_reading" 
+name="bible_reading">
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>Description</label>
+
+<textarea 
+id="description" 
+name="description" 
+rows="5"></textarea>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>Thumbnail Cover</label>
+
+<input
+
+type="file"
+
+id="thumbnail"
+
+name="thumbnail"
+
+accept="image/*">
+
+</div>
+
+
+
+<div class="thumbnail-preview">
+
+<img
+
+id="thumbnailPreview"
+
+src="../images/default-sermon.jpg"
+
+alt="Thumbnail Preview">
+
+</div>
+
+
+
+
+
+<h3>Video Source</h3>
+
+
+
+<label>
+
+<input
+
+type="radio"
+
+name="videoType"
+
+value="local"
+
+checked>
+
+Upload Video
+
+</label>
+
+
+
+<label style="margin-left:20px;">
+
+
+<input
+
+type="radio"
+
+name="videoType"
+
+value="youtube">
+
+
+YouTube Link
+
+
+</label>
+
+
+
+
+<div
+
+class="form-group"
+
+id="localVideoSection">
+
+
+<label>Upload Video</label>
+
+
+<input
+
+type="file"
+
+id="video_file"
+
+name="video_file"
+
+accept="video/*">
+
+
+</div>
+
+
+
+<video
+
+id="videoPreview"
+
+controls
+
+style="display:none;width:100%;margin-top:15px;">
+
+</video>
+
+
+
+
+
+<div
+
+class="form-group"
+
+id="youtubeSection"
+
+style="display:none;">
+
+
+<label>YouTube URL</label>
+
+
+<input
+
+type="url"
+
+id="youtube_url"
+
+name="youtube_url"
+
+placeholder="https://www.youtube.com/watch?v=...">
+
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>Sermon Notes</label>
+
+
+<input
+
+type="file"
+
+id="notes"
+
+name="notes"
+
+accept=".pdf,.doc,.docx,.ppt,.pptx">
+
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+
+<input
+
+type="checkbox"
+
+id="featured"
+
+name="featured">
+
+
+Featured Sermon
+
+
+</label>
+
+
+</div>
+
+
+
+
+
+<button type="submit">
+
+Save Sermon
+
+</button>
+
+
+
+</form>
+
+
+</section>
+
+
+
+
+
+<hr>
+
+
+
+
+
+<section>
+
+
+
+<h2>Saved Sermons</h2>
+
+
+
+
+<div class="toolbar">
+
+
+
+<input
+
+type="text"
+
+id="search"
+
+placeholder="Search Sermons">
+
+
+
+
+
+<select id="speakerFilter">
+
+
+<option value="">
+
+All Speakers
+
+</option>
+
+
+</select>
+
+
+
+
+
+<select id="yearFilter">
+
+
+<option value="">
+
+All Years
+
+</option>
+
+
+</select>
+
+
+
+
+
+<select id="sortFilter">
+
+
+<option value="newest">
+
+Newest First
+
+</option>
+
+
+<option value="oldest">
+
+Oldest First
+
+</option>
+
+
+</select>
+
+
+
+</div>
+
+
+<table class="sermon-table">
+
+<thead>
+<tr>
+    <th>ID</th>
+    <th>Thumbnail</th>
+    <th>Title</th>
+    <th>Preacher</th>
+    <th>Date</th>
+    <th>Video</th>
+    <th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="sermonTableBody">
+
+</tbody>
+
+</table>
+
+
+</section>
+
+
+
+</main>
+
+
+
+
+
+<footer>
+
+
+<p>
+
+Kingdom Ways Church CMS © 2026
+
+</p>
+
+
+</footer>
+
+
+
+
+
+<script>
+
+
+const radios=document.querySelectorAll('input[name="videoType"]');
+
+
+const local=document.getElementById("localVideoSection");
+
+
+const youtube=document.getElementById("youtubeSection");
+
+
+
+radios.forEach(r=>{
+
+
+r.addEventListener("change",()=>{
+
+
+
+if(r.value==="local" && r.checked){
+
+
+local.style.display="block";
+
+
+youtube.style.display="none";
+
+
+}
+
+
+
+if(r.value==="youtube" && r.checked){
+
+
+local.style.display="none";
+
+
+youtube.style.display="block";
+
+
+}
+
+
+
+});
+
+
+});
+
+
+
+</script>
+
+
+
+
+<script src="sermons-admin.js"></script>
+
+
+
+</body>
+
+</html>

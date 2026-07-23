@@ -1,0 +1,78 @@
+/* ===========================
+   MEMBERS TABLE
+=========================== */
+
+.members-table{
+    margin-top:30px;
+    background:#ffffff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.members-table h2{
+    margin-bottom:20px;
+    color:#1d3557;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table thead{
+    background:#1d3557;
+    color:#ffffff;
+}
+
+table th{
+    padding:15px;
+    text-align:left;
+}
+
+table td{
+    padding:15px;
+    border-bottom:1px solid #ddd;
+}
+
+table tbody tr:hover{
+    background:#f4f6f9;
+}
+
+.member-photo{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.edit-btn{
+    background:#0d6efd;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:5px;
+    cursor:pointer;
+    margin-right:5px;
+}
+
+.edit-btn:hover{
+    background:#0b5ed7;
+}
+
+.delete-btn{
+    background:#dc3545;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.delete-btn:hover{
+    background:#bb2d3b;
+}

@@ -1,0 +1,212 @@
+// =============================
+// Kingdom Ways Church CMS
+// Sermons JavaScript
+// =============================
+
+const sermonForm = document.getElementById("sermonForm");
+const sermonsContainer = document.getElementById("sermonsContainer");
+
+// Load saved sermons
+let sermons = JSON.parse(localStorage.getItem("sermons")) || [];
+
+// Display sermons when page loads
+displaySermons();
+
+// =============================
+// SAVE SERMON
+// =============================
+sermonForm.addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    const videoInput = document.getElementById("video");
+
+    const sermon = {
+
+        id: Date.now(),
+
+        title: document.getElementById("title").value,
+
+        preacher: document.getElementById("preacher").value,
+
+        date: document.getElementById("date").value,
+
+        bible_reading: document.getElementById("bible_reading").value,
+
+        description: document.getElementById("description").value,
+
+        video: videoInput.files.length > 0
+            ? videoInput.files[0].name
+            : "No Video"
+
+    };
+
+    sermons.push(sermon);
+
+    saveSermons();
+
+    displaySermons();
+
+    sermonForm.reset();
+
+    alert("Sermon saved successfully!");
+
+});
+
+// =============================
+// DISPLAY SERMONS
+// =============================
+function displaySermons() {
+
+    sermonsContainer.innerHTML = "";
+
+    if (sermons.length === 0) {
+
+        sermonsContainer.innerHTML = `
+
+            <p style="text-align:center;">
+                No sermons available.
+            </p>
+
+        `;
+
+        return;
+    }
+
+    sermons.forEach(function (sermon) {
+
+        const card = document.createElement("div");
+
+        card.className = "sermon-card";
+
+        card.innerHTML = `
+
+            <h3>${sermon.title}</h3>
+
+            <p>
+                <strong>Preacher:</strong>
+                ${sermon.preacher}
+            </p>
+
+            <p>
+                <strong>Date:</strong>
+                ${sermon.date}
+            </p>
+
+            <p>
+                <strong>Bible Reading:</strong>
+                ${sermon.bible_reading}
+            </p>
+
+            <p>
+                ${sermon.description}
+            </p>
+
+            <p>
+                🎥 ${sermon.video}
+            </p>
+
+            <div class="actions">
+
+                <button
+                    class="edit"
+                    onclick="editSermon(${sermon.id})">
+
+                    Edit
+
+                </button>
+
+                <button
+                    class="delete"
+                    onclick="deleteSermon(${sermon.id})">
+
+                    Delete
+
+                </button>
+
+            </div>
+
+        `;
+
+        sermonsContainer.appendChild(card);
+
+    });
+
+}
+
+// =============================
+// DELETE SERMON
+// =============================
+function deleteSermon(id) {
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this sermon?"
+    );
+
+    if (!confirmDelete) return;
+
+    sermons = sermons.filter(function (sermon) {
+
+        return sermon.id !== id;
+
+    });
+
+    saveSermons();
+
+    displaySermons();
+
+}
+
+// =============================
+// EDIT SERMON
+// =============================
+function editSermon(id) {
+
+    const sermon = sermons.find(function (item) {
+
+        return item.id === id;
+
+    });
+
+    if (!sermon) return;
+
+    document.getElementById("title").value = sermon.title;
+    document.getElementById("preacher").value = sermon.preacher;
+    document.getElementById("date").value = sermon.date;
+    document.getElementById("bible_reading").value = sermon.bible_reading;
+    document.getElementById("description").value = sermon.description;
+
+    sermons = sermons.filter(function (item) {
+
+        return item.id !== id;
+
+    });
+
+    saveSermons();
+
+    displaySermons();
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+// =============================
+// SAVE TO LOCAL STORAGE
+// =============================
+function saveSermons() {
+
+    localStorage.setItem(
+
+        "sermons",
+
+        JSON.stringify(sermons)
+
+    );
+
+}

@@ -1,0 +1,501 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
+
+
+body{
+
+    background:#f4f6fb;
+    color:#222;
+
+}
+
+
+
+.attendance-page{
+
+    width:95%;
+    margin:30px auto;
+
+}
+
+
+
+/* ================= HEADER ================= */
+
+
+.attendance-header{
+
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    animation:slideDown .6s ease;
+
+}
+
+
+
+.home-btn{
+
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#1d4ed8;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-size:22px;
+    transition:.3s;
+
+}
+
+
+.home-btn:hover{
+
+    transform:scale(1.1) rotate(5deg);
+
+}
+
+
+
+.header-title h1{
+
+    font-size:28px;
+    color:#1d4ed8;
+
+}
+
+
+.header-title p{
+
+    color:#666;
+    margin-top:5px;
+
+}
+
+
+
+.date-box{
+
+    background:#eef2ff;
+    padding:15px 20px;
+    border-radius:12px;
+    font-weight:600;
+
+}
+
+
+
+
+
+/* ================= CARDS ================= */
+
+
+.summary-cards{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin:30px 0;
+
+}
+
+
+
+.card{
+
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.3s;
+
+}
+
+
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+
+
+.card i{
+
+    font-size:35px;
+    color:#2563eb;
+
+}
+
+
+.card h3{
+
+    color:#666;
+    font-size:15px;
+
+}
+
+
+.card h2{
+
+    margin-top:8px;
+    font-size:30px;
+
+}
+
+
+
+
+
+
+
+/* ================= CONTROLS ================= */
+
+
+.attendance-controls{
+
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    display:flex;
+    align-items:end;
+    gap:25px;
+    flex-wrap:wrap;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    margin-bottom:30px;
+
+}
+
+
+
+.attendance-controls label{
+
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+
+}
+
+
+
+select,
+input{
+
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    min-width:220px;
+    outline:none;
+
+}
+
+
+
+select:focus,
+input:focus{
+
+    border-color:#2563eb;
+
+}
+
+
+
+
+.export-btn{
+
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:13px 25px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+
+}
+
+
+.export-btn:hover{
+
+    background:#1e40af;
+
+}
+
+
+
+
+
+
+
+/* ================= TABLES ================= */
+
+
+.table-section{
+
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+
+
+.table-section h2{
+
+    color:#1d4ed8;
+    margin-bottom:8px;
+
+}
+
+
+
+.table-section p{
+
+    color:#666;
+    margin-bottom:20px;
+
+}
+
+
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+
+
+thead{
+
+    background:#1d4ed8;
+    color:white;
+
+}
+
+
+
+th,
+td{
+
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid #eee;
+
+}
+
+
+
+tbody tr{
+
+    transition:.3s;
+
+}
+
+
+
+tbody tr:hover{
+
+    background:#f1f5ff;
+
+}
+
+
+
+
+
+/* ================= HISTORY ================= */
+
+
+.history-section,
+.percentage-section,
+.export-section{
+
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+
+
+.history-card{
+
+    background:#f8fafc;
+    padding:20px;
+    border-radius:15px;
+    margin-top:15px;
+
+}
+
+
+
+.history-card button{
+
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    background:#2563eb;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+
+}
+
+
+
+
+
+/* ================= PERCENTAGE ================= */
+
+
+.percentage-card{
+
+    text-align:center;
+    padding:25px;
+
+}
+
+
+
+#attendanceRate{
+
+    font-size:45px;
+    font-weight:bold;
+    color:#16a34a;
+
+}
+
+
+
+
+
+/* ================= EXPORT ================= */
+
+
+.export-section{
+
+    display:flex;
+    gap:20px;
+
+}
+
+
+
+.export-section button{
+
+    padding:15px 25px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#111827;
+    color:white;
+
+}
+
+
+.export-section button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+
+
+
+/* ================= ANIMATION ================= */
+
+
+@keyframes slideDown{
+
+from{
+
+    opacity:0;
+    transform:translateY(-30px);
+
+}
+
+to{
+
+    opacity:1;
+    transform:translateY(0);
+
+}
+
+}
+
+
+
+
+
+/* ================= MOBILE ================= */
+
+
+@media(max-width:700px){
+
+
+.attendance-header{
+
+    flex-direction:column;
+    text-align:center;
+
+}
+
+
+
+table{
+
+    font-size:14px;
+
+}
+
+
+
+th,
+td{
+
+    padding:10px;
+
+}
+
+
+
+.attendance-controls{
+
+    flex-direction:column;
+    align-items:stretch;
+
+}
+
+
+
+select,
+input{
+
+    width:100%;
+
+}
+
+
+
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kingdom Ways | Connect Hub</title>
+    <!-- FontAwesome 6 Icons Package -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="stylesheet" href="charttest.css">
+</head>
+<body>
+
+<div class="whatsapp-layout">
+
+    <!-- ==========================================
+         LEFT SECTION: CHAT LIST SIDEBAR
+         ========================================== -->
+    <aside class="chat-sidebar">
+        
+        <!-- User Profile Status Header Bar -->
+        <header class="sidebar-header">
+            <div class="current-user-avatar">
+                <i class="fa-solid fa-circle-user"></i>
+                <span id="myIdBadge">ID: --</span>
+            </div>
+            <div class="sidebar-actions">
+                <button title="New Broadcast Channel"><i class="fa-solid fa-circle-notch"></i></button>
+                <button title="New Direct Message"><i class="fa-solid fa-message"></i></button>
+                <button title="More Settings"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </div>
+        </header>
+
+        <!-- Search Channels Navigation Bar -->
+        <div class="search-container">
+            <div class="search-input-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" id="chatSearchInput" placeholder="Search or start new chat...">
+            </div>
+        </div>
+
+        <!-- Scrollable Active Conversations Queue -->
+        <div class="conversations-scroll-list" id="conversationsContainer">
+            <!-- JavaScript renders the 10 member ID rows right here -->
+        </div>
+
+    </aside>
+
+    <!-- ==========================================
+         RIGHT SECTION: LIVE CONVERSATION TIMELINE VIEWPORT
+         ========================================== -->
+    <main class="chat-viewport">
+        
+        <!-- Active Workspace Destination Navigation Top Bar Header -->
+        <header class="viewport-header">
+            <div class="target-profile-info">
+                <div class="target-avatar" id="activeRoomAvatar">G</div>
+                <div>
+                    <h3 id="activeRoomTitle">KINGDOMWAYS CONNECT HUB</h3>
+                    <p id="activeRoomMetadata">Lets connect</p>
+                </div>
+            </div>
+
+            <!-- Global Social Communities Integration Anchors Links -->
+            <div class="social-integration-hub">
+                <a href="https://whatsapp.com" target="_blank" class="brand-link whatsapp-color" title="Open Main Church WhatsApp Group Account">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://facebook.com" target="_blank" class="brand-link facebook-color" title="Open Main Church Facebook Page Link">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- Dynamic Message Stream Display Board Background Canvas Layout Canvas Wrapper -->
+        <div class="message-bubbles-stream" id="messageStreamCanvas">
+            <!-- Dynamic chats append down here sequentially on processing triggers hooks loops -->
+        </div>
+
+        <!-- Message Compilation Footer Composer Bar Input Control -->
+        <footer class="composition-input-tray">
+            <div class="tray-utility-icons">
+                <button title="Add Attachment"><i class="fa-solid fa-plus"></i></button>
+                <button title="Insert Emoticon"><i class="fa-solid fa-face-smile"></i></button>
+            </div>
+            <form id="messageDispatchForm" style="flex: 1; display: flex; gap: 15px;">
+                <input type="text" id="chatMessageField" placeholder="Type a message..." required autocomplete="off">
+                <button type="submit" class="dispatch-audio-msg-btn" id="sendBtn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </footer>
+
+    </main>
+
+</div>
+
+<!-- Linked application interactive engine linked out of the flat repository directory -->
+<script src="charttest.js"></script>
+
+</body>
+</html>

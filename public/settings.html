@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Management Dashboard - Settings</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>@Masa7DeV</h2>
+        </div>
+        <ul class="menu">
+            <li><a href="dashboard.html">👥 Members</a></li>
+            <li><a href="events.html">📅 Events</a></li>
+            <li><a href="sermons-admin.html">📖 Sermons</a></li>
+            <li><a href="attendance.html">✅ Attendance</a></li>
+            <li><a href="galleryadmin.html">🖼 Gallery</a></li>
+            <li><a href="login.html">🚪 Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Workspace Container -->
+    <main class="main-content">
+
+        <!-- Header Branding & Status Info Bars -->
+        <header class="topbar">
+            <div>
+                <h1>KINGDOMWAYS MANAGEMENT DASHBOARD</h1>
+                <p id="settings-role-badge">Verifying profile access parameters...</p>
+            </div>
+            <div class="admin">
+                <h3>Welcome</h3>
+                <p id="admin-display-name">..</p>
+            </div>
+        </header>
+
+        <!-- Dynamic Settings Controls Layout Grid -->
+        <section class="cards">
+
+            
+            <div class="card" id="profileCard" style="display: none;">
+                <h3>Church / Organization Profile</h3>
+                <form id="profileForm" style="margin-top: 15px; width: 100%;">
+                    <div style="margin-bottom: 15px; text-align: left;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Organization Name</label>
+                        <input type="text" id="orgNameInput" name="organization_name" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 15px; text-align: left;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Currency Symbol</label>
+                        <input type="text" id="currencyInput" name="currency_symbol" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <button type="submit" class="btn-submit" style="padding: 8px 15px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer;">Save Profile</button>
+                </form>
+            </div>
+
+            <!-- Panel 2: Messaging Alert Routing Preference Adjustments Layout Block -->
+            <div class="card" id="notifyCard" style="display: none;">
+                <h3>Notification Preferences</h3>
+                <form id="notifyForm" style="margin-top: 15px; width: 100%; text-align: left;">
+                    <div style="margin-bottom: 12px;">
+                        <label style="cursor: pointer;"><input type="checkbox" id="emailRegInput" name="email_registrations"> Email for new member registrations</label>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label style="cursor: pointer;"><input type="checkbox" id="emailOfferInput" name="email_offerings"> Email weekly offering summaries</label>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="cursor: pointer;"><input type="checkbox" id="smsUrgentInput" name="sms_urgent"> SMS alerts for urgent church events</label>
+                    </div>
+                    <button type="submit" class="btn-submit" style="padding: 8px 15px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer;">Update System Preferences</button>
+                </form>
+            </div>
+
+        </section>
+
+        <!-- Panel 3: Authorization Metrics & Internal Roles Tracking Layout Grid Block -->
+        <section class="recent" id="userManagementSection" style="display: none;">
+            <h2>Authorized Users & System Roles</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <!-- Dynamic rendering engine inputs row metrics down here dynamically -->
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+</div>
+
+<!-- Process script assets locally side by side out of the exact same repository base directory path link -->
+<script src="settings.js"></script>
+
+</body>
+</html>

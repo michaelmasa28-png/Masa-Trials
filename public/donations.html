@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance | Kingdom Ways CMS</title>
+<link rel="stylesheet" href="donations.css">
+<link rel="stylesheet" href="https://cloudflare.com">
+<style>
+    /* Security Overlay Modals Configuration Elements */
+    .secure-auth-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 7, 13, 0.85); backdrop-filter: blur(6px); display: none; justify-content: center; align-items: center; z-index: 999; }
+    .secure-modal-body { background: #0d1626; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; width: 90%; max-width: 450px; overflow: hidden; color: #e2e8f0; font-family: sans-serif; }
+    .secure-modal-title { padding: 1.25rem; background: rgba(255, 255, 255, 0.02); border-bottom: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; align-items: center; }
+    .btn-modal-close { background: none; border: none; color: #94a3b8; font-size: 1.5rem; cursor: pointer; }
+    .secure-modal-content { padding: 1.5rem; }
+    .form-element-block { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .form-element-block label { font-size: 0.85rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; }
+    .form-element-block input, .form-element-block select { background: rgba(18, 30, 53, 0.8); border: 1px solid rgba(255,255,255,0.12); padding: 0.75rem; color: #fff; border-radius: 4px; outline: none; }
+    .secure-modal-actions { padding: 1.25rem; background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: flex-end; gap: 1rem; }
+    .btn-modal-proceed { background: #00d2ff; border: none; color: #fff; padding: 0.65rem 1.5rem; border-radius: 4px; font-weight: 600; cursor: pointer; width: 100%; }
+    .auth-error-output { color: #ff3366; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
+    .write-restricted-hidden { opacity: 0.35 !important; cursor: not-allowed !important; pointer-events: none !important; }
+    
+    /* Top Secure Navigation Status Header Custom Add-on */
+    .secure-auth-bar { width: 100%; padding: 0.75rem 2rem; background: rgba(11, 15, 25, 0.9); border-bottom: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; align-items: center; color: #e2e8f0; font-family: sans-serif; }
+    .role-indicator { padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; border: 1px solid #10b981; color: #10b981; background: rgba(16,185,129,0.1); }
+    .restriction-hint { font-size: 0.85rem; color: #ffb800; margin-left: 1rem; }
+    .exit-gate-btn { background: none; border: 1px solid rgba(255,255,255,0.12); color: #e2e8f0; padding: 0.4rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 600; }
+    .exit-gate-btn:hover { background: #ff3366; color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="secure-auth-bar" id="rbacStateBar">
+    <div class="bar-left">
+        <span class="role-indicator" id="currentRoleTag">SUB-ADMIN RECORDER</span>
+        <span class="restriction-hint" id="systemRestrictionNotice">[WRITE MODE]: Verification keys active.</span>
+    </div>
+    <div class="bar-right">
+        <span id="sessionTimerClock"><i class="fas fa-lock"></i> Session Tracking</span>
+        <button id="exitSecBtn" class="exit-gate-btn">Exit Secure Terminal</button>
+    </div>
+</div>
+
+<div class="finance-container">
+
+    <!-- ==========================
+         HEADER
+    ========================== -->
+    <header class="finance-header">
+        <div class="header-left">
+            <h1>
+                <i class="fas fa-wallet"></i>
+                Finance Management
+            </h1>
+            <p>
+                Manage church finances, funds, welfare and reports.
+            </p>
+        </div>
+        <div class="header-right">
+            <a href="dashboard.html" class="cms-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to CMS Dashboard
+            </a>
+        </div>
+    </header>
+
+    <!-- ==========================
+         FINANCE NAVIGATION
+    ========================== -->
+    <nav class="finance-nav" id="viewToggleNav">
+        <a href="#" class="active" data-target="dashboard">
+            <i class="fas fa-chart-pie"></i>
+            Dashboard
+        </a>
+        <a href="#" data-target="income">
+            <i class="fas fa-arrow-circle-down"></i>
+            Income
+        </a>
+        <a href="#" data-target="expenses">
+            <i class="fas fa-arrow-circle-up"></i>
+            Expenses
+        </a>
+        <a href="#" data-target="accounts">
+            <i class="fas fa-university"></i>
+            Accounts
+        </a>
+        <a href="#" data-target="funds">
+            <i class="fas fa-building"></i>
+            Funds
+        </a>
+        <a href="#" data-target="welfare">
+            <i class="fas fa-hand-holding-heart"></i>
+            Welfare
+        </a>
+        <a href="#" data-target="reports">
+            <i class="fas fa-file-alt"></i>
+            Reports
+        </a>
+    </nav>
+
+    <!-- ==========================
+         FINANCE SUMMARY
+    ========================== -->
+    <section class="finance-cards" id="dashboardKPISection">
+        <div class="finance-card">
+            <i class="fas fa-wallet"></i>
+            <h4>Current Balance</h4>
+            <h2 id="currentBalance">KSh 0</h2>
+        </div>
+        <div class="finance-card">
+            <i class="fas fa-university"></i>
+            <h4>Bank Balance</h4>
+            <h2 id="bankBalance">KSh 0</h2>
+        </div>
+        <div class="finance-card">
+            <i class="fas fa-money-bill-wave"></i>
+            <h4>Cash Office</h4>
+            <h2 id="cashBalance">KSh 0</h2>
+        </div>
+        <div class="finance-card">
+            <i class="fas fa-credit-card"></i>
+            <h4>Total Expenses</h4>
+            <h2 id="expenseTotal">KSh 0</h2>
+        </div>
+        <div class="finance-card">
+            <i class="fas fa-chart-line"></i>
+            <h4>Net Income</h4>
+            <h2 id="netIncome">KSh 0</h2>
+        </div>
+        <div class="finance-card">
+            <i class="fas fa-clock"></i>
+            <h4>Pending Payments</h4>
+            <h2 id="pendingPayments">0</h2>
+        </div>
+    </section>
+
+    <!-- ==========================
+         QUICK ACTIONS
+    ========================== -->
+    <section class="quick-actions" id="quickActionsGroup">
+        <button id="addIncome" class="write-gate-btn">
+            <i class="fas fa-plus-circle"></i>
+            Add Income
+        </button>
+        <button id="addExpense" class="write-gate-btn">
+            <i class="fas fa-minus-circle"></i>
+            Add Expense
+        </button>
+        <button id="transferFunds" class="write-gate-btn">
+            <i class="fas fa-exchange-alt"></i>
+            Transfer Funds
+        </button>
+        <button id="manageAccounts">
+            <i class="fas fa-university"></i>
+            Accounts
+        </button>
+        <button id="financeReports">
+            <i class="fas fa-file-pdf"></i>
+            Reports
+        </button>
+    </section>
+    <!-- ==========================
+         ACCOUNTS OVERVIEW
+    =========================== -->
+    <section class="accounts-section" id="accountsViewSegment">
+        <div class="section-title">
+            <h2>
+                <i class="fas fa-university"></i>
+                Church Accounts
+            </h2>
+            <button class="add-btn write-gate-btn" id="createNewAccountTrigger">
+                <i class="fas fa-plus"></i>
+                New Account
+            </button>
+        </div>
+
+        <div class="account-grid" id="mainAccountsDataGrid">
+            <div class="account-card" data-acc-key="main">
+                <h3>Main Church Account</h3>
+                <h1 id="lbl-acc-main">KSh 0</h1>
+                <p>Primary operating account</p>
+            </div>
+            <div class="account-card" data-acc-key="bank">
+                <h3>Bank Account</h3>
+                <h1 id="lbl-acc-bank">KSh 0</h1>
+                <p>Church Bank Balance</p>
+            </div>
+            <div class="account-card" data-acc-key="cash">
+                <h3>Cash Office</h3>
+                <h1 id="lbl-acc-cash">KSh 0</h1>
+                <p>Cash Available</p>
+            </div>
+            <div class="account-card" data-acc-key="mpesa">
+                <h3>M-Pesa Account</h3>
+                <h1 id="lbl-acc-mpesa">KSh 0</h1>
+                <p>Mobile Money</p>
+            </div>
+            <div class="account-card" data-acc-key="petty">
+                <h3>Petty Cash</h3>
+                <h1 id="lbl-acc-petty">KSh 0</h1>
+                <p>Small Daily Expenses</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================
+         CHURCH FUNDS
+    =========================== -->
+    <section class="funds-section" id="fundsViewSegment">
+        <div class="section-title">
+            <h2>
+                <i class="fas fa-building"></i>
+                Church Funds
+            </h2>
+            <button class="add-btn write-gate-btn" id="createNewFundTrigger">
+                <i class="fas fa-plus"></i>
+                New Fund
+            </button>
+        </div>
+
+        <div class="fund-grid" id="mainFundsDataGrid">
+            <div class="fund-card" data-fund-key="building">
+                <i class="fas fa-hammer"></i>
+                <h3>Building Fund</h3>
+                <h2 id="lbl-fund-building">KSh 0</h2>
+            </div>
+            <div class="fund-card" data-fund-key="mission">
+                <i class="fas fa-cross"></i>
+                <h3>Mission Fund</h3>
+                <h2 id="lbl-fund-mission">KSh 0</h2>
+            </div>
+            <div class="fund-card" data-fund-key="children">
+                <i class="fas fa-child"></i>
+                <h3>Children Ministry</h3>
+                <h2 id="lbl-fund-children">KSh 0</h2>
+            </div>
+            <div class="fund-card" data-fund-key="choir">
+                <i class="fas fa-music"></i>
+                <h3>Choir Fund</h3>
+                <h2 id="lbl-fund-choir">KSh 0</h2>
+            </div>
+            <div class="fund-card" data-fund-key="youth">
+                <i class="fas fa-users"></i>
+                <h3>Youth Fund</h3>
+                <h2 id="lbl-fund-youth">KSh 0</h2>
+            </div>
+            <div class="fund-card" data-fund-key="women">
+                <i class="fas fa-female"></i>
+                <h3>Women's Ministry</h3>
+                <h2 id="lbl-fund-women">KSh 0</h2>
+            </div>
+            <div class="fund-card" data-fund-key="men">
+                <i class="fas fa-male"></i>
+                <h3>Men's Ministry</h3>
+                <h2 id="lbl-fund-men">KSh 0</h2>
+            </div>
+            <div class="fund-card" data-fund-key="emergency">
+                <i class="fas fa-heart"></i>
+                <h3>Emergency Fund</h3>
+                <h2 id="lbl-fund-emergency">KSh 0</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================
+         WELFARE SUMMARY
+    =========================== -->
+    <section class="welfare-section" id="welfareViewSegment">
+        <div class="section-title">
+            <h2>
+                <i class="fas fa-hand-holding-heart"></i>
+                Welfare Summary
+            </h2>
+            <button class="add-btn write-gate-btn" id="createNewWelfareTrigger">
+                <i class="fas fa-plus"></i>
+                New Welfare Record
+            </button>
+        </div>
+
+        <div class="welfare-grid" id="mainWelfareDataGrid">
+            <div class="finance-card">
+                <h4>People Assisted</h4>
+                <h2 id="lbl-welfare-people">0</h2>
+            </div>
+            <div class="finance-card">
+                <h4>Total Assistance</h4>
+                <h2 id="lbl-welfare-total">KSh 0</h2>
+            </div>
+            <div class="finance-card">
+                <h4>Remaining Budget</h4>
+                <h2 id="lbl-welfare-budget">KSh 0</h2>
+            </div>
+            <div class="finance-card">
+                <h4>Pending Requests</h4>
+                <h2 id="lbl-welfare-pending">0</h2>
+            </div>
+        </div>
+    </section>
+    <!-- ==========================
+         RECENT TRANSACTIONS
+    ========================== -->
+    <section class="transactions-section" id="transactionsViewSegment">
+        <div class="section-title">
+            <h2>
+                <i class="fas fa-exchange-alt"></i>
+                Recent Transactions
+            </h2>
+            <button class="add-btn" id="viewAllTransactionsTrigger">
+                <i class="fas fa-eye"></i>
+                View All
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table class="secure-ledger-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Category</th>
+                        <th>Account</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionTable">
+                    <!-- Dynamic database fields will populate here -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ==========================
+         LATEST FINANCIAL ACTIVITIES
+    ========================== -->
+    <section class="activity-section" id="activitiesViewSegment">
+        <div class="section-title">
+            <h2>
+                <i class="fas fa-history"></i>
+                Latest Activities
+            </h2>
+        </div>
+
+        <div class="activity-list" id="secureActivityStreamLog">
+            <!-- Dynamic server event updates logs inject here -->
+        </div>
+    </section>
+
+    <!-- ==========================
+         MONTHLY SUMMARY
+    ========================== -->
+    <section class="summary-section" id="monthlySummaryViewSegment">
+        <div class="section-title">
+            <h2>
+                <i class="fas fa-chart-bar"></i>
+                Monthly Summary
+            </h2>
+        </div>
+
+        <div class="summary-grid" id="aggregatedSummaryGrid">
+            <div class="summary-card">
+                <h4>Total Income</h4>
+                <h2 id="lbl-summary-income">KSh 0</h2>
+            </div>
+            <div class="summary-card">
+                <h4>Total Expenses</h4>
+                <h2 id="lbl-summary-expenses">KSh 0</h2>
+            </div>
+            <div class="summary-card">
+                <h4>Net Balance</h4>
+                <h2 id="lbl-summary-net">KSh 0</h2>
+            </div>
+            <div class="summary-card">
+                <h4>Transactions</h4>
+                <h2 id="lbl-summary-count">0</h2>
+            </div>
+        </div>
+    </section>
+    <!-- ==========================
+         FINANCE REPORT CENTER
+    ========================== -->
+    <section class="reports-section" id="reportsViewSegment">
+        <div class="section-title">
+            <h2>
+                <i class="fas fa-file-invoice-dollar"></i>
+                Finance Report Center
+            </h2>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="report-filters">
+            <div class="filter-control">
+                <label for="reportFromDate">From Date</label>
+                <input type="date" id="reportFromDate">
+            </div>
+            <div class="filter-control">
+                <label for="reportToDate">To Date</label>
+                <input type="date" id="reportToDate">
+            </div>
+            <div class="filter-control">
+                <label for="reportFund">Target Fund</label>
+                <select id="reportFund">
+                    <option value="">All Funds</option>
+                    <option value="building">Building Fund</option>
+                    <option value="welfare">Welfare Fund</option>
+                    <option value="youth">Youth Fund</option>
+                    <option value="missions">Missions Fund</option>
+                </select>
+            </div>
+            <div class="filter-control">
+                <label for="reportAccount">Target Account</label>
+                <select id="reportAccount">
+                    <option value="">All Accounts</option>
+                    <option value="bank">Bank</option>
+                    <option value="cash">Cash Office</option>
+                    <option value="mpesa">M-Pesa</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- REPORT CARDS -->
+        <div class="report-grid">
+            <div class="report-card">
+                <i class="fas fa-calendar-day"></i>
+                <h3>Daily Report</h3>
+                <p>View today's income, expenses and balances.</p>
+                <button class="btn-generate" data-report="daily">Generate</button>
+            </div>
+
+            <div class="report-card">
+                <i class="fas fa-calendar-week"></i>
+                <h3>Weekly Report</h3>
+                <p>Weekly financial performance.</p>
+                <button class="btn-generate" data-report="weekly">Generate</button>
+            </div>
+
+            <div class="report-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Monthly Report</h3>
+                <p>Income, expenses and fund summaries.</p>
+                <button class="btn-generate" data-report="monthly">Generate</button>
+            </div>
+
+            <div class="report-card">
+                <i class="fas fa-calendar"></i>
+                <h3>Annual Report</h3>
+                <p>Complete yearly financial statement.</p>
+                <button class="btn-generate" data-report="annual">Generate</button>
+            </div>
+
+            <div class="report-card">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h3>Welfare Report</h3>
+                <p>Welfare requests and assistance summary.</p>
+                <button class="btn-generate" data-report="welfare">Generate</button>
+            </div>
+
+            <div class="report-card">
+                <i class="fas fa-university"></i>
+                <h3>Account Report</h3>
+                <p>Bank, Cash and Mobile Money balances.</p>
+                <button class="btn-generate" data-report="account">Generate</button>
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="report-actions">
+            <button id="exportPDF"><i class="fas fa-file-pdf"></i> Export PDF</button>
+            <button id="exportExcel"><i class="fas fa-file-excel"></i> Export Excel</button>
+            <button id="printReport"><i class="fas fa-print"></i> Print Report</button>
+        </div>
+
+        <!-- GENERATED REPORT -->
+        <div id="reportOutput" class="report-output-canvas">
+            <h3>Generated Report Workspace</h3>
+            <div id="reportCanvasOutputPayload">
+                <p>Select parameters above and hit generate to render ledger details.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================
+         FOOTER
+    ========================== -->
+    <footer class="finance-footer">
+        <p>Kingdom Ways Church CMS © 2026 | Enterprise Security Ledger System V2.1</p>
+    </footer>
+</div> <!-- Closing container div -->
+<!-- ==========================================================================
+     RBAC CRYPTOGRAPHIC VERIFICATION GATEWAY WINDOW
+     ========================================================================== -->
+<div class="secure-auth-modal" id="systemVerificationGatewayModal">
+    <div class="secure-modal-body animate-scale-up">
+        <div class="secure-modal-title">
+            <h3><i class="fas fa-shield-alt"></i> Security Verification Checkpoint</h3>
+            <button class="btn-modal-close" data-target-modal="systemVerificationGatewayModal">&times;</button>
+        </div>
+        <div class="secure-modal-content">
+            <p class="modal-notice-text">
+                This transaction writes updates to the permanent ledger. Please verify your secure access configuration pin.
+            </p>
+            <div class="form-element-block">
+                <label for="rbacIntermediaryAuthKey">Sub-Admin Secure Access Pin</label>
+                <input type="password" id="rbacIntermediaryAuthKey" autocomplete="current-password" placeholder="••••••••">
+            </div>
+            <div id="authOverlayFeedbackMessage" class="auth-error-output"></div>
+        </div>
+        <div class="secure-modal-actions">
+            <button id="commitVerificationAction" class="btn-modal-proceed">Verify Key Signature</button>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================================
+     SECURE DATA TRANSACTION CONSOLE CONTEXT WINDOW
+     ========================================================================== -->
+<div class="secure-auth-modal" id="secureTransactionConsoleModal">
+    <div class="secure-modal-body animate-scale-up">
+        <div class="secure-modal-title">
+            <h3 id="transactionModalDisplayHeading">Record Ledger Entry</h3>
+            <button class="btn-modal-close" data-target-modal="secureTransactionConsoleModal">&times;</button>
+        </div>
+        <form id="ledgerTransactionSubmissionForm">
+            <div class="secure-modal-content">
+                <input type="hidden" id="entryFlowTypeDirection">
+                <div class="form-element-block">
+                    <label for="entryFormDescription">Transaction Description</label>
+                    <input type="text" id="entryFormDescription" required placeholder="e.g. Sunday Offerings, Electricity Pay">
+                </div>
+                <div class="form-element-block">
+                    <label for="entryFormCategory">Accounting Category</label>
+                    <input type="text" id="entryFormCategory" required placeholder="e.g. Tithe, Benevolence, Facility">
+                </div>
+                <div class="form-element-block">
+                    <label for="entryFormAccountDestination">Target Registry Account</label>
+                    <select id="entryFormAccountDestination" required>
+                        <!-- Syncs automatically via State Variables -->
+                    </select>
+                </div>
+                <div class="form-element-block">
+                    <label for="entryFormFinancialValue">Amount (KSh)</label>
+                    <input type="number" id="entryFormFinancialValue" required min="1" placeholder="0.00">
+                </div>
+            </div>
+            <div class="secure-modal-actions">
+                <button type="submit" class="btn-modal-proceed full-width-btn">Post Transaction to Ledger</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- ==========================================================================
+     CORE FINANCE APPLICATION DATA ENGINE & DATABASE API SYNC SCRIPT
+     ========================================================================== -->
+<script>
+const API_BASE_URL = window.location.origin;
+
+/**
+ * Enterprise Application Runtime State Store
+ * Synchronized live against the MySQL database server endpoints.
+ */
+const LedgerState = {
+    session: {
+        role: "unverified", // Set to "main_admin" or "sub_admin" by rolelogin.html
+        username: null,
+        tokenActive: false,
+        timeRemaining: 900 // 15:00 Minute Security Lease Token Timeout
+    },
+    recoveryMatrix: {
+        targetAccount: null,
+        requestedBy: null,
+        approvalsCollected: [],
+        isExecuted: false
+    },
+    accounts: {},
+    funds: {
+        building: { name: "Building Fund", balance: 0, icon: "fa-hammer" },
+        mission: { name: "Mission Fund", balance: 0, icon: "fa-cross" },
+        children: { name: "Children Ministry", balance: 0, icon: "fa-child" },
+        choir: { name: "Choir Fund", balance: 0, icon: "fa-music" },
+        youth: { name: "Youth Fund", balance: 0, icon: "fa-users" },
+        women: { name: "Women's Ministry", balance: 0, icon: "fa-female" },
+        men: { name: "Men's Ministry", balance: 0, icon: "fa-male" },
+        emergency: { name: "Emergency Fund", balance: 0, icon: "fa-heart" }
+    },
+    welfare: {
+        peopleAssisted: 14,
+        totalAssistance: 45000,
+        remainingBudget: 105000,
+        pendingRequests: 3
+    },
+    transactions: [],
+    activities: [
+        { type: "transfer", title: "System Initialized", desc: "Secure cryptographic data channel successfully verified.", time: "Just Now" }
+    ]
+};
+
+/**
+ * Frontend Isolation Fallback Validation Pin
+ */
+const AdminCredentials = {
+    main_admin: { key: "MAIN-SECURE-2026" },
+    sub_admin:  { key: "SUB-LEDGER-7788" }
+};
+
+/**
+ * Core Initialization Routine
+ */
+async function initLedgerApp() {
+    loadSessionFromStorage();
+    startSecurityTimer();
+    bindActionEventListeners();
+    
+    // Pull fresh ledger metrics from the live Node/MySQL endpoints
+    await syncDataFromDatabaseServer();
+}
+
+window.addEventListener('DOMContentLoaded', initLedgerApp);
+
+// ==========================================================================
+// SESSION CHECKPOINTS & PROTECTION RULES
+// ==========================================================================
+
+function loadSessionFromStorage() {
+    try {
+        const cached = localStorage.getItem("kw_cms_active_session");
+        if (cached) {
+            LedgerState.session = JSON.parse(cached);
+        } else {
+            // Defaulting test layer session profile if missing
+            LedgerState.session.role = "sub_admin"; 
+            localStorage.setItem("kw_cms_active_session", JSON.stringify(LedgerState.session));
+        }
+    } catch (e) {
+        restrictToReadOnlyMode("Session parsing runtime execution error.");
+    }
+}
+
+function restrictToReadOnlyMode(reasonNotice) {
+    const noticeEl = document.getElementById("systemRestrictionNotice");
+    if (noticeEl) noticeEl.innerText = `[READ-ONLY MODE]: ${reasonNotice}`;
+    
+    const roleTag = document.getElementById("currentRoleTag");
+    if (roleTag) {
+        roleTag.innerText = "UNVERIFIED";
+        roleTag.className = "role-indicator";
+    }
+
+    document.querySelectorAll(".write-gate-btn").forEach(btn => {
+        btn.classList.add("write-restricted-hidden");
+        btn.setAttribute("disabled", "true");
+    });
+}
+
+function startSecurityTimer() {
+    const timerDisplay = document.getElementById("sessionTimerClock");
+    const interval = setInterval(() => {
+        if (LedgerState.session.timeRemaining <= 0) {
+            clearInterval(interval);
+            localStorage.removeItem("kw_cms_active_session");
+            window.location.href = "rolelogin.html";
+        } else {
+            LedgerState.session.timeRemaining--;
+            const mins = Math.floor(LedgerState.session.timeRemaining / 60);
+            const secs = LedgerState.session.timeRemaining % 60;
+            if (timerDisplay) {
+                timerDisplay.innerHTML = `<i class="fas fa-lock"></i> Expires: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+        }
+    }, 1000);
+}
+
+// ==========================================================================
+// CALCULATION MATRIX ENGINE & DYNAMIC COMPONENT RENDERING
+// ==========================================================================
+
+function renderUIComponents() {
+    let runningTotalCalculated = 0;
+    let bankAccountValue = 0;
+    let cashOfficeValue = 0;
+
+    Object.keys(LedgerState.accounts).forEach(key => {
+        const acc = LedgerState.accounts[key];
+        runningTotalCalculated += acc.balance;
+        if (key === 'bank') bankAccountValue = acc.balance;
+        if (key === 'cash') cashOfficeValue = acc.balance;
+
+        const node = document.getElementById(`lbl-acc-${key}`);
+        if (node) node.innerText = formatToKSh(acc.balance);
+    });
+
+    let calculatedIncomeTotal = 0;
+    let calculatedExpenseTotal = 0;
+
+    LedgerState.transactions.forEach(tx => {
+        if (tx.status === "Completed") {
+            if (tx.type === "income") calculatedIncomeTotal += tx.amount;
+            if (tx.type === "expense") calculatedExpenseTotal += tx.amount;
+        }
+    });
+
+    safeSetText('currentBalance', formatToKSh(runningTotalCalculated));
+    safeSetText('bankBalance', formatToKSh(bankAccountValue));
+    safeSetText('cashBalance', formatToKSh(cashOfficeValue));
+    safeSetText('expenseTotal', formatToKSh(calculatedExpenseTotal));
+    safeSetText('netIncome', formatToKSh(calculatedIncomeTotal - calculatedExpenseTotal));
+    safeSetText('pendingPayments', LedgerState.welfare.pendingRequests.toString());
+
+    safeSetText('lbl-summary-income', formatToKSh(calculatedIncomeTotal));
+    safeSetText('lbl-summary-expenses', formatToKSh(calculatedExpenseTotal));
+    safeSetText('lbl-summary-net', formatToKSh(calculatedIncomeTotal - calculatedExpenseTotal));
+    safeSetText('lbl-summary-count', LedgerState.transactions.length.toString());
+
+    safeSetText('lbl-welfare-people', LedgerState.welfare.peopleAssisted.toString());
+    safeSetText('lbl-welfare-total', formatToKSh(LedgerState.welfare.totalAssistance));
+    safeSetText('lbl-welfare-budget', formatToKSh(LedgerState.welfare.remainingBudget));
+    safeSetText('lbl-welfare-pending', LedgerState.welfare.pendingRequests.toString());
+
+    Object.keys(LedgerState.funds).forEach(key => {
+        const fundNode = document.getElementById(`lbl-fund-${key}`);
+        if (fundNode) fundNode.innerText = formatToKSh(LedgerState.funds[key].balance);
+    });
+
+    hydrateTransactionTable();
+    hydrateActivityStreamLog();
+    refreshActiveRoleUIPanel();
+}
+
+function hydrateTransactionTable() {
+    const tbody = document.getElementById("transactionTable");
+    if (!tbody) return;
+
+    tbody.innerHTML = LedgerState.transactions.map(tx => {
+        const accountDisplay = LedgerState.accounts[tx.account] ? LedgerState.accounts[tx.account].name : tx.account;
+        return `
+            <tr data-row-id="${tx.id}">
+                <td>${tx.date}</td>
+                <td><span class="badge ${tx.type}">${tx.type}</span></td>
+                <td>${tx.category}</td>
+                <td>${accountDisplay}</td>
+                <td style="font-weight: 700; color: ${tx.type === 'income' ? '#10b981' : '#ff3366'}">
+                    ${tx.type === 'income' ? '+' : '-'} ${formatToKSh(tx.amount)}
+                </td>
+                <td><span class="status-pill status-completed">${tx.status}</span></td>
+                <td>
+                    <button class="edit-row-btn write-gate-btn" data-action-id="${tx.id}">Edit</button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function hydrateActivityStreamLog() {
+    const listContainer = document.getElementById("secureActivityStreamLog");
+    if (!listContainer) return;
+
+    listContainer.innerHTML = LedgerState.activities.map(act => {
+        let iconClass = "fa-exchange-alt transfer-icon";
+        if (act.type === "income") iconClass = "fa-arrow-circle-down income-icon";
+        if (act.type === "expense") iconClass = "fa-arrow-circle-up expense-icon";
+
+        return `
+            <div class="activity-item">
+                <i class="fas ${iconClass} act-icon"></i>
+                <div>
+                    <h4>${act.title}</h4>
+                    <p>${act.desc}</p>
+                    <small>${act.time}</small>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function formatToKSh(value) {
+    return "KSh " + value.toLocaleString('en-KE', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
+
+function safeSetText(elementId, textValue) {
+    const target = document.getElementById(elementId);
+    if (target) target.innerText = textValue;
+}
+
+// ==========================================================================
+// ASYNCHRONOUS DATA DATABASE CONNECTIONS (FETCH HANDSHAKES)
+// ==========================================================================
+
+async function syncDataFromDatabaseServer() {
+    try {
+        const [accountsResponse, ledgerResponse] = await Promise.all([
+            fetch(`${API_BASE_URL}/api/finance/accounts`),
+            fetch(`${API_BASE_URL}/api/finance/transactions`)
+        ]);
+
+        const accountsData = await accountsResponse.json();
+        const ledgerData = await ledgerResponse.json();
+
+        if (accountsData.success && ledgerData.success) {
+            LedgerState.accounts = accountsData.accounts;
+            
+            LedgerState.transactions = ledgerData.transactions.map(row => ({
+                id: row.tx_id,
+                date: row.tx_date,
+                type: row.tx_type,
+                category: row.category,
+                account: row.account_key,
+                amount: parseFloat(row.amount),
+                status: row.tx_status
+            }));
+
+            renderUIComponents();
+        }
+    } catch (networkError) {
+        console.error("Critical: Database sync connection timeout.", networkError);
+    }
+}
+
+async function commitNewPayloadToLedgerState() {
+    const flow = document.getElementById("entryFlowTypeDirection").value;
+    const desc = document.getElementById("entryFormDescription").value;
+    const cat = document.getElementById("entryFormCategory").value;
+    const accKey = document.getElementById("entryFormAccountDestination").value;
+    const amount = parseFloat(document.getElementById("entryFormFinancialValue").value);
+    const enteredKey = document.getElementById("rbacIntermediaryAuthKey").value;
+
+    const payload = {
+        userRole: LedgerState.session.role,
+        secureKey: enteredKey,
+        txPayload: { type: flow, category: cat, account: accKey, amount: amount, desc: desc }
+    };
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/finance/transaction`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            document.getElementById("ledgerTransactionSubmissionForm").reset();
+            document.getElementById("secureTransactionConsoleModal").style.display = "none";
+            
+            LedgerState.activities.unshift({
+                type: flow,
+                title: flow === "income" ? "Income Logged" : "Expense Logged",
+                desc: `${desc} valued at ${formatToKSh(amount)} processed across database registers successfully.`,
+                time: "Just Now"
+            });
+
+            await syncDataFromDatabaseServer();
+            alert("Entry successfully executed inside decentralized MySQL database repositories.");
+        } else {
+            alert(`Access Denied: ${result.error}`);
+        }
+    } catch (err) {
+        alert("API connection layer dropped or experienced network timeouts.");
+    }
+}
+
+// ==========================================================================
+// INTERACTIVE DISPATCHERS & WORKSPACE LISTENERS MATRIX
+// ==========================================================================
+
+function bindActionEventListeners() {
+    const tabs = document.querySelectorAll("#viewToggleNav a");
+    tabs.forEach(tab => {
+        tab.addEventListener("click", function(e) {
+            e.preventDefault();
+            tabs.forEach(t => t.classList.remove("active"));
+            this.classList.add("active");
+            
+            const viewTarget = this.getAttribute("data-target");
+            filterDashboardViews(viewTarget);
+        });
+    });
+
+    const addIncomeBtn = document.getElementById("addIncome");
+    if (addIncomeBtn) addIncomeBtn.addEventListener("click", () => setupTransactionModalWindow("income"));
+
+    const addExpenseBtn = document.getElementById("addExpense");
+    if (addExpenseBtn) addExpenseBtn.addEventListener("click", () => setupTransactionModalWindow("expense"));
+
+    const transactionTableBody = document.getElementById("transactionTable");
+    if (transactionTableBody) {
+        transactionTableBody.addEventListener("click", function(e) {
+            if (e.target.classList.contains("edit-row-btn")) {
+                const targetTxId = e.target.getAttribute("data-action-id");
+                triggerSecureRecordEdit(targetTxId);
+            }
+        });
+    }
+
+    const ledgerForm = document.getElementById("ledgerTransactionSubmissionForm");
+    if (ledgerForm) {
+        ledgerForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            executeTransactionWriteToLedger();
+        });
+    }
+
+    document.querySelectorAll(".btn-modal-close").forEach(btn => {
+        btn.addEventListener("click", function() {
+            const mId = this.getAttribute("data-target-modal");
+            if (mId) document.getElementById(mId).style.display = "none";
+        });
+    });
+
+    const exitBtn = document.getElementById("exitSecBtn");
+    if (exitBtn) {
+        exitBtn.addEventListener("click", () => {
+            localStorage.removeItem("kw_cms_active_session");
+            window.location.href = "rolelogin.html";
+        });
+    }
+}
+
+function refreshActiveRoleUIPanel() {
+    const roleTag = document.getElementById("currentRoleTag");
+    const notice = document.getElementById("systemRestrictionNotice");
+    const role = LedgerState.session.role;
+
+    if (!roleTag) return;
+
+    if (role === "main_admin") {
+        roleTag.innerText = "MAIN ADMIN OVERSEER";
+        if (notice) notice.innerText = "[MONITOR MODE]: Complete insight enabled. Direct database financial modifications offline.";
+        document.querySelectorAll(".write-gate-btn").forEach(b => b.classList.add("write-restricted-hidden"));
+    } else if (role === "sub_admin") {
+        roleTag.innerText = "SUB-ADMIN RECORDER";
+        if (notice) notice.innerText = "[WRITE MODE]: Verification checkpoints configured for database updates.";
+        document.querySelectorAll(".write-gate-btn").forEach(b => b.classList.remove("write-restricted-hidden"));
+    }
+}
+
+function filterDashboardViews(targetSegment) {
+    const allViews = [
+        "dashboardKPISection", "quickActionsGroup", "accountsViewSegment", 
+        "fundsViewSegment", "welfareViewSegment", "transactionsViewSegment", 
+        "activitiesViewSegment", "monthlySummaryViewSegment", "reportsViewSegment"
+    ];
+
+    allViews.forEach(viewId => {
+        const block = document.getElementById(viewId);
+        if (!block) return;
+        
+        if (targetSegment === "dashboard") {
+            block.style.display = (viewId === "reportsViewSegment") ? "none" : "";
+        } else {
+            block.style.display = viewId.toLowerCase().includes(targetSegment) ? "" : "none";
+        }
+    });
+}
+
+function setupTransactionModalWindow(flowDirectionType) {
+    if (LedgerState.session.role === "main_admin") {
+        alert("Action Denied: Active account profile is set to read-only monitor access permissions.");
+        return;
+    }
+
+    const selectElement = document.getElementById("entryFormAccountDestination");
+    if (selectElement) {
+        selectElement.innerHTML = Object.keys(LedgerState.accounts).map(key => 
+            `<option value="${key}">${LedgerState.accounts[key].name}</option>`
+        ).join('');
+    }
+
+    const modalTitle = document.getElementById("transactionModalDisplayHeading");
+    if (modalTitle) modalTitle.innerText = flowDirectionType === "income" ? "Record Secure Church Income" : "Record Secure Church Expense";
+
+    document.getElementById("entryFlowTypeDirection").value = flowDirectionType;
+    document.getElementById("secureTransactionConsoleModal").style.display = "flex";
+}
+
+function executeTransactionWriteToLedger() {
+    const gatewayModal = document.getElementById("systemVerificationGatewayModal");
+    const inputKeyField = document.getElementById("rbacIntermediaryAuthKey");
+    const validationMessage = document.getElementById("authOverlayFeedbackMessage");
+    
+    if (inputKeyField) inputKeyField.value = "";
+    if (validationMessage) validationMessage.innerText = "";
+
+    gatewayModal.style.display = "flex";
+
+    const verifyButton = document.getElementById("commitVerificationAction");
+    verifyButton.onclick = function() {
+        if (inputKeyField.value === AdminCredentials.sub_admin.key) {
+            commitNewPayloadToLedgerState();
+            gatewayModal.style.display = "none";
+        } else {
+            validationMessage.innerText = "Access Violation: Invalid database write protection key signature.";
+        }
+    };
+}
+
+function triggerSecureRecordEdit(targetTransactionId) {
+    if (LedgerState.session.role === "main_admin") {
+        alert("Security Lockout: Modifications offline on monitor access profiles status.");
+        return;
+    }
+    
+    const targetRecord = LedgerState.transactions.find(t => t.id === targetTransactionId);
+    if (!targetRecord) return;
+
+    const modifiedAmount = prompt(`Auditing record [${targetRecord.category}]. Enter new targeted balance scale (KSh):`, targetRecord.amount);
+    if (modifiedAmount === null || modifiedAmount.trim() === "" || isNaN(modifiedAmount)) return;
+
+    const gatewayModal = document.getElementById("systemVerificationGatewayModal");
+    const inputKeyField = document.getElementById("rbacIntermediaryAuthKey");
+    const validationMessage = document.getElementById("authOverlayFeedbackMessage");
+    
+    if (inputKeyField) inputKeyField.value = "";
+    if (validationMessage) validationMessage.innerText = "";
+    
+    gatewayModal.style.display = "flex";
+
+    document.getElementById("commitVerificationAction").onclick = async function() {
+        if (inputKeyField.value === AdminCredentials.sub_admin.key) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/finance/transaction/edit`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userRole: LedgerState.session.role,
+                        secureKey: inputKeyField.value,
+                        txId: targetTransactionId,
+                        newAmount: parseFloat(modifiedAmount)
+                    })
+                });
+
+                const statusResult = await response.json();
+                gatewayModal.style.display = "none";
+
+                if (statusResult.success) {
+                    LedgerState.activities.unshift({
+                        type: "transfer",
+                        title: "Ledger Audit Written",
+                        desc: `Record item [${targetTransactionId}] modified successfully inside the database state layers.`,
+                        time: "Just Now"
+                    });
+                    
+                    await syncDataFromDatabaseServer();
+                    alert("Database Audit Modification Completed.");
+                } else {
+                    alert(`Rejected: ${statusResult.error}`);
+                }
+            } catch (err) {
+                alert("Failed to communicate update adjustments to server.");
+            }
+        } else {
+            validationMessage.innerText = "Access Violation: Authentication verification pinpoint check mismatched.";
+        }
+    };
+}
+</script>
+</body>
+</html>

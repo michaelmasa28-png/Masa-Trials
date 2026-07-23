@@ -1,0 +1,330 @@
+/* ==========================================================================
+   Kingdom Ways User Events Design System
+   ========================================================================== */
+
+/* --- 1. Global Reset & Variables --- */
+:root {
+    --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    --accent-color: #38bdf8;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --bg-light: #f8fafc;
+    --bg-card: #ffffff;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- 2. Master Layout Framework --- */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- 3. Sidebar Container Styling --- */
+.sidebar {
+    width: 280px;
+    background: var(--primary-gradient);
+    color: #ffffff;
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .logo i {
+    font-size: 28px;
+    color: var(--accent-color);
+}
+
+.sidebar .logo h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.sidebar .logo span {
+    font-size: 12px;
+    color: #94a3b8;
+    display: block;
+    margin-top: 2px;
+}
+
+.sidebar nav {
+    margin-top: 30px;
+    flex-grow: 1;
+}
+
+.sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.sidebar nav a:hover, 
+.sidebar nav a.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+/* --- 4. Devotional Quotes Block --- */
+.quote-box {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid var(--accent-color);
+    padding: 16px;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 30px;
+}
+
+.quote-box h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quote-box p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    font-style: italic;
+}
+
+.sidebar .version {
+    font-size: 11px;
+    color: #64748b;
+    text-align: center;
+}
+
+/* --- 5. Main Canvas & Topbar Headers --- */
+.content {
+    flex: 1;
+    padding: 40px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.topbar p {
+    margin: 6px 0 0 0;
+    color: var(--text-muted);
+}
+
+/* --- 6. Live Search Tool --- */
+.search-box {
+    position: relative;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+.search-box input {
+    padding: 12px 20px 12px 45px;
+    width: 300px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 14px;
+    outline: none;
+    background-color: var(--bg-card);
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* --- 7. Layout Cards & Section Headers --- */
+.card {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: var(--shadow-sm);
+}
+
+.section-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- 8. Events Dynamic Display Grids --- */
+.events-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* --- 9. Individual Event Cards --- */
+.preview-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.preview-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.preview-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* --- 10. Status & Highlight Badges --- */
+.badge {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 4px 12px;
+    background-color: #e0f2fe;
+    color: #0369a1;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge.featured {
+    background-color: #fef3c7;
+    color: #b45309;
+}
+
+.preview-content h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #0f172a;
+    line-height: 1.4;
+}
+
+.preview-content p {
+    margin: 0 0 20px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #475569;
+    flex-grow: 1;
+}
+
+/* --- 11. Event Card Metadata Grids --- */
+.preview-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.preview-meta div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.preview-meta i {
+    color: #2563eb;
+    width: 14px;
+    text-align: center;
+}
+
+/* --- 12. Media Queries for Responsiveness --- */
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        padding: 20px;
+    }
+    .sidebar nav {
+        margin-top: 15px;
+    }
+    .content {
+        padding: 20px;
+    }
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .search-box input {
+        width: 100%;
+    }
+}

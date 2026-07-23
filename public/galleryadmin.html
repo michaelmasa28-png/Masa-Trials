@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kingdom Ways CMS | galleryadmin</title>
+
+<link rel="stylesheet" href="galleryadmin.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>
+Kingdom Ways Church CMS
+</h1>
+
+<p>
+Gallery Management
+</p>
+
+</header>
+
+
+
+<main class="container">
+
+
+<section class="upload-box">
+
+<h2>
+Upload Gallery Photo
+</h2>
+
+
+<form id="galleryForm" method="POST" enctype="multipart/form-data">
+
+
+<label>
+Photo Title
+</label>
+
+<input 
+type="text"
+id="title"
+name="title"
+placeholder="Example: Sunday Worship"
+required>
+
+
+
+<label>
+Category
+</label>
+
+
+<select id="category" name="category">
+
+<option value="Worship">
+Worship
+</option>
+
+<option value="Youth">
+Youth
+</option>
+
+<option value="Conference">
+Conference
+</option>
+
+<option value="Outreach">
+Outreach
+</option>
+
+<option value="Baptism">
+Baptism
+</option>
+
+</select>
+
+
+
+<label>
+Choose Photo
+</label>
+
+
+<input 
+type="file"
+id="image"
+name="image"
+accept="image/*"
+required>
+
+
+
+<div id="preview">
+
+<img id="previewImage" src="" alt="Preview">
+
+</div>
+
+
+
+<button type="submit">
+Save To Gallery
+</button>
+
+
+</form>
+
+
+</section>
+
+
+
+
+
+<section class="gallery-list">
+
+
+<h2>
+Uploaded Photos
+</h2>
+
+
+<div id="admingallery">
+
+</div>
+
+
+</section>
+
+
+
+</main>
+
+
+
+
+<script src="galleryadmin.js"></script>
+
+
+</body>
+
+</html>

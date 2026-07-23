@@ -1,0 +1,242 @@
+/* ==========================================================================
+   Modern Holographic Key Portal Core Design Architecture Rules Block
+   ========================================================================== */
+
+:root {
+    --bg-dark-void: #090d16;
+    --card-glass: rgba(15, 23, 42, 0.65);
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --text-white: #ffffff;
+    --text-dim: #64748b;
+    
+    /* Spectrum reflection variables definitions used during active animation hover vectors loops */
+    --color-refract-1: #38bdf8;
+    --color-refract-2: #ec4899;
+    --color-refract-3: #eab308;
+    --color-refract-4: #22c55e;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-dark-void);
+    color: var(--text-white);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- Ambient Floating Visual Glow Backdrops Mappings --- */
+.glow-orb {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.15;
+    z-index: 1;
+    pointer-events: none;
+}
+.premium-glow {
+    background-color: var(--color-refract-1);
+    top: -10%;
+    left: 15%;
+}
+.structural-glow {
+    background-color: var(--color-refract-2);
+    bottom: -10%;
+    right: 15%;
+}
+
+/* --- Main Interface Panel Glassmorphism Architecture --- */
+.login-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 35px;
+    background: var(--card-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* --- Central Anchored Floating Letter A Styling Configurations --- */
+.logo-wrapper {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 25px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+.central-anchor {
+    font-size: 46px;
+    font-weight: 800;
+    font-family: 'Georgia', serif;
+    color: var(--text-white);
+    letter-spacing: -1px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    user-select: none;
+}
+
+.portal-header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.portal-header p {
+    margin: 8px 0 35px 0;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+}
+
+/* --- Key Input Field Box Wrappers Layout Control Elements --- */
+.input-wrapper {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 16px 16px 16px 48px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-glass);
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-white);
+    letter-spacing: 3px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.input-wrapper input::placeholder {
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: #475569;
+}
+
+.input-wrapper input:focus {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+.input-wrapper input:focus ~ .input-icon {
+    color: var(--text-white);
+}
+
+/* --- Kinetic Multi-Reflective Hover Button Components Structural Definition --- */
+.kinetic-enter-btn {
+    width: 100%;
+    padding: 16px;
+    background: #ffffff;
+    border: none;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 5;
+    
+    /* Rotation and transition baseline transformation declarations elements mapping links */
+    transform: rotate(0deg) scale(1);
+    transition: 
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
+        color 0.4s ease, 
+        box-shadow 0.4s ease, 
+        border-radius 0.5s ease;
+}
+
+/* --- Multi-Reflecting Gradient Shift Spectrum Interpolations States Rules --- */
+@keyframes dynamicHolographicRefraction {
+    0% {
+        box-shadow: 
+            0 0 20px var(--color-refract-1),
+            -5px -5px 30px var(--color-refract-2),
+            5px 5px 30px var(--color-refract-3);
+    }
+    33% {
+        box-shadow: 
+            0 0 25px var(--color-refract-3),
+            -5px -5px 35px var(--color-refract-4),
+            5px 5px 35px var(--color-refract-1);
+    }
+    66% {
+        box-shadow: 
+            0 0 20px var(--color-refract-2),
+            -5px -5px 30px var(--color-refract-3),
+            5px 5px 30px var(--color-refract-4);
+    }
+    100% {
+        box-shadow: 
+            0 0 20px var(--color-refract-1),
+            -5px -5px 30px var(--color-refract-2),
+            5px 5px 30px var(--color-refract-3);
+    }
+}
+
+/* --- Trigger Interactive Kinetic Transforms and Color Cascades on Hover or Focus States --- */
+.kinetic-enter-btn:hover,
+.kinetic-enter-btn:focus {
+    outline: none;
+    color: var(--text-white);
+    background: #000000;
+    border-radius: 30px;
+    
+    /* Execute rotational spin and expansion vectors transformation parameters */
+    transform: rotate(360deg) scale(1.04);
+    
+    /* Inject multi-reflective spectrum transitions animations sequences loops tracking triggers hooks */
+    animation: dynamicHolographicRefraction 3s infinite linear;
+}
+
+/* Tactile reduction handling when touched down or clicked */
+.kinetic-enter-btn:active {
+    transform: rotate(360deg) scale(0.97);
+    transition: transform 0.1s ease;
+}
+
+.login-footer {
+    margin-top: 35px;
+}
+
+.login-footer p {
+    font-size: 11px;
+    color: #475569;
+    letter-spacing: 0.5px;
+}
