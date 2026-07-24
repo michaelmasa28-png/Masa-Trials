@@ -1,50 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kingdom Ways Church</title>
 
-    <link rel="stylesheet" href="clientMode.css">
+<meta charset="UTF-8">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-         <script src="clientMode.js"></script>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Kingdom Ways Church</title>
+
+<link rel="stylesheet" href="clientMode.css">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
 
 </head>
 
 <body>
 
-<!-- HERO -->
+<!-- ==========================
+     WELCOME POPUP
+========================== -->
+
+<div id="welcomePopup" class="welcome-popup">
+
+    Welcome
+
+    <span id="memberName"></span>
+
+    👋
+
+</div>
+
+<!-- ==========================
+     HERO
+========================== -->
+
 <header class="hero">
 
     <div class="overlay"></div>
 
+    <!-- Top Bar -->
+
+    <div class="top-bar">
+
+        <div class="clock">
+
+            <span id="currentTime">
+
+                00:00
+
+            </span>
+
+        </div>
+
+        <button
+        id="logoutBtn"
+        class="logout-btn">
+
+            Logout
+
+        </button>
+
+    </div>
+
     <div class="hero-content">
 
-        <h1>KingdomWays Church</h1>
+        <h1>
 
-        <p class="welcome">
-            Welcome Home
-        </p>
+            KINGDOM WAYS
 
-        <!-- Secretary updates these -->
+        </h1>
+
+        <!-- Theme -->
+
         <div class="theme-box">
 
-            <h2>Church Theme</h2>
+            <h2>
+
+                Church Theme
+
+            </h2>
 
             <p id="churchTheme">
+
                 Theme will be updated by the Church Secretary.
+
             </p>
 
         </div>
 
+        <!-- Vision -->
+
         <div class="vision-box">
 
-            <h2>Church Vision</h2>
+            <h2>
+
+                Church Vision
+
+            </h2>
 
             <p id="churchVision">
+
                 Vision statement will appear here.
+
             </p>
 
         </div>
@@ -53,9 +117,9 @@
 
 </header>
 
-
-
-<!-- MAIN -->
+<!-- ==========================
+     MAIN
+========================== -->
 
 <main>
 
@@ -65,84 +129,190 @@
 
     <div class="card">
 
-        <span class="icon">📖</span>
+        <span class="icon">
 
-        <h2>Sermons</h2>
+            📖
+
+        </span>
+
+        <h2>
+
+            Sermons
+
+        </h2>
 
         <p>
+
             Listen to weekly sermons and spiritual teachings.
+
         </p>
 
         <a href="sermonsclient.html">
+
             Click to View →
+
         </a>
 
     </div>
 
+    <!-- Notice Board -->
 
+    <div class="card">
+
+        <span class="icon">
+
+            📌
+
+        </span>
+
+        <h2>
+
+            Notice Board
+
+        </h2>
+
+        <p>
+
+            Church events and weekly updates.
+
+        </p>
+
+        <a href="eventclient.html">
+
+            Click to View →
+
+        </a>
+
+    </div>
+
+    <!-- Connect Hub -->
+
+    <div class="card">
+
+        <span class="icon">
+
+            💬
+
+        </span>
+
+        <h2>
+
+           KingdomWays Connect Hub
+
+        </h2>
+
+        <p>
+
+            COMMINICATION CENTER
+
+        </p>
+
+        <p>
+
+            Chat with or send a request.
+
+        </p>
+
+        <a href="charttest.html">
+
+            Click to Open →
+
+        </a>
+
+    </div>
 
     <!-- Sunday Live -->
 
     <div class="card">
 
-        <span class="icon">📺</span>
+        <span class="icon">
 
-        <h2>Sunday Live</h2>
+            📺
+
+        </span>
+
+        <h2>
+
+            Sunday Live
+
+        </h2>
 
         <p>
+
             Join our live worship every Sunday.
+
         </p>
 
         <button disabled>
+
             Coming Soon
+
         </button>
 
     </div>
 
-
-
-    <!-- Giving -->
+    <!-- Offerings -->
 
     <div class="card">
 
-        <span class="icon">💝</span>
+        <span class="icon">
 
-        <h2>Offerings</h2>
+            💝
+
+        </span>
+
+        <h2>
+
+            Offerings
+
+        </h2>
 
         <p>
 
-            • M-Pesa<br>
-            • Bank<br>
+            M-PESA<br> • 
+
             • Other Giving Plans
 
         </p>
 
-        <a href="donations.html">
+        <a href="offerings.html">
+
             Give Now →
+
         </a>
 
     </div>
-
-
 
     <!-- Contact -->
 
     <div class="card">
 
-        <span class="icon">📞</span>
+        <span class="icon">
 
-        <h2>Contact Us</h2>
+            📞
+
+        </span>
+
+        <h2>
+
+            Contact Us
+
+        </h2>
 
         <p>
 
             Church Office<br>
+
             WhatsApp<br>
+
             Personal Care
 
         </p>
 
-        <a href="charttest.html">
+        <a href="connect.html">
+
             Contact →
+
         </a>
 
     </div>
@@ -151,26 +321,32 @@
 
 </main>
 
-
-
-<!-- FOOTER -->
+<!-- ==========================
+     FOOTER
+========================== -->
 
 <footer>
 
-    <button class="back-btn"
-        onclick="window.location.href='index.html'">
+    <button
+    class="back-btn"
+    onclick="window.location.href='index.html'">
 
         ← Back
 
     </button>
 
-    <div id="secretAdmin" class="hidden-admin">
+    <div id="secretAdmin"
+    class="hidden-admin">
 
         Kingdom Ways Church ©
+        <span id="year"></span>
 
     </div>
 
 </footer>
 
+<script src="clientMode.js"></script>
+
 </body>
+
 </html>

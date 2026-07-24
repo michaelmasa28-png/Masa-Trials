@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Kingdom Ways Church | Giving Portal
+</title>
+
+<link rel="stylesheet" href="offering.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="portal">
+
+<!-- ==========================================
+HEADER
+========================================== -->
+
+<header class="topbar">
+
+<div class="brand">
+
+<i class="fa-solid fa-hand-holding-heart"></i>
+
+<div>
+
+<h1>
+Kingdom Ways Church
+</h1>
+
+<p>
+Giving & Stewardship
+</p>
+
+</div>
+
+</div>
+
+<div class="secure-badge">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+Secure M-Pesa Giving
+
+</div>
+
+</header>
+
+
+
+
+
+<!-- ==========================================
+WELCOME CARD
+========================================== -->
+
+<section class="hero-card">
+
+<h2>
+
+Worship Through Giving
+
+</h2>
+
+<p>
+
+"Honor the Lord with your wealth and with the firstfruits of all your increase."
+
+</p>
+
+<span>
+
+Proverbs 3:9
+
+</span>
+
+</section>
+
+
+
+
+
+
+
+<!-- ==========================================
+MAIN GRID
+========================================== -->
+
+<div class="giving-grid">
+
+
+
+
+<!-- ==========================================
+LEFT
+========================================== -->
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-user"></i>
+
+Member Information
+
+</h2>
+
+
+
+<div class="info-row">
+
+<label>
+
+Member Name
+
+</label>
+
+<p id="memberName">
+
+Loading...
+
+</p>
+
+</div>
+
+
+
+
+
+<div class="info-row">
+
+<label>
+
+Member Number
+
+</label>
+
+<p id="memberNumber">
+
+Loading...
+
+</p>
+
+</div>
+
+
+
+
+
+<div class="info-row">
+
+<label>
+
+Registered Phone
+
+</label>
+
+<p id="registeredPhone">
+
+Loading...
+
+</p>
+
+</div>
+
+
+
+
+
+<div class="alternate-phone">
+
+<label>
+
+<input
+type="checkbox"
+id="useAnotherPhone">
+
+Use another M-Pesa number
+
+</label>
+
+</div>
+
+
+
+
+
+<div
+id="anotherPhoneBox"
+style="display:none;">
+
+<label>
+
+Alternative Number
+
+</label>
+
+<input
+
+type="tel"
+
+id="alternativePhone"
+
+placeholder="07XXXXXXXX">
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ==========================================
+RIGHT
+========================================== -->
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-wallet"></i>
+
+Giving Details
+
+</h2>
+
+
+
+<form
+id="givingForm">
+
+
+
+<div class="input-group">
+
+<label>
+
+Giving Category
+
+</label>
+
+<select
+id="givingCategory"
+required>
+
+<option value="">
+
+Select Category
+
+</option>
+
+<option value="Tithe">
+
+Tithe
+
+</option>
+
+<option value="Offering">
+
+Offering
+
+</option>
+
+<option value="Donation">
+
+Donation
+
+</option>
+
+<option value="Pledge">
+
+Pledge
+
+</option>
+
+</select>
+
+</div>
+
+
+
+
+
+
+<div class="input-group">
+
+<label>
+
+Amount (KES)
+
+</label>
+
+<input
+
+type="number"
+
+id="givingAmount"
+
+min="1"
+
+required
+
+placeholder="1000">
+
+</div>
+
+
+
+
+
+
+
+<div class="input-group">
+
+<label>
+
+Reference / Note
+
+(Optional)
+
+</label>
+
+<textarea
+
+id="givingNote"
+
+rows="4"
+
+placeholder="Optional message">
+
+</textarea>
+
+</div>
+
+
+
+
+
+
+
+<button
+
+type="submit"
+
+class="payBtn">
+
+<i class="fa-solid fa-mobile-screen-button"></i>
+
+Send M-Pesa Prompt
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ==========================================
+CONFIRMATION MODAL
+========================================== -->
+
+<div
+id="confirmModal"
+class="modal">
+
+<div class="modal-content">
+
+<h2>
+
+Confirm Giving
+
+</h2>
+
+<hr>
+
+<p>
+
+<strong>
+
+Member
+
+</strong>
+
+<span id="confirmMember">
+
+</span>
+
+</p>
+
+<p>
+
+<strong>
+
+Category
+
+</strong>
+
+<span id="confirmCategory">
+
+</span>
+
+</p>
+
+<p>
+
+<strong>
+
+Amount
+
+</strong>
+
+KES
+
+<span id="confirmAmount">
+
+</span>
+
+</p>
+
+<p>
+
+<strong>
+
+Phone
+
+</strong>
+
+<span id="confirmPhone">
+
+</span>
+
+</p>
+
+<div class="modal-buttons">
+
+<button
+id="cancelPayment"
+class="cancelBtn">
+
+Cancel
+
+</button>
+
+<button
+id="confirmPayment"
+class="confirmBtn">
+
+Confirm & Send
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ==========================================
+PAYMENT STATUS
+========================================== -->
+
+<section
+id="paymentStatus"
+class="status-card"
+style="display:none;">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<h2>
+
+Waiting for M-Pesa Confirmation
+
+</h2>
+
+<p>
+
+An M-Pesa prompt has been sent.
+
+Please complete payment on your phone.
+
+</p>
+
+<div
+id="statusMessage">
+
+Awaiting response...
+
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ==========================================
+RECEIPT
+========================================== -->
+
+<section
+id="receiptCard"
+class="receipt-card"
+style="display:none;">
+
+<h2>
+
+Payment Successful
+
+</h2>
+
+<hr>
+
+<p>
+
+Member
+
+<span id="receiptMember">
+
+</span>
+
+</p>
+
+<p>
+
+Member Number
+
+<span id="receiptMemberNumber">
+
+</span>
+
+</p>
+
+<p>
+
+Category
+
+<span id="receiptCategory">
+
+</span>
+
+</p>
+
+<p>
+
+Amount
+
+KES
+
+<span id="receiptAmount">
+
+</span>
+
+</p>
+
+<p>
+
+M-Pesa Receipt
+
+<span id="receiptCode">
+
+</span>
+
+</p>
+
+<p>
+
+Date
+
+<span id="receiptDate">
+
+</span>
+
+</p>
+
+<button
+id="finishBtn">
+
+Return Home
+
+</button>
+
+</section>
+
+
+
+
+
+
+<footer>
+
+Kingdom Ways Church © 2026
+
+</footer>
+
+<script src="offering.js"></script>
+
+</body>
+
+</html>

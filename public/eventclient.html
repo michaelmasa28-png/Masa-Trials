@@ -1,103 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kingdom Ways | Church Events</title>
-    <link rel="stylesheet" href="eventclient.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+Kingdom Ways Church | Events
+</title>
+
+
+<link rel="stylesheet" href="eventclient.css">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
 </head>
+
+
 <body>
 
-<div class="dashboard">
 
-    <!-- ===========================
-    SIDEBAR (Matches Admin Layout)
-    =========================== -->
-    <aside class="sidebar">
-        <div class="logo">
-            <i class="fa-solid fa-church"></i>
-            <div>
-                <h2>Kingdom Ways</h2>
-                <span>Church Portal</span>
-            </div>
-        </div>
+<div class="portal">
 
-        <nav>
-            <a href="sportlights.html" class="active">
-                <i class="fa-solid fa-house"></i>
-                sportlights
-            </a>
-        </nav>
 
-        <!-- Dynamic Encouragement Box -->
-        <div class="quote-box">
-            <h4>
-                <i class="fa-solid fa-heart"></i>
-                Daily Encouragement
-            </h4>
-            <p id="quoteText">Loading your encouraging word...</p>
-        </div>
+<!-- =========================
+HEADER
+========================= -->
 
-        <div class="version">
-            Portal Version 2.0
-        </div>
-    </aside>
 
-    <!-- ===========================
-    MAIN AREA CONTENT
-    =========================== -->
-    <main class="content">
+<header class="topbar">
 
-        <header class="topbar">
-            <div>
-                <h1>
-                    <i class="fa-solid fa-calendar-days"></i>
-                    Church Events
-                </h1>
-                <p>Stay up to date with recently published events and upcoming services.</p>
-            </div>
-            
-            <!-- Live Search Tool -->
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" id="searchEvent" placeholder="Search events...">
-            </div>
-        </header>
 
-        <!-- ===========================
-        FEATURED HIGHLIGHT ZONE (Optional element wrapper)
-        ========================== -->
-        <section id="featuredZone" style="display: none; margin-bottom: 30px;">
-            <h2 style="font-size: 18px; margin-bottom: 15px; color: #1e3a8a;"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> Featured Event</h2>
-            <div id="featuredContainer"></div>
-        </section>
+<div class="brand">
 
-        <!-- ===========================
-        UPCOMING EVENTS CARD CANVAS CONTAINER
-        =========================== -->
-        <section class="card">
-            <div class="section-header">
-                <div>
-                    <h2>
-                        <i class="fa-solid fa-calendar-week"></i>
-                        Upcoming Church Events
-                    </h2>
-                </div>
-            </div>
+<i class="fa-solid fa-church"></i>
 
-            <!-- AJAX RENDERING TARGET GRID CONTAINER -->
-            <div class="events-list" id="eventsContainer">
-                <p class="loading-placeholder" style="padding: 40px; text-align: center; color: #64748b; font-style: italic;">Fetching active church calendar logs...</p>
-            </div>
-        </section>
+<div>
 
-    </main>
+<h1>
+Kingdom Ways Church
+</h1>
+
+<p>
+Church Events & Announcements
+</p>
 
 </div>
 
-<!-- Process user facing dynamic operations out of the local app workspace folder asset directory path -->
+</div>
+
+
+
+
+<div class="search-box">
+
+
+<i class="fa-solid fa-search"></i>
+
+
+<input
+
+type="search"
+
+id="searchEvent"
+
+placeholder="Search events..."
+
+>
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+<!-- =========================
+HERO
+========================= -->
+
+
+<section class="hero">
+
+
+<div>
+
+
+<h2>
+
+Upcoming Church Events
+
+</h2>
+
+
+<p>
+
+Stay connected with what is happening in Kingdom Ways Church.
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =========================
+FEATURED EVENT
+========================= -->
+
+
+<section
+
+id="featuredZone"
+
+class="featured-zone"
+
+style="display:none;">
+
+
+<h2>
+
+<i class="fa-solid fa-star"></i>
+
+Featured Event
+
+</h2>
+
+
+<div
+
+id="featuredContainer">
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =========================
+EVENT LIST
+========================= -->
+
+
+<section class="events-section">
+
+
+<div class="section-title">
+
+
+<h2>
+
+<i class="fa-solid fa-calendar-days"></i>
+
+Church Calendar
+
+</h2>
+
+
+</div>
+
+
+
+
+
+<div
+
+id="eventsContainer"
+
+class="events-grid">
+
+
+<div class="loading">
+
+Loading events...
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<footer>
+
+
+<p>
+
+© 2026 Kingdom Ways Church
+
+<br>
+
+Growing Together in Christ
+
+</p>
+
+
+</footer>
+
+
+
+</div>
+
+
+
 <script src="eventclient.js"></script>
 
+
 </body>
+
+
 </html>

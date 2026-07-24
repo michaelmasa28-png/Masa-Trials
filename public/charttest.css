@@ -1,364 +1,2101 @@
-/* ==========================================================================
-   WhatsApp Web Style Interface Layout Normalization Stylesheet Core Rules Block
-   ========================================================================== */
+/*==========================================================
+    KINGDOM WAYS CONNECT HUB
+    charttest.css
+    PART 1
+==========================================================*/
 
-:root {
-    --wa-bg-app: #eae6df;
-    --wa-header-gray: #f0f2f5;
-    --wa-sidebar-bg: #ffffff;
-    --wa-border-light: #e9edef;
-    --wa-chat-active: #f0f2f5;
-    --wa-chat-hover: #f5f6f6;
-    --wa-bubble-out: #d9fdd3;
-    --wa-bubble-in: #ffffff;
-    --wa-text-dark: #111b21;
-    --wa-text-muted: #667781;
-    --wa-text-blue: #00a884;
-    --whatsapp-green-brand: #25d366;
-    --facebook-blue-brand: #1877f2;
+
+/* ==========================
+        RESET
+========================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:
+    "Poppins",
+    Arial,
+    sans-serif;
+
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #d1d7db;
-    color: var(--wa-text-dark);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+
+html{
+
+    scroll-behavior:smooth;
+
 }
 
-/* Master Flexible Split Column Framework */
-.whatsapp-layout {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    background-color: #ffffff;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+
+
+body{
+
+
+    min-height:100vh;
+
+
+    background:
+
+    linear-gradient(
+    135deg,
+    rgba(11,31,58,.96),
+    rgba(36,119,255,.88)
+    ),
+
+    url("images/church.jpg");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-attachment:fixed;
+
+
+    overflow:hidden;
+
+
 }
 
-/* --- LEFT COLUMN: CONVERSATION SIDEBAR QUEUE LISTS --- */
-.chat-sidebar {
-    width: 400px;
-    background-color: var(--wa-sidebar-bg);
-    border-right: 1px solid var(--wa-border-light);
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
+
+
+
+
+/* ==========================
+      MAIN CONTAINER
+========================== */
+
+
+.connect-wrapper{
+
+
+    width:95%;
+
+    height:92vh;
+
+
+    margin:4vh auto;
+
+
+    display:flex;
+
+
+    background:
+
+    rgba(255,255,255,.12);
+
+
+    backdrop-filter:
+
+    blur(18px);
+
+
+    border-radius:28px;
+
+
+    overflow:hidden;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+
+    box-shadow:
+
+    0 30px 80px rgba(0,0,0,.45);
+
+
 }
 
-.sidebar-header {
-    height: 60px;
-    background-color: var(--wa-header-gray);
-    padding: 10px 16px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+
+
+
+
+
+/* ==========================
+        LEFT SIDEBAR
+========================== */
+
+
+.connect-sidebar{
+
+
+    width:360px;
+
+
+    background:
+
+    rgba(255,255,255,.95);
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    border-right:
+
+    2px solid rgba(212,175,55,.3);
+
+
+
 }
 
-.current-user-avatar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    color: var(--wa-text-muted);
+
+
+
+
+
+
+
+/* ==========================
+        HEADER
+========================== */
+
+
+.connect-header{
+
+
+    padding:20px;
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+    background:
+
+
+    linear-gradient(
+    135deg,
+    #0b1f3a,
+    #2477ff
+    );
+
+
+    color:white;
+
+
 }
 
-.current-user-avatar i {
-    font-size: 34px;
+
+
+
+
+
+/* MEMBER PROFILE */
+
+
+.member-profile{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:12px;
+
+
 }
 
-.sidebar-actions {
-    display: flex;
-    gap: 20px;
+
+
+.member-profile img{
+
+
+    width:55px;
+
+
+    height:55px;
+
+
+    border-radius:50%;
+
+
+    object-fit:cover;
+
+
+    border:
+
+    3px solid #d4af37;
+
+
 }
 
-.sidebar-actions button {
-    background: none;
-    border: none;
-    color: var(--wa-text-muted);
-    font-size: 20px;
-    cursor: pointer;
-    padding: 0;
+
+
+
+.member-profile h3{
+
+
+    font-size:16px;
+
+
+    font-weight:700;
+
+
 }
 
-.search-container {
-    padding: 8px 12px;
-    background-color: #ffffff;
-    border-bottom: 1px solid var(--wa-border-light);
+
+
+
+.member-profile p{
+
+
+    font-size:12px;
+
+
+    color:#ffd54a;
+
+
 }
 
-.search-input-box {
-    position: relative;
-    background-color: var(--wa-header-gray);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
+
+
+
+
+
+
+
+/* ==========================
+    HEADER BUTTONS
+========================== */
+
+
+.header-actions{
+
+
+    display:flex;
+
+
+    gap:8px;
+
+
 }
 
-.search-input-box i {
-    position: absolute;
-    left: 14px;
-    color: var(--wa-text-muted);
-    font-size: 14px;
+
+.header-actions button{
+
+
+    width:34px;
+
+
+    height:34px;
+
+
+    border:none;
+
+
+    border-radius:50%;
+
+
+    background:
+
+    rgba(255,255,255,.18);
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
 }
 
-.search-input-box input {
-    width: 100%;
-    padding: 8px 12px 8px 45px;
-    background: none;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    color: var(--wa-text-dark);
+
+
+.header-actions button:hover{
+
+
+    background:#d4af37;
+
+
+    transform:translateY(-3px);
+
+
 }
 
-.conversations-scroll-list {
-    flex: 1;
-    overflow-y: auto;
-    background-color: #ffffff;
+
+
+
+
+
+
+
+
+/* ==========================
+        SEARCH
+========================== */
+
+
+.chat-search{
+
+
+    padding:18px;
+
+
+    background:#f4f7fb;
+
+
 }
 
-/* Individual WhatsApp Chat Strip Cards Rows Items Rules Elements Mappings */
-.chat-row-item {
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    gap: 15px;
-    cursor: pointer;
-    border-bottom: 1px solid var(--wa-border-light);
-    transition: background 0.1s ease;
+
+
+.chat-search input{
+
+
+    width:100%;
+
+
+    padding:14px 20px;
+
+
+    border-radius:40px;
+
+
+    border:none;
+
+
+    outline:none;
+
+
+    background:white;
+
+
+    box-shadow:
+
+    0 5px 18px rgba(0,0,0,.08);
+
+
+    font-size:14px;
+
+
 }
 
-.chat-row-item:hover { background-color: var(--wa-chat-hover); }
-.chat-row-item.active { background-color: var(--wa-chat-active); }
 
-.row-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: #005c4b;
-    color: #ffffff;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    flex-shrink: 0;
+
+.chat-search input:focus{
+
+
+    box-shadow:
+
+    0 0 0 3px rgba(36,119,255,.2);
+
+
 }
 
-.row-body-meta {
-    flex: 1;
-    min-width: 0; /* Important for ellipsis truncation math behaviors rules properties */
+
+
+
+
+
+
+/* ==========================
+     CONVERSATION LIST
+========================== */
+
+
+.conversation-list{
+
+
+    flex:1;
+
+
+    overflow-y:auto;
+
+
+    padding:10px;
+
+
 }
 
-.row-top-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 4px;
+
+
+
+
+.conversation-item{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:15px;
+
+
+    padding:15px;
+
+
+    border-radius:18px;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
 }
 
-.row-top-line h4 {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--wa-text-dark);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+
+.conversation-item:hover{
+
+
+    background:
+
+
+    rgba(36,119,255,.12);
+
+
 }
 
-.id-timestamp {
-    font-size: 12px;
-    font-family: monospace;
-    color: var(--wa-text-blue);
-    font-weight: 600;
+
+
+.conversation-item img{
+
+
+    width:48px;
+
+
+    height:48px;
+
+
+    border-radius:50%;
+
+
+    object-fit:cover;
+
+
+    border:
+
+    2px solid #2477ff;
+
+
 }
 
-.row-bottom-line p {
-    margin: 0;
-    font-size: 13px;
-    color: var(--wa-text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+
+
+.conversation-item h4{
+
+
+    color:#0b1f3a;
+
+
+    font-size:15px;
+
+
 }
 
-/* --- RIGHT COLUMN: WHATSAPP-STYLE LIVE CONVERSATION GRID PLATFORMS --- */
-.chat-viewport {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--wa-bg-app);
-    position: relative;
+
+
+
+.conversation-item p{
+
+
+    color:#777;
+
+
+    font-size:13px;
+
+
 }
 
-/* Decorative backdrop wallpaper overlay matching standard WhatsApp chat rooms patterns */
-.chat-viewport::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url('https://githubusercontent.com');
-    opacity: 0.06;
-    pointer-events: none;
-    z-index: 1;
+
+
+
+
+
+/* ==========================
+       ADMIN AREA
+========================== */
+
+
+.admin-section{
+
+
+    padding:20px;
+
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #0b1f3a,
+    #2477ff
+    );
+
+
+    color:white;
+
+
 }
 
-.viewport-header {
-    height: 60px;
-    background-color: var(--wa-header-gray);
-    padding: 10px 16px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 10;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
+
+
+.admin-section button{
+
+
+    width:100%;
+
+
+    margin-top:10px;
+
+
+    padding:12px;
+
+
+    border:none;
+
+
+    border-radius:30px;
+
+
+    background:#d4af37;
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+    font-weight:bold;
+
+
 }
 
-.target-profile-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+
+
+.admin-section button:hover{
+
+
+    transform:translateY(-3px);
+
+
 }
 
-.target-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #0f172a;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
+
+
+.hidden{
+
+
+    display:none;
+
 }
 
-.target-profile-info h3 { margin: 0; font-size: 16px; font-weight: 500; }
-.target-profile-info p { margin: 2px 0 0 0; font-size: 12px; color: var(--wa-text-muted); }
 
-/* Top Right Brand Placement Icons Rules Elements Mappings Links */
-.social-integration-hub {
-    display: flex;
-    gap: 22px;
+/*==========================================================
+    KINGDOM WAYS CONNECT HUB
+    charttest.css
+    PART 2
+    CHAT AREA + MESSAGE DESIGN
+==========================================================*/
+
+
+
+/* ==========================
+        CHAT AREA
+========================== */
+
+
+.chat-area{
+
+
+    flex:1;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    background:
+
+
+    rgba(245,248,255,.92);
+
+
+
 }
 
-.brand-link {
-    font-size: 26px;
-    text-decoration: none;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+
+
+
+
+
+/* ==========================
+        CHAT HEADER
+========================== */
+
+
+.chat-header{
+
+
+    height:85px;
+
+
+    padding:20px 30px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    background:white;
+
+
+    border-bottom:
+
+    1px solid rgba(0,0,0,.08);
+
+
+
 }
 
-.brand-link:hover { transform: scale(1.15) translateY(-2px); }
-.whatsapp-color { color: var(--whatsapp-green-brand); }
-.facebook-color { color: var(--facebook-blue-brand); }
 
-/* Live Message Bubble Rows Structures Viewports Content */
-.message-bubbles-stream {
-    flex: 1;
-    padding: 20px 40px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: relative;
-    z-index: 5;
+
+
+
+.active-chat-profile{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:15px;
+
+
 }
 
-.wa-bubble-node {
-    max-width: 65%;
-    padding: 8px 12px 6px 12px;
-    font-size: 14.2px;
-    line-height: 1.4;
-    border-radius: 7.5px;
-    box-shadow: 0 1px 0.5px rgba(0,0,0,0.13);
-    position: relative;
-    word-wrap: break-word;
-    animation: bubbleEnter 0.15s ease-out;
+
+
+
+
+.group-avatar{
+
+
+    width:55px;
+
+
+    height:55px;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    background:
+
+
+    linear-gradient(
+    135deg,
+    #0b1f3a,
+    #d4af37
+    );
+
+
+    color:white;
+
+
+    font-size:18px;
+
+
+    font-weight:800;
+
+
+    box-shadow:
+
+    0 8px 20px rgba(0,0,0,.2);
+
+
+
 }
 
-@keyframes bubbleEnter {
-    from { opacity: 0; transform: scale(0.98) translateY(4px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+
+
+
+
+
+
+.active-chat-profile h2{
+
+
+    color:#0b1f3a;
+
+
+    font-size:18px;
+
+
 }
 
-.wa-bubble-node.incoming-bubble {
-    background-color: var(--wa-bubble-in);
-    align-self: flex-start;
-    border-top-left-radius: 0;
+
+
+.active-chat-profile p{
+
+
+    color:#777;
+
+
+    font-size:13px;
+
+
 }
 
-.wa-bubble-node.outgoing-bubble {
-    background-color: var(--wa-bubble-out);
-    align-self: flex-end;
-    border-top-right-radius: 0;
+
+
+
+
+
+
+
+
+/* ==========================
+       MESSAGE AREA
+========================== */
+
+
+.message-container{
+
+
+    flex:1;
+
+
+    padding:30px;
+
+
+    overflow-y:auto;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:15px;
+
+
+    background:
+
+
+    linear-gradient(
+
+    rgba(255,255,255,.85),
+
+    rgba(240,246,255,.9)
+
+    );
+
+
+
 }
 
-.bubble-author-title {
-    font-size: 12.5px;
-    font-weight: 600;
-    color: #005c4b;
-    margin-bottom: 3px;
-    display: block;
+
+
+
+
+.empty-chat{
+
+
+    height:100%;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    color:#8a94a6;
+
+
 }
 
-.bubble-timestamp-line {
-    font-size: 11px;
-    color: var(--wa-text-muted);
-    float: right;
-    margin-top: 5px;
-    margin-left: 20px;
+
+
+.empty-chat i{
+
+
+    font-size:70px;
+
+
+    margin-bottom:20px;
+
+
+    color:#2477ff;
+
+
 }
 
-/* Base Tray Composer Inputs Bottom Areas Elements Controls Form Forms Row */
-.composition-input-tray {
-    height: 62px;
-    background-color: var(--wa-header-gray);
-    padding: 10px 24px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    position: relative;
-    z-index: 10;
+
+
+
+
+
+
+
+/* ==========================
+      MESSAGE BUBBLES
+========================== */
+
+
+
+.message-bubble{
+
+
+    max-width:65%;
+
+
+    padding:14px 18px;
+
+
+    border-radius:22px;
+
+
+    position:relative;
+
+
+    animation:
+
+    messageAppear .35s ease;
+
+
+
 }
 
-.tray-utility-icons {
-    display: flex;
-    gap: 18px;
-    color: var(--wa-text-muted);
-    font-size: 22px;
+
+
+
+.message-bubble.sender{
+
+
+    align-self:flex-end;
+
+
+    background:
+
+
+    linear-gradient(
+    135deg,
+    #2477ff,
+    #19c37d
+    );
+
+
+    color:white;
+
+
+    border-bottom-right-radius:5px;
+
+
 }
 
-.tray-utility-icons i { cursor: pointer; }
 
-.composition-input-tray input {
-    flex: 1;
-    padding: 10px 18px;
-    border: none;
-    outline: none;
-    background-color: #ffffff;
-    border-radius: 8px;
-    font-size: 15px;
-    color: var(--wa-text-dark);
+
+
+.message-bubble.receiver{
+
+
+    align-self:flex-start;
+
+
+    background:white;
+
+
+    color:#243447;
+
+
+    border-bottom-left-radius:5px;
+
+
+    box-shadow:
+
+
+    0 8px 20px rgba(0,0,0,.08);
+
+
+
 }
 
-.dispatch-audio-msg-btn {
-    background: none;
-    border: none;
-    color: var(--wa-text-muted);
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 5px;
+
+
+
+
+.message-bubble strong{
+
+
+    display:block;
+
+
+    font-size:13px;
+
+
+    margin-bottom:5px;
+
+
+    color:#d4af37;
+
+
 }
 
-.dispatch-audio-msg-btn:hover { color: #005c4b; }
+
+
+
+
+.message-bubble p{
+
+
+    line-height:1.6;
+
+
+    font-size:15px;
+
+
+}
+
+
+
+
+.message-time{
+
+
+    display:block;
+
+
+    margin-top:6px;
+
+
+    text-align:right;
+
+
+    font-size:11px;
+
+
+    opacity:.7;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+       INPUT TRAY
+========================== */
+
+
+.message-box{
+
+
+    padding:20px;
+
+
+    background:white;
+
+
+    border-top:
+
+
+    1px solid rgba(0,0,0,.08);
+
+
+}
+
+
+
+
+
+.message-box form{
+
+
+    display:flex;
+
+
+    gap:12px;
+
+
+    align-items:center;
+
+
+
+}
+
+
+
+
+
+.message-box input{
+
+
+    flex:1;
+
+
+    padding:16px 22px;
+
+
+    border-radius:40px;
+
+
+    border:2px solid #e4e9f2;
+
+
+    outline:none;
+
+
+    font-size:15px;
+
+
+    transition:.3s;
+
+
+
+}
+
+
+
+
+.message-box input:focus{
+
+
+    border-color:#2477ff;
+
+
+    box-shadow:
+
+
+    0 0 15px rgba(36,119,255,.2);
+
+
+
+}
+
+
+
+
+
+
+/* ==========================
+       ATTACH BUTTON
+========================== */
+
+
+.attach-btn{
+
+
+    width:45px;
+
+
+    height:45px;
+
+
+    border-radius:50%;
+
+
+    border:none;
+
+
+    background:#eef5ff;
+
+
+    color:#2477ff;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.attach-btn:hover{
+
+
+    background:#2477ff;
+
+
+    color:white;
+
+
+    transform:rotate(20deg);
+
+
+}
+
+
+
+
+
+
+/* ==========================
+       SEND BUTTON
+========================== */
+
+
+.send-btn{
+
+
+    width:55px;
+
+
+    height:55px;
+
+
+    border-radius:50%;
+
+
+    border:none;
+
+
+    background:
+
+
+    linear-gradient(
+    135deg,
+    #d4af37,
+    #ff9f1c
+    );
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+    font-size:18px;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.send-btn:hover{
+
+
+    transform:
+
+    scale(1.1)
+    rotate(-10deg);
+
+
+    box-shadow:
+
+    0 10px 25px rgba(212,175,55,.5);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+       SCROLL BAR
+========================== */
+
+
+.message-container::-webkit-scrollbar,
+.conversation-list::-webkit-scrollbar{
+
+
+    width:8px;
+
+
+}
+
+
+
+.message-container::-webkit-scrollbar-thumb,
+.conversation-list::-webkit-scrollbar-thumb{
+
+
+    background:
+
+
+    linear-gradient(
+    #2477ff,
+    #d4af37
+    );
+
+
+    border-radius:20px;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================
+      ANIMATION
+========================== */
+
+
+@keyframes messageAppear{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:
+
+        translateY(20px);
+
+
+    }
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:
+
+        translateY(0);
+
+
+    }
+
+
+}
+
+/*==========================================================
+    KINGDOM WAYS CONNECT HUB
+    charttest.css
+    PART 3
+    RESPONSIVE + MEMBER FEATURES + FINAL POLISH
+==========================================================*/
+
+
+
+/* ==========================
+       ACTIVE CHAT ITEM
+========================== */
+
+
+.conversation-item.active{
+
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    rgba(36,119,255,.15),
+
+    rgba(212,175,55,.15)
+
+    );
+
+
+    border-left:
+
+
+    4px solid #d4af37;
+
+
+
+}
+
+
+
+
+
+.conversation-item.active h4{
+
+
+    color:#2477ff;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================
+       UNREAD MESSAGE BADGE
+========================== */
+
+
+.message-count{
+
+
+    margin-left:auto;
+
+
+    min-width:25px;
+
+
+    height:25px;
+
+
+    padding:0 7px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    border-radius:50%;
+
+
+    background:#d4af37;
+
+
+    color:white;
+
+
+    font-size:12px;
+
+
+    font-weight:bold;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+       MEMBER PHOTO UPLOAD
+========================== */
+
+
+.profile-upload{
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    gap:15px;
+
+
+}
+
+
+
+
+
+.profile-upload img{
+
+
+    width:120px;
+
+
+    height:120px;
+
+
+    border-radius:50%;
+
+
+    object-fit:cover;
+
+
+    border:
+
+
+    4px solid #d4af37;
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(0,0,0,.25);
+
+
+
+}
+
+
+
+
+.upload-btn{
+
+
+    padding:10px 25px;
+
+
+    border-radius:30px;
+
+
+    background:
+
+
+    linear-gradient(
+    135deg,
+    #2477ff,
+    #19c37d
+    );
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+    font-weight:600;
+
+
+    border:none;
+
+
+}
+
+
+
+.upload-btn:hover{
+
+
+    transform:translateY(-3px);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+       ADMIN CHAT BADGE
+========================== */
+
+
+.admin-tag{
+
+
+    display:inline-block;
+
+
+    margin-left:8px;
+
+
+    padding:3px 10px;
+
+
+    border-radius:20px;
+
+
+    background:#d4af37;
+
+
+    color:white;
+
+
+    font-size:11px;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+       EMPTY STATE
+========================== */
+
+
+.no-conversation{
+
+
+    text-align:center;
+
+
+    margin:auto;
+
+
+    color:#777;
+
+
+}
+
+
+
+
+.no-conversation i{
+
+
+    font-size:60px;
+
+
+    color:#2477ff;
+
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+       TABLET
+========================== */
+
+
+@media(max-width:1000px){
+
+
+
+.connect-wrapper{
+
+
+    width:100%;
+
+
+    height:100vh;
+
+
+    margin:0;
+
+
+    border-radius:0;
+
+
+
+}
+
+
+
+
+
+.connect-sidebar{
+
+
+    width:320px;
+
+
+}
+
+
+
+
+
+.message-bubble{
+
+
+    max-width:75%;
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+       MOBILE
+========================== */
+
+
+@media(max-width:700px){
+
+
+
+body{
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+.connect-wrapper{
+
+
+    flex-direction:column;
+
+
+    height:100vh;
+
+
+}
+
+
+
+
+
+.connect-sidebar{
+
+
+    width:100%;
+
+
+    height:40%;
+
+
+}
+
+
+
+.chat-area{
+
+
+    height:60%;
+
+
+}
+
+
+
+.connect-header{
+
+
+    padding:15px;
+
+
+}
+
+
+
+
+
+.member-profile img{
+
+
+    width:45px;
+
+
+    height:45px;
+
+
+}
+
+
+
+
+
+.chat-header{
+
+
+    height:70px;
+
+
+    padding:15px;
+
+
+}
+
+
+
+
+
+.active-chat-profile h2{
+
+
+    font-size:15px;
+
+
+}
+
+
+
+
+
+.message-container{
+
+
+    padding:15px;
+
+
+}
+
+
+
+
+
+.message-bubble{
+
+
+    max-width:90%;
+
+
+}
+
+
+
+
+
+.message-box{
+
+
+    padding:12px;
+
+
+}
+
+
+
+
+
+.message-box input{
+
+
+    padding:13px 18px;
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+       SMALL PHONES
+========================== */
+
+
+@media(max-width:420px){
+
+
+
+.header-actions button{
+
+
+    width:30px;
+
+
+    height:30px;
+
+
+}
+
+
+
+
+
+.member-profile h3{
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+
+.group-avatar{
+
+
+    width:45px;
+
+
+    height:45px;
+
+
+}
+
+
+
+
+
+.send-btn{
+
+
+    width:45px;
+
+
+    height:45px;
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+       DARK MODE READY
+       (Future CMS Setting)
+========================== */
+
+
+body.dark-connect{
+
+
+    background:#08101f;
+
+
+}
+
+
+
+body.dark-connect .chat-area{
+
+
+    background:#111827;
+
+
+}
+
+
+
+body.dark-connect .message-container{
+
+
+    background:#0f172a;
+
+
+}
+
+
+
+body.dark-connect .message-bubble.receiver{
+
+
+    background:#1e293b;
+
+
+    color:white;
+
+
+}
+
+
+
+body.dark-connect .message-box{
+
+
+    background:#111827;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+       SMOOTH TRANSITIONS
+========================== */
+
+
+button,
+input,
+.conversation-item,
+.message-bubble{
+
+
+    transition:.3s ease;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+       ACCESSIBILITY
+========================== */
+
+
+button:focus,
+input:focus{
+
+
+    outline:
+
+
+    3px solid rgba(36,119,255,.35);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+       KINGDOM WAYS SIGNATURE
+========================== */
+
+
+.connect-wrapper::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:200px;
+
+
+    height:200px;
+
+
+    border-radius:50%;
+
+
+    background:
+
+
+    radial-gradient(
+
+    circle,
+
+    rgba(212,175,55,.25),
+
+    transparent 70%
+
+    );
+
+
+    top:-80px;
+
+
+    right:-80px;
+
+
+    pointer-events:none;
+
+
+}
+
+

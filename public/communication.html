@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Kingdom Ways CMS | Communication Center</title>
+
+<link rel="stylesheet"
+href="communication.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- ==================================================
+SIDEBAR
+================================================== -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<i class="fa-solid fa-comments"></i>
+
+<div>
+
+<h2>Kingdom Ways</h2>
+
+<span>Communication Center</span>
+
+</div>
+
+</div>
+
+
+<nav>
+
+<a href="dashboard.html">
+
+<i class="fa-solid fa-house"></i>
+
+Dashboard
+
+</a>
+
+<a href="members.html">
+
+<i class="fa-solid fa-users"></i>
+
+Members
+
+</a>
+
+<a href="events.html">
+
+<i class="fa-solid fa-calendar-days"></i>
+
+Events
+
+</a>
+
+<a href="giving.html">
+
+<i class="fa-solid fa-hand-holding-heart"></i>
+
+Giving
+
+</a>
+
+<a href="communication.html"
+
+class="active">
+
+<i class="fa-solid fa-comments"></i>
+
+Communication
+
+</a>
+
+</nav>
+
+
+<div class="version">
+
+Kingdom Ways CMS 2.0
+
+</div>
+
+</aside>
+
+
+
+<!-- ==================================================
+MAIN CONTENT
+================================================== -->
+
+<main class="content">
+
+<header class="topbar">
+
+<div>
+
+<h1>
+
+<i class="fa-solid fa-comments"></i>
+
+Communication Center
+
+</h1>
+
+<p>
+
+Manage church contacts, broadcast SMS and internal member communication.
+
+</p>
+
+</div>
+
+
+<div class="admin-profile">
+
+<div class="admin-avatar">
+
+A
+
+</div>
+
+<div>
+
+<h4 id="adminName">
+
+Administrator
+
+</h4>
+
+<span id="adminRole">
+
+Super Administrator
+
+</span>
+
+</div>
+
+</div>
+
+</header>
+
+
+
+<!-- ==================================================
+STATISTICS
+================================================== -->
+
+<section class="stats-grid">
+
+
+<div class="stat-card">
+
+<div class="stat-icon blue">
+
+<i class="fa-solid fa-users"></i>
+
+</div>
+
+<div>
+
+<h2 id="totalMembers">
+
+0
+
+</h2>
+
+<span>
+
+Registered Members
+
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-icon green">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+</div>
+
+<div>
+
+<h2 id="smsToday">
+
+0
+
+</h2>
+
+<span>
+
+SMS Sent Today
+
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-icon orange">
+
+<i class="fa-solid fa-envelope-open-text"></i>
+
+</div>
+
+<div>
+
+<h2 id="internalMessages">
+
+0
+
+</h2>
+
+<span>
+
+Internal Messages
+
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-icon purple">
+
+<i class="fa-solid fa-clock"></i>
+
+</div>
+
+<div>
+
+<h2 id="pendingDelivery">
+
+0
+
+</h2>
+
+<span>
+
+Pending Delivery
+
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================================
+COMMUNICATION MODES
+================================================== -->
+
+<section class="communication-tabs">
+
+
+<button
+
+class="tab-btn active"
+
+data-tab="smsPanel"
+
+id="smsTab">
+
+<i class="fa-solid fa-mobile-screen"></i>
+
+SMS Broadcast
+
+</button>
+
+
+
+<button
+
+class="tab-btn"
+
+data-tab="internalPanel"
+
+id="internalTab">
+
+<i class="fa-solid fa-comments"></i>
+
+Internal Messages
+
+</button>
+
+
+
+<button
+
+class="tab-btn"
+
+data-tab="contactsPanel"
+
+id="contactsTab">
+
+<i class="fa-solid fa-address-book"></i>
+
+Church Contacts
+
+</button>
+
+</section>
+
+
+
+<!-- ==================================================
+TAB CONTENT STARTS BELOW
+PART 2 CONTINUES...
+======<!-- ==================================================
+SMS BROADCAST PANEL
+================================================== -->
+
+<section
+
+class="tab-panel active"
+
+id="smsPanel">
+
+
+<div class="panel-grid">
+
+
+<!-- ==========================================
+LEFT : MEMBER SELECTION
+========================================== -->
+
+<div class="card">
+
+
+<div class="card-header">
+
+<h2>
+
+<i class="fa-solid fa-users"></i>
+
+Select Recipients
+
+</h2>
+
+</div>
+
+
+<div class="toolbar">
+
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+
+type="search"
+
+id="memberSearch"
+
+placeholder="Search member number or name...">
+
+</div>
+
+
+<label class="select-all">
+
+<input
+
+type="checkbox"
+
+id="selectAllMembers">
+
+<span>
+
+Select All
+
+</span>
+
+</label>
+
+</div>
+
+
+
+<!-- MEMBER TABLE -->
+
+<div
+
+class="member-table"
+
+id="memberTable">
+
+
+<!-- Backend loads members here -->
+
+<div class="loading-members">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+<p>
+
+Loading members...
+
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<!-- SUMMARY -->
+
+<div class="selection-summary">
+
+
+<div>
+
+<strong id="selectedCount">
+
+0
+
+</strong>
+
+Members Selected
+
+</div>
+
+
+<div>
+
+SMS Recipients:
+
+<strong id="recipientCount">
+
+0
+
+</strong>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- ==========================================
+RIGHT : MESSAGE COMPOSER
+========================================== -->
+
+<div class="card">
+
+
+<div class="card-header">
+
+<h2>
+
+<i class="fa-solid fa-paper-plane"></i>
+
+Compose SMS
+
+</h2>
+
+</div>
+
+
+
+<form id="smsForm">
+
+
+<div class="input-group">
+
+<label>
+
+Category
+
+</label>
+
+<select id="smsCategory">
+
+<option>
+
+Announcement
+
+</option>
+
+<option>
+
+Prayer
+
+</option>
+
+<option>
+
+Emergency
+
+</option>
+
+<option>
+
+Finance
+
+</option>
+
+<option>
+
+Youth
+
+</option>
+
+<option>
+
+Choir
+
+</option>
+
+<option>
+
+Sunday Service
+
+</option>
+
+<option>
+
+Other
+
+</option>
+
+</select>
+
+</div>
+
+
+
+
+<div============================================ -->
+
+<!-- ==================================================
+INTERNAL COMMUNICATION PANEL
+================================================== -->
+
+<section
+class="tab-panel"
+id="internalPanel">
+
+<div class="panel-grid">
+
+
+<!-- ==========================================
+LEFT : MEMBER DIRECTORY
+========================================== -->
+
+<div class="card">
+
+<div class="card-header">
+
+<h2>
+
+<i class="fa-solid fa-address-book"></i>
+
+Member Directory
+
+</h2>
+
+</div>
+
+
+<div class="toolbar">
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="search"
+id="internalSearch"
+placeholder="Search member number or name...">
+
+</div>
+
+<label class="select-all">
+
+<input
+type="checkbox"
+id="selectAllInternal">
+
+<span>
+
+Select All
+
+</span>
+
+</label>
+
+</div>
+
+
+<div
+class="member-table"
+id="internalMemberTable">
+
+<!-- Backend loads members -->
+
+<div class="loading-members">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+<p>
+
+Loading members...
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="selection-summary">
+
+<div>
+
+Selected
+
+<strong id="internalSelectedCount">
+
+0
+
+</strong>
+
+</div>
+
+<div>
+
+Recipients
+
+<strong id="internalRecipientCount">
+
+0
+
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+<!-- ==========================================
+RIGHT : MESSAGE COMPOSER
+========================================== -->
+
+<div class="card">
+
+<div class="card-header">
+
+<h2>
+
+<i class="fa-solid fa-comments"></i>
+
+Compose Internal Message
+
+</h2>
+
+</div>
+
+<form id="internalMessageForm">
+
+
+<div class="input-group">
+
+<label>
+
+Subject
+
+</label>
+
+<input
+type="text"
+id="internalSubject"
+maxlength="120"
+placeholder="Message subject"
+required>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+
+Priority
+
+</label>
+
+<select id="internalPriority">
+
+<option value="normal">
+
+Normal
+
+</option>
+
+<option value="important">
+
+Important
+
+</option>
+
+<option value="urgent">
+
+Urgent
+
+</option>
+
+</select>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+
+Message
+
+</label>
+
+<textarea
+id="internalMessage"
+rows="10"
+maxlength="3000"
+placeholder="Write your message..."
+required>
+
+</textarea>
+
+</div>
+
+
+<div class="message-footer">
+
+<div>
+
+Characters
+
+<strong id="internalCharacters">
+
+0
+
+</strong>
+
+/3000
+
+</div>
+
+<div>
+
+Recipients
+
+<strong id="internalRecipients">
+
+0
+
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="broadcast-options">
+
+<label>
+
+<input
+type="checkbox"
+id="allowReply"
+checked>
+
+Allow Reply
+
+</label>
+
+<label>
+
+<input
+type="checkbox"
+id="notifyLogin"
+checked>
+
+Notify on Login
+
+</label>
+
+<label>
+
+<input
+type="checkbox"
+id="saveInternalHistory"
+checked>
+
+Save History
+
+</label>
+
+</div>
+
+
+<div class="button-group">
+
+<button
+type="button"
+class="secondary-btn"
+id="previewInternal">
+
+<i class="fa-solid fa-eye"></i>
+
+Preview
+
+</button>
+
+<button
+type="submit"
+class="primary-btn"
+id="sendInternal">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+Send Message
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+
+
+<!-- ==========================================
+RECENT INTERNAL MESSAGES
+========================================== -->
+
+<section class="card">
+
+<div class="section-header">
+
+<div>
+
+<h2>
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+Recent Internal Messages
+
+</h2>
+
+<p>
+
+Latest messages sent through the Kingdom Ways Communication Hub.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div
+class="history-table"
+id="internalHistory">
+
+<div class="loading-members">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+<p>
+
+Loading message history...
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</section>
+
+<!-- ==================================================
+PART 4
+Church Contacts Management
+================================================== -->
+
+
+<!-- ==================================================
+CHURCH CONTACTS PANEL
+================================================== -->
+
+<section
+class="tab-panel"
+id="contactsPanel">
+
+<div class="panel-grid">
+
+<!-- ==========================================
+LEFT : CONTACT SETTINGS
+========================================== -->
+
+<div class="card">
+
+<div class="card-header">
+
+<h2>
+
+<i class="fa-solid fa-address-book"></i>
+
+Official Church Contacts
+
+</h2>
+
+</div>
+
+<form id="contactForm">
+
+<div class="input-group">
+
+<label>
+
+Church Office Phone
+
+</label>
+
+<input
+type="tel"
+id="churchPhone"
+placeholder="+254712345678">
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+
+WhatsApp Link
+
+</label>
+
+<input
+type="url"
+id="churchWhatsapp"
+placeholder="https://wa.me/2547XXXXXXXX">
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+
+Facebook Page
+
+</label>
+
+<input
+type="url"
+id="churchFacebook"
+placeholder="https://facebook.com/YourChurch">
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+
+Instagram
+
+</label>
+
+<input
+type="url"
+id="churchInstagram"
+placeholder="https://instagram.com/YourChurch">
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+
+YouTube Channel
+
+</label>
+
+<input
+type="url"
+id="churchYoutube"
+placeholder="https://youtube.com/@YourChurch">
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+
+Church Website
+
+</label>
+
+<input
+type="url"
+id="churchWebsite"
+placeholder="https://www.kingdomways.org">
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+
+Church Email
+
+</label>
+
+<input
+type="email"
+id="churchEmail"
+placeholder="info@kingdomways.org">
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+
+Google Maps Link
+
+</label>
+
+<input
+type="url"
+id="churchMaps"
+placeholder="https://maps.google.com/...">
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>
+
+Office Hours
+
+</label>
+
+<input
+type="text"
+id="officeHours"
+placeholder="Mon - Fri : 8:00 AM - 5:00 PM">
+
+</div>
+
+
+
+<div class="button-group">
+
+<button
+type="submit"
+class="primary-btn"
+id="saveContacts">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save Contacts
+
+</button>
+
+
+
+<button
+type="button"
+class="secondary-btn"
+id="previewContacts">
+
+<i class="fa-solid fa-eye"></i>
+
+Preview
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+
+
+
+
+<!-- ==========================================
+RIGHT : LIVE PREVIEW
+========================================== -->
+
+<div class="card">
+
+<div class="card-header">
+
+<h2>
+
+<i class="fa-solid fa-mobile-screen"></i>
+
+Member Preview
+
+</h2>
+
+</div>
+
+<div class="contact-preview">
+
+<div class="preview-logo">
+
+<i class="fa-solid fa-church"></i>
+
+<h2>
+
+Kingdom Ways Church
+
+</h2>
+
+<p>
+
+Official Church Contacts
+
+</p>
+
+</div>
+
+
+
+<div class="preview-links">
+
+<div>
+
+<i class="fa-brands fa-whatsapp"></i>
+
+<span id="previewWhatsapp">
+
+Not Configured
+
+</span>
+
+</div>
+
+
+
+<div>
+
+<i class="fa-brands fa-facebook"></i>
+
+<span id="previewFacebook">
+
+Not Configured
+
+</span>
+
+</div>
+
+
+
+<div>
+
+<i class="fa-brands fa-instagram"></i>
+
+<span id="previewInstagram">
+
+Not Configured
+
+</span>
+
+</div>
+
+
+
+<div>
+
+<i class="fa-brands fa-youtube"></i>
+
+<span id="previewYoutube">
+
+Not Configured
+
+</span>
+
+</div>
+
+
+
+<div>
+
+<i class="fa-solid fa-globe"></i>
+
+<span id="previewWebsite">
+
+Not Configured
+
+</span>
+
+</div>
+
+
+
+<div>
+
+<i class="fa-solid fa-envelope"></i>
+
+<span id="previewEmail">
+
+Not Configured
+
+</span>
+
+</div>
+
+
+
+<div>
+
+<i class="fa-solid fa-phone"></i>
+
+<span id="previewPhone">
+
+Not Configured
+
+</span>
+
+</div>
+
+
+
+<div>
+
+<i class="fa-solid fa-location-dot"></i>
+
+<span id="previewMaps">
+
+Not Configured
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+<!-- ==========================================
+LAST UPDATED
+========================================== -->
+
+<section class="card">
+
+<div class="section-header">
+
+<div>
+
+<h2>
+
+<i class="fa-solid fa-clock"></i>
+
+Contact Information Status
+
+</h2>
+
+<p>
+
+Information currently visible to members.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="status-grid">
+
+<div class="status-item">
+
+<strong>
+
+Last Updated
+
+</strong>
+
+<span id="lastContactUpdate">
+
+Never
+
+</span>
+
+</div>
+
+<div class="status-item">
+
+<strong>
+
+Updated By
+
+</strong>
+
+<span id="lastUpdatedBy">
+
+System
+
+</span>
+
+</div>
+
+<div class="status-item">
+
+<strong>
+
+Status
+
+</strong>
+
+<span id="contactStatus">
+
+Ready
+
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+</section>
+
+<!-- ==================================================
+PART 5
+Communication History & Delivery Reports
+================================================== -->
+
+<!-- ==================================================
+COMMUNICATION HISTORY
+================================================== -->
+
+<section class="history-section">
+
+<div class="section-header">
+
+<div>
+
+<h2>
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+Communication History
+
+</h2>
+
+<p>
+
+Track every SMS and internal communication sent from the Kingdom Ways CMS.
+
+</p>
+
+</div>
+
+
+<div class="history-actions">
+
+<button
+class="secondary-btn"
+id="refreshHistory">
+
+<i class="fa-solid fa-rotate"></i>
+
+Refresh
+
+</button>
+
+<button
+class="primary-btn"
+id="exportHistory">
+
+<i class="fa-solid fa-file-export"></i>
+
+Export Report
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- ======================================
+SUMMARY CARDS
+====================================== -->
+
+<div class="history-summary">
+
+
+<div class="summary-card">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+<h2 id="historyTotalSent">
+
+0
+
+</h2>
+
+<span>
+
+Total Messages
+
+</span>
+
+</div>
+
+
+
+<div class="summary-card">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<h2 id="historyDelivered">
+
+0
+
+</h2>
+
+<span>
+
+Delivered
+
+</span>
+
+</div>
+
+
+
+<div class="summary-card">
+
+<i class="fa-solid fa-clock"></i>
+
+<h2 id="historyPending">
+
+0
+
+</h2>
+
+<span>
+
+Pending
+
+</span>
+
+</div>
+
+
+
+<div class="summary-card">
+
+<i class="fa-solid fa-circle-xmark"></i>
+
+<h2 id="historyFailed">
+
+0
+
+</h2>
+
+<span>
+
+Failed
+
+</span>
+
+</div>
+
+</div>
+
+
+
+
+
+<!-- ======================================
+FILTERS
+====================================== -->
+
+<div class="history-toolbar">
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="search"
+id="historySearch"
+placeholder="Search message...">
+
+</div>
+
+
+
+<select id="historyType">
+
+<option value="all">
+
+All Communications
+
+</option>
+
+<option value="sms">
+
+SMS
+
+</option>
+
+<option value="internal">
+
+Internal
+
+</option>
+
+</select>
+
+
+
+<select id="historyStatus">
+
+<option value="all">
+
+All Status
+
+</option>
+
+<option value="delivered">
+
+Delivered
+
+</option>
+
+<option value="pending">
+
+Pending
+
+</option>
+
+<option value="failed">
+
+Failed
+
+</option>
+
+</select>
+
+
+
+<input
+type="date"
+id="historyDate">
+
+</div>
+
+
+
+
+
+<!-- ======================================
+HISTORY TABLE
+====================================== -->
+
+<div class="table-wrapper">
+
+<table class="history-table">
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Type</th>
+
+<th>Recipients</th>
+
+<th>Category</th>
+
+<th>Status</th>
+
+<th>Administrator</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historyTableBody">
+
+<tr>
+
+<td colspan="7">
+
+<div class="loading-members">
+
+<i class="fa-solid fa-spinner fa-spin"></i>
+
+Loading communication history...
+
+</div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- ==================================================
+DELIVERY REPORT
+================================================== -->
+
+<section class="card">
+
+<div class="section-header">
+
+<div>
+
+<h2>
+
+<i class="fa-solid fa-chart-line"></i>
+
+Delivery Analytics
+
+</h2>
+
+<p>
+
+Real-time communication performance.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="analytics-grid">
+
+<div class="analytics-item">
+
+<h3>
+
+Delivery Rate
+
+</h3>
+
+<div
+class="progress-bar">
+
+<div
+class="progress-fill"
+id="deliveryRateBar">
+
+</div>
+
+</div>
+
+<strong id="deliveryRate">
+
+0%
+
+</strong>
+
+</div>
+
+
+
+<div class="analytics-item">
+
+<h3>
+
+Average Delivery Time
+
+</h3>
+
+<h2 id="averageDeliveryTime">
+
+0 sec
+
+</h2>
+
+</div>
+
+
+
+<div class="analytics-item">
+
+<h3>
+
+Most Used Category
+
+</h3>
+
+<h2 id="topCategory">
+
+Announcement
+
+</h2>
+
+</div>
+
+
+
+<div class="analytics-item">
+
+<h3>
+
+Messages This Month
+
+</h3>
+
+<h2 id="monthlyMessages">
+
+0
+
+</h2>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- ==================================================
+SUCCESS MODAL
+================================================== -->
+
+<div
+class="modal"
+id="successModal">
+
+<div class="modal-content small">
+
+<div class="success-animation">
+
+<i class="fa-solid fa-circle-check"></i>
+
+</div>
+
+<h2>
+
+Communication Sent Successfully
+
+</h2>
+
+<p id="successMessage">
+
+Your communication has been delivered successfully.
+
+</p>
+
+<div class="button-group">
+
+<button
+class="primary-btn"
+id="closeSuccess">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+<!-- ==================================================
+TOAST
+================================================== -->
+
+<div
+id="toast"
+class="toast">
+
+Saved Successfully
+
+</div>
+
+
+
+<!-- ==================================================
+JAVASCRIPT
+================================================== -->
+
+<script src="communication.js"></script>
+
+</main>
+
+</div>
+
+</body>
+
+</html>

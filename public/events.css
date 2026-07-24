@@ -1,101 +1,87 @@
 /* ==========================================================
    KINGDOM WAYS CHURCH CMS
-   EVENTS DASHBOARD
-   PART 2A
+   EVENTS MANAGEMENT STYLE
+   PART 1
 ========================================================== */
 
-/* ===============================
-   GOOGLE FONT
-=============================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-/* ===============================
-   ROOT
-=============================== */
 
 :root{
 
     --primary:#2563eb;
-    --primary-light:#3b82f6;
+    --secondary:#14b8a6;
+    --gold:#d4af37;
 
-    --success:#16a34a;
-    --warning:#f59e0b;
-    --danger:#dc2626;
+    --dark:#0f172a;
 
-    --purple:#7c3aed;
+    --sidebar:#081b33;
 
-    --bg:#f5f7fb;
+    --background:#f1f5f9;
 
-    --card:#ffffff;
+    --white:#ffffff;
 
-    --border:#e5e7eb;
+    --text:#334155;
 
-    --text:#111827;
-
-    --text-light:#6b7280;
+    --muted:#64748b;
 
     --shadow:
-    0 8px 25px rgba(15,23,42,.06);
+    0 15px 40px rgba(15,23,42,.12);
 
-    --radius:18px;
+    --radius:22px;
+
+    --transition:.35s ease;
 
 }
 
-/* ===============================
-RESET
-=============================== */
+
+
+/* ==========================
+        RESET
+========================== */
+
 
 *{
 
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
 
 }
 
-html{
 
-    scroll-behavior:smooth;
-
-}
 
 body{
 
-    font-family:"Inter",sans-serif;
+    font-family:
+    'Poppins',
+    Arial,
+    sans-serif;
 
-    background:var(--bg);
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #eef5ff,
+        #f8fafc
+    );
+
 
     color:var(--text);
 
-}
-
-/* ===============================
-SCROLLBAR
-=============================== */
-
-::-webkit-scrollbar{
-
-    width:10px;
+    min-height:100vh;
 
 }
 
-::-webkit-scrollbar-thumb{
 
-    background:#cbd5e1;
-    border-radius:20px;
 
-}
 
-::-webkit-scrollbar-thumb:hover{
 
-    background:var(--primary);
+/* ==========================
+        DASHBOARD
+========================== */
 
-}
-
-/* ===============================
-LAYOUT
-=============================== */
 
 .dashboard{
 
@@ -105,31 +91,64 @@ LAYOUT
 
 }
 
-/* ===============================
-SIDEBAR
-=============================== */
+
+
+
+
+/* ==========================
+        SIDEBAR
+========================== */
+
 
 .sidebar{
 
     width:270px;
 
-    background:#111827;
+
+    position:fixed;
+
+
+    top:0;
+
+    left:0;
+
+    bottom:0;
+
+
+    padding:25px 20px;
+
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #081b33,
+        #102a43
+    );
+
 
     color:white;
+
 
     display:flex;
 
     flex-direction:column;
 
-    position:fixed;
 
-    top:0;
-    left:0;
-    bottom:0;
+    box-shadow:
 
-    padding:30px 22px;
+    10px 0 35px rgba(0,0,0,.18);
+
+
+    z-index:1000;
 
 }
+
+
+
+
+/* LOGO */
+
 
 .logo{
 
@@ -137,1457 +156,1854 @@ SIDEBAR
 
     align-items:center;
 
-    gap:16px;
+    gap:15px;
 
-    margin-bottom:50px;
+
+    padding-bottom:25px;
+
+
+    border-bottom:
+
+    1px solid rgba(255,255,255,.15);
 
 }
+
+
 
 .logo i{
 
-    width:58px;
-    height:58px;
+    font-size:40px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:18px;
-
-    background:var(--primary);
-
-    font-size:24px;
+    color:var(--gold);
 
 }
+
+
 
 .logo h2{
 
-    font-size:20px;
+    font-size:22px;
 
 }
+
+
 
 .logo span{
 
-    color:#cbd5e1;
-
     font-size:13px;
+
+    color:#cbd5e1;
 
 }
 
-/* ===============================
-MENU
-=============================== */
+
+
+
+/* NAVIGATION */
+
 
 .sidebar nav{
 
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
+    margin-top:35px;
 
 }
+
+
 
 .sidebar nav a{
 
-    text-decoration:none;
-
-    color:#cbd5e1;
-
-    padding:15px 18px;
-
-    border-radius:14px;
 
     display:flex;
 
+
     align-items:center;
+
 
     gap:15px;
 
-    transition:.25s;
 
-    font-weight:500;
+    padding:15px 18px;
 
-}
-
-.sidebar nav a i{
-
-    width:22px;
-
-    text-align:center;
-
-}
-
-.sidebar nav a:hover{
-
-    background:#1f2937;
-
-    color:white;
-
-    transform:translateX(5px);
-
-}
-
-.sidebar nav a.active{
-
-    background:var(--primary);
-
-    color:white;
-
-    box-shadow:0 10px 25px rgba(37,99,235,.25);
-
-}
-
-/* ===============================
-CONTENT
-=============================== */
-
-.content{
-
-    margin-left:270px;
-
-    width:calc(100% - 270px);
-
-    padding:45px;
-
-}
-
-/* ===============================
-TOPBAR
-=============================== */
-
-.topbar{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:40px;
-
-}
-
-.topbar h1{
-
-    font-size:34px;
-
-    font-weight:800;
-
-    margin-bottom:8px;
-
-}
-
-.topbar p{
-
-    color:var(--text-light);
-
-    font-size:15px;
-
-}
-
-.publishBtn{
-
-    border:none;
-
-    background:var(--primary);
-
-    color:white;
-
-    padding:14px 24px;
 
     border-radius:14px;
 
-    cursor:pointer;
 
-    font-size:15px;
+    color:white;
 
-    font-weight:600;
+
+    text-decoration:none;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.sidebar nav a i{
+
+    color:#60a5fa;
+
+}
+
+
+
+.sidebar nav a:hover{
+
+
+    background:
+
+    rgba(255,255,255,.12);
+
+
+    transform:translateX(8px);
+
+}
+
+
+
+
+
+/* QUOTE BOX */
+
+
+.quote-box{
+
+
+    margin-top:auto;
+
+
+    padding:20px;
+
+
+    border-radius:18px;
+
+
+    background:
+
+    rgba(255,255,255,.10);
+
+
+    backdrop-filter:blur(10px);
+
+
+}
+
+
+
+.quote-box h4{
+
+
+    color:var(--gold);
+
+
+    margin-bottom:12px;
+
+
+}
+
+
+
+.quote-box p{
+
+
+    font-size:14px;
+
+
+    line-height:1.7;
+
+
+    color:#e2e8f0;
+
+
+}
+
+
+
+
+.version{
+
+
+    text-align:center;
+
+
+    margin-top:20px;
+
+
+    font-size:12px;
+
+
+    color:#94a3b8;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+        MAIN CONTENT
+========================== */
+
+
+.content{
+
+
+    margin-left:270px;
+
+
+    width:calc(100% - 270px);
+
+
+    padding:30px;
+
+
+}
+
+
+
+
+
+
+/* ==========================
+        TOPBAR
+========================== */
+
+
+.topbar{
+
+
+    background:white;
+
+
+    padding:25px 30px;
+
+
+    border-radius:25px;
+
 
     display:flex;
 
+
+    justify-content:space-between;
+
+
     align-items:center;
+
+
+    gap:20px;
+
+
+    box-shadow:var(--shadow);
+
+
+    margin-bottom:30px;
+
+
+}
+
+
+
+.topbar h1{
+
+
+    font-size:30px;
+
+
+    color:var(--dark);
+
+
+}
+
+
+
+.topbar h1 i{
+
+
+    color:var(--primary);
+
+
+}
+
+
+
+.topbar p{
+
+
+    margin-top:8px;
+
+
+    color:var(--muted);
+
+
+}
+
+
+
+
+
+/* NEW EVENT BUTTON */
+
+
+.publishBtn{
+
+
+    border:none;
+
+
+    padding:15px 28px;
+
+
+    border-radius:50px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+
+    color:white;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    display:flex;
+
 
     gap:10px;
 
-    transition:.25s;
+
+    align-items:center;
+
+
+    transition:.35s;
+
+
+    box-shadow:
+
+    0 12px 25px rgba(37,99,235,.35);
+
 
 }
+
+
 
 .publishBtn:hover{
 
-    background:#1d4ed8;
 
-    transform:translateY(-3px);
+    transform:translateY(-5px);
 
-    box-shadow:
-    0 15px 30px rgba(37,99,235,.25);
 
 }
 
-/* ===============================
-STATISTICS
-=============================== */
+/* ==========================================================
+   KINGDOM WAYS CHURCH CMS
+   EVENTS MANAGEMENT STYLE
+   PART 2
+========================================================== */
+
+
+
+/* ==========================
+        STATS SECTION
+========================== */
+
 
 .stats{
 
     display:grid;
 
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
 
     gap:25px;
-
-    margin-bottom:40px;
-
-}
-
-.stat-card{
-
-    background:var(--card);
-
-    border-radius:20px;
-
-    padding:28px;
-
-    box-shadow:var(--shadow);
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-    border:1px solid var(--border);
-
-    transition:.25s;
-
-}
-
-.stat-card:hover{
-
-    transform:translateY(-6px);
-
-    box-shadow:
-    0 18px 40px rgba(15,23,42,.10);
-
-}
-
-.icon{
-
-    width:65px;
-
-    height:65px;
-
-    border-radius:18px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:24px;
-
-    color:white;
-
-}
-
-.blue{
-
-    background:#2563eb;
-
-}
-
-.green{
-
-    background:#16a34a;
-
-}
-
-.orange{
-
-    background:#ea580c;
-
-}
-
-.purple{
-
-    background:#7c3aed;
-
-}
-
-.stat-card h2{
-
-    font-size:28px;
-
-    margin-bottom:5px;
-
-}
-
-.stat-card span{
-
-    color:var(--text-light);
-
-    font-size:14px;
-
-}
-
-/* ===============================
-GRID
-=============================== */
-
-.grid{
-
-    display:grid;
-
-    grid-template-columns:1.2fr .8fr;
-
-    gap:30px;
 
     margin-bottom:35px;
 
 }
 
-/* ===============================
-CARDS
-=============================== */
 
-.card{
+
+
+.stat-card{
+
 
     background:white;
+
+
+    padding:25px;
+
 
     border-radius:22px;
 
-    padding:32px;
-
-    box-shadow:var(--shadow);
-
-    border:1px solid var(--border);
-
-}
-
-.card h2{
-
-    font-size:22px;
-
-    margin-bottom:28px;
-
-}
-
-/* ===============================
-SECTION HEADER
-=============================== */
-
-.section-header{
 
     display:flex;
 
-    justify-content:space-between;
 
     align-items:center;
 
-    margin-bottom:25px;
-
-}
-
-.section-header h2{
-
-    margin:0;
-
-}
-
-/* ===============================
-RESPONSIVE
-=============================== */
-
-@media(max-width:1200px){
-
-.stats{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.grid{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-@media(max-width:900px){
-
-.sidebar{
-
-left:-100%;
-
-}
-
-.content{
-
-margin-left:0;
-
-width:100%;
-
-padding:25px;
-
-}
-
-.topbar{
-
-flex-direction:column;
-
-align-items:flex-start;
-
-gap:20px;
-
-}
-
-}
-
-@media(max-width:600px){
-
-.stats{
-
-grid-template-columns:1fr;
-
-}
-
-.card{
-
-padding:22px;
-
-}
-
-.topbar h1{
-
-font-size:28px;
-
-}
-
-}
-
-/* ==========================================================
-   KINGDOM WAYS CHURCH CMS
-   EVENTS DASHBOARD
-   PART 2B
-   Form • Inputs • Buttons • Preview
-==========================================================*/
-
-
-/*==============================
-FORM
-==============================*/
-
-#eventForm{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:22px;
-
-}
-
-.input-group{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
-
-}
-
-.input-group label{
-
-    font-size:14px;
-
-    font-weight:600;
-
-    color:#374151;
-
-    letter-spacing:.2px;
-
-}
-
-
-/*==============================
-INPUTS
-==============================*/
-
-.input-group input,
-.input-group textarea{
-
-    width:100%;
-
-    font-family:inherit;
-
-    font-size:15px;
-
-    color:var(--text);
-
-    background:#fafbfc;
-
-    border:1.5px solid var(--border);
-
-    border-radius:16px;
-
-    padding:15px 18px;
-
-    outline:none;
-
-    transition:.25s ease;
-
-}
-
-.input-group textarea{
-
-    resize:vertical;
-
-    min-height:160px;
-
-    line-height:1.7;
-
-}
-
-.input-group input::placeholder,
-.input-group textarea::placeholder{
-
-    color:#9ca3af;
-
-}
-
-.input-group input:hover,
-.input-group textarea:hover{
-
-    border-color:#cbd5e1;
-
-    background:white;
-
-}
-
-.input-group input:focus,
-.input-group textarea:focus{
-
-    background:white;
-
-    border-color:var(--primary);
-
-    box-shadow:
-
-    0 0 0 5px rgba(37,99,235,.12);
-
-}
-
-
-/*==============================
-2 COLUMN LAYOUT
-==============================*/
-
-.two-column{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
 
     gap:20px;
 
+
+    box-shadow:var(--shadow);
+
+
+    transition:.35s;
+
+
+    overflow:hidden;
+
+
+    position:relative;
+
+
 }
 
 
-/*==============================
-BUTTON
-==============================*/
 
-.saveBtn{
+.stat-card:hover{
 
-    border:none;
 
-    background:linear-gradient(
-    135deg,
-    var(--primary),
-    var(--primary-light));
+    transform:translateY(-8px);
+
+
+}
+
+
+
+
+.stat-card h2{
+
+
+    font-size:32px;
+
+
+    color:var(--dark);
+
+
+}
+
+
+
+.stat-card span{
+
+
+    color:var(--muted);
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+
+/* STAT ICONS */
+
+
+.icon{
+
+
+    width:65px;
+
+
+    height:65px;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    border-radius:18px;
+
 
     color:white;
 
-    border-radius:16px;
 
-    padding:16px 20px;
+    font-size:25px;
 
-    font-size:15px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:12px;
-
-    transition:.3s;
-
-}
-
-.saveBtn:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-
-    0 18px 30px rgba(37,99,235,.25);
-
-}
-
-.saveBtn:active{
-
-    transform:scale(.98);
 
 }
 
 
-/*==============================
-PREVIEW PANEL
-==============================*/
 
-.preview{
 
-    position:sticky;
+.icon.blue{
 
-    top:35px;
 
-    align-self:start;
+    background:
 
-}
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #60a5fa);
 
-.preview-card{
-
-    overflow:hidden;
-
-    border-radius:20px;
-
-    border:1px solid var(--border);
-
-    background:white;
 
 }
 
 
-/*==============================
-IMAGE
-==============================*/
 
-.preview-image{
+.icon.green{
 
-    height:240px;
 
-    overflow:hidden;
+    background:
 
-    background:#eef2ff;
+    linear-gradient(
+    135deg,
+    #059669,
+    #34d399);
 
-}
-
-.preview-image img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    display:block;
-
-    transition:.5s;
-
-}
-
-.preview-card:hover img{
-
-    transform:scale(1.05);
 
 }
 
 
-/*==============================
-CONTENT
-==============================*/
 
-.preview-content{
+.icon.orange{
 
-    padding:26px;
 
-}
+    background:
 
-.preview-content h3{
+    linear-gradient(
+    135deg,
+    #ea580c,
+    #fb923c);
 
-    font-size:26px;
-
-    font-weight:800;
-
-    margin-bottom:14px;
-
-    line-height:1.3;
-
-    color:var(--text);
-
-}
-
-.preview-content p{
-
-    color:var(--text-light);
-
-    line-height:1.8;
-
-    margin-bottom:25px;
 
 }
 
 
-/*==============================
-BADGE
-==============================*/
 
-.badge{
+.icon.purple{
 
-    display:inline-flex;
 
-    align-items:center;
+    background:
 
-    justify-content:center;
+    linear-gradient(
+    135deg,
+    #7c3aed,
+    #c084fc);
 
-    padding:8px 14px;
-
-    margin-bottom:18px;
-
-    border-radius:50px;
-
-    background:#dbeafe;
-
-    color:var(--primary);
-
-    font-size:13px;
-
-    font-weight:700;
-
-    letter-spacing:.3px;
 
 }
 
 
-/*==============================
-META
-==============================*/
 
-.preview-meta{
 
-    display:flex;
 
-    flex-direction:column;
 
-    gap:16px;
+/* ==========================
+        FORM GRID
+========================== */
 
-    border-top:1px solid var(--border);
 
-    padding-top:24px;
+.grid{
 
-}
 
-.preview-meta div{
+    display:grid;
 
-    display:flex;
 
-    align-items:center;
+    grid-template-columns:
 
-    gap:14px;
+    minmax(400px,1fr)
 
-    font-size:15px;
+    minmax(350px,500px);
 
-    color:#475569;
 
-}
+    gap:30px;
 
-.preview-meta i{
 
-    width:42px;
+    margin-bottom:40px;
 
-    height:42px;
-
-    border-radius:12px;
-
-    background:#f3f6fb;
-
-    color:var(--primary);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:16px;
 
 }
 
 
-/*==============================
-SMALL ANIMATIONS
-==============================*/
+
+
+
+
+
+/* ==========================
+        GENERAL CARDS
+========================== */
+
 
 .card{
 
-    transition:.25s;
+
+    background:white;
+
+
+    border-radius:25px;
+
+
+    padding:30px;
+
+
+    box-shadow:var(--shadow);
+
+
+    transition:.35s;
+
 
 }
+
+
 
 .card:hover{
 
-    transform:translateY(-4px);
-
-}
-
-.preview-card{
-
-    transition:.3s;
-
-}
-
-.preview-card:hover{
 
     box-shadow:
 
-    0 20px 40px rgba(15,23,42,.08);
+    0 25px 60px rgba(0,0,0,.12);
+
 
 }
 
 
-/*==============================
-RESPONSIVE
-==============================*/
 
-@media(max-width:900px){
+.card h2{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:12px;
+
+
+    color:var(--dark);
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+.card h2 i{
+
+
+    color:var(--primary);
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================
+        FORM INPUTS
+========================== */
+
+
+
+.input-group{
+
+
+    margin-bottom:22px;
+
+
+}
+
+
+
+.input-group label{
+
+
+    display:block;
+
+
+    margin-bottom:8px;
+
+
+    font-weight:600;
+
+
+    color:#334155;
+
+
+}
+
+
+
+
+input,
+textarea{
+
+
+    width:100%;
+
+
+    padding:15px 18px;
+
+
+    border-radius:14px;
+
+
+    border:2px solid #e2e8f0;
+
+
+    outline:none;
+
+
+    font-size:15px;
+
+
+    transition:.3s;
+
+
+    font-family:inherit;
+
+
+}
+
+
+
+input:focus,
+textarea:focus{
+
+
+    border-color:var(--primary);
+
+
+    box-shadow:
+
+    0 0 0 4px rgba(37,99,235,.12);
+
+
+}
+
+
+
+textarea{
+
+
+    resize:vertical;
+
+
+}
+
+
+
+
+
+
+/* DATE AND TIME ROW */
+
 
 .two-column{
 
-grid-template-columns:1fr;
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    1fr 1fr;
+
+
+    gap:20px;
+
 
 }
 
-.preview{
 
-position:relative;
 
-top:0;
+
+
+
+
+/* ==========================
+        FORM BUTTONS
+========================== */
+
+
+.button-group{
+
+
+    display:flex;
+
+
+    gap:15px;
+
+
+    margin-top:25px;
+
 
 }
+
+
+
+
+.saveBtn,
+.cancelBtn{
+
+
+    flex:1;
+
+
+    padding:15px;
+
+
+    border:none;
+
+
+    border-radius:15px;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.saveBtn{
+
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8);
+
+
+    color:white;
+
+
+}
+
+
+
+
+.saveBtn:hover{
+
+
+    transform:translateY(-4px);
+
+
+}
+
+
+
+
+
+.cancelBtn{
+
+
+    background:#e2e8f0;
+
+
+    color:#334155;
+
+
+}
+
+
+
+.cancelBtn:hover{
+
+
+    background:#cbd5e1;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================
+        LIVE PREVIEW
+========================== */
+
+
+.preview-card{
+
+
+    overflow:hidden;
+
+
+    border-radius:22px;
+
+
+    background:#f8fafc;
+
+
+    border:
+
+    1px solid #e2e8f0;
+
+
+}
+
+
 
 .preview-image{
 
-height:220px;
+
+    height:230px;
+
+
+    overflow:hidden;
+
 
 }
+
+
+
+.preview-image img{
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+    object-fit:cover;
+
+
+}
+
+
+
+
 
 .preview-content{
 
-padding:22px;
+
+    padding:25px;
+
 
 }
+
+
+
+.badge{
+
+
+    display:inline-block;
+
+
+    padding:8px 15px;
+
+
+    border-radius:30px;
+
+
+    background:#dcfce7;
+
+
+    color:#15803d;
+
+
+    font-size:13px;
+
+
+    font-weight:700;
+
+
+}
+
+
 
 .preview-content h3{
 
-font-size:22px;
+
+    margin:18px 0;
+
+
+    font-size:24px;
+
+
+    color:var(--dark);
+
 
 }
+
+
+
+
+.preview-content p{
+
+
+    color:var(--muted);
+
+
+    line-height:1.7;
+
+
+}
+
+
+
+
+
+.preview-meta{
+
+
+    margin-top:25px;
+
+
+    display:grid;
+
+
+    gap:15px;
+
+
+}
+
+
+
+
+.preview-meta div{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:12px;
+
+
+    color:#475569;
+
+
+}
+
+
+
+
+.preview-meta i{
+
+
+    color:var(--primary);
+
 
 }
 
 /* ==========================================================
    KINGDOM WAYS CHURCH CMS
-   EVENTS DASHBOARD
-   PART 2C
-   Events List • Search • Empty State • Utilities
-==========================================================*/
+   EVENTS MANAGEMENT STYLE
+   PART 3
+========================================================== */
 
-/* ===============================
-SEARCH BOX
-=============================== */
 
-#searchEvent{
 
-    width:300px;
+/* ==========================
+        RECENT EVENTS
+========================== */
 
-    max-width:100%;
 
-    padding:14px 18px;
+.section-header{
 
-    border:1.5px solid var(--border);
-
-    border-radius:14px;
-
-    background:#fafbfc;
-
-    font-size:15px;
-
-    font-family:inherit;
-
-    transition:.25s;
-
-}
-
-#searchEvent:focus{
-
-    outline:none;
-
-    background:white;
-
-    border-color:var(--primary);
-
-    box-shadow:0 0 0 5px rgba(37,99,235,.10);
-
-}
-
-/* ===============================
-EVENT LIST
-=============================== */
-
-.events-list{
 
     display:flex;
 
-    flex-direction:column;
 
-    gap:18px;
+    justify-content:space-between;
 
-}
-
-/* ===============================
-EVENT CARD
-=============================== */
-
-.event{
-
-    display:grid;
-
-    grid-template-columns:120px 1fr auto;
-
-    gap:24px;
 
     align-items:center;
 
-    padding:18px;
 
-    background:#fff;
+    gap:20px;
 
-    border:1px solid var(--border);
 
-    border-radius:18px;
+    margin-bottom:25px;
 
-    transition:.25s;
 
 }
 
-.event:hover{
 
-    transform:translateY(-4px);
 
-    box-shadow:0 14px 30px rgba(15,23,42,.08);
+.section-header h2{
 
-}
 
-.event img{
+    margin-bottom:5px;
 
-    width:120px;
-
-    height:90px;
-
-    object-fit:cover;
-
-    border-radius:14px;
 
 }
 
-/* ===============================
-EVENT DETAILS
-=============================== */
 
-.event-body h3{
 
-    font-size:20px;
+.section-header p{
 
-    margin-bottom:8px;
 
-    color:var(--text);
+    color:var(--muted);
+
 
 }
 
-.event-body p{
 
-    color:var(--text-light);
 
-    line-height:1.7;
 
-    margin-bottom:14px;
 
-}
 
-.event-info{
+/* SEARCH BOX */
+
+
+.search-box{
+
 
     display:flex;
 
-    flex-wrap:wrap;
-
-    gap:18px;
-
-    font-size:14px;
-
-    color:#475569;
-
-}
-
-.event-info span{
-
-    display:flex;
 
     align-items:center;
 
-    gap:8px;
-
-}
-
-.event-info i{
-
-    color:var(--primary);
-
-}
-
-/* ===============================
-ACTIONS
-=============================== */
-
-.actions{
-
-    display:flex;
 
     gap:12px;
 
-}
 
-.actions button{
+    background:#f8fafc;
 
-    border:none;
-
-    cursor:pointer;
 
     padding:12px 18px;
 
-    border-radius:12px;
 
-    font-size:14px;
+    border-radius:50px;
 
-    font-weight:600;
 
-    transition:.25s;
+    border:2px solid #e2e8f0;
+
 
 }
 
-.edit{
 
-    background:#eff6ff;
+
+.search-box i{
+
 
     color:var(--primary);
 
-}
-
-.edit:hover{
-
-    background:var(--primary);
-
-    color:white;
 
 }
 
-.delete{
 
-    background:#fef2f2;
 
-    color:#dc2626;
+.search-box input{
 
-}
 
-.delete:hover{
+    border:none;
 
-    background:#dc2626;
 
-    color:white;
+    background:transparent;
 
-}
 
-/* ===============================
-STATUS BADGES
-=============================== */
+    width:220px;
 
-.status{
 
-    display:inline-flex;
+    padding:5px;
 
-    align-items:center;
-
-    justify-content:center;
-
-    padding:7px 14px;
-
-    border-radius:999px;
-
-    font-size:12px;
-
-    font-weight:700;
-
-    letter-spacing:.3px;
 
 }
 
-.status.live{
 
-    background:#dcfce7;
 
-    color:#15803d;
+.search-box input:focus{
 
-}
 
-.status.upcoming{
+    box-shadow:none;
 
-    background:#dbeafe;
-
-    color:#2563eb;
 
 }
 
-.status.closed{
 
-    background:#f3f4f6;
 
-    color:#6b7280;
 
-}
 
-/* ===============================
-EMPTY STATE
-=============================== */
 
-.empty{
+/* EVENTS GENERATED LIST */
 
-    text-align:center;
 
-    padding:80px 20px;
+.events-list{
 
-    border:2px dashed var(--border);
 
-    border-radius:22px;
+    display:grid;
 
-    background:#fcfcfd;
 
-}
+    grid-template-columns:
 
-.empty i{
 
-    font-size:60px;
+    repeat(auto-fit,minmax(280px,1fr));
 
-    color:#cbd5e1;
 
-    margin-bottom:20px;
+    gap:25px;
+
 
 }
 
-.empty h3{
 
-    font-size:24px;
 
-    margin-bottom:10px;
 
-}
+.event-item{
 
-.empty p{
 
-    color:var(--text-light);
+    background:#f8fafc;
 
-}
 
-/* ===============================
-NOTIFICATION
-=============================== */
+    padding:22px;
 
-.toast{
 
-    position:fixed;
+    border-radius:20px;
 
-    right:30px;
 
-    top:30px;
+    border:1px solid #e2e8f0;
 
-    background:#111827;
-
-    color:white;
-
-    padding:16px 22px;
-
-    border-radius:14px;
-
-    box-shadow:0 18px 35px rgba(0,0,0,.18);
-
-    opacity:0;
-
-    transform:translateY(-20px);
-
-    pointer-events:none;
 
     transition:.35s;
 
-    z-index:9999;
 
 }
 
-.toast.show{
 
-    opacity:1;
 
-    transform:translateY(0);
+.event-item:hover{
 
-}
 
-/* ===============================
-LOADING SPINNER
-=============================== */
+    background:white;
 
-.loader{
 
-    width:45px;
+    transform:translateY(-7px);
 
-    height:45px;
 
-    border:4px solid #e5e7eb;
+    box-shadow:
 
-    border-top:4px solid var(--primary);
+    0 18px 40px rgba(0,0,0,.12);
 
-    border-radius:50%;
-
-    animation:spin .8s linear infinite;
-
-    margin:auto;
 
 }
 
-@keyframes spin{
 
-    from{
 
-        transform:rotate(0deg);
+.event-item h3{
 
-    }
 
-    to{
+    color:var(--primary);
 
-        transform:rotate(360deg);
 
-    }
+    margin-bottom:12px;
+
 
 }
 
-/* ===============================
-FADE ANIMATION
-=============================== */
 
-.fade{
 
-    animation:fade .4s ease;
+.event-item p{
 
-}
 
-@keyframes fade{
+    color:var(--muted);
 
-    from{
 
-        opacity:0;
+    line-height:1.7;
 
-        transform:translateY(15px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
 
 }
 
-/* ===============================
-RESPONSIVE
-=============================== */
 
-@media(max-width:992px){
 
-    .event{
 
-        grid-template-columns:1fr;
 
-    }
 
-    .event img{
 
-        width:100%;
 
-        height:220px;
+/* ==========================
+        GALLERY MODAL
+========================== */
 
-    }
 
-    .actions{
+.modal{
 
-        width:100%;
 
-    }
+    display:none;
 
-    .actions button{
 
-        flex:1;
+    position:fixed;
 
-    }
 
-}
+    inset:0;
 
-@media(max-width:768px){
 
-    .section-header{
+    background:
 
-        flex-direction:column;
+    rgba(15,23,42,.65);
 
-        align-items:flex-start;
 
-        gap:18px;
+    backdrop-filter:blur(8px);
 
-    }
 
-    #searchEvent{
+    justify-content:center;
 
-        width:100%;
-
-    }
-
-    .event-body h3{
-
-        font-size:18px;
-
-    }
-
-    .event-info{
-
-        flex-direction:column;
-
-        gap:10px;
-
-    }
-
-}
-
-@media(max-width:480px){
-
-    .content{
-
-        padding:18px;
-
-    }
-
-    .card{
-
-        padding:20px;
-
-        border-radius:18px;
-
-    }
-
-    .topbar h1{
-
-        font-size:24px;
-
-    }
-
-    .publishBtn{
-
-        width:100%;
-
-        justify-content:center;
-
-    }
-
-}
-
-/* ============================
-QUOTE BOX
-============================ */
-
-.quote-box{
-
-    margin-top:40px;
-
-    padding:20px;
-
-    border-radius:18px;
-
-    background:rgba(255,255,255,.06);
-
-    border:1px solid rgba(255,255,255,.08);
-
-}
-
-.quote-box h4{
-
-    color:white;
-
-    font-size:15px;
-
-    margin-bottom:18px;
-
-    display:flex;
 
     align-items:center;
 
-    gap:10px;
+
+    z-index:9999;
+
 
 }
 
-.quote-box p{
 
-    color:#dbeafe;
 
-    line-height:1.8;
+.modal-content{
 
-    font-size:14px;
 
-    min-height:90px;
+    width:min(95%,900px);
 
-    transition:.5s;
+
+    background:white;
+
+
+    border-radius:25px;
+
+
+    overflow:hidden;
+
+
+    animation:
+
+    modalOpen .35s ease;
+
+
+}
+
+
+
+
+.modal-header{
+
+
+    padding:22px 30px;
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8);
+
+
+    color:white;
+
 
 }
 
-/* ============================
-VERSION
-============================ */
 
-.version{
 
-    margin-top:auto;
 
-    text-align:center;
+.modal-header h2{
 
-    color:#9ca3af;
 
-    font-size:13px;
+    color:white;
 
-    padding-top:25px;
+
+    margin:0;
+
 
 }
+
+
+
+.closeModal{
+
+
+    width:40px;
+
+
+    height:40px;
+
+
+    border-radius:50%;
+
+
+    border:none;
+
+
+    cursor:pointer;
+
+
+    color:white;
+
+
+    background:
+
+    rgba(255,255,255,.2);
+
+
+    font-size:18px;
+
+
+}
+
+
+
+
+.closeModal:hover{
+
+
+    background:white;
+
+
+    color:var(--primary);
+
+
+}
+
+
+
+
+
+/* GALLERY IMAGES */
+
+
+.galleryGrid img{
+
+
+    width:100%;
+
+
+    height:160px;
+
+
+    object-fit:cover;
+
+
+    border-radius:15px;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.galleryGrid img:hover{
+
+
+    transform:scale(1.05);
+
+
+}
+
+
+
+
+
+
+/* ==========================
+        TOAST MESSAGE
+========================== */
+
+
+.toast{
+
+
+    animation:
+
+    toastShow .4s ease;
+
+
+}
+
+
+
+
+@keyframes toastShow{
+
+
+from{
+
+
+    opacity:0;
+
+
+    transform:translateY(-20px);
+
+
+}
+
+
+to{
+
+
+    opacity:1;
+
+
+    transform:translateY(0);
+
+
+}
+
+
+}
+
+
+
+
+
+
+/* ==========================
+        MODAL ANIMATION
+========================== */
+
+
+@keyframes modalOpen{
+
+
+from{
+
+
+    opacity:0;
+
+
+    transform:scale(.85);
+
+
+}
+
+
+to{
+
+
+    opacity:1;
+
+
+    transform:scale(1);
+
+
+}
+
+
+}
+
+
+
+
+
+
+/* ==========================
+        SCROLL BAR
+========================== */
+
+
+::-webkit-scrollbar{
+
+
+    width:10px;
+
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+
+    background:#e2e8f0;
+
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+
+    background:
+
+    linear-gradient(
+    #2563eb,
+    #14b8a6);
+
+
+    border-radius:20px;
+
+
+}
+
+
+
+
+
+
+/* ==========================
+        RESPONSIVE
+========================== */
+
+
+@media(max-width:1200px){
+
+
+    .grid{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+}
+
+
+
+
+
+@media(max-width:900px){
+
+
+    .dashboard{
+
+
+        display:block;
+
+
+    }
+
+
+
+    .sidebar{
+
+
+        position:relative;
+
+
+        width:100%;
+
+
+        height:auto;
+
+
+    }
+
+
+
+    .content{
+
+
+        margin-left:0;
+
+
+        width:100%;
+
+
+        padding:20px;
+
+
+    }
+
+
+
+    .topbar{
+
+
+        flex-direction:column;
+
+
+        align-items:flex-start;
+
+
+    }
+
+
+}
+
+
+
+
+@media(max-width:650px){
+
+
+
+    .content{
+
+
+        padding:15px;
+
+
+    }
+
+
+
+    .card{
+
+
+        padding:20px;
+
+
+    }
+
+
+
+    .two-column{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+
+
+    .button-group{
+
+
+        flex-direction:column;
+
+
+    }
+
+
+
+    .section-header{
+
+
+        flex-direction:column;
+
+
+        align-items:flex-start;
+
+
+    }
+
+
+
+
+    .search-box{
+
+
+        width:100%;
+
+
+    }
+
+
+
+    .search-box input{
+
+
+        width:100%;
+
+
+    }
+
+
+
+    .topbar h1{
+
+
+        font-size:22px;
+
+
+    }
+
+
+
+    .stat-card h2{
+
+
+        font-size:25px;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+/* ==========================
+        FINAL CMS TOUCH
+========================== */
+
+
+button{
+
+
+    font-family:inherit;
+
+
+}
+
+
+
+::selection{
+
+
+    background:#2563eb;
+
+
+    color:white;
+
+
+}
+
+
+
+
+/* END KINGDOM WAYS EVENTS CSS */
+
+
+

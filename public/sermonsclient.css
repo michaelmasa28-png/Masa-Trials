@@ -1,48 +1,87 @@
-```css
 /*==========================================================
         KINGDOM WAYS CHURCH
         SERMON CLIENT
-        PART 1
+        PART 1 / 7
+        PREMIUM FRONTEND STYLE
+==========================================================*/
+
+
+/*==========================================================
+IMPORTS
 ==========================================================*/
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
+
+
 /*==========================================================
-ROOT
+ROOT VARIABLES
 ==========================================================*/
 
 :root{
 
-    --primary:#2477ff;
-    --secondary:#19c37d;
-    --purple:#8b5cf6;
+
+    --primary:#0b5cff;
+
+    --primary-dark:#073bba;
+
+
+    --secondary:#00b894;
+
+    --purple:#7c3aed;
+
+
+    --gold:#d4af37;
+
+
     --orange:#ff9f1c;
-    --gold:#ffd54a;
+
+
 
     --white:#ffffff;
 
-    --background:#eef5ff;
 
-    --text:#243447;
+    --background:#f5f9ff;
+
+
+    --card:#ffffff;
+
+
+    --text:#1f2937;
+
 
     --text-light:#6b7280;
 
+
+
     --shadow:
-    0 15px 45px rgba(0,0,0,.08);
+
+    0 15px 40px rgba(0,0,0,.10);
+
+
 
     --shadow-hover:
-    0 20px 55px rgba(36,119,255,.18);
+
+    0 25px 60px rgba(11,92,255,.20);
+
+
 
     --radius:24px;
 
+
+
     --transition:.35s ease;
 
+
 }
+
+
 
 
 /*==========================================================
 RESET
 ==========================================================*/
+
 
 *{
 
@@ -54,206 +93,251 @@ RESET
 
 }
 
+
+
 html{
 
     scroll-behavior:smooth;
 
 }
 
+
+
 body{
+
 
     font-family:'Poppins',sans-serif;
 
-    background:
-
-    linear-gradient(
-    180deg,
-    #f9fcff,
-    #eef6ff
-    );
-
-    color:var(--text);
-
-    overflow-x:hidden;
 
     min-height:100vh;
 
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    #f8fbff,
+
+    #eef6ff
+
+    );
+
+
+    color:var(--text);
+
+
+    overflow-x:hidden;
+
+
 }
+
+
 
 
 /*==========================================================
-BACKGROUND EFFECT
+BACKGROUND LIGHT EFFECT
 ==========================================================*/
+
 
 body::before{
 
-    content:"";
-
-    position:fixed;
-
-    width:450px;
-
-    height:450px;
-
-    border-radius:50%;
-
-    background:
-
-    radial-gradient(
-
-    circle,
-
-    rgba(36,119,255,.18),
-
-    transparent 70%
-
-    );
-
-    top:-180px;
-
-    left:-120px;
-
-    animation:blob1 16s infinite alternate;
-
-    z-index:-5;
-
-}
-
-body::after{
 
     content:"";
 
+
     position:fixed;
+
 
     width:500px;
 
+
     height:500px;
+
 
     border-radius:50%;
 
+
+    top:-200px;
+
+
+    left:-150px;
+
+
     background:
+
 
     radial-gradient(
 
     circle,
 
-    rgba(139,92,246,.12),
+    rgba(11,92,255,.18),
 
     transparent 70%
 
     );
 
-    right:-150px;
 
-    bottom:-180px;
+    z-index:-1;
 
-    animation:blob2 18s infinite alternate;
 
-    z-index:-5;
+    animation:
+
+    floatingGlow 15s infinite alternate;
+
 
 }
+
+
+
+
+body::after{
+
+
+    content:"";
+
+
+    position:fixed;
+
+
+    width:500px;
+
+
+    height:500px;
+
+
+    border-radius:50%;
+
+
+    bottom:-200px;
+
+
+    right:-150px;
+
+
+    background:
+
+
+    radial-gradient(
+
+    circle,
+
+    rgba(0,184,148,.15),
+
+    transparent 70%
+
+    );
+
+
+    z-index:-1;
+
+
+    animation:
+
+    floatingGlow2 18s infinite alternate;
+
+
+}
+
+
 
 
 /*==========================================================
 HEADER
 ==========================================================*/
 
+
 header{
 
-    width:100%;
 
     position:sticky;
 
+
     top:0;
+
+
+    width:100%;
+
 
     z-index:999;
 
-    backdrop-filter:blur(16px);
 
-    background:rgba(255,255,255,.82);
+    background:
+
+    rgba(255,255,255,.88);
+
+
+    backdrop-filter:
+
+    blur(18px);
+
 
     box-shadow:
 
-    0 6px 25px rgba(0,0,0,.05);
+
+    0 5px 25px rgba(0,0,0,.08);
+
 
 }
+
+
 
 
 .header-content{
 
-    width:min(95%,1450px);
+
+    width:92%;
+
+
+    max-width:1400px;
+
 
     margin:auto;
 
+
+    padding:18px 0;
+
+
     display:flex;
+
 
     justify-content:space-between;
 
+
     align-items:center;
 
-    padding:18px 10px;
 
-    gap:20px;
+    gap:25px;
+
 
 }
+
+
+
+
+/*==========================================================
+LOGO
+==========================================================*/
 
 
 .logo h1{
 
-    color:var(--primary);
 
-    font-size:clamp(1.8rem,3vw,2.5rem);
+    font-size:
+
+    clamp(1.6rem,3vw,2.4rem);
+
 
     font-weight:800;
 
-}
 
-.logo p{
+    letter-spacing:.5px;
 
-    color:var(--text-light);
-
-    margin-top:5px;
-
-}
-
-
-/*==========================================================
-NAVIGATION
-==========================================================*/
-
-.top-nav{
-
-    display:flex;
-
-    gap:15px;
-
-    flex-wrap:wrap;
-
-}
-
-.top-nav a{
-
-    padding:13px 28px;
-
-    border-radius:50px;
-
-    background:white;
-
-    color:var(--primary);
-
-    font-weight:600;
-
-    transition:var(--transition);
-
-    box-shadow:
-
-    0 10px 25px rgba(36,119,255,.08);
-
-}
-
-.top-nav a:hover{
 
     background:
+
 
     linear-gradient(
 
@@ -265,75 +349,210 @@ NAVIGATION
 
     );
 
-    color:white;
 
-    transform:translateY(-4px);
+    -webkit-background-clip:text;
+
+
+    color:transparent;
+
 
 }
+
+
+
+.logo p{
+
+
+    margin-top:5px;
+
+
+    color:var(--text-light);
+
+
+    font-size:.95rem;
+
+
+}
+
 
 
 /*==========================================================
-HERO
+NAVIGATION
 ==========================================================*/
 
-.hero{
 
-    position:relative;
+.top-nav{
 
-    min-height:55vh;
 
     display:flex;
 
-    justify-content:center;
 
-    align-items:center;
+    gap:15px;
 
-    text-align:center;
-
-    overflow:hidden;
-
-    padding:70px 20px;
 
 }
 
-.hero::before{
 
-    content:"";
 
-    position:absolute;
+.top-nav a{
 
-    inset:0;
+
+    text-decoration:none;
+
+
+    padding:12px 25px;
+
+
+    border-radius:50px;
+
+
+    color:var(--primary);
+
+
+    background:white;
+
+
+    font-weight:600;
+
+
+    box-shadow:
+
+
+    0 8px 20px rgba(0,0,0,.08);
+
+
+    transition:var(--transition);
+
+
+}
+
+
+
+.top-nav a:hover{
+
+
+    color:white;
+
 
     background:
 
+
     linear-gradient(
 
-    rgba(36,119,255,.72),
+    135deg,
 
-    rgba(25,195,125,.45)
+    var(--primary),
+
+    var(--purple)
+
+    );
+
+
+    transform:
+
+    translateY(-4px);
+
+
+}
+
+
+
+
+/*==========================================================
+HERO SECTION
+==========================================================*/
+
+
+.hero{
+
+
+    position:relative;
+
+
+    min-height:55vh;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    text-align:center;
+
+
+    padding:80px 20px;
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+
+.hero::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    background:
+
+
+    linear-gradient(
+
+    rgba(5,20,60,.75),
+
+    rgba(0,120,90,.55)
 
     ),
 
-    url("../images/church.jpg")
 
-    center/cover;
+    url("images/church.jpg");
 
-    z-index:-3;
+
+    background-size:cover;
+
+
+    background-position:center;
+
+
+    z-index:-2;
+
 
 }
+
+
 
 
 .hero::after{
 
+
     content:"";
+
 
     position:absolute;
 
-    width:650px;
 
-    height:650px;
+    width:600px;
+
+
+    height:600px;
+
 
     border-radius:50%;
+
 
     background:
 
@@ -341,1108 +560,3896 @@ HERO
 
     circle,
 
-    rgba(255,255,255,.18),
+    rgba(255,255,255,.20),
 
     transparent 70%
 
     );
 
-    animation:rotateGlow 25s linear infinite;
+
+    animation:
+
+    heroGlow 15s linear infinite;
+
 
 }
+
+
 
 
 .hero-text{
 
-    max-width:850px;
 
     color:white;
 
+
+    max-width:850px;
+
+
+    animation:
+
+    heroEnter 1s ease;
+
+
 }
+
+
 
 .hero-text h2{
 
-    font-size:clamp(2.5rem,5vw,4.5rem);
+
+    font-size:
+
+    clamp(2.5rem,5vw,4.5rem);
+
 
     font-weight:800;
 
+
     margin-bottom:20px;
 
+
+    letter-spacing:1px;
+
+
 }
+
+
 
 .hero-text p{
 
+
     font-size:1.15rem;
+
 
     line-height:1.9;
 
+
 }
 
 
+
 /*==========================================================
-MAIN
+MAIN WRAPPER
 ==========================================================*/
+
 
 .page-wrapper{
 
-    width:min(96%,1550px);
 
-    margin:50px auto;
+    width:92%;
+
+
+    max-width:1500px;
+
+
+    margin:60px auto;
+
 
 }
+
+
 
 .content-area{
 
+
     width:100%;
+
 
 }
 
 
+
 /*==========================================================
-SEARCH
+SEARCH AREA
 ==========================================================*/
+
 
 .search-section{
 
-    margin-bottom:35px;
+
+    margin-bottom:40px;
+
 
 }
+
+
 
 #search{
 
+
     width:100%;
+
 
     padding:18px 25px;
 
+
     border:none;
+
 
     outline:none;
 
-    font-size:1rem;
 
-    border-radius:60px;
+    border-radius:50px;
+
 
     background:white;
 
+
+    font-size:1rem;
+
+
     box-shadow:var(--shadow);
 
-    transition:var(--transition);
+
+    transition:.3s;
+
 
 }
+
+
+
 
 #search:focus{
 
+
     transform:scale(1.02);
+
 
     box-shadow:
 
-    0 18px 45px rgba(36,119,255,.15);
+    0 20px 45px rgba(11,92,255,.20);
+
 
 }
 
+/*==========================================================
+        KINGDOM WAYS CHURCH
+        SERMON CLIENT
+        PART 2 / 7
+        SERMON CARDS SYSTEM
+==========================================================*/
+
 
 /*==========================================================
-TITLE
+SECTION TITLE
 ==========================================================*/
+
 
 .section-title{
 
+
     color:var(--primary);
 
-    font-size:2rem;
+
+    font-size:2.1rem;
+
 
     font-weight:700;
 
-    margin-bottom:30px;
+
+    margin-bottom:35px;
+
+
+    position:relative;
+
+
+    display:inline-block;
+
 
 }
 
 
-/*==========================================================
-MAIN GRID
-==========================================================*/
 
-.main-grid{
-
-    display:grid;
-
-    grid-template-columns:
-
-    minmax(0,1fr)
-
-    340px;
-
-    gap:35px;
-
-    align-items:start;
-
-}
+.section-title::after{
 
 
-/*==========================================================
-DAILY ENCOURAGEMENT
-==========================================================*/
+    content:"";
 
-.encouragement-card{
 
-    position:sticky;
+    position:absolute;
 
-    top:100px;
 
-    padding:30px;
+    left:0;
 
-    border-radius:28px;
+
+    bottom:-10px;
+
+
+    width:70px;
+
+
+    height:4px;
+
+
+    border-radius:20px;
+
 
     background:
 
     linear-gradient(
 
-    135deg,
+    90deg,
 
-    #2477ff,
+    var(--primary),
 
-    #19c37d,
-
-    #8b5cf6
+    var(--secondary)
 
     );
 
-    background-size:250%;
-
-    animation:
-
-    cardGradient 8s linear infinite,
-
-    floatCard 6s ease-in-out infinite;
-
-    color:white;
-
-    box-shadow:
-
-    0 20px 50px rgba(0,0,0,.15);
 
 }
 
-.encouragement-card h3{
 
-    margin-bottom:20px;
 
-    font-size:1.4rem;
-
-}
-
-.encouragement-card blockquote{
-
-    line-height:2;
-
-    font-style:italic;
-
-}
-
-.encouragement-card p{
-
-    margin-top:20px;
-
-    font-weight:600;
-
-}
 
 
 /*==========================================================
-ANIMATIONS
+MAIN CONTENT GRID
 ==========================================================*/
 
-@keyframes blob1{
 
-    to{
+.main-grid{
 
-        transform:
 
-        translate(70px,60px);
+    display:grid;
 
-    }
 
-}
+    grid-template-columns:
 
-@keyframes blob2{
 
-    to{
+    minmax(0,1fr)
 
-        transform:
+    340px;
 
-        translate(-80px,-50px);
 
-    }
+    gap:35px;
 
-}
 
-@keyframes rotateGlow{
+    align-items:start;
 
-    to{
-
-        transform:rotate(360deg);
-
-    }
 
 }
 
-@keyframes floatCard{
 
-    50%{
 
-        transform:translateY(-12px);
 
-    }
-
-}
-
-@keyframes cardGradient{
-
-    to{
-
-        background-position:250%;
-
-    }
-
-}
-```
-```css
-/*==========================================================
-        KINGDOM WAYS CHURCH
-        SERMON CLIENT
-        PART 2
-        (Continue below Part 1)
-==========================================================*/
 
 
 /*==========================================================
 SERMON CONTAINER
 ==========================================================*/
 
+
 #sermons-container{
+
 
     display:grid;
 
+
     grid-template-columns:
-    repeat(auto-fill,minmax(340px,1fr));
+
+
+    repeat(
+
+    auto-fit,
+
+    minmax(320px,1fr)
+
+    );
+
 
     gap:30px;
 
-    align-content:start;
 
 }
+
+
+
+
 
 
 /*==========================================================
 SERMON CARD
 ==========================================================*/
 
+
 .sermon-card{
 
-    background:#fff;
-
-    border-radius:24px;
-
-    overflow:hidden;
-
-    box-shadow:var(--shadow);
-
-    transition:var(--transition);
-
-    display:flex;
-
-    flex-direction:column;
 
     position:relative;
 
-}
 
-.sermon-card:hover{
+    overflow:hidden;
 
-    transform:
-    translateY(-10px);
-
-    box-shadow:var(--shadow-hover);
-
-}
-
-
-/*==========================================================
-TOP ACCENT
-==========================================================*/
-
-.sermon-card::before{
-
-    content:"";
-
-    width:100%;
-
-    height:6px;
-
-    display:block;
 
     background:
 
-    linear-gradient(
-    90deg,
-    var(--primary),
-    var(--secondary),
-    var(--purple),
-    var(--orange),
-    var(--gold));
 
-    background-size:300%;
-
-    animation:gradientMove 6s linear infinite;
-
-}
+    rgba(255,255,255,.95);
 
 
-/*==========================================================
-IMAGE
-==========================================================*/
-
-.sermon-image{
-
-    width:100%;
-
-    height:220px;
-
-    object-fit:cover;
-
-    transition:.6s;
-
-}
-
-.sermon-card:hover .sermon-image{
-
-    transform:scale(1.08);
-
-}
+    border-radius:26px;
 
 
-/*==========================================================
-CARD CONTENT
-==========================================================*/
+    box-shadow:
 
-.sermon-card-content{
 
-    padding:22px;
+    var(--shadow);
+
 
     display:flex;
 
+
     flex-direction:column;
+
+
+    transition:
+
+
+    var(--transition);
+
+
+    border:
+
+
+    1px solid rgba(0,0,0,.05);
+
+
+}
+
+
+
+
+.sermon-card:hover{
+
+
+    transform:
+
+
+    translateY(-12px);
+
+
+    box-shadow:
+
+
+    var(--shadow-hover);
+
+
+}
+
+
+
+
+
+/*==========================================================
+CARD TOP LINE
+==========================================================*/
+
+
+.sermon-card::before{
+
+
+    content:"";
+
+
+    height:6px;
+
+
+    width:100%;
+
+
+    background:
+
+
+    linear-gradient(
+
+    90deg,
+
+    var(--primary),
+
+    var(--secondary),
+
+    var(--purple),
+
+    var(--gold)
+
+    );
+
+
+    background-size:300%;
+
+
+    animation:
+
+
+    movingGradient 6s linear infinite;
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+SERMON IMAGE
+==========================================================*/
+
+
+.sermon-image{
+
+
+    width:100%;
+
+
+    height:230px;
+
+
+    object-fit:cover;
+
+
+    transition:.5s;
+
+
+}
+
+
+
+
+.sermon-card:hover .sermon-image{
+
+
+    transform:
+
+
+    scale(1.07);
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+SERMON CONTENT
+==========================================================*/
+
+
+.sermon-card-content{
+
+
+    padding:25px;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
 
     flex:1;
 
+
 }
 
 
+
+
+
+
 /*==========================================================
-TITLE
+SERMON TITLE
 ==========================================================*/
+
 
 .sermon-card h3{
 
-    color:var(--primary);
 
-    font-size:1.4rem;
+    color:
+
+    var(--primary);
+
+
+    font-size:1.35rem;
+
 
     margin-bottom:15px;
 
+
+    font-weight:700;
+
+
+    line-height:1.4;
+
+
 }
+
+
+
+
+.sermon-card h3:hover{
+
+
+    color:var(--purple);
+
+
+}
+
+
+
+
+
 
 
 /*==========================================================
-DETAILS
+SERMON INFORMATION
 ==========================================================*/
+
 
 .sermon-card p{
 
-    color:var(--text-light);
 
-    margin-bottom:12px;
+    color:
+
+    var(--text-light);
+
 
     line-height:1.8;
 
+
+    margin-bottom:12px;
+
+
 }
+
+
+
 
 .sermon-card strong{
 
-    color:var(--secondary);
+
+    color:
+
+    var(--secondary);
+
 
 }
+
+
+
+
+
 
 
 /*==========================================================
 DATE BADGE
 ==========================================================*/
 
+
 .sermon-date{
 
-    display:inline-block;
 
-    padding:8px 16px;
+    width:max-content;
 
-    border-radius:30px;
 
-    margin-bottom:18px;
+    padding:
 
-    background:#eef7ff;
+    7px 18px;
 
-    color:var(--primary);
 
-    font-size:.9rem;
+    border-radius:50px;
+
+
+    background:
+
+
+    rgba(11,92,255,.10);
+
+
+    color:
+
+    var(--primary);
+
+
+    font-size:.85rem;
+
 
     font-weight:600;
 
+
+    margin-bottom:18px;
+
+
 }
+
+
+
 
 
 /*==========================================================
 DESCRIPTION
 ==========================================================*/
 
+
 .sermon-description{
+
 
     flex:1;
 
-    margin-bottom:20px;
+
+    margin-bottom:25px;
+
 
 }
+
+
+
+
 
 
 /*==========================================================
 WATCH BUTTON
 ==========================================================*/
 
+
 .watch-btn{
+
+
+    width:100%;
+
 
     display:flex;
 
+
     justify-content:center;
+
 
     align-items:center;
 
-    margin-top:auto;
 
     padding:15px;
 
-    border-radius:14px;
+
+    border-radius:50px;
+
 
     text-decoration:none;
 
+
     color:white;
+
 
     font-weight:700;
 
+
     background:
 
-    linear-gradient(
-    135deg,
-    var(--primary),
-    var(--purple));
 
-    transition:var(--transition);
+    linear-gradient(
+
+    135deg,
+
+    var(--primary),
+
+    var(--purple)
+
+    );
+
+
+    transition:
+
+    var(--transition);
+
 
 }
+
+
+
+
 
 .watch-btn:hover{
 
-    transform:translateY(-4px);
+
+    transform:
+
+
+    translateY(-5px);
+
 
     background:
 
+
     linear-gradient(
+
     135deg,
+
     var(--secondary),
-    var(--primary));
 
-}
+    var(--primary)
 
+    );
 
-/*==========================================================
-HOVER ICON
-==========================================================*/
-
-.sermon-card::after{
-
-    content:"✝";
-
-    position:absolute;
-
-    right:18px;
-
-    top:18px;
-
-    width:42px;
-
-    height:42px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:white;
-
-    color:var(--primary);
-
-    font-size:18px;
 
     box-shadow:
 
-    0 10px 20px rgba(0,0,0,.08);
+
+    0 15px 35px rgba(0,0,0,.20);
+
 
 }
 
 
+
+
+
+
+
 /*==========================================================
-NO SERMONS
+CROSS ICON DECORATION
 ==========================================================*/
 
-#sermons-container h2{
 
-    grid-column:1/-1;
+.sermon-card::after{
 
-    text-align:center;
 
-    color:var(--text-light);
+    content:"✝";
 
-    padding:60px;
+
+    position:absolute;
+
+
+    top:18px;
+
+
+    right:18px;
+
+
+    width:42px;
+
+
+    height:42px;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    background:white;
+
+
+    color:var(--gold);
+
+
+    font-size:20px;
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(0,0,0,.12);
+
 
 }
 
 
+
+
+
+
+
 /*==========================================================
-LOADING
+LOADING MESSAGE
 ==========================================================*/
+
 
 .loading{
 
+
+    grid-column:1/-1;
+
+
     text-align:center;
+
 
     padding:70px;
 
+
     color:var(--primary);
+
+
+    font-weight:600;
+
 
     font-size:1.1rem;
 
+
 }
 
 
+
+
+
 /*==========================================================
-CARD ANIMATION
+EMPTY RESULT
 ==========================================================*/
+
+
+#sermons-container h2{
+
+
+    grid-column:1/-1;
+
+
+    text-align:center;
+
+
+    padding:60px;
+
+
+    color:var(--text-light);
+
+
+}
+
+
+
+
+
+/*==========================================================
+ANIMATION
+==========================================================*/
+
 
 .sermon-card{
 
-    animation:cardFade .8s ease;
+
+    animation:
+
+
+    cardAppear .8s ease;
+
 
 }
 
-@keyframes cardFade{
+
+
+@keyframes cardAppear{
+
 
     from{
 
+
         opacity:0;
 
+
         transform:
+
+
         translateY(40px);
 
+
     }
+
 
     to{
 
+
         opacity:1;
 
+
         transform:
+
+
         translateY(0);
 
+
     }
+
 
 }
 
 
-/*==========================================================
-GRADIENT ANIMATION
-==========================================================*/
 
-@keyframes gradientMove{
 
-    0%{
+@keyframes movingGradient{
+
+
+    from{
+
 
         background-position:0%;
 
+
     }
 
-    100%{
+
+    to{
+
 
         background-position:300%;
 
+
     }
+
 
 }
 
-
-/*==========================================================
-TABLETS
-==========================================================*/
-
-@media(max-width:1100px){
-
-    .main-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .encouragement-card{
-
-        position:relative;
-
-        top:0;
-
-        order:-1;
-
-        margin-bottom:30px;
-
-    }
-
-}
-
-
-/*==========================================================
-MOBILE
-==========================================================*/
-
-@media(max-width:768px){
-
-    #sermons-container{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .sermon-image{
-
-        height:210px;
-
-    }
-
-    .sermon-card-content{
-
-        padding:18px;
-
-    }
-
-}
-```
-```css id="sermoncss-part3"
 /*==========================================================
         KINGDOM WAYS CHURCH
         SERMON CLIENT
-        PART 3
-        (Append below Part 2)
+        PART 3 / 7
+        DAILY ENCOURAGEMENT + SIDEBAR
 ==========================================================*/
+
+
+/*==========================================================
+DAILY ENCOURAGEMENT CARD
+==========================================================*/
+
+
+.encouragement-card{
+
+
+    position:sticky;
+
+
+    top:110px;
+
+
+    overflow:hidden;
+
+
+    padding:35px;
+
+
+    border-radius:30px;
+
+
+    color:white;
+
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    #0b5cff,
+
+    #00b894,
+
+    #7c3aed
+
+    );
+
+
+    background-size:250%;
+
+
+    box-shadow:
+
+
+    0 25px 55px rgba(0,0,0,.18);
+
+
+    animation:
+
+
+    gradientFlow 10s linear infinite,
+
+    cardFloat 6s ease-in-out infinite;
+
+
+}
+
+
+
+
+/*==========================================================
+SIDEBAR LIGHT EFFECTS
+==========================================================*/
+
+
+.encouragement-card::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:250px;
+
+
+    height:250px;
+
+
+    border-radius:50%;
+
+
+    top:-120px;
+
+
+    right:-100px;
+
+
+    background:
+
+
+    rgba(255,255,255,.15);
+
+
+}
+
+
+
+
+.encouragement-card::after{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:180px;
+
+
+    height:180px;
+
+
+    border-radius:50%;
+
+
+    bottom:-80px;
+
+
+    left:-60px;
+
+
+    background:
+
+
+    rgba(255,255,255,.10);
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+CARD TITLE
+==========================================================*/
+
+
+.encouragement-card h3{
+
+
+    position:relative;
+
+
+    z-index:2;
+
+
+    font-size:1.5rem;
+
+
+    margin-bottom:25px;
+
+
+    font-weight:700;
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+VERSE TEXT
+==========================================================*/
+
+
+.encouragement-card blockquote{
+
+
+    position:relative;
+
+
+    z-index:2;
+
+
+    font-size:1.05rem;
+
+
+    line-height:2;
+
+
+    font-style:italic;
+
+
+    min-height:80px;
+
+
+    transition:.5s;
+
+
+}
+
+
+
+
+
+.encouragement-card blockquote::before{
+
+
+    content:"“";
+
+
+    font-size:4rem;
+
+
+    opacity:.4;
+
+
+    position:absolute;
+
+
+    left:-15px;
+
+
+    top:-30px;
+
+
+}
+
+
+
+
+
+/*==========================================================
+VERSE REFERENCE
+==========================================================*/
+
+
+.encouragement-card p{
+
+
+    position:relative;
+
+
+    z-index:2;
+
+
+    margin-top:25px;
+
+
+    font-weight:700;
+
+
+    color:#fff;
+
+
+    opacity:.9;
+
+
+    text-align:right;
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+VERSE TRANSITION SUPPORT
+==========================================================*/
+
+
+#dailyVerse{
+
+
+    animation:
+
+
+    verseAppear 1s ease;
+
+
+}
+
+
+
+
+@keyframes verseAppear{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:
+
+
+        translateY(15px);
+
+
+    }
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:
+
+
+        translateY(0);
+
+
+    }
+
+
+}
+
+
+
+
+
 
 
 /*==========================================================
 FOOTER
 ==========================================================*/
 
+
 footer{
 
-    margin-top:70px;
 
-    padding:35px 20px;
+    margin-top:80px;
+
+
+    padding:40px 20px;
+
 
     text-align:center;
 
-    color:#fff;
+
+    color:white;
+
+
+    border-top-left-radius:35px;
+
+
+    border-top-right-radius:35px;
+
 
     background:
+
+
     linear-gradient(
+
     135deg,
-    var(--primary),
-    var(--secondary),
-    var(--purple));
+
+    #0b5cff,
+
+    #00b894,
+
+    #7c3aed
+
+    );
+
 
     background-size:300%;
 
-    animation:footerGradient 10s linear infinite;
 
-    border-top-left-radius:30px;
+    animation:
 
-    border-top-right-radius:30px;
+
+    footerMove 12s linear infinite;
+
 
 }
+
+
+
+
 
 footer p{
 
-    font-size:1rem;
 
     line-height:1.8;
 
+
     letter-spacing:.4px;
 
-}
-
-
-/*==========================================================
-SMOOTH CARD HOVER
-==========================================================*/
-
-.sermon-card:hover h3{
-
-    color:var(--purple);
-
-}
-
-.sermon-card:hover .watch-btn{
-
-    letter-spacing:.5px;
 
 }
 
 
-/*==========================================================
-SEARCH ANIMATION
-==========================================================*/
 
-#search::placeholder{
 
-    color:#8d99ae;
 
-    transition:.3s;
 
-}
-
-#search:focus::placeholder{
-
-    opacity:.5;
-
-}
-
-
-/*==========================================================
-DAILY ENCOURAGEMENT EFFECT
-==========================================================*/
-
-.encouragement-card{
-
-    overflow:hidden;
-
-}
-
-.encouragement-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:220px;
-
-    height:220px;
-
-    border-radius:50%;
-
-    top:-90px;
-
-    right:-90px;
-
-    background:
-
-    rgba(255,255,255,.12);
-
-}
-
-.encouragement-card::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:140px;
-
-    height:140px;
-
-    border-radius:50%;
-
-    bottom:-50px;
-
-    left:-40px;
-
-    background:
-
-    rgba(255,255,255,.08);
-
-}
-
-
-/*==========================================================
-SCROLLBAR
-==========================================================*/
-
-::-webkit-scrollbar{
-
-    width:10px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#edf4ff;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:
-    linear-gradient(
-    var(--primary),
-    var(--secondary));
-
-    border-radius:50px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:
-    linear-gradient(
-    var(--purple),
-    var(--primary));
-
-}
-
-
-/*==========================================================
-TEXT SELECTION
-==========================================================*/
-
-::selection{
-
-    background:var(--primary);
-
-    color:#fff;
-
-}
-
-
-/*==========================================================
-TABLETS
-==========================================================*/
-
-@media (max-width:992px){
-
-    .header-content{
-
-        flex-direction:column;
-
-        text-align:center;
-
-        gap:18px;
-
-    }
-
-    .top-nav{
-
-        justify-content:center;
-
-        width:100%;
-
-    }
-
-    .hero{
-
-        min-height:45vh;
-
-    }
-
-}
-
-
-/*==========================================================
-MOBILE
-==========================================================*/
-
-@media (max-width:768px){
-
-    .hero{
-
-        padding:60px 20px;
-
-    }
-
-    .hero-text h2{
-
-        font-size:2.2rem;
-
-    }
-
-    .hero-text p{
-
-        font-size:1rem;
-
-    }
-
-    .section-title{
-
-        text-align:center;
-
-        font-size:1.8rem;
-
-    }
-
-    .top-nav{
-
-        flex-wrap:wrap;
-
-    }
-
-    .top-nav a{
-
-        flex:1;
-
-        min-width:120px;
-
-        text-align:center;
-
-    }
-
-}
-
-
-/*==========================================================
-SMALL PHONES
-==========================================================*/
-
-@media (max-width:480px){
-
-    .logo h1{
-
-        font-size:1.6rem;
-
-    }
-
-    .logo p{
-
-        font-size:.9rem;
-
-    }
-
-    .hero-text h2{
-
-        font-size:1.8rem;
-
-    }
-
-    .hero-text p{
-
-        font-size:.95rem;
-
-        line-height:1.7;
-
-    }
-
-    #search{
-
-        padding:16px 20px;
-
-    }
-
-    .encouragement-card{
-
-        padding:22px;
-
-    }
-
-    .watch-btn{
-
-        font-size:.95rem;
-
-    }
-
-}
-
-
-/*==========================================================
-LARGE DESKTOPS
-==========================================================*/
-
-@media (min-width:1600px){
-
-    .page-wrapper{
-
-        max-width:1650px;
-
-    }
-
-    #sermons-container{
-
-        grid-template-columns:
-        repeat(auto-fill,minmax(380px,1fr));
-
-    }
-
-}
-
-
-/*==========================================================
-4K DISPLAYS
-==========================================================*/
-
-@media (min-width:2560px){
-
-    html{
-
-        font-size:18px;
-
-    }
-
-}
-
-
-/*==========================================================
-ACCESSIBILITY
-==========================================================*/
-
-@media (prefers-reduced-motion:reduce){
-
-    *{
-
-        animation:none !important;
-
-        transition:none !important;
-
-        scroll-behavior:auto;
-
-    }
-
-}
 
 
 /*==========================================================
 FOOTER ANIMATION
 ==========================================================*/
 
-@keyframes footerGradient{
+
+@keyframes footerMove{
+
 
     from{
 
+
         background-position:0%;
 
+
     }
+
 
     to{
 
+
         background-position:300%;
+
 
     }
 
+
 }
-```
+
+
+
+
+
+
+
+/*==========================================================
+GLOBAL LINK STYLE
+==========================================================*/
+
+
+a{
+
+
+    transition:
+
+
+    var(--transition);
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+IMAGE FALLBACK
+==========================================================*/
+
+
+.sermon-image{
+
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    #dbeafe,
+
+    #dcfce7
+
+    );
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+SMOOTH PAGE LOAD
+==========================================================*/
+
+
+.page-wrapper{
+
+
+    animation:
+
+
+    pageEnter .8s ease;
+
+
+}
+
+
+
+@keyframes pageEnter{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:
+
+
+        translateY(25
+
+/*==========================================================
+        KINGDOM WAYS CHURCH
+        SERMON CLIENT
+        PART 4 / 7
+        RESPONSIVE DESIGN + MOBILE OPTIMIZATION
+==========================================================*/
+
+
+
+/*==========================================================
+TABLET DEVICES
+==========================================================*/
+
+
+@media(max-width:1100px){
+
+
+
+    .main-grid{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+
+    .encouragement-card{
+
+
+        position:relative;
+
+
+        top:0;
+
+
+        order:-1;
+
+
+        margin-bottom:35px;
+
+
+    }
+
+
+
+
+    #sermons-container{
+
+
+        grid-template-columns:
+
+
+        repeat(
+
+        auto-fit,
+
+        minmax(300px,1fr)
+
+        );
+
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+SMALL TABLETS
+==========================================================*/
+
+
+@media(max-width:900px){
+
+
+
+    .header-content{
+
+
+        flex-direction:column;
+
+
+        text-align:center;
+
+
+    }
+
+
+
+    .top-nav{
+
+
+        justify-content:center;
+
+
+        width:100%;
+
+
+    }
+
+
+
+
+    .hero{
+
+
+        min-height:45vh;
+
+
+    }
+
+
+
+
+    .hero-text h2{
+
+
+        font-size:2.8rem;
+
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+MOBILE DEVICES
+==========================================================*/
+
+
+@media(max-width:768px){
+
+
+
+    body{
+
+
+        overflow-x:hidden;
+
+
+    }
+
+
+
+
+
+    .header-content{
+
+
+        padding:15px;
+
+
+        gap:15px;
+
+
+    }
+
+
+
+
+
+
+    .logo h1{
+
+
+        font-size:1.7rem;
+
+
+    }
+
+
+
+
+
+
+    .logo p{
+
+
+        font-size:.85rem;
+
+
+    }
+
+
+
+
+
+    .top-nav{
+
+
+        display:flex;
+
+
+        flex-wrap:wrap;
+
+
+        justify-content:center;
+
+
+        gap:10px;
+
+
+    }
+
+
+
+
+
+    .top-nav a{
+
+
+        padding:10px 20px;
+
+
+        font-size:.9rem;
+
+
+    }
+
+
+
+
+
+
+    .hero{
+
+
+        padding:55px 20px;
+
+
+    }
+
+
+
+
+
+    .hero-text h2{
+
+
+        font-size:2.2rem;
+
+
+    }
+
+
+
+
+
+    .hero-text p{
+
+
+        font-size:1rem;
+
+
+        line-height:1.7;
+
+
+    }
+
+
+
+
+
+
+    .page-wrapper{
+
+
+        width:94%;
+
+
+        margin:35px auto;
+
+
+    }
+
+
+
+
+
+
+    .section-title{
+
+
+        display:block;
+
+
+        text-align:center;
+
+
+        font-size:1.7rem;
+
+
+    }
+
+
+
+
+
+
+
+    #search{
+
+
+        padding:16px 20px;
+
+
+        font-size:.95rem;
+
+
+    }
+
+
+
+
+
+
+    #sermons-container{
+
+
+        grid-template-columns:1fr;
+
+
+        gap:25px;
+
+
+    }
+
+
+
+
+
+
+    .sermon-card{
+
+
+        border-radius:22px;
+
+
+    }
+
+
+
+
+
+
+    .sermon-image{
+
+
+        height:200px;
+
+
+    }
+
+
+
+
+
+
+    .sermon-card-content{
+
+
+        padding:20px;
+
+
+    }
+
+
+
+
+
+
+    .sermon-card h3{
+
+
+        font-size:1.2rem;
+
+
+    }
+
+
+
+
+
+
+    .encouragement-card{
+
+
+        padding:25px;
+
+
+        border-radius:25px;
+
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==========================================================
+SMALL PHONES
+==========================================================*/
+
+
+@media(max-width:480px){
+
+
+
+    .hero-text h2{
+
+
+        font-size:1.9rem;
+
+
+    }
+
+
+
+
+
+
+    .hero-text p{
+
+
+        font-size:.9rem;
+
+
+    }
+
+
+
+
+
+    .top-nav a{
+
+
+        width:100%;
+
+
+        text-align:center;
+
+
+    }
+
+
+
+
+
+
+
+    .sermon-image{
+
+
+        height:180px;
+
+
+    }
+
+
+
+
+
+
+    .watch-btn{
+
+
+        padding:13px;
+
+
+        font-size:.9rem;
+
+
+    }
+
+
+
+
+
+
+
+    .encouragement-card h3{
+
+
+        font-size:1.2rem;
+
+
+    }
+
+
+
+
+
+
+    .encouragement-card blockquote{
+
+
+        font-size:.95rem;
+
+
+    }
+
+
+
+
+
+
+    footer{
+
+
+        padding:30px 15px;
+
+
+        font-size:.9rem;
+
+
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==========================================================
+LARGE SCREENS
+==========================================================*/
+
+
+@media(min-width:1600px){
+
+
+
+    .page-wrapper{
+
+
+        max-width:1650px;
+
+
+    }
+
+
+
+
+
+
+    #sermons-container{
+
+
+        grid-template-columns:
+
+
+        repeat(
+
+        auto-fit,
+
+        minmax(380px,1fr)
+
+        );
+
+
+    }
+
+
+
+}
+
+
+
+
+
+/*==========================================================
+VERY LARGE DISPLAYS
+==========================================================*/
+
+
+@media(min-width:2400px){
+
+
+
+    html{
+
+
+        font-size:18px;
+
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==========================================================
+REDUCED MOTION SUPPORT
+==========================================================*/
+
+
+@media(prefers-reduced-motion:reduce){
+
+
+
+    *,
+
+
+    *::before,
+
+
+    *::after{
+
+
+        animation:none !important;
+
+
+        transition:none !important;
+
+
+        scroll-behavior:auto !important;
+
+
+    }
+
+
+
+}
+
+/*==========================================================
+        KINGDOM WAYS CHURCH
+        SERMON CLIENT
+        PART 5 / 7
+        LOADING + FUTURE MEDIA SUPPORT
+==========================================================*/
+
+
+
+/*==========================================================
+LOADING CONTAINER
+==========================================================*/
+
+
+.loading{
+
+
+    grid-column:1/-1;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    min-height:250px;
+
+
+    color:var(--primary);
+
+
+    font-weight:600;
+
+
+    gap:20px;
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+LOADING SPINNER
+==========================================================*/
+
+
+.loading::before{
+
+
+    content:"";
+
+
+    width:55px;
+
+
+    height:55px;
+
+
+    border-radius:50%;
+
+
+    border:5px solid rgba(11,92,255,.15);
+
+
+    border-top-color:var(--primary);
+
+
+    animation:
+
+
+    loadingSpin 1s linear infinite;
+
+
+}
+
+
+
+
+@keyframes loadingSpin{
+
+
+    from{
+
+
+        transform:rotate(0deg);
+
+
+    }
+
+
+    to{
+
+
+        transform:rotate(360deg);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+EMPTY SERMON MESSAGE
+==========================================================*/
+
+
+.empty-sermon{
+
+
+    grid-column:1/-1;
+
+
+    padding:70px 30px;
+
+
+    text-align:center;
+
+
+    background:white;
+
+
+    border-radius:25px;
+
+
+    box-shadow:var(--shadow);
+
+
+}
+
+
+
+
+
+.empty-sermon h2{
+
+
+    color:var(--primary);
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+.empty-sermon p{
+
+
+    color:var(--text-light);
+
+
+    line-height:1.8;
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+VIDEO READY AREA
+(Future sermon video player)
+==========================================================*/
+
+
+.sermon-video{
+
+
+    width:100%;
+
+
+    aspect-ratio:16/9;
+
+
+    border-radius:20px;
+
+
+    overflow:hidden;
+
+
+    background:#000;
+
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+.sermon-video video{
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+    object-fit:cover;
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+AUDIO SERMON SUPPORT
+==========================================================*/
+
+
+.sermon-audio{
+
+
+    width:100%;
+
+
+    margin-top:15px;
+
+
+    padding:15px;
+
+
+    border-radius:20px;
+
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    #eef6ff,
+
+    #ecfff7
+
+    );
+
+
+}
+
+
+
+
+
+.sermon-audio audio{
+
+
+    width:100%;
+
+
+}
+
+
+
+
+
+
+
+
+/*==========================================================
+SERMON FEATURED BADGE
+==========================================================*/
+
+
+.featured-badge{
+
+
+    position:absolute;
+
+
+    top:18px;
+
+
+    left:18px;
+
+
+    padding:8px 18px;
+
+
+    border-radius:50px;
+
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    var(--gold),
+
+    var(--orange)
+
+    );
+
+
+    color:white;
+
+
+    font-size:.8rem;
+
+
+    font-weight:700;
+
+
+    z-index:3;
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(0,0,0,.15);
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+VIEW COUNTER
+==========================================================*/
+
+
+.sermon-views{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:8px;
+
+
+    color:var(--text-light);
+
+
+    font-size:.9rem;
+
+
+    margin-top:10px;
+
+
+}
+
+
+
+
+
+.sermon-views span{
+
+
+    color:var(--primary);
+
+
+    font-weight:600;
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+SERMON META INFORMATION
+==========================================================*/
+
+
+.sermon-meta{
+
+
+    display:flex;
+
+
+    flex-wrap:wrap;
+
+
+    gap:10px;
+
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+.sermon-meta span{
+
+
+    padding:7px 14px;
+
+
+    border-radius:50px;
+
+
+    background:#f0f6ff;
+
+
+    color:var(--primary);
+
+
+    font-size:.85rem;
+
+
+    font-weight:600;
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+SHIMMER EFFECT
+==========================================================*/
+
+
+.skeleton{
+
+
+    background:
+
+
+    linear-gradient(
+
+    90deg,
+
+    #eeeeee,
+
+    #f8f8f8,
+
+    #eeeeee
+
+    );
+
+
+    background-size:200%;
+
+
+    animation:
+
+
+    shimmer 1.5s infinite;
+
+
+}
+
+
+
+
+@keyframes shimmer{
+
+
+    from{
+
+
+        background-position:-200%;
+
+
+    }
+
+
+    to{
+
+
+        background-position:200%;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+SKELETON CARD
+==========================================================*/
+
+
+.skeleton-card{
+
+
+    height:350px;
+
+
+    border-radius:25px;
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+
+
+.skeleton-image{
+
+
+    height:200px;
+
+
+}
+
+
+
+
+
+.skeleton-text{
+
+
+    height:18px;
+
+
+    margin:20px;
+
+
+    border-radius:10px;
+
+
+}
+
+
+
+
+
+.skeleton-text.small{
+
+
+    width:60%;
+
+
+    height:14px;
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+PRINT MODE
+==========================================================*/
+
+
+@media print{
+
+
+    header,
+
+
+    footer,
+
+
+    .top-nav,
+
+
+    #search{
+
+
+        display:none;
+
+
+    }
+
+
+
+
+    body{
+
+
+        background:white;
+
+
+    }
+
+
+
+
+    .sermon-card{
+
+
+        box-shadow:none;
+
+
+        border:1px solid #ddd;
+
+
+    }
+
+
+
+}
+
+/*==========================================================
+        KINGDOM WAYS CHURCH
+        SERMON CLIENT
+        PART 6 / 7
+        FINAL POLISH + ACCESSIBILITY
+==========================================================*/
+
+
+
+/*==========================================================
+GLOBAL FOCUS EFFECTS
+==========================================================*/
+
+
+a:focus,
+button:focus,
+input:focus{
+
+
+    outline:none;
+
+
+    box-shadow:
+
+
+    0 0 0 4px rgba(11,92,255,.25);
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+BETTER BUTTON INTERACTION
+==========================================================*/
+
+
+.watch-btn:active,
+.top-nav a:active{
+
+
+    transform:
+
+
+    scale(.96);
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+SERMON CARD DEPTH EFFECT
+==========================================================*/
+
+
+.sermon-card{
+
+
+    isolation:isolate;
+
+
+}
+
+
+
+
+
+.sermon-card:hover::before{
+
+
+    filter:
+
+
+    brightness(1.15);
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+IMAGE OVERLAY EFFECT
+==========================================================*/
+
+
+.sermon-image{
+
+
+    position:relative;
+
+
+}
+
+
+
+
+
+.sermon-card:hover .sermon-image{
+
+
+    filter:
+
+
+    brightness(1.05);
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+CARD CONTENT SPACING CONTROL
+==========================================================*/
+
+
+.sermon-card-content > *:last-child{
+
+
+    margin-bottom:0;
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+PREMIUM SCROLL REVEAL SUPPORT
+==========================================================*/
+
+
+.reveal{
+
+
+    opacity:0;
+
+
+    transform:
+
+
+    translateY(40px);
+
+
+    transition:
+
+
+    .8s ease;
+
+
+}
+
+
+
+
+
+.reveal.active{
+
+
+    opacity:1;
+
+
+    transform:
+
+
+    translateY(0);
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+SOFT GLASS EFFECT
+==========================================================*/
+
+
+.glass{
+
+
+    background:
+
+
+    rgba(255,255,255,.75);
+
+
+    backdrop-filter:
+
+
+    blur(15px);
+
+
+    border:
+
+
+    1px solid rgba(255,255,255,.4);
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+ERROR MESSAGE
+==========================================================*/
+
+
+.error-message{
+
+
+    padding:30px;
+
+
+    border-radius:25px;
+
+
+    background:
+
+
+    rgba(255,0,0,.05);
+
+
+    color:#dc2626;
+
+
+    text-align:center;
+
+
+    font-weight:600;
+
+
+    box-shadow:
+
+
+    0 10px 30px rgba(220,38,38,.10);
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+SUCCESS MESSAGE
+==========================================================*/
+
+
+.success-message{
+
+
+    padding:25px;
+
+
+    border-radius:25px;
+
+
+    background:
+
+
+    rgba(0,184,148,.08);
+
+
+    color:#059669;
+
+
+    text-align:center;
+
+
+    font-weight:600;
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+SMOOTH DARK TEXT
+==========================================================*/
+
+
+.sermon-card,
+.search-section,
+.encouragement-card{
+
+
+    -webkit-font-smoothing:
+
+
+    antialiased;
+
+
+    -moz-osx-font-smoothing:
+
+
+    grayscale;
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+BROWSER COMPATIBILITY
+==========================================================*/
+
+
+@supports not (backdrop-filter:blur(10px)){
+
+
+    header{
+
+
+        background:white;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+HIGH CONTRAST SUPPORT
+==========================================================*/
+
+
+@media(prefers-contrast:high){
+
+
+
+    .sermon-card{
+
+
+        border:
+
+
+        2px solid #000;
+
+
+    }
+
+
+
+
+    .top-nav a{
+
+
+        border:
+
+
+        2px solid #000;
+
+
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+TOUCH DEVICES
+==========================================================*/
+
+
+@media(hover:none){
+
+
+
+    .sermon-card:hover{
+
+
+        transform:none;
+
+
+    }
+
+
+
+
+
+    .top-nav a:hover{
+
+
+        transform:none;
+
+
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+LANDSCAPE MOBILE
+==========================================================*/
+
+
+@media(max-height:500px) and (orientation:landscape){
+
+
+
+    .hero{
+
+
+        min-height:80vh;
+
+
+    }
+
+
+
+
+
+    .hero-text h2{
+
+
+        font-size:2rem;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+FADE PAGE TRANSITION
+==========================================================*/
+
+
+body{
+
+
+    animation:
+
+
+    bodyEnter .7s ease;
+
+
+}
+
+
+
+
+@keyframes bodyEnter{
+
+
+    from{
+
+
+        opacity:0;
+
+
+    }
+
+
+    to{
+
+
+        opacity:1;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+END PART 6
+==========================================================*/
+
+
+
+/*==========================================================
+        KINGDOM WAYS CHURCH
+        SERMON CLIENT
+        PART 7 / 7
+        FINAL PRODUCTION FINISH
+==========================================================*/
+
+
+
+/*==========================================================
+PAGE ENTER ANIMATION
+==========================================================*/
+
+
+header,
+.hero,
+.page-wrapper,
+footer{
+
+
+    animation:
+
+
+    pageFade .9s ease;
+
+
+}
+
+
+
+@keyframes pageFade{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:translateY(20px);
+
+
+    }
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:translateY(0);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+PREMIUM HOVER LIGHT
+==========================================================*/
+
+
+.sermon-card{
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+
+
+.sermon-card::after{
+
+
+    transition:
+
+
+    .4s ease;
+
+
+}
+
+
+
+
+
+.sermon-card:hover::after{
+
+
+    transform:
+
+
+    rotate(360deg);
+
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    var(--gold),
+
+    white
+
+    );
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+NAV ACTIVE FEEL
+==========================================================*/
+
+
+.top-nav a{
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+
+
+.top-nav a::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    background:
+
+
+    linear-gradient(
+
+    120deg,
+
+    transparent,
+
+    rgba(255,255,255,.5),
+
+    transparent
+
+    );
+
+
+    transform:
+
+
+    translateX(-120%);
+
+
+    transition:.6s;
+
+
+}
+
+
+
+
+
+.top-nav a:hover::before{
+
+
+    transform:
+
+
+    translateX(120%);
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+SEARCH PREMIUM STYLE
+==========================================================*/
+
+
+.search-section{
+
+
+    position:relative;
+
+
+}
+
+
+
+
+
+.search-section::before{
+
+
+    content:"🔍";
+
+
+    position:absolute;
+
+
+    right:25px;
+
+
+    top:50%;
+
+
+    transform:
+
+
+    translateY(-50%);
+
+
+    font-size:22px;
+
+
+    opacity:.5;
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+
+
+
+/*==========================================================
+VERSE CARD TEXT EFFECT
+==========================================================*/
+
+
+#dailyVerse{
+
+
+    transition:
+
+
+    opacity .5s ease,
+
+
+    transform .5s ease;
+
+
+}
+
+
+
+
+
+#dailyVerse.fade{
+
+
+    opacity:0;
+
+
+    transform:
+
+
+    translateY(15px);
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+EMPTY SPACE BALANCE
+==========================================================*/
+
+
+main{
+
+
+    padding-bottom:20px;
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+SMALL DEVICE OPTIMIZATION
+==========================================================*/
+
+
+@media(max-width:600px){
+
+
+
+    .header-content{
+
+
+        padding:15px;
+
+
+    }
+
+
+
+
+
+    .hero{
+
+
+        padding:
+
+
+        50px 15px;
+
+
+    }
+
+
+
+
+
+    .hero-text h2{
+
+
+        letter-spacing:1px;
+
+
+    }
+
+
+
+
+
+    .page-wrapper{
+
+
+        width:92%;
+
+
+        margin:
+
+
+        35px auto;
+
+
+    }
+
+
+
+
+
+    .sermon-card{
+
+
+        border-radius:18px;
+
+
+    }
+
+
+
+
+
+    .encouragement-card{
+
+
+        border-radius:20px;
+
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+VERY SMALL PHONES
+==========================================================*/
+
+
+@media(max-width:380px){
+
+
+
+    .logo h1{
+
+
+        font-size:1.4rem;
+
+
+    }
+
+
+
+
+
+    .top-nav a{
+
+
+        width:100%;
+
+
+    }
+
+
+
+
+
+    .hero-text h2{
+
+
+        font-size:1.6rem;
+
+
+    }
+
+
+
+
+
+    .sermon-card h3{
+
+
+        font-size:1.15rem;
+
+
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+FINAL COLOR POLISH
+==========================================================*/
+
+
+.sermon-card strong{
+
+
+    color:
+
+
+    var(--secondary);
+
+
+}
+
+
+
+
+
+.watch-btn{
+
+
+    box-shadow:
+
+
+    0 12px 30px rgba(36,119,255,.25);
+
+
+}
+
+
+
+
+
+.watch-btn:hover{
+
+
+    box-shadow:
+
+
+    0 18px 40px rgba(25,195,125,.35);
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+FINAL PERFORMANCE SETTINGS
+==========================================================*/
+
+
+img,
+video{
+
+
+    max-width:100%;
+
+
+    height:auto;
+
+
+}
+
+
+
+
+
+img{
+
+
+    display:block;
+
+
+}
+
+
+
+
+
+
+
+/*==========================================================
+END OF SERMON CLIENT CSS
+KINGDOM WAYS CHURCH
+PRODUCTION READY
+==========================================================*/

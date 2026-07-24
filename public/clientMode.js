@@ -1,28 +1,262 @@
-// ======================================
-// KINGDOM WAYS CHURCH
+// ======================================================
+// KINGDOM WAYS PENTECOSTAL CHURCH
 // CLIENT MODE
-// =====================================
+// PART 1 - INITIALIZATION & SESSION
+// ======================================================
+
+console.log("CLIENT MODE STARTING...");
+
+// ======================================================
+// API
+// ======================================================
 
 const API = "";
 
+// ======================================================
+// SESSION
+// ======================================================
 
-// ======================================
-// DATE
-// ======================================
+const SESSION_KEY = "memberSession";
 
-const today = new Date();
+// ======================================================
+// DOM
+// ======================================================
 
-const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric"
+const welcomePopup =
+document.getElementById("welcomePopup");
+
+const memberName =
+document.getElementById("memberName");
+
+const currentTime =
+document.getElementById("currentTime");
+
+const logoutBtn =
+document.getElementById("logoutBtn");
+
+const year =
+document.getElementById("year");
+
+// ======================================================
+// FOOTER YEAR
+// ======================================================
+
+if(year){
+
+    year.innerHTML =
+    new Date().getFullYear();
+
+}
+
+// ======================================================
+// GET MEMBER SESSION
+// ======================================================
+
+function getMemberSession(){
+
+    const data =
+    localStorage.getItem(
+        SESSION_KEY
+    );
+
+    if(!data){
+
+        return null;
+
+    }
+
+    try{
+
+        return JSON.parse(data);
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        localStorage.removeItem(
+            SESSION_KEY
+        );
+
+        return null;
+
+    }
+
+}
+
+// ======================================================
+// SESSION VALIDATION
+// ======================================================
+
+const session =
+getMemberSession();
+
+if(!session){
+
+    console.log(
+        "NO ACTIVE SESSION"
+    );
+
+    window.location.href =
+    "btn.html";
+
+    throw new Error(
+        "SESSION NOT FOUND"
+    );
+
+}
+
+if(Date.now() >= session.expiresAt){
+
+    localStorage.removeItem(
+        SESSION_KEY
+    );
+
+    window.location.href =
+    "btn.html";
+
+    throw new Error(
+        "SESSION EXPIRED"
+    );
+
+}
+
+console.log(
+    "SESSION VERIFIED"
+);
+
+// ======================================================
+// WELCOME POPUP
+// ======================================================
+
+if(welcomePopup && memberName){
+
+    memberName.innerHTML =
+    session.full_name;
+
+    welcomePopup.classList.add(
+        "show"
+    );
+
+    setTimeout(()=>{
+
+        welcomePopup.classList.remove(
+            "show"
+        );
+
+    },4000);
+
+}
+
+// ======================================================
+// LIVE CLOCK
+// ======================================================
+
+function updateClock(){
+
+    if(!currentTime){
+
+        return;
+
+    }
+
+    const now =
+    new Date();
+
+    currentTime.innerHTML =
+    now.toLocaleTimeString(
+        [],
+        {
+
+            hour:"2-digit",
+
+            minute:"2-digit"
+
+        }
+
+    );
+
+}
+
+updateClock();
+
+setInterval(
+
+    updateClock,
+
+    1000
+
+);
+
+// ======================================================
+// TODAY
+// ======================================================
+
+const today =
+new Date();
+
+const options={
+
+    weekday:"long",
+
+    year:"numeric",
+
+    month:"long",
+
+    day:"numeric"
+
 };
 
 console.log(
-    today.toLocaleDateString("en-US", options)
+
+    today.toLocaleDateString(
+
+        "en-US",
+
+        options
+
+    )
+
 );
 
+// ======================================================
+// LOGOUT
+// ======================================================
+
+if(logoutBtn){
+
+    logoutBtn.addEventListener(
+
+        "click",
+
+        ()=>{
+
+            localStorage.removeItem(
+
+                SESSION_KEY
+
+            );
+
+            window.location.href =
+
+            "btn.html";
+
+        }
+
+    );
+
+}
+
+console.log(
+
+    "CLIENT INITIALIZATION COMPLETE"
+
+);
+
+// ======================================================
+// PART 2 - BIBLE VERSE ROTATION
+// ======================================================
 
 // ======================================
 // BIBLE VERSES
@@ -38,18 +272,31 @@ const verses = [
 
     '"For with God nothing shall be impossible." — Luke 1:37',
 
-    '"Be strong and courageous." — Joshua 1:9'
+    '"Be strong and courageous." — Joshua 1:9',
+
+    '"The joy of the Lord is your strength." — Nehemiah 8:10',
+
+    '"Cast all your anxiety on Him because He cares for you." — 1 Peter 5:7'
 
 ];
 
+// ======================================
+// CREATE VERSE ELEMENT
+// ======================================
 
-let verse = document.createElement("p");
+const hero =
+document.querySelector(".hero-content");
 
-verse.className = "verse";
+const verse =
+document.createElement("p");
 
+verse.className =
+"verse";
 
-const hero = document.querySelector(".hero-content");
+verse.style.opacity = "0";
 
+verse.style.transition =
+"opacity .8s ease";
 
 if(hero){
 
@@ -57,173 +304,333 @@ if(hero){
 
 }
 
+// ======================================
+// ROTATE VERSES
+// ======================================
 
-
-let index = 0;
-
+let currentVerse = 0;
 
 function rotateVerse(){
 
+    if(!hero){
 
-    verse.style.opacity = 0;
+        return;
 
+    }
+
+    verse.style.opacity = "0";
 
     setTimeout(()=>{
 
+        verse.innerHTML =
 
-        verse.innerHTML = verses[index];
+        verses[currentVerse];
 
+        verse.style.opacity = "1";
 
-        verse.style.opacity = 1;
+        currentVerse++;
 
+        if(currentVerse >= verses.length){
 
-        index++;
-
-
-        if(index >= verses.length){
-
-            index = 0;
+            currentVerse = 0;
 
         }
 
-
-    },500);
-
+    },400);
 
 }
 
-
+// ======================================
+// START
+// ======================================
 
 rotateVerse();
 
-
+// Change every 8 seconds
 setInterval(
+
     rotateVerse,
-    1000
+
+    8000
+
 );
 
+// ======================================
+// HERO FADE IN
+// ======================================
 
+if(hero){
 
+    hero.style.opacity = "0";
+
+    hero.style.transform =
+
+    "translateY(30px)";
+
+    setTimeout(()=>{
+
+        hero.style.transition =
+
+        "all .8s ease";
+
+        hero.style.opacity = "1";
+
+        hero.style.transform =
+
+        "translateY(0)";
+
+    },300);
+
+}
+
+// ======================================
+// THEME & VISION HOVER EFFECT
+// ======================================
+
+document
+
+.querySelectorAll(
+
+".theme-box,.vision-box"
+
+)
+
+.forEach(box=>{
+
+    box.addEventListener(
+
+        "mouseenter",
+
+        ()=>{
+
+            box.style.transform =
+
+            "translateY(-5px)";
+
+        }
+
+    );
+
+    box.addEventListener(
+
+        "mouseleave",
+
+        ()=>{
+
+            box.style.transform =
+
+            "translateY(0)";
+
+        }
+
+    );
+
+});
+
+console.log(
+
+    "Bible Verse Rotation Ready"
+
+);
+
+// ======================================================
+// PART 3 - LOAD CHURCH THEME & VISION
+// ======================================================
+
+// ======================================
+// DOM
+// ======================================
+
+const churchTheme =
+document.getElementById("churchTheme");
+
+const churchVision =
+document.getElementById("churchVision");
+
+// ======================================
+// DEFAULT VALUES
+// ======================================
+
+const DEFAULT_THEME =
+
+"Walking by Faith.";
+
+const DEFAULT_VISION =
+
+"To know Christ and make Him known.";
 
 // ======================================
 // LOAD CHURCH THEME
 // ======================================
 
-fetch(`${API}/theme`)
+async function loadChurchTheme(){
 
-.then(res=>{
+    if(!churchTheme){
 
-
-    if(!res.ok){
-
-        throw new Error();
+        return;
 
     }
 
+    try{
 
-    return res.json();
+        const response =
+        await fetch(
 
+            `${API}/theme`
 
-})
+        );
 
+        if(!response.ok){
 
-.then(data=>{
+            throw new Error(
 
+                "Unable to load theme."
 
-    const themeBox =
-    document.getElementById("churchTheme");
+            );
 
+        }
 
-    if(themeBox){
+        const data =
+        await response.json();
 
-        themeBox.innerHTML =
-        data.theme;
+        churchTheme.innerHTML =
 
-    }
+        data.theme ||
 
-
-})
-
-
-.catch(()=>{
-
-
-    const themeBox =
-    document.getElementById("churchTheme");
-
-
-    if(themeBox){
-
-        themeBox.innerHTML =
-        "Walking by Faith.";
+        DEFAULT_THEME;
 
     }
 
+    catch(error){
 
-});
+        console.error(
 
+            "Theme Error:",
 
+            error
 
+        );
+
+        churchTheme.innerHTML =
+
+        DEFAULT_THEME;
+
+    }
+
+}
 
 // ======================================
 // LOAD CHURCH VISION
 // ======================================
 
-fetch(`${API}/vision`)
+async function loadChurchVision(){
 
-.then(res=>{
+    if(!churchVision){
 
-
-    if(!res.ok){
-
-        throw new Error();
+        return;
 
     }
 
+    try{
 
-    return res.json();
+        const response =
+        await fetch(
 
+            `${API}/vision`
 
-})
+        );
 
+        if(!response.ok){
 
-.then(data=>{
+            throw new Error(
 
+                "Unable to load vision."
 
-    const visionBox =
-    document.getElementById("churchVision");
+            );
 
+        }
 
-    if(visionBox){
+        const data =
+        await response.json();
 
-        visionBox.innerHTML =
-        data.vision;
+        churchVision.innerHTML =
 
-    }
+        data.vision ||
 
-
-})
-
-
-.catch(()=>{
-
-
-    const visionBox =
-    document.getElementById("churchVision");
-
-
-    if(visionBox){
-
-        visionBox.innerHTML =
-        "To know Christ and make Him known.";
+        DEFAULT_VISION;
 
     }
 
+    catch(error){
+
+        console.error(
+
+            "Vision Error:",
+
+            error
+
+        );
+
+        churchVision.innerHTML =
+
+        DEFAULT_VISION;
+
+    }
+
+}
+
+// ======================================
+// LOAD BOTH AT THE SAME TIME
+// ======================================
+
+Promise.all([
+
+    loadChurchTheme(),
+
+    loadChurchVision()
+
+])
+
+.then(()=>{
+
+    console.log(
+
+        "Theme & Vision Loaded"
+
+    );
 
 });
 
+// ======================================
+// OPTIONAL REFRESH
+// (Secretary updates become visible)
+// ======================================
 
+// Refresh every 5 minutes
 
+setInterval(()=>{
+
+    loadChurchTheme();
+
+    loadChurchVision();
+
+},
+
+300000);
+
+// ======================================================
+// PART 3 COMPLETE
+// ======================================================
+
+console.log(
+
+    "Church Information Ready"
+
+);
+
+// ======================================================
+// PART 4 - CARDS, NAVIGATION & SECRET ADMIN
+// ======================================================
 
 // ======================================
 // CARD ANIMATION
@@ -232,184 +639,582 @@ fetch(`${API}/vision`)
 const cards =
 document.querySelectorAll(".card");
 
+function animateCards(){
 
-cards.forEach((card,i)=>{
+    cards.forEach((card,index)=>{
 
-
-    card.style.opacity = "0";
-
-
-    card.style.transform =
-    "translateY(40px)";
-
-
-    setTimeout(()=>{
-
-
-        card.style.transition =
-        ".7s";
-
-
-        card.style.opacity =
-        "1";
-
+        card.style.opacity = "0";
 
         card.style.transform =
-        "translateY(0px)";
+        "translateY(40px)";
 
+        setTimeout(()=>{
 
-    },300 * i);
+            card.style.transition =
+            ".7s ease";
 
+            card.style.opacity =
+            "1";
 
-});
+            card.style.transform =
+            "translateY(0)";
 
-
-
-
-// ======================================
-// SECRET ADMIN ENTRY
-// 5 clicks opens admin login
-// ======================================
-
-window.addEventListener("load",()=>{
-
-
-    let adminClicks = 0;
-
-
-    const secret =
-    document.getElementById("secretAdmin");
-
-
-
-    if(secret){
-
-
-        secret.addEventListener("click",()=>{
-
-
-            adminClicks++;
-
-
-            console.log(
-                "SECRET ADMIN CLICK:",
-                adminClicks
-            );
-
-
-
-            if(adminClicks >= 5){
-
-
-                window.location.href =
-                "login.html";
-
-
-            }
-
-
-
-            setTimeout(()=>{
-
-
-                adminClicks = 0;
-
-
-            },3000);
-
-
-
-        });
-
-
-
-    }
-
-
-
-});
-
-
-
-// ======================================
-// BACK BUTTON
-// ======================================
-
-const back =
-document.querySelector(".back-btn");
-
-if(back){
-
-    back.addEventListener("click",()=>{
-
-        window.location.href = "index.html";
+        },200 * index);
 
     });
 
 }
 
+animateCards();
+
+// ======================================
+// CARD HOVER EFFECT
+// ======================================
+
+cards.forEach(card=>{
+
+    card.addEventListener(
+
+        "mouseenter",
+
+        ()=>{
+
+            card.style.transform =
+            "translateY(-10px) scale(1.03)";
+
+        }
+
+    );
+
+    card.addEventListener(
+
+        "mouseleave",
+
+        ()=>{
+
+            card.style.transform =
+            "translateY(0)";
+
+        }
+
+    );
+
+});
+
+// ======================================
+// CARD CLICK EFFECT
+// ======================================
+
+cards.forEach(card=>{
+
+    card.addEventListener(
+
+        "mousedown",
+
+        ()=>{
+
+            card.style.transform =
+            "scale(.98)";
+
+        }
+
+    );
+
+    card.addEventListener(
+
+        "mouseup",
+
+        ()=>{
+
+            card.style.transform =
+            "translateY(-6px)";
+
+        }
+
+    );
+
+});
+
+// ======================================
+// SECRET ADMIN ENTRY
+// Five clicks opens Admin Login
+// ======================================
+
+window.addEventListener(
+
+    "load",
+
+    ()=>{
+
+        let adminClicks = 0;
+
+        let resetTimer;
+
+        const secret =
+
+        document.getElementById(
+
+            "secretAdmin"
+
+        );
+
+        if(!secret){
+
+            return;
+
+        }
+
+        secret.addEventListener(
+
+            "click",
+
+            ()=>{
+
+                adminClicks++;
+
+                console.log(
+
+                    "SECRET CLICK:",
+
+                    adminClicks
+
+                );
+
+                clearTimeout(
+
+                    resetTimer
+
+                );
+
+                if(adminClicks >= 5){
+
+                    adminClicks = 0;
+
+                    window.location.href =
+
+                    "login.html";
+
+                }
+
+                resetTimer =
+
+                setTimeout(()=>{
+
+                    adminClicks = 0;
+
+                },3000);
+
+            }
+
+        );
+
+    }
+
+);
+
+// ======================================
+// BACK BUTTON
+// ======================================
+
+const backButton =
+
+document.querySelector(
+
+    ".back-btn"
+
+);
+
+if(backButton){
+
+    backButton.addEventListener(
+
+        "click",
+
+        ()=>{
+
+            window.location.href =
+
+            "index.html";
+
+        }
+
+    );
+
+}
+
+// ======================================
+// PAGE FADE-IN
+// ======================================
+
+window.addEventListener(
+
+    "load",
+
+    ()=>{
+
+        document.body.style.opacity =
+
+        "0";
+
+        document.body.style.transition =
+
+        "opacity .7s ease";
+
+        requestAnimationFrame(()=>{
+
+            document.body.style.opacity =
+
+            "1";
+
+        });
+
+    }
+
+);
 
 // ======================================
 // FUTURE FEATURES
 // ======================================
 //
-// Live Stream API
-// Notifications
-// Prayer Requests
-// Daily Devotion
-// Member Profile
-// Church Announcements
+// • Notifications
+// • Prayer Requests
+// • Daily Devotion
+// • Member Profile
+// • Attendance History
+// • Gallery
+// • Live Streaming
+// • Push Notifications
 //
 // ======================================
 
-// ==========================================
-// KINGDOM WAYS CLIENT MODE INTRO
-// ==========================================
+console.log(
+
+    "Cards & Navigation Ready"
+
+);
+
+// ======================================================
+// PART 5 - SESSION MANAGEMENT & SECURITY
+// ======================================================
 
 
-window.addEventListener("load",()=>{
+// ======================================
+// SESSION SETTINGS
+// ======================================
 
+const SESSION_DURATION =
 
-    console.log(
-        "CLIENT MODE LOADED"
-    );
-
-
-
-    const memberSession =
-    localStorage.getItem("member");
-
-
-
-    console.log(
-        "MEMBER SESSION:",
-        memberSession
-    );
+6 * 60 * 60 * 1000; // 6 hours
 
 
 
-    if(memberSession){
+// ======================================
+// CHECK SESSION STATUS
+// ======================================
+
+function checkSession(){
+
+    const activeSession =
+    getMemberSession();
 
 
-        console.log(
-            "STARTING KINGDOM WAYS INTRO"
-        );
-
-
-        showChurchAnimation();
-
-
-
-    }else{
-
+    if(!activeSession){
 
         console.log(
-            "NO MEMBER SESSION"
+            "No active member session"
         );
 
+        redirectToLogin();
+
+        return false;
 
     }
 
+
+
+    if(
+
+        activeSession.expiresAt &&
+
+        Date.now() >= activeSession.expiresAt
+
+    ){
+
+        console.log(
+            "Member session expired"
+        );
+
+
+        logoutMember();
+
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+// ======================================
+// REDIRECT LOGIN
+// ======================================
+
+function redirectToLogin(){
+
+    window.location.href =
+    "btn.html";
+
+}
+
+
+
+// ======================================
+// LOGOUT MEMBER
+// ======================================
+
+function logoutMember(){
+
+    console.log(
+
+        "Logging out member"
+
+    );
+
+
+    localStorage.removeItem(
+
+        SESSION_KEY
+
+    );
+
+
+    window.location.href =
+
+    "btn.html";
+
+}
+
+
+
+// ======================================
+// SESSION REMAINING TIME
+// ======================================
+
+function sessionRemaining(){
+
+
+    const session =
+
+    getMemberSession();
+
+
+
+    if(!session ||
+
+       !session.expiresAt){
+
+        return 0;
+
+    }
+
+
+
+    return Math.max(
+
+        0,
+
+        session.expiresAt - Date.now()
+
+    );
+
+
+}
+
+
+
+// ======================================
+// FORMAT SESSION TIME
+// ======================================
+
+function formatSessionTime(){
+
+    const milliseconds =
+
+    sessionRemaining();
+
+
+
+    if(milliseconds <= 0){
+
+        return "Expired";
+
+    }
+
+
+
+    const hours =
+
+    Math.floor(
+
+        milliseconds /
+
+        (1000 * 60 * 60)
+
+    );
+
+
+
+    const minutes =
+
+    Math.floor(
+
+        (milliseconds %
+
+        (1000 * 60 * 60))
+
+        /
+
+        (1000 * 60)
+
+    );
+
+
+
+    return (
+
+        hours +
+
+        "h " +
+
+        minutes +
+
+        "m"
+
+    );
+
+
+}
+
+
+
+// ======================================
+// REFRESH SESSION
+// ======================================
+
+function refreshSession(){
+
+
+    const session =
+
+    getMemberSession();
+
+
+
+    if(!session){
+
+        return;
+
+    }
+
+
+
+    session.expiresAt =
+
+    Date.now() +
+
+    SESSION_DURATION;
+
+
+
+    localStorage.setItem(
+
+        SESSION_KEY,
+
+        JSON.stringify(session)
+
+    );
+
+
+}
+
+
+
+// ======================================
+// USER ACTIVITY TRACKING
+// ======================================
+
+let activityTimer;
+
+
+
+function registerActivity(){
+
+
+    if(!checkSession()){
+
+        return;
+
+    }
+
+
+
+    clearTimeout(
+
+        activityTimer
+
+    );
+
+
+
+    activityTimer =
+
+    setTimeout(()=>{
+
+
+        console.log(
+
+            "Session active:",
+
+            formatSessionTime()
+
+        );
+
+
+    },1000);
+
+
+}
+
+
+
+// Track normal user actions
+
+[
+
+"click",
+
+"keypress",
+
+"mousemove",
+
+"touchstart"
+
+]
+
+.forEach(event=>{
+
+
+    document.addEventListener(
+
+        event,
+
+        registerActivity
+
+    );
 
 
 });
@@ -417,320 +1222,395 @@ window.addEventListener("load",()=>{
 
 
 
+// ======================================
+// AUTO SESSION CHECK
+// ======================================
 
-function showChurchAnimation(){
 
+// Check every minute
 
+setInterval(()=>{
 
-    const overlay =
-    document.createElement("div");
 
+    checkSession();
 
 
-    overlay.style.position =
-    "fixed";
+},60000);
 
 
-    overlay.style.left =
-    "0";
 
+// ======================================
+// LOGOUT BUTTON SUPPORT
+// ======================================
 
-    overlay.style.top =
-    "0";
+const logoutButton =
 
+document.getElementById(
 
-    overlay.style.width =
-    "100vw";
+    "logoutBtn"
 
+);
 
-    overlay.style.height =
-    "100vh";
 
 
-    overlay.style.background =
-    "radial-gradient(circle,#0d5c2f,#020805)";
+if(logoutButton){
 
 
-    overlay.style.display =
-    "flex";
+    logoutButton.onclick =
 
+    ()=>{
 
-    overlay.style.alignItems =
-    "center";
 
+        logoutMember();
 
-    overlay.style.justifyContent =
-    "center";
 
-
-    overlay.style.zIndex =
-    "999999";
-
-
-    overlay.style.overflow =
-    "hidden";
-
-
-
-
-
-    const orb =
-    document.createElement("div");
-
-
-
-    orb.innerHTML =
-    "✦";
-
-
-
-    orb.style.fontSize =
-    "35px";
-
-
-
-    orb.style.color =
-    "#FFD700";
-
-
-
-    orb.style.textShadow =
-    "0 0 20px gold,0 0 60px cyan,0 0 120px #00ff88";
-
-
-
-    orb.style.transition =
-    "all 2s ease";
-
-
-
-
-    overlay.appendChild(orb);
-
-
-
-    document.body.appendChild(overlay);
-
-
-
-
-
-
-    // ==================================
-    // SMALL ICON EXPLODES TO FULL SCREEN
-    // ==================================
-
-
-    setTimeout(()=>{
-
-
-        orb.style.transform =
-        "scale(80) rotate(1440deg)";
-
-
-        orb.style.opacity =
-        "0.15";
-
-
-
-    },100);
-
-
-
-
-
-
-    // ==================================
-    // RETURN TO CENTER
-    // ==================================
-
-
-    setTimeout(()=>{
-
-
-        orb.style.transform =
-        "scale(1) rotate(2880deg)";
-
-
-        orb.style.opacity =
-        "1";
-
-
-
-    },2200);
-
-
-
-
-
-
-
-    // ==================================
-    // SHOW CHURCH NAME
-    // ==================================
-
-
-    setTimeout(()=>{
-
-
-        orb.style.display =
-        "none";
-
-
-
-        const title =
-        document.createElement("div");
-
-
-
-        title.innerHTML = `
-
-
-        <div style="
-        font-size:52px;
-        font-weight:900;
-        letter-spacing:7px;
-        color:#FFD700;
-        text-align:center;
-        font-family:Arial Black,Arial;
-        text-shadow:
-        0 0 20px gold,
-        0 0 50px #00ff88;
-        ">
-        KINGDOM WAYS
-        </div>
-
-
-
-        <div style="
-        margin-top:15px;
-        font-size:34px;
-        font-weight:700;
-        letter-spacing:6px;
-        color:white;
-        text-align:center;
-        text-shadow:
-        0 0 25px #00ff88;
-        ">
-        PENTECOSTAL CHURCH
-        </div>
-
-
-
-        <div style="
-        margin-top:25px;
-        font-size:18px;
-        letter-spacing:10px;
-        color:#8cffb7;
-        text-align:center;
-        ">
-        WELCOME HOME
-        </div>
-
-
-
-        `;
-
-
-
-
-        title.style.animation =
-        "kwFade 1s ease";
-
-
-
-        overlay.appendChild(title);
-
-
-
-    },2500);
-
-
-
-
-
-
-
-
-    // ==================================
-    // CLOSE INTRO
-    // ==================================
-
-
-    setTimeout(()=>{
-
-
-        overlay.style.opacity =
-        "0";
-
-
-
-        setTimeout(()=>{
-
-
-            overlay.remove();
-
-
-
-        },1000);
-
-
-
-    },6000);
-
+    };
 
 
 }
 
 
 
+// ======================================
+// EXPORT FOR OTHER PAGES
+// ======================================
+
+window.KingdomSession = {
+
+
+    getMemberSession,
+
+    checkSession,
+
+    logoutMember,
+
+    refreshSession,
+
+    sessionRemaining,
+
+    formatSessionTime
+
+
+};
 
 
 
-
-// ==========================================
-// ANIMATION STYLE
-// ==========================================
-
-
-const style =
-document.createElement("style");
+// ======================================
+// PART 5 COMPLETE
+// ======================================
 
 
+console.log(
 
-style.innerHTML = `
+    "Session Security Ready"
+
+);
+
+// ======================================================
+// PART 6 - FINAL CLEANUP & FUTURE READY SYSTEM
+// ======================================================
 
 
-@keyframes kwFade{
+// ======================================
+// SESSION COMPATIBILITY BRIDGE
+// Supports old "member" storage
+// and new "memberSession"
+// ======================================
+
+function migrateOldSession(){
 
 
-from{
+    const newSession =
+
+    localStorage.getItem(
+
+        "memberSession"
+
+    );
 
 
-opacity:0;
+    const oldSession =
 
-transform:scale(.3);
+    localStorage.getItem(
+
+        "member"
+
+    );
+
+
+
+    if(!newSession && oldSession){
+
+
+        console.log(
+
+            "Migrating old member session"
+
+        );
+
+
+        try{
+
+
+            const member =
+
+            JSON.parse(oldSession);
+
+
+
+            const updatedSession = {
+
+
+                ...member,
+
+
+                expiresAt:
+
+                Date.now()
+
+                +
+
+                (6 *
+
+                60 *
+
+                60 *
+
+                1000)
+
+
+            };
+
+
+
+            localStorage.setItem(
+
+                "memberSession",
+
+                JSON.stringify(
+
+                    updatedSession
+
+                )
+
+            );
+
+
+
+            localStorage.removeItem(
+
+                "member"
+
+            );
+
+
+        }
+
+        catch(error){
+
+
+            console.error(
+
+                "Session migration failed",
+
+                error
+
+            );
+
+
+        }
+
+
+    }
 
 
 }
 
 
-to{
+
+migrateOldSession();
 
 
-opacity:1;
 
-transform:scale(1);
+// ======================================
+// INTERNET CONNECTION STATUS
+// ======================================
+
+function connectionStatus(){
+
+
+    if(navigator.onLine){
+
+
+        console.log(
+
+            "Internet connection available"
+
+        );
+
+
+    }
+
+    else{
+
+
+        console.log(
+
+            "Offline mode"
+
+        );
+
+
+    }
 
 
 }
 
 
-}
+
+window.addEventListener(
+
+    "online",
+
+    ()=>{
 
 
-`;
+        console.log(
+
+            "Connection restored"
+
+        );
+
+
+    }
+
+);
 
 
 
-document.head.appendChild(style);
+window.addEventListener(
+
+    "offline",
+
+    ()=>{
+
+
+        console.log(
+
+            "No internet connection"
+
+        );
+
+
+    }
+
+);
+
+
+
+// ======================================
+// LAZY FEATURE LOADER
+// Future modules
+// ======================================
+
+
+const KingdomFeatures = {
+
+
+    sermons:false,
+
+    events:false,
+
+    gallery:false,
+
+    notifications:false,
+
+    profile:false
+
+
+};
+
+
+
+window.KingdomFeatures =
+
+KingdomFeatures;
+
+
+
+// ======================================
+// PREVENT DOUBLE CLICK ERRORS
+// ======================================
+
+document
+
+.querySelectorAll(
+
+"button"
+
+)
+
+.forEach(button=>{
+
+
+    button.addEventListener(
+
+        "dblclick",
+
+        event=>{
+
+
+            event.preventDefault();
+
+
+        }
+
+
+    );
+
+
+});
+
+
+
+// ======================================
+// ERROR HANDLER
+// ======================================
+
+window.addEventListener(
+
+"error",
+
+(event)=>{
+
+
+    console.error(
+
+        "Kingdom Ways Error:",
+
+        event.error
+
+    );
+
+
+});
+
+
+
+// ======================================
+// FINAL READY MESSAGE
+// ======================================
+
+console.log(
+
+"%c KINGDOM WAYS CLIENT MODE READY ",
+
+"background:#0b1f3a;color:#ffd700;font-size:16px;font-weight:bold;"
+
+);
+
+
+
+// ======================================================
+// END CLIENT MODE
+// ======================================================

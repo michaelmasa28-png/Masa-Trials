@@ -1,102 +1,386 @@
-// ===============================
+// ======================================================
+// KINGDOM WAYS PENTECOSTAL CHURCH
+// BTN.JS
+// PART 1 - INITIALIZATION
+// ======================================================
+
+console.log("✅ BTN.JS Loaded Successfully");
+
+// ======================================================
 // SERVER URL
-// ===============================
-console.log("BTN.JS LOADED");
+// ======================================================
+
 const API_URL = "";
 
+// ======================================================
+// SESSION CONFIGURATION
+// ======================================================
 
+const SESSION_DURATION = 6 * 60 * 60 * 1000; // 6 Hours
 
-// ===============================
-// MEMBER REGISTRATION
-// ===============================
+const SESSION_KEY = "memberSession";
+
+// ======================================================
+// DOM ELEMENTS
+// ======================================================
 
 const signupForm = document.getElementById("signupForm");
 
+const loginForm = document.getElementById("loginForm");
+
+const signupMessage = document.getElementById("signupMessage");
+
+const loginMessage = document.getElementById("loginMessage");
+
+const signupBtn = document.getElementById("signupBtn");
+
+const loginBtn = document.getElementById("loginBtn");
+
+const loginLoader = document.getElementById("loginLoader");
+
+const year = document.getElementById("year");
+
+// ======================================================
+// FOOTER YEAR
+// ======================================================
+
+if(year){
+
+    year.textContent = new Date().getFullYear();
+
+}
+
+// ======================================================
+// MESSAGE HELPERS
+// ======================================================
+
+function showSuccess(element,message){
+
+    if(!element) return;
+
+    element.className="message-success";
+
+    element.innerHTML=message;
+
+}
+
+function showError(element,message){
+
+    if(!element) return;
+
+    element.className="message-error";
+
+    element.innerHTML=message;
+
+}
+
+function clearMessage(element){
+
+    if(!element) return;
+
+    element.className="";
+
+    element.innerHTML="";
+
+}
+
+// ======================================================
+// LOADER HELPERS
+// ======================================================
+
+function startLoading(){
+
+    if(loginLoader){
+
+        loginLoader.style.display="block";
+
+    }
+
+    if(loginBtn){
+
+        loginBtn.disabled=true;
+
+        loginBtn.classList.add("loading");
+
+    }
+
+}
+
+function stopLoading(){
+
+    if(loginLoader){
+
+        loginLoader.style.display="none";
+
+    }
+
+    if(loginBtn){
+
+        loginBtn.disabled=false;
+
+        loginBtn.classList.remove("loading");
+
+    }
+
+}
+
+// ======================================================
+// SESSION HELPERS
+// ======================================================
+
+function saveMemberSession(member){
+
+    const session={
+
+        ...member,
+
+        loginTime:Date.now(),
+
+        expiresAt:Date.now()+SESSION_DURATION
+
+    };
+
+    localStorage.setItem(
+
+        SESSION_KEY,
+
+        JSON.stringify(session)
+
+    );
+
+}
+
+function getMemberSession(){
+
+    const data=localStorage.getItem(SESSION_KEY);
+
+    if(!data) return null;
+
+    try{
+
+        return JSON.parse(data);
+
+    }
+
+    catch{
+
+        localStorage.removeItem(SESSION_KEY);
+
+        return null;
+
+    }
+
+}
+
+function clearMemberSession(){
+
+    localStorage.removeItem(SESSION_KEY);
+
+}
+
+// ======================================================
+// AUTO LOGIN
+// ======================================================
+
+(function(){
+
+    const session=getMemberSession();
+
+    if(!session) return;
+
+    if(Date.now()>session.expiresAt){
+
+        clearMemberSession();
+
+        return;
+
+    }
+
+    console.log("✅ Active member session found");
+
+    window.location.href="clientMode.html";
+
+})();
+
+// ======================================================
+// MEMBER REGISTRATION
+// ======================================================
+
 if (signupForm) {
 
-    signupForm.addEventListener("submit", async function(e){
-     console.log("MEMBER LOGIN BUTTON CLICKED");
+    signupForm.addEventListener("submit", async (e) => {
 
         e.preventDefault();
 
+        clearMessage(signupMessage);
 
-        const full_name = document.getElementById("fullName").value;
-        const phone = document.getElementById("signupPhone").value;
+        const full_name = document
+            .getElementById("fullName")
+            .value
+            .trim();
 
+        const phone = document
+            .getElementById("signupPhone")
+            .value
+            .trim();
 
-        const message = document.getElementById("signupMessage");
+        if (!full_name || !phone) {
 
+            showError(
+
+                signupMessage,
+
+                "Please complete all required fields."
+
+            );
+
+            return;
+
+        }
+
+        if (signupBtn) {
+
+            signupBtn.disabled = true;
+
+            signupBtn.innerHTML = "Submitting...";
+
+        }
 
         try {
 
-            const response = await fetch(
-                `${API_URL}/member/register`,
-                {
-                    method:"POST",
+            const controller = new AbortController();
 
-                    headers:{
-                        "Content-Type":"application/json"
+            const timeout = setTimeout(() => {
+
+                controller.abort();
+
+            }, 15000);
+
+            const response = await fetch(
+
+                `${API_URL}/member/register`,
+
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type": "application/json"
+
                     },
 
-                    body:JSON.stringify({
-                        full_name: full_name,
-                        phone: phone
-                    })
+                    body: JSON.stringify({
+
+                        full_name,
+
+                        phone
+
+                    }),
+
+                    signal: controller.signal
+
                 }
+
             );
 
+            clearTimeout(timeout);
 
             const data = await response.json();
 
+            if (response.ok && data.success) {
 
-            if(data.success){
+                showSuccess(
 
-                message.style.color = "green";
+                    signupMessage,
 
-                message.innerHTML =
-                "Registration submitted successfully. Wait for admin approval.";
+                    "✅ Registration submitted successfully. Please wait for church administration approval."
+
+                );
 
                 signupForm.reset();
 
             }
-            else{
 
-                message.style.color = "red";
+            else {
 
-                message.innerHTML =
-                data.message || "Registration failed.";
+                showError(
+
+                    signupMessage,
+
+                    data.message ||
+
+                    "Registration failed."
+
+                );
 
             }
 
-
-        }
-        catch(error){
-
-            console.error(error);
-
-            message.style.color="red";
-
-            message.innerHTML =
-            "Server connection failed.";
-
         }
 
+        catch (error) {
+
+            console.error(
+
+                "Registration Error:",
+
+                error
+
+            );
+
+            if (error.name === "AbortError") {
+
+                showError(
+
+                    signupMessage,
+
+                    "Request timed out. Please try again."
+
+                );
+
+            }
+
+            else {
+
+                showError(
+
+                    signupMessage,
+
+                    "Unable to connect to the server."
+
+                );
+
+            }
+
+        }
+
+        finally {
+
+            if (signupBtn) {
+
+                signupBtn.disabled = false;
+
+                signupBtn.innerHTML = "Submit Registration";
+
+            }
+
+        }
 
     });
 
 }
 
-// ===============================
+// ======================================================
 // MEMBER LOGIN
-// ===============================
+// ======================================================
 
-const loginForm = document.getElementById("loginForm");
-console.log("LOGIN FORM FOUND:", loginForm);
 if (loginForm) {
 
-    loginForm.addEventListener("submit", async function (e) {
+    loginForm.addEventListener("submit", async (e) => {
 
         e.preventDefault();
+
+        clearMessage(loginMessage);
 
         const full_name = document
             .getElementById("loginUsername")
@@ -108,92 +392,589 @@ if (loginForm) {
             .value
             .trim();
 
-        const message = document.getElementById("loginMessage");
+        if (!full_name || !phone) {
+
+            showError(
+
+                loginMessage,
+
+                "Please enter your username and phone number."
+
+            );
+
+            return;
+
+        }
+
+        startLoading();
 
         try {
 
-            console.log("Sending login request...");
-            console.log({
-                full_name: full_name,
-                phone: phone
-            });
+            const controller = new AbortController();
+
+            const timeout = setTimeout(() => {
+
+                controller.abort();
+
+            },15000);
 
             const response = await fetch(
+
                 `${API_URL}/member/login`,
+
                 {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
+
+                    method:"POST",
+
+                    headers:{
+
+                        "Content-Type":"application/json"
+
                     },
-                    body: JSON.stringify({
-                        full_name: full_name,
-                        phone: phone
-                    })
+
+                    body:JSON.stringify({
+
+                        full_name,
+
+                        phone
+
+                    }),
+
+                    signal:controller.signal
+
                 }
+
             );
 
-            console.log("Status:", response.status);
+            clearTimeout(timeout);
 
             const data = await response.json();
 
-            console.log("Response:", data);
+            if(!response.ok){
 
-            if (!response.ok) {
+                showError(
 
-                message.style.color = "red";
-                message.innerHTML =
-                    data.message || "Login failed.";
+                    loginMessage,
 
-                return;
-            }
+                    data.message || "Login failed."
 
-            if (!data.success) {
-
-                message.style.color = "red";
-                message.innerHTML =
-                    data.message || "Invalid login details.";
+                );
 
                 return;
+
             }
 
-// Save member session
-localStorage.setItem(
-    "member",
-    JSON.stringify({
-        member_id: data.member_id,
-        member_number: data.member_number,
-        username: data.username,
-        full_name: data.full_name,
-        is_active: data.is_active,
-        profile_completed: data.profile_completed
-    })
-);
+            if(!data.success){
 
-message.style.color = "#00ff88";
-message.innerHTML = "Login successful...";
+                showError(
 
+                    loginMessage,
 
-// ===============================
-// OPEN CLIENT MODE
-// ===============================
+                    data.message || "Invalid login details."
 
-setTimeout(()=>{
+                );
 
-    window.location.href = "clientMode.html";
+                return;
 
-},500);
+            }
 
+            // =============================
+            // SAVE 6-HOUR SESSION
+            // =============================
 
+            saveMemberSession({
 
-} catch (error) {
+                member_id:data.member_id,
 
-    console.error(error);
+                member_number:data.member_number,
 
-    message.style.color = "red";
-    message.innerHTML = "Unable to connect to server.";
+                username:data.username,
+
+                full_name:data.full_name,
+
+                is_active:data.is_active,
+
+                profile_completed:data.profile_completed
+
+            });
+
+            showSuccess(
+
+                loginMessage,
+
+                "Login successful. Redirecting..."
+
+            );
+
+            setTimeout(()=>{
+
+                window.location.href="clientMode.html";
+
+            },700);
+
+        }
+
+        catch(error){
+
+            console.error(
+
+                "Login Error:",
+
+                error
+
+            );
+
+            if(error.name==="AbortError"){
+
+                showError(
+
+                    loginMessage,
+
+                    "Server took too long to respond."
+
+                );
+
+            }
+
+            else{
+
+                showError(
+
+                    loginMessage,
+
+                    "Unable to connect to the server."
+
+                );
+
+            }
+
+        }
+
+        finally{
+
+            stopLoading();
+
+        }
+
+    });
 
 }
+
+// ======================================================
+// PART 4 - USER EXPERIENCE
+// ======================================================
+
+// ==========================================
+// Auto Hide Messages
+// ==========================================
+
+function autoHideMessage(element,time=5000){
+
+    if(!element) return;
+
+    setTimeout(()=>{
+
+        element.innerHTML="";
+
+        element.className="";
+
+    },time);
+
+}
+
+// ==========================================
+// Improve showSuccess()
+// ==========================================
+
+const originalShowSuccess = showSuccess;
+
+showSuccess = function(element,message){
+
+    originalShowSuccess(element,message);
+
+    autoHideMessage(element);
+
+};
+
+// ==========================================
+// Improve showError()
+// ==========================================
+
+const originalShowError = showError;
+
+showError = function(element,message){
+
+    originalShowError(element,message);
+
+    autoHideMessage(element,7000);
+
+};
+
+// ==========================================
+// ENTER KEY SUPPORT
+// ==========================================
+
+document.querySelectorAll("input").forEach(input=>{
+
+    input.addEventListener("keypress",e=>{
+
+        if(e.key==="Enter"){
+
+            const form=input.closest("form");
+
+            if(form){
+
+                form.requestSubmit();
+
+            }
+
+        }
+
+    });
 
 });
 
+// ==========================================
+// Remove message while typing
+// ==========================================
+
+document.querySelectorAll("input").forEach(input=>{
+
+    input.addEventListener("input",()=>{
+
+        clearMessage(signupMessage);
+
+        clearMessage(loginMessage);
+
+    });
+
+});
+
+// ==========================================
+// Trim spaces automatically
+// ==========================================
+
+document.querySelectorAll("input").forEach(input=>{
+
+    input.addEventListener("blur",()=>{
+
+        input.value=input.value.trim();
+
+    });
+
+});
+
+// ==========================================
+// Phone Number Validation
+// ==========================================
+
+const phoneInputs=document.querySelectorAll(
+
+    "#signupPhone,#loginPhone"
+
+);
+
+phoneInputs.forEach(input=>{
+
+    input.addEventListener("input",()=>{
+
+        input.value=input.value.replace(
+
+            /[^0-9]/g,
+
+            ""
+
+        );
+
+    });
+
+});
+
+// ==========================================
+// Prevent Double Form Submission
+// ==========================================
+
+let submitting=false;
+
+document.querySelectorAll("form").forEach(form=>{
+
+    form.addEventListener("submit",()=>{
+
+        if(submitting){
+
+            event.preventDefault();
+
+            return;
+
+        }
+
+        submitting=true;
+
+        setTimeout(()=>{
+
+            submitting=false;
+
+        },3000);
+
+    });
+
+});
+
+// ==========================================
+// Connection Status
+// ==========================================
+
+window.addEventListener("offline",()=>{
+
+    showError(
+
+        loginMessage,
+
+        "No internet connection."
+
+    );
+
+});
+
+window.addEventListener("online",()=>{
+
+    console.log("Internet Restored");
+
+});
+
+// ==========================================
+// Console Signature
+// ==========================================
+
+console.log(
+
+"%cKingdom Ways Church",
+
+"color:#D4AF37;font-size:18px;font-weight:bold;"
+
+);
+
+console.log(
+
+"%cMember Authentication Ready",
+
+"color:#103B73;font-size:13px;"
+
+);
+
+// ======================================================
+// PART 5 - SESSION PROTECTION
+// ======================================================
+
+// ==========================================
+// Session Validation
+// ==========================================
+
+function isSessionValid(){
+
+    const session = getMemberSession();
+
+    if(!session){
+
+        return false;
+
+    }
+
+    if(Date.now() >= session.expiresAt){
+
+        clearMemberSession();
+
+        return false;
+
+    }
+
+    return true;
+
 }
+
+// ==========================================
+// Remaining Session Time
+// ==========================================
+
+function getRemainingSessionTime(){
+
+    const session = getMemberSession();
+
+    if(!session){
+
+        return 0;
+
+    }
+
+    return Math.max(
+
+        0,
+
+        session.expiresAt - Date.now()
+
+    );
+
+}
+
+// ==========================================
+// Extend Session
+// Call this whenever the user performs an action.
+// ==========================================
+
+function refreshSession(){
+
+    const session = getMemberSession();
+
+    if(!session){
+
+        return;
+
+    }
+
+    session.expiresAt =
+
+        Date.now() + SESSION_DURATION;
+
+    localStorage.setItem(
+
+        SESSION_KEY,
+
+        JSON.stringify(session)
+
+    );
+
+}
+
+// ==========================================
+// Logout
+// ==========================================
+
+function logoutMember(){
+
+    clearMemberSession();
+
+    window.location.href = "btn.html";
+
+}
+
+// ==========================================
+// Check Session Every Minute
+// ==========================================
+
+setInterval(()=>{
+
+    if(!isSessionValid()){
+
+        return;
+
+    }
+
+},60000);
+
+// ==========================================
+// Refresh Session On Activity
+// ==========================================
+
+[
+
+"click",
+
+"keydown",
+
+"mousemove",
+
+"touchstart"
+
+].forEach(eventName=>{
+
+    document.addEventListener(
+
+        eventName,
+
+        ()=>{
+
+            if(isSessionValid()){
+
+                refreshSession();
+
+            }
+
+        },
+
+        {
+
+            passive:true
+
+        }
+
+    );
+
+});
+
+// ==========================================
+// Before Leaving Page
+// ==========================================
+
+window.addEventListener(
+
+    "beforeunload",
+
+    ()=>{
+
+        if(isSessionValid()){
+
+            refreshSession();
+
+        }
+
+    }
+
+);
+
+// ==========================================
+// Welcome Message
+// ==========================================
+
+const currentSession = getMemberSession();
+
+if(currentSession){
+
+    console.log(
+
+        `Welcome ${currentSession.full_name}`
+
+    );
+
+}
+
+// ==========================================
+// Expose Utilities
+// ==========================================
+
+window.memberSession = {
+
+    isSessionValid,
+
+    getMemberSession,
+
+    getRemainingSessionTime,
+
+    refreshSession,
+
+    logoutMember,
+
+    clearMemberSession
+
+};
+
+// ==========================================
+// Finished
+// ==========================================
+
+console.log(
+
+    "%cMember Authentication System Ready",
+
+    "color:#16a34a;font-size:14px;font-weight:bold;"
+
+);

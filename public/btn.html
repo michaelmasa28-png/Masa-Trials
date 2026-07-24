@@ -4,153 +4,209 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Members Sign Up & Login</title>
+<meta name="description"
+content="Kingdom Ways Pentecostal Church Member Registration and Login">
+
+<meta name="theme-color" content="#103B73">
+
+<title>Kingdom Ways Church | Member Registration & Login</title>
+
+<link rel="icon" href="images/logo.png">
 
 <link rel="stylesheet" href="btn.css">
 
 </head>
 
-
 <body>
 
+<!-- ================= LOGO ================= -->
 
 <div class="logo">
-    <img src="images/logo.png" alt="Church Logo">
+
+    <img
+    src="images/logo.png"
+    alt="Kingdom Ways Pentecostal Church Logo">
+
 </div>
 
-
+<!-- ================= MAIN CONTAINER ================= -->
 
 <div class="button-container">
-
 
 <!-- ================= SIGN UP ================= -->
 
 <section id="signup">
 
-<h1>New Member Sign Up Here</h1>
+<h1>New Member Registration</h1>
 
 <p>
-Register and wait for admin approval
+
+Register once and wait for church administration approval.
+
 </p>
 
+<form id="signupForm" autocomplete="on">
 
-<form id="signupForm">
+<label for="fullName">
 
-
-<label>
 Full Name
+
 </label>
 
-
 <input
+
 type="text"
+
 id="fullName"
+
+name="fullName"
+
 placeholder="Enter Full Name"
+
+autocomplete="name"
+
 required>
 
+<label for="signupPhone">
 
-
-<label>
 Phone Number
+
 </label>
 
-
 <input
+
 type="tel"
+
 id="signupPhone"
-placeholder="Enter Phone Number"
+
+name="signupPhone"
+
+placeholder="07XXXXXXXX"
+
 pattern="[0-9]{10,}"
+
+autocomplete="tel"
+
 required>
 
+<button
+type="submit"
+id="signupBtn">
 
-
-<button type="submit">
 Submit Registration
+
 </button>
 
-
 </form>
-
 
 <p id="signupMessage"></p>
 
-
 </section>
-
-
-
-
 
 <!-- ================= LOGIN ================= -->
 
-
 <section id="signin">
 
-
 <h2>
-Already Approved Member?
+
+Already an Approved Member?
+
 </h2>
 
-
 <p>
-Login Here
+
+Login to access your member portal.
+
 </p>
 
+<form id="loginForm" autocomplete="on">
 
+<label for="loginPhone">
 
-<form id="loginForm">
-
-
-<label>
 Phone Number
+
 </label>
 
-
 <input
+
 type="tel"
+
 id="loginPhone"
-placeholder="Phone Number"
+
+name="loginPhone"
+
+placeholder="07XXXXXXXX"
+
+autocomplete="tel"
+
 required>
 
+<label for="loginUsername">
 
-
-<label>
 Username
+
 </label>
 
-
 <input
+
 type="text"
+
 id="loginUsername"
+
+name="loginUsername"
+
 placeholder="Your generated username"
+
+autocomplete="username"
+
 required>
 
+<!-- Loading Spinner -->
 
+<div
+id="loginLoader"
+class="loader"
+style="display:none;">
+</div>
 
-<button type="submit">
+<button
+type="submit"
+id="loginBtn">
+
 Sign In
-</button>
 
+</button>
 
 </form>
 
-
 <p id="loginMessage"></p>
-
-
 
 </section>
 
-
-
 </div>
 
+<!-- ================= FOOTER ================= -->
 
+<footer>
+
+<p>
+
+© <span id="year"></span>
+
+Kingdom Ways Pentecostal Church.
+
+All Rights Reserved.
+
+</p>
+
+</footer>
+
+<!-- ================= JAVASCRIPT ================= -->
 
 <script src="btn.js"></script>
-
 
 </body>
 

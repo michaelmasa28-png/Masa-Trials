@@ -1,0 +1,2233 @@
+/*==========================================================
+        KINGDOM WAYS CHURCH
+        CONNECT WITH US
+        CLIENT PORTAL
+        PART 1
+==========================================================*/
+
+
+/*==========================================================
+GOOGLE FONT
+==========================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+
+/*==========================================================
+ROOT VARIABLES
+==========================================================*/
+
+:root{
+
+    --primary:#2563eb;
+    --secondary:#3b82f6;
+    --success:#10b981;
+    --warning:#f59e0b;
+    --danger:#ef4444;
+    --purple:#7c3aed;
+
+    --bg:#f4f8fc;
+    --white:#ffffff;
+
+    --text:#1f2937;
+    --text-light:#6b7280;
+
+    --border:#e5e7eb;
+
+    --shadow:
+    0 18px 45px rgba(37,99,235,.08);
+
+    --shadow-hover:
+    0 25px 55px rgba(37,99,235,.18);
+
+    --radius:22px;
+
+    --transition:.35s ease;
+
+}
+
+
+/*==========================================================
+RESET
+==========================================================*/
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:linear-gradient(
+        180deg,
+        #f8fbff,
+        #eef5ff
+    );
+
+    color:var(--text);
+
+    overflow-x:hidden;
+
+}
+
+
+/*==========================================================
+BACKGROUND EFFECTS
+==========================================================*/
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    width:450px;
+
+    height:450px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(37,99,235,.14),
+
+        transparent 70%
+
+    );
+
+    top:-180px;
+
+    left:-120px;
+
+    animation:blobLeft 18s infinite alternate;
+
+    z-index:-10;
+
+}
+
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    width:520px;
+
+    height:520px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(16,185,129,.10),
+
+        transparent 70%
+
+    );
+
+    right:-180px;
+
+    bottom:-180px;
+
+    animation:blobRight 20s infinite alternate;
+
+    z-index:-10;
+
+}
+
+
+/*==========================================================
+LAYOUT
+==========================================================*/
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:
+
+    290px
+
+    1fr;
+
+    min-height:100vh;
+
+}
+
+
+/*==========================================================
+CONTENT AREA
+==========================================================*/
+
+.content{
+
+    padding:35px;
+
+    overflow-x:hidden;
+
+}
+
+
+/*==========================================================
+SECTION SPACING
+==========================================================*/
+
+section{
+
+    margin-bottom:35px;
+
+}
+
+
+/*==========================================================
+COMMON CARD
+==========================================================*/
+
+.card{
+
+    background:var(--white);
+
+    border-radius:var(--radius);
+
+    padding:28px;
+
+    box-shadow:var(--shadow);
+
+    transition:var(--transition);
+
+}
+
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:var(--shadow-hover);
+
+}
+
+
+/*==========================================================
+HEADINGS
+==========================================================*/
+
+h1{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:#1e3a8a;
+
+}
+
+
+h2{
+
+    font-size:1.4rem;
+
+    font-weight:700;
+
+}
+
+
+h3{
+
+    font-size:1.15rem;
+
+    font-weight:600;
+
+}
+
+
+p{
+
+    color:var(--text-light);
+
+    line-height:1.7;
+
+}
+
+
+/*==========================================================
+LINKS
+==========================================================*/
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+
+/*==========================================================
+BUTTON RESET
+==========================================================*/
+
+button{
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+}
+
+
+/*==========================================================
+IMAGES
+==========================================================*/
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+
+/*==========================================================
+ANIMATIONS
+==========================================================*/
+
+@keyframes blobLeft{
+
+    to{
+
+        transform:
+
+        translate(60px,80px);
+
+    }
+
+}
+
+
+@keyframes blobRight{
+
+    to{
+
+        transform:
+
+        translate(-80px,-60px);
+
+    }
+
+}
+
+/*==========================================================
+        KINGDOM WAYS CHURCH
+        CONNECT WITH US
+        CLIENT PORTAL
+        PART 2
+==========================================================*/
+
+
+/*==========================================================
+SIDEBAR
+==========================================================*/
+
+.sidebar{
+
+    background:
+    linear-gradient(
+    180deg,
+    #0f172a,
+    #1e3a8a,
+    #2563eb);
+
+    color:#fff;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:30px 22px;
+
+    position:sticky;
+
+    top:0;
+
+    height:100vh;
+
+    overflow-y:auto;
+
+    box-shadow:
+    10px 0 35px rgba(0,0,0,.15);
+
+}
+
+
+/*==========================================================
+LOGO
+==========================================================*/
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:40px;
+
+    padding-bottom:25px;
+
+    border-bottom:
+
+    1px solid
+
+    rgba(255,255,255,.15);
+
+}
+
+
+.logo i{
+
+    width:65px;
+
+    height:65px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:18px;
+
+    font-size:28px;
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #f59e0b,
+    #fbbf24);
+
+    color:#fff;
+
+    box-shadow:
+
+    0 12px 28px
+
+    rgba(245,158,11,.35);
+
+}
+
+
+.logo h2{
+
+    color:#fff;
+
+    font-size:1.45rem;
+
+    font-weight:700;
+
+    margin-bottom:3px;
+
+}
+
+
+.logo span{
+
+    font-size:.9rem;
+
+    color:
+
+    rgba(255,255,255,.72);
+
+}
+
+
+/*==========================================================
+NAVIGATION
+==========================================================*/
+
+.sidebar nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    margin-bottom:auto;
+
+}
+
+
+/*==========================================================
+NAV LINKS
+==========================================================*/
+
+.sidebar nav a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:15px 18px;
+
+    border-radius:16px;
+
+    color:
+
+    rgba(255,255,255,.85);
+
+    font-weight:500;
+
+    transition:.35s;
+
+}
+
+
+.sidebar nav a i{
+
+    width:22px;
+
+    text-align:center;
+
+    font-size:18px;
+
+}
+
+
+/*==========================================================
+HOVER
+==========================================================*/
+
+.sidebar nav a:hover{
+
+    background:
+
+    rgba(255,255,255,.14);
+
+    color:#fff;
+
+    transform:
+
+    translateX(6px);
+
+}
+
+
+/*==========================================================
+ACTIVE
+==========================================================*/
+
+.sidebar nav a.active{
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #ffffff,
+    #eff6ff);
+
+    color:#2563eb;
+
+    font-weight:700;
+
+    box-shadow:
+
+    0 12px 30px
+
+    rgba(255,255,255,.18);
+
+}
+
+
+.sidebar nav a.active i{
+
+    color:#2563eb;
+
+}
+
+
+/*==========================================================
+VERSION PANEL
+==========================================================*/
+
+.version{
+
+    margin-top:35px;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    font-size:.9rem;
+
+    color:
+
+    rgba(255,255,255,.82);
+
+    background:
+
+    rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+
+    border:
+
+    1px solid
+
+    rgba(255,255,255,.12);
+
+}
+
+
+/*==========================================================
+SIDEBAR SCROLLBAR
+==========================================================*/
+
+.sidebar::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+
+.sidebar::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+
+.sidebar::-webkit-scrollbar-thumb{
+
+    background:
+
+    rgba(255,255,255,.25);
+
+    border-radius:20px;
+
+}
+
+
+.sidebar::-webkit-scrollbar-thumb:hover{
+
+    background:
+
+    rgba(255,255,255,.45);
+
+}
+
+
+/*==========================================================
+LOGO ANIMATION
+==========================================================*/
+
+.logo i{
+
+    animation:
+
+    churchGlow 4s ease-in-out infinite;
+
+}
+
+
+@keyframes churchGlow{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+        box-shadow:
+
+        0 12px 28px
+
+        rgba(245,158,11,.35);
+
+    }
+
+    50%{
+
+        transform:translateY(-6px);
+
+        box-shadow:
+
+        0 18px 38px
+
+        rgba(245,158,11,.55);
+
+    }
+
+}
+
+
+/*==========================================================
+ACTIVE LINK INDICATOR
+==========================================================*/
+
+.sidebar nav a.active::before{
+
+    content:"";
+
+    width:6px;
+
+    height:28px;
+
+    border-radius:30px;
+
+    background:#2563eb;
+
+    margin-right:2px;
+
+}
+
+/*==========================================================
+        KINGDOM WAYS CHURCH
+        CONNECT WITH US
+        CLIENT PORTAL
+        PART 3
+==========================================================*/
+
+
+/*==========================================================
+TOPBAR
+==========================================================*/
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:25px;
+
+    margin-bottom:35px;
+
+    padding:28px 35px;
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(16px);
+
+    border-radius:26px;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+.topbar h1{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    color:#1e3a8a;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+}
+
+
+.topbar h1 i{
+
+    color:var(--primary);
+
+    font-size:34px;
+
+}
+
+
+.topbar p{
+
+    margin-top:8px;
+
+    font-size:1rem;
+
+    color:var(--text-light);
+
+}
+
+
+
+/*==========================================================
+HERO CARD
+==========================================================*/
+
+.hero-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:30px;
+
+    padding:55px 45px;
+
+    margin-bottom:40px;
+
+    color:#fff;
+
+    text-align:center;
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #2563eb,
+
+    #3b82f6,
+
+    #7c3aed
+
+    );
+
+    background-size:250%;
+
+    animation:
+
+    heroGradient 12s linear infinite;
+
+    box-shadow:
+
+    0 30px 70px
+
+    rgba(37,99,235,.25);
+
+}
+
+
+
+/*==========================================================
+HERO BACKGROUND GLOW
+==========================================================*/
+
+.hero-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+
+    height:420px;
+
+    border-radius:50%;
+
+    top:-180px;
+
+    left:-120px;
+
+    background:
+
+    radial-gradient(
+
+    circle,
+
+    rgba(255,255,255,.18),
+
+    transparent 70%
+
+    );
+
+}
+
+
+.hero-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:320px;
+
+    height:320px;
+
+    border-radius:50%;
+
+    right:-100px;
+
+    bottom:-120px;
+
+    background:
+
+    radial-gradient(
+
+    circle,
+
+    rgba(255,255,255,.12),
+
+    transparent 70%
+
+    );
+
+}
+
+
+
+/*==========================================================
+HERO ICON
+==========================================================*/
+
+.hero-card i{
+
+    font-size:72px;
+
+    margin-bottom:22px;
+
+    color:#FFD54F;
+
+    display:block;
+
+    animation:
+
+    heroPulse 3s ease-in-out infinite;
+
+}
+
+
+
+/*==========================================================
+HERO TITLE
+==========================================================*/
+
+.hero-card h2{
+
+    font-size:2.2rem;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+
+/*==========================================================
+HERO DESCRIPTION
+==========================================================*/
+
+.hero-card p{
+
+    max-width:760px;
+
+    margin:auto;
+
+    color:#eef6ff;
+
+    font-size:1.08rem;
+
+    line-height:1.9;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+
+/*==========================================================
+SECTION TITLE
+==========================================================*/
+
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:25px;
+
+    font-size:1.4rem;
+
+    color:#1e3a8a;
+
+    font-weight:700;
+
+}
+
+
+.section-title i{
+
+    color:var(--primary);
+
+}
+
+
+
+/*==========================================================
+HEADER BADGE
+==========================================================*/
+
+.hero-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 22px;
+
+    margin-bottom:20px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(12px);
+
+    color:#fff;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+}
+
+
+.hero-badge i{
+
+    font-size:16px;
+
+    margin:0;
+
+    animation:none;
+
+    color:#FFD54F;
+
+}
+
+
+
+/*==========================================================
+ANIMATIONS
+==========================================================*/
+
+@keyframes heroGradient{
+
+    0%{
+
+        background-position:0%;
+
+    }
+
+    100%{
+
+        background-position:250%;
+
+    }
+
+}
+
+
+@keyframes heroPulse{
+
+    0%,100%{
+
+        transform:translateY(0) scale(1);
+
+        filter:drop-shadow(0 0 12px rgba(255,213,74,.45));
+
+    }
+
+    50%{
+
+        transform:translateY(-8px) scale(1.08);
+
+        filter:drop-shadow(0 0 28px rgba(255,213,74,.8));
+
+    }
+
+}
+
+/*==========================================================
+        KINGDOM WAYS CHURCH
+        CONNECT WITH US
+        CLIENT PORTAL
+        PART 4
+==========================================================*/
+
+
+/*==========================================================
+CONTACT GRID
+==========================================================*/
+
+.contact-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(310px,1fr));
+
+    gap:28px;
+
+    align-items:stretch;
+
+}
+
+
+/*==========================================================
+CONTACT CARD
+==========================================================*/
+
+.contact-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#fff;
+
+    border-radius:26px;
+
+    padding:35px 28px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:var(--transition);
+
+    border:1px solid rgba(37,99,235,.08);
+
+}
+
+
+.contact-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:var(--shadow-hover);
+
+}
+
+
+/*==========================================================
+TOP ACCENT
+==========================================================*/
+
+.contact-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:6px;
+
+    background:
+
+    linear-gradient(
+
+    90deg,
+
+    var(--primary),
+
+    var(--secondary),
+
+    var(--success),
+
+    var(--warning),
+
+    var(--purple)
+
+    );
+
+    background-size:300%;
+
+    animation:contactGradient 8s linear infinite;
+
+}
+
+
+/*==========================================================
+BACKGROUND GLOW
+==========================================================*/
+
+.contact-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+    circle,
+
+    rgba(37,99,235,.07),
+
+    transparent 70%
+
+    );
+
+    top:-60px;
+
+    right:-60px;
+
+}
+
+
+/*==========================================================
+ICON HOLDER
+==========================================================*/
+
+.icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    margin-bottom:22px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:38px;
+
+    color:#fff;
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.15);
+
+    transition:.45s;
+
+}
+
+
+.contact-card:hover .icon{
+
+    transform:
+
+    rotate(8deg)
+
+    scale(1.08);
+
+}
+
+
+/*==========================================================
+ICON COLORS
+==========================================================*/
+
+.whatsapp{
+
+    background:linear-gradient(135deg,#25D366,#0ca74d);
+
+}
+
+.facebook{
+
+    background:linear-gradient(135deg,#1877F2,#1458b0);
+
+}
+
+.email{
+
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+
+}
+
+.website{
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+}
+
+.youtube{
+
+    background:linear-gradient(135deg,#ff0000,#b91c1c);
+
+}
+
+.maps{
+
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+
+}
+
+.phone{
+
+    background:linear-gradient(135deg,#0ea5e9,#2563eb);
+
+}
+
+.instagram{
+
+    background:linear-gradient(
+
+    135deg,
+
+    #f09433,
+
+    #e6683c,
+
+    #dc2743,
+
+    #cc2366,
+
+    #bc1888
+
+    );
+
+}
+
+
+/*==========================================================
+CARD TITLE
+==========================================================*/
+
+.contact-card h3{
+
+    color:#1e3a8a;
+
+    font-size:1.3rem;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+}
+
+
+/*==========================================================
+CARD DESCRIPTION
+==========================================================*/
+
+.contact-card p{
+
+    min-height:52px;
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+
+}
+
+
+/*==========================================================
+VERIFIED BADGE
+==========================================================*/
+
+.verified{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:8px 18px;
+
+    border-radius:50px;
+
+    margin-bottom:24px;
+
+    background:#ecfdf5;
+
+    color:#059669;
+
+    font-size:.88rem;
+
+    font-weight:700;
+
+    border:1px solid #bbf7d0;
+
+}
+
+
+/*==========================================================
+ACTION BUTTON
+==========================================================*/
+
+.openBtn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:#fff;
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    var(--primary),
+
+    var(--purple)
+
+    );
+
+    transition:.35s;
+
+    box-shadow:
+
+    0 15px 30px rgba(37,99,235,.25);
+
+}
+
+
+.openBtn:hover{
+
+    transform:translateY(-4px);
+
+    letter-spacing:.5px;
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    var(--success),
+
+    var(--primary)
+
+    );
+
+}
+
+
+.openBtn:active{
+
+    transform:scale(.97);
+
+}
+
+
+/*==========================================================
+GRADIENT ANIMATION
+==========================================================*/
+
+@keyframes contactGradient{
+
+    from{
+
+        background-position:0%;
+
+    }
+
+    to{
+
+        background-position:300%;
+
+    }
+
+}
+/*==========================================================
+        KINGDOM WAYS CHURCH
+        CONNECT WITH US
+        CLIENT PORTAL
+        PART 5
+==========================================================*/
+
+
+/*==========================================================
+FLOATING ANIMATION
+==========================================================*/
+
+.contact-card{
+
+    animation:cardFade .8s ease both;
+
+}
+
+.contact-card:nth-child(2){
+
+    animation-delay:.08s;
+
+}
+
+.contact-card:nth-child(3){
+
+    animation-delay:.16s;
+
+}
+
+.contact-card:nth-child(4){
+
+    animation-delay:.24s;
+
+}
+
+.contact-card:nth-child(5){
+
+    animation-delay:.32s;
+
+}
+
+.contact-card:nth-child(6){
+
+    animation-delay:.40s;
+
+}
+
+.contact-card:nth-child(7){
+
+    animation-delay:.48s;
+
+}
+
+.contact-card:nth-child(8){
+
+    animation-delay:.56s;
+
+}
+
+
+/*==========================================================
+CARD FADE
+==========================================================*/
+
+@keyframes cardFade{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+}
+
+
+/*==========================================================
+ICON FLOAT
+==========================================================*/
+
+.icon{
+
+    animation:iconFloat 5s ease-in-out infinite;
+
+}
+
+@keyframes iconFloat{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+}
+
+
+/*==========================================================
+BUTTON SHIMMER
+==========================================================*/
+
+.openBtn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.openBtn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:70%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.45),
+
+        transparent
+
+    );
+
+    transition:.7s;
+
+}
+
+.openBtn:hover::before{
+
+    left:140%;
+
+}
+
+
+/*==========================================================
+CARD GLOW
+==========================================================*/
+
+.contact-card:hover{
+
+    border-color:
+
+    rgba(37,99,235,.18);
+
+}
+
+.contact-card:hover::after{
+
+    transform:scale(1.25);
+
+    transition:1s;
+
+}
+
+
+/*==========================================================
+TEXT EFFECT
+==========================================================*/
+
+.contact-card:hover h3{
+
+    color:var(--primary);
+
+}
+
+.contact-card:hover p{
+
+    color:#4b5563;
+
+}
+
+
+/*==========================================================
+HERO GLOW
+==========================================================*/
+
+.hero-card{
+
+    position:relative;
+
+}
+
+.hero-card::before{
+
+    animation:heroGlow 10s linear infinite;
+
+}
+
+.hero-card::after{
+
+    animation:heroGlowReverse 12s linear infinite;
+
+}
+
+@keyframes heroGlow{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+@keyframes heroGlowReverse{
+
+    from{
+
+        transform:rotate(360deg);
+
+    }
+
+    to{
+
+        transform:rotate(0deg);
+
+    }
+
+}
+
+
+/*==========================================================
+VERIFIED BADGE
+==========================================================*/
+
+.verified{
+
+    transition:.35s;
+
+}
+
+.contact-card:hover .verified{
+
+    background:#d1fae5;
+
+    transform:scale(1.05);
+
+}
+
+
+/*==========================================================
+TOPBAR HOVER
+==========================================================*/
+
+.topbar{
+
+    transition:.35s;
+
+}
+
+.topbar:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+/*==========================================================
+SCROLLBAR
+==========================================================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#edf4ff;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:
+
+    linear-gradient(
+
+        var(--primary),
+
+        var(--secondary)
+
+    );
+
+    border-radius:50px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:
+
+    linear-gradient(
+
+        var(--purple),
+
+        var(--primary)
+
+    );
+
+}
+
+
+/*==========================================================
+TEXT SELECTION
+==========================================================*/
+
+::selection{
+
+    background:var(--primary);
+
+    color:#fff;
+
+}
+
+
+/*==========================================================
+FOCUS
+==========================================================*/
+
+button:focus-visible,
+
+a:focus-visible{
+
+    outline:3px solid rgba(37,99,235,.25);
+
+    outline-offset:4px;
+
+}
+
+
+/*==========================================================
+SOFT PAGE FADE
+==========================================================*/
+
+body{
+
+    animation:pageFade .6s ease;
+
+}
+
+@keyframes pageFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+/*==========================================================
+        KINGDOM WAYS CHURCH
+        CONNECT WITH US
+        CLIENT PORTAL
+        PART 6
+==========================================================*/
+
+
+/*==========================================================
+LARGE DESKTOPS
+==========================================================*/
+
+@media (min-width:1600px){
+
+    .content{
+
+        max-width:1700px;
+
+        margin:auto;
+
+    }
+
+    .contact-grid{
+
+        grid-template-columns:
+        repeat(4,1fr);
+
+    }
+
+}
+
+
+/*==========================================================
+LAPTOPS
+==========================================================*/
+
+@media (max-width:1200px){
+
+    .contact-grid{
+
+        grid-template-columns:
+        repeat(auto-fit,minmax(300px,1fr));
+
+    }
+
+}
+
+
+/*==========================================================
+TABLETS
+==========================================================*/
+
+@media (max-width:992px){
+
+    .dashboard{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .sidebar{
+
+        position:relative;
+
+        height:auto;
+
+        min-height:auto;
+
+        padding:25px;
+
+    }
+
+    .sidebar nav{
+
+        flex-direction:row;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
+    .sidebar nav a{
+
+        flex:1 1 220px;
+
+        justify-content:center;
+
+    }
+
+    .content{
+
+        padding:25px;
+
+    }
+
+    .topbar{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        align-items:center;
+
+    }
+
+    .hero-card{
+
+        padding:45px 30px;
+
+    }
+
+}
+
+
+/*==========================================================
+MOBILE
+==========================================================*/
+
+@media (max-width:768px){
+
+    .content{
+
+        padding:18px;
+
+    }
+
+    .topbar{
+
+        padding:22px;
+
+    }
+
+    .topbar h1{
+
+        font-size:1.55rem;
+
+    }
+
+    .hero-card{
+
+        padding:40px 22px;
+
+    }
+
+    .hero-card i{
+
+        font-size:55px;
+
+    }
+
+    .hero-card h2{
+
+        font-size:1.6rem;
+
+    }
+
+    .hero-card p{
+
+        font-size:.95rem;
+
+    }
+
+    .contact-grid{
+
+        grid-template-columns:1fr;
+
+        gap:22px;
+
+    }
+
+    .contact-card{
+
+        padding:28px 22px;
+
+    }
+
+    .icon{
+
+        width:80px;
+
+        height:80px;
+
+        font-size:34px;
+
+    }
+
+}
+
+
+/*==========================================================
+SMALL PHONES
+==========================================================*/
+
+@media (max-width:480px){
+
+    .logo{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .logo i{
+
+        width:60px;
+
+        height:60px;
+
+        font-size:24px;
+
+    }
+
+    .logo h2{
+
+        font-size:1.25rem;
+
+    }
+
+    .sidebar nav{
+
+        flex-direction:column;
+
+    }
+
+    .sidebar nav a{
+
+        width:100%;
+
+        justify-content:flex-start;
+
+    }
+
+    .topbar h1{
+
+        font-size:1.35rem;
+
+    }
+
+    .hero-card{
+
+        border-radius:22px;
+
+    }
+
+    .hero-card h2{
+
+        font-size:1.35rem;
+
+    }
+
+    .contact-card h3{
+
+        font-size:1.15rem;
+
+    }
+
+    .openBtn{
+
+        padding:14px;
+
+        font-size:14px;
+
+    }
+
+}
+
+
+/*==========================================================
+4K MONITORS
+==========================================================*/
+
+@media (min-width:2560px){
+
+    html{
+
+        font-size:18px;
+
+    }
+
+}
+
+
+/*==========================================================
+ACCESSIBILITY
+==========================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}
+
+
+/*==========================================================
+PRINT
+==========================================================*/
+
+@media print{
+
+    .sidebar,
+
+    .openBtn{
+
+        display:none;
+
+    }
+
+    .dashboard{
+
+        display:block;
+
+    }
+
+    .content{
+
+        padding:0;
+
+    }
+
+}
+
+
+/*==========================================================
+END OF FILE
+KINGDOM WAYS CONNECT CLIENT
+VERSION 2.0
+==========================================================*/
