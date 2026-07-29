@@ -123,10 +123,9 @@ document
 
 function approveMember(id){
 
-    const session = JSON.parse(
-        localStorage.getItem("adminSession")
-    );
-
+   const session = JSON.parse(
+    localStorage.getItem("adminSession")
+);
     if(!session || !session.token){
         alert("Admin session expired. Login again.");
         return;
@@ -175,9 +174,9 @@ function approveMember(id){
 
 function deleteMember(id){
 
-    const session = JSON.parse(
-        localStorage.getItem("adminSession")
-    );
+   const session = JSON.parse(
+    localStorage.getItem("adminSession")
+);
 
     if(!session || !session.token){
         alert("Admin session expired. Login again.");

@@ -433,7 +433,7 @@ class Attendance(Base):
 
     attendance_type = Column(
         String(50),
-        default="Sunday Service"
+        default="Placed under kingdomwaysempowermentinfluence"
     )
 
     time_in = Column(
@@ -499,4 +499,247 @@ class Gallery(Base):
     created_at = Column(
         DateTime(timezone=True),
         server_default=func.now()
+    )
+
+
+# ============================================
+# EVENTS MODEL
+# Kingdom Ways Church CMS
+# ============================================
+
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Text,
+    Boolean,
+    Date,
+    Time,
+    DateTime,
+    ForeignKey
+)
+
+from sqlalchemy.sql import func
+
+from app.database import Base
+
+
+
+class Event(Base):
+
+    __tablename__ = "events"
+
+
+    # -----------------------------
+    # Primary Key
+    # -----------------------------
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+
+    # -----------------------------
+    # Basic Information
+    # -----------------------------
+
+    title = Column(
+        String(150),
+        nullable=False
+    )
+
+
+    subtitle = Column(
+        String(200),
+        nullable=True
+    )
+
+
+    description = Column(
+        Text,
+        nullable=False
+    )
+
+
+    category = Column(
+        String(100),
+        nullable=True
+    )
+
+
+    speaker = Column(
+        String(150),
+        nullable=True
+    )
+
+
+    host = Column(
+        String(150),
+        nullable=True
+    )
+
+
+    bible_reading = Column(
+        String(100),
+        nullable=True
+    )
+
+
+
+    # -----------------------------
+    # Date & Time
+    # -----------------------------
+
+    start_date = Column(
+        Date,
+        nullable=False
+    )
+
+
+    end_date = Column(
+        Date,
+        nullable=True
+    )
+
+
+    start_time = Column(
+        Time,
+        nullable=True
+    )
+
+
+    end_time = Column(
+        Time,
+        nullable=True
+    )
+
+
+
+    # -----------------------------
+    # Location
+    # -----------------------------
+
+    venue = Column(
+        String(200),
+        nullable=False
+    )
+
+
+    maps_link = Column(
+        String(500),
+        nullable=True
+    )
+
+
+
+    # -----------------------------
+    # Registration
+    # -----------------------------
+
+    capacity = Column(
+        Integer,
+        nullable=True
+    )
+
+
+    registration_required = Column(
+        Boolean,
+        default=False
+    )
+
+
+    registration_deadline = Column(
+        DateTime,
+        nullable=True
+    )
+
+
+
+    # -----------------------------
+    # Event Settings
+    # -----------------------------
+
+    featured = Column(
+        Boolean,
+        default=False
+    )
+
+
+    public_event = Column(
+        Boolean,
+        default=True
+    )
+
+
+    allow_comments = Column(
+        Boolean,
+        default=False
+    )
+
+
+    send_notification = Column(
+        Boolean,
+        default=False
+    )
+
+
+
+    # -----------------------------
+    # Status
+    # -----------------------------
+
+    status = Column(
+        String(50),
+        default="draft"
+    )
+
+
+
+    # -----------------------------
+    # Media
+    # -----------------------------
+
+    banner = Column(
+        String(500),
+        nullable=True
+    )
+
+
+    attachment = Column(
+        String(500),
+        nullable=True
+    )
+
+
+
+    # -----------------------------
+    # Ownership
+    # -----------------------------
+
+    created_by = Column(
+        Integer,
+        ForeignKey(
+            "admins.id"
+        ),
+        nullable=True
+    )
+
+
+
+    # -----------------------------
+    # Dates
+    # -----------------------------
+
+    created_at = Column(
+        DateTime,
+        server_default=func.now()
+    )
+
+
+    updated_at = Column(
+        DateTime,
+        server_default=func.now(),
+        onupdate=func.now()
     )

@@ -4,611 +4,295 @@
  MEMBER DISPLAY ONLY
 ==========================================================*/
 
+console.log("eventclient.js loaded");
 
-// ===============================
-// BACKEND URL
-// ===============================
+//==================================
+// CONFIG
+//==================================
 
 const API_URL = "";
 
-
-
-// ===============================
+//==================================
 // ELEMENTS
-// ===============================
+//==================================
 
-const eventsContainer =
-document.getElementById("eventsContainer");
+const eventsContainer = document.getElementById("eventsContainer");
+const featuredZone = document.getElementById("featuredZone");
+const featuredContainer = document.getElementById("featuredContainer");
+const searchInput = document.getElementById("searchEvent");
 
-
-const featuredZone =
-document.getElementById("featuredZone");
-
-
-const featuredContainer =
-document.getElementById("featuredContainer");
-
-
-const searchInput =
-document.getElementById("searchEvent");
-
-
-
-// ===============================
-// DATA STORAGE
-// ===============================
+//==================================
+// DATA
+//==================================
 
 let allEvents = [];
 
-
-
-
-// ===============================
+//==================================
 // LOAD EVENTS
-// ===============================
+//==================================
 
-async function loadEvents(){
-
+async function loadEvents() {
 
     eventsContainer.innerHTML = `
-
         <div class="loading">
-
             Loading church events...
-
         </div>
-
     `;
 
+    try {
 
-    try{
+        const response = await fetch(`${API_URL}/api/events/`);
 
+        console.log("Status:", response.status);
 
-        const response = await fetch(
-            `${API_URL}/events`
-        );
-
-
-        console.log(
-            "EVENT STATUS:",
-            response.status
-        );
-
-
-
-        if(!response.ok){
-
-            throw new Error(
-                "Failed loading events"
-            );
-
+        if (!response.ok) {
+            throw new Error("Unable to load events.");
         }
-
-
 
         const data = await response.json();
 
+        console.log("API Response:", data);
 
+        allEvents = data.events || [];
 
-        console.log(
-            "EVENT DATA:",
-            data
-        );
+        displayFeatured(allEvents);
+        displayEvents(allEvents);
 
+    } catch (error) {
 
-
-        /*
-          Supports:
-          [
-            events
-          ]
-
-          or
-
-          {
-            events:[]
-          }
-        */
-
-
-        allEvents =
-        Array.isArray(data)
-        ?
-        data
-        :
-        data.events || [];
-
-
-
-        displayEvents(
-            allEvents
-        );
-
-
-        displayFeatured(
-            allEvents
-        );
-
-
-    }
-
-
-    catch(error){
-
-
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         eventsContainer.innerHTML = `
-
             <div class="loading">
-
-                Unable to load events.
-
-                <br>
-
-                Please try again.
-
+                Unable to load church events.
             </div>
-
         `;
-
-
     }
-
 
 }
 
-
-
-
-
-
-// ===============================
+//==================================
 // DISPLAY EVENTS
-// ===============================
+//==================================
 
+function displayEvents(events) {
 
-function displayEvents(events){
+    eventsContainer.innerHTML = "";
 
-
-
-    eventsContainer.innerHTML="";
-
-
-
-    if(events.length===0){
-
+    if (!events.length) {
 
         eventsContainer.innerHTML = `
-
-        <div class="loading">
-
-            No upcoming events available.
-
-        </div>
-
+            <div class="loading">
+                No upcoming events available.
+            </div>
         `;
 
-
         return;
-
     }
 
-
-
-
-
-    events.forEach(event=>{
-
-
-        const card =
-        createEventCard(event);
-
+    events.forEach(event => {
 
         eventsContainer.appendChild(
-            card
+            createEventCard(event)
         );
-
 
     });
 
-
-
 }
 
+//==================================
+// CREATE CARD
+//==================================
 
+function createEventCard(event) {
 
+    const card = document.createElement("div");
 
+    card.className = "event-card";
 
-
-// ===============================
-// CREATE EVENT CARD
-// ===============================
-
-
-function createEventCard(event){
-
-
-
-    const card =
-    document.createElement("div");
-
-
-    card.className =
-    "event-card";
-
-
-
-
-
-    const image =
-    event.image
-    ||
-    event.event_image
-    ||
-    "images/default-event.jpg";
-
-
-
+    const image = event.banner
+        ? "/" + event.banner
+        : "images/default-event.jpg";
 
     card.innerHTML = `
 
-
         <img
-
-        class="event-image"
-
-        src="${image}"
-
-        onerror="this.src='images/default-event.jpg'"
-
+            class="event-image"
+            src="${image}"
+            onerror="this.src='images/default-event.jpg'"
         >
-
-
 
         <div class="event-content">
 
+            ${event.featured ? `
+                <span class="badge">
+                    ⭐ Featured Event
+                </span>
+            ` : ""}
 
-        ${
-            event.featured
-            ?
-            `
-            <span class="badge">
+            <h3>${event.title}</h3>
 
-            ⭐ Featured Event
+            <p class="event-description">
+                ${event.description || ""}
+            </p>
 
-            </span>
-            `
-            :
-            ""
-        }
+            <div class="event-info">
 
+                <div>
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span>${formatDate(event.start_date)}</span>
+                </div>
 
+                <div>
+                    <i class="fa-solid fa-clock"></i>
+                    <span>${formatTime(event.start_time)}</span>
+                </div>
 
-        <h3>
+                <div>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>${event.venue || "Main Church"}</span>
+                </div>
 
-        ${event.title || "Church Event"}
+                <div>
+                    <i class="fa-solid fa-microphone"></i>
+                    <span>${event.speaker || "To be announced"}</span>
+                </div>
 
-        </h3>
-
-
-
-
-        <p class="event-description">
-
-        ${
-        event.description
-        ||
-        "Kingdom Ways Church event."
-        }
-
-        </p>
-
-
-
-
-
-        <div class="event-info">
-
-
-
-        <div>
-
-        <i class="fa-solid fa-calendar-days"></i>
-
-        <span>
-
-        ${
-        formatDate(event.date)
-        }
-
-        </span>
+            </div>
 
         </div>
-
-
-
-
-
-        <div>
-
-        <i class="fa-solid fa-clock"></i>
-
-        <span>
-
-        ${
-        event.time || "Time not set"
-        }
-
-        </span>
-
-        </div>
-
-
-
-
-
-        <div>
-
-        <i class="fa-solid fa-location-dot"></i>
-
-        <span>
-
-        ${
-        event.location
-        ||
-        event.venue
-        ||
-        "Main Church"
-        }
-
-        </span>
-
-        </div>
-
-
-
-
-
-        <div>
-
-        <i class="fa-solid fa-microphone"></i>
-
-        <span>
-
-        ${
-        event.speaker
-        ||
-        "To be announced"
-        }
-
-        </span>
-
-        </div>
-
-
-
-        </div>
-
-
-        </div>
-
 
     `;
 
-
-
     return card;
-
 
 }
 
-
-
-
-
-
-// ===============================
+//==================================
 // FEATURED EVENTS
-// ===============================
+//==================================
 
+function displayFeatured(events) {
 
-function displayFeatured(events){
+    const featured = events.filter(event => event.featured);
 
+    if (!featured.length) {
 
-    const featured =
-    events.filter(
-        e=>e.featured === true
-    );
-
-
-
-    if(featured.length===0){
-
-
-        featuredZone.style.display =
-        "none";
-
-
+        featuredZone.style.display = "none";
         return;
-
 
     }
 
+    featuredZone.style.display = "block";
 
+    featuredContainer.innerHTML = "";
 
-
-    featuredZone.style.display =
-    "block";
-
-
-
-    featuredContainer.innerHTML="";
-
-
-
-    featured.forEach(event=>{
-
-
-        const card =
-        createEventCard(event);
-
-
+    featured.forEach(event => {
 
         featuredContainer.appendChild(
-            card
+            createEventCard(event)
         );
-
 
     });
 
-
-
 }
 
-
-
-
-
-
-
-
-// ===============================
+//==================================
 // SEARCH
-// ===============================
+//==================================
 
+searchInput.addEventListener("input", () => {
 
-searchInput.addEventListener(
-"input",
-()=>{
+    const value = searchInput.value
+        .toLowerCase()
+        .trim();
 
+    if (!value) {
 
-    const value =
-    searchInput.value
-    .toLowerCase()
-    .trim();
-
-
-
-    if(!value){
-
-
-        displayEvents(
-            allEvents
-        );
-
-
+        displayEvents(allEvents);
         return;
 
     }
 
-
-
-
-    const filtered =
-    allEvents.filter(event=>{
-
+    const filtered = allEvents.filter(event => {
 
         return (
 
-        event.title
-        ?.toLowerCase()
-        .includes(value)
+            (event.title || "")
+                .toLowerCase()
+                .includes(value)
 
-        ||
+            ||
 
-        event.location
-        ?.toLowerCase()
-        .includes(value)
+            (event.description || "")
+                .toLowerCase()
+                .includes(value)
 
-        ||
+            ||
 
-        event.speaker
-        ?.toLowerCase()
-        .includes(value)
+            (event.venue || "")
+                .toLowerCase()
+                .includes(value)
+
+            ||
+
+            (event.speaker || "")
+                .toLowerCase()
+                .includes(value)
 
         );
-
 
     });
 
-
-
-    displayEvents(
-        filtered
-    );
-
+    displayEvents(filtered);
 
 });
 
-
-
-
-
-
-
-// ===============================
+//==================================
 // DATE FORMAT
-// ===============================
+//==================================
 
+function formatDate(date) {
 
-function formatDate(date){
+    if (!date) return "Date not set";
 
-
-    if(!date){
-
-        return "Date not set";
-
-    }
-
-
-
-    try{
-
-
-        return new Date(date)
-        .toLocaleDateString(
-            "en-GB",
-            {
-                year:"numeric",
-                month:"long",
-                day:"numeric"
-            }
-        );
-
-
-    }
-
-    catch{
-
-
-        return date;
-
-    }
-
+    return new Date(date).toLocaleDateString(
+        "en-GB",
+        {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
+    );
 
 }
 
+//==================================
+// TIME FORMAT
+//==================================
 
+function formatTime(time) {
 
+    if (!time) return "Time not set";
 
+    try {
 
+        return time.substring(0,5);
 
+    } catch {
 
-// ===============================
+        return time;
+
+    }
+
+}
+
+//==================================
 // START
-// ===============================
+//==================================
 
-
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
+document.addEventListener("DOMContentLoaded", () => {
 
     loadEvents();
-
 
 });

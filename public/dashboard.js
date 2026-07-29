@@ -31,7 +31,13 @@ setInterval(updateDateTime, 1000);
 
 async function loadDashboardStats(){
 
-    const response = await fetch("/dashboard/stats");
+  const token = localStorage.getItem("token");
+
+const response = await fetch("/dashboard/stats", {
+    headers: {
+        "Authorization": `Bearer ${token}`
+    }
+});
 
     const stats = await response.json();
 

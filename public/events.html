@@ -4,37 +4,59 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Kingdom Ways CMS | Events</title>
 
-<link rel="stylesheet" href="events.css">
+<link
+rel="stylesheet"
+href="events.css">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
-
 <body>
 
+<!-- =========================
+LOADING
+========================= -->
 
-<div class="dashboard">
+<div
+id="loadingOverlay"
+class="loading-overlay">
+
+<div class="loader"></div>
+
+<p>Loading Events...</p>
+
+</div>
 
 
-<!-- ===========================
+<!-- =========================
+TOASTS
+========================= -->
+
+<div
+id="toastContainer"
+class="toast-container">
+</div>
+
+
+<!-- =========================
 SIDEBAR
-=========================== -->
-
+========================= -->
 
 <aside class="sidebar">
 
-
 <div class="logo">
 
-<i class="fa-solid fa-church"></i>
-
-<div>
+<i class="fas fa-church"></i>
 
 <h2>Kingdom Ways</h2>
 
@@ -42,528 +64,402 @@ SIDEBAR
 
 </div>
 
-</div>
+<ul>
 
-
-
-<nav>
-
+<li>
 <a href="dashboard.html">
-
-<i class="fa-solid fa-house"></i>
-
+<i class="fas fa-home"></i>
 Dashboard
-
 </a>
+</li>
 
-</nav>
+<li>
+<a href="members.html">
+<i class="fas fa-users"></i>
+Members
+</a>
+</li>
 
+<li class="active">
+<a href="events.html">
+<i class="fas fa-calendar-days"></i>
+Events
+</a>
+</li>
 
+<li>
+<a href="sermons.html">
+<i class="fas fa-microphone"></i>
+Sermons
+</a>
+</li>
 
+<li>
+<a href="gallery.html">
+<i class="fas fa-images"></i>
+Gallery
+</a>
+</li>
 
-<div class="quote-box">
+<li>
+<a href="attendance.html">
+<i class="fas fa-user-check"></i>
+Attendance
+</a>
+</li>
 
+<li>
+<a href="donations.html">
+<i class="fas fa-hand-holding-dollar"></i>
+Finance
+</a>
+</li>
 
-<h4>
+<li>
+<a href="settings.html">
+<i class="fas fa-cog"></i>
+Settings
+</a>
+</li>
 
-<i class="fa-solid fa-heart"></i>
-
-Daily Encouragement
-
-</h4>
-
-
-<p id="quoteText">
-
-Trust in the Lord with all your heart.
-
-</p>
-
-
-</div>
-
-
-
-
-<div class="version">
-
-CMS Version 2.0
-
-</div>
-
-
+</ul>
 
 </aside>
 
 
 
-
-
-<!-- ===========================
+<!-- =========================
 MAIN CONTENT
-=========================== -->
+========================= -->
+
+<main class="main-content">
 
 
-<main class="content">
 
+<!-- =========================
+HEADER
+========================= -->
 
-
-<header class="topbar">
-
+<header class="page-header">
 
 <div>
 
 <h1>
 
-<i class="fa-solid fa-calendar-days"></i>
+<i class="fas fa-calendar-days"></i>
 
-Events Management
+Church Events
 
 </h1>
 
-
-<p>
-
-Create, edit and publish church events for members.
-
-</p>
-
+<p id="currentDate"></p>
 
 </div>
 
 
+<div class="header-right">
+
+<div class="admin-card">
+
+<i class="fas fa-user-circle"></i>
+
+<span id="adminName">
+Administrator
+</span>
+
+</div>
 
 
 <button
+id="refreshEventsBtn"
+class="btn secondary">
 
-class="publishBtn"
+<i class="fas fa-rotate"></i>
 
-id="newEventBtn">
-
-
-<i class="fa-solid fa-plus"></i>
-
-New Event
-
+Refresh
 
 </button>
 
 
+<button
+id="addEventBtn"
+class="btn primary">
+
+<i class="fas fa-plus"></i>
+
+New Event
+
+</button>
+
+</div>
 
 </header>
 
 
 
+<!-- =========================
+STATISTICS
+========================= -->
 
+<section class="stats-grid">
 
-<!-- ===========================
-STATS
-=========================== -->
+<div class="stat-card">
 
+<h2 id="totalEvents">0</h2>
 
-<section class="stats">
+<p>Total Events</p>
 
+</div>
 
 
 <div class="stat-card">
 
+<h2 id="upcomingEvents">0</h2>
 
-<div class="icon blue">
-
-<i class="fa-solid fa-calendar-days"></i>
-
-</div>
-
-
-<div>
-
-<h2 id="totalEvents">
-
-0
-
-</h2>
-
-<span>
-
-Upcoming Events
-
-</span>
+<p>Upcoming</p>
 
 </div>
-
-
-</div>
-
-
-
 
 
 <div class="stat-card">
 
+<h2 id="ongoingEvents">0</h2>
 
-<div class="icon green">
-
-<i class="fa-solid fa-users"></i>
-
-</div>
-
-
-<div>
-
-<h2 id="totalGuests">
-
-0
-
-</h2>
-
-<span>
-
-Registered Guests
-
-</span>
+<p>Ongoing</p>
 
 </div>
-
-
-</div>
-
-
-
 
 
 <div class="stat-card">
 
+<h2 id="completedEvents">0</h2>
 
-<div class="icon orange">
-
-<i class="fa-solid fa-location-dot"></i>
-
-</div>
-
-
-<div>
-
-<h2 id="totalLocations">
-
-0
-
-</h2>
-
-<span>
-
-Locations
-
-</span>
+<p>Completed</p>
 
 </div>
-
-
-</div>
-
-
-
 
 
 <div class="stat-card">
 
+<h2 id="draftEvents">0</h2>
 
-<div class="icon purple">
-
-<i class="fa-solid fa-star"></i>
-
-</div>
-
-
-<div>
-
-<h2 id="featuredEvents">
-
-0
-
-</h2>
-
-
-<span>
-
-Featured Events
-
-</span>
-
+<p>Drafts</p>
 
 </div>
 
 
+<div class="stat-card">
+
+<h2 id="featuredEvents">0</h2>
+
+<p>Featured</p>
+
 </div>
-
-
 
 </section>
 
 
 
+<!-- =========================
+FILTERS
+========================= -->
 
-
-
-<!-- ===========================
-FORM + PREVIEW
-=========================== -->
-
-
-<section class="grid">
-
-
-
-<div class="card">
-
-
-<h2>
-
-<i class="fa-solid fa-calendar-plus"></i>
-
-Create New Event
-
-</h2>
-
-
-
-
-<form id="eventForm">
-
-
-
-<input type="hidden" id="eventId">
-
-
-
-
-
-<div class="input-group">
-
-
-<label>
-
-Event Title
-
-</label>
-
-
+<section class="filters">
 
 <input
 
 type="text"
 
-id="eventTitle"
+id="searchEvent"
 
-placeholder="Sunday Worship Service"
+placeholder="Search event...">
 
-required>
 
+<select id="categoryFilter">
 
+<option value="">
 
-</div>
+All Categories
 
+</option>
 
+<option value="Conference">
 
+Conference
 
+</option>
 
+<option value="Prayer">
 
+Prayer
 
-<div class="two-column">
+</option>
 
+<option value="Youth">
 
+Youth
 
-<div class="input-group">
+</option>
 
+<option value="Seminar">
 
-<label>
+Seminar
 
-Event Date
+</option>
 
-</label>
+<option value="Outreach">
 
+Outreach
 
+</option>
 
-<input
+<option value="Sunday Service">
 
-type="date"
+Sunday Service
 
-id="eventDate"
+</option>
 
-required>
+</select>
 
 
 
-</div>
+<select id="statusFilter">
 
+<option value="">
 
+All Status
 
+</option>
 
+<option value="draft">
 
-<div class="input-group">
+Draft
 
+</option>
 
-<label>
+<option value="published">
 
-Event Time
+Published
 
-</label>
+</option>
 
+<option value="completed">
 
+Completed
 
-<input
+</option>
 
-type="time"
+</select>
 
-id="eventTime"
 
-required>
 
+<select id="monthFilter">
 
+<option value="">
 
-</div>
+Month
 
+</option>
 
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8">August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">November</option>
+<option value="12">December</option>
 
-</div>
+</select>
 
 
 
+<select id="yearFilter">
 
+<option value="">
 
-<div class="input-group">
+Year
 
+</option>
 
-<label>
+<option>2026</option>
 
-Venue
+<option>2027</option>
 
-</label>
+<option>2028</option>
 
+<option>2029</option>
 
+<option>2030</option>
 
-<input
+</select>
 
-type="text"
 
-id="eventLocation"
 
-placeholder="Main Sanctuary"
+<select id="sortEvents">
 
-required>
+<option value="latest">
 
+Latest
 
+</option>
 
-</div>
+<option value="oldest">
 
+Oldest
 
+</option>
 
+<option value="title">
 
+Title
 
-<div class="input-group">
+</option>
 
+</select>
 
-<label>
+</section>
+<!-- =========================
+EVENTS TABLE
+========================= -->
 
-Speaker
+<section class="table-section">
 
-</label>
-
-
-
-<input
-
-type="text"
-
-id="eventSpeaker"
-
-placeholder="To be announced">
-
-
-
-</div>
-
-
-
-<!-- ===========================
-FIXED FIELD POSITIONS (GUESTS & FEATURED CHECKBOX)
-=========================== -->
-<div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:18px;
-margin-top:18px;
-margin-bottom:18px;
-">
+<div class="table-header">
 
 <div>
 
-<label style="
-display:block;
-font-weight:600;
-margin-bottom:8px;
-color:#374151;
-">
+<h2>Church Events</h2>
 
-<i class="fas fa-users"></i>
-
-Registered Guests
-
-</label>
-
-<input
-type="number"
-id="eventGuests"
-value="0"
-min="0"
-placeholder="Number of guests"
-
-style="
-width:100%;
-padding:13px;
-border:2px solid #dbeafe;
-border-radius:12px;
-font-size:15px;
-outline:none;
-transition:.3s;
-box-sizing: border-box;
-">
+<p id="eventCounter">0 Events Found</p>
 
 </div>
 
+<div>
 
+<button
+id="exportEventsBtn"
+class="btn secondary">
 
-<div style="
-display:flex;
-align-items:center;
-justify-content:center;
-padding-top:25px;
-">
+<i class="fas fa-file-csv"></i>
 
-<label style="
-display:flex;
-align-items:center;
-gap:12px;
-cursor:pointer;
-font-weight:600;
-font-size:16px;
-">
+Export CSV
 
-<input
+</button>
 
-type="checkbox"
+<button
+id="printEventsBtn"
+class="btn secondary">
 
-id="featuredEvent"
+<i class="fas fa-print"></i>
 
-style="
-width:22px;
-height:22px;
-cursor:pointer;
-accent-color:#2563eb;
-">
+Print
 
-⭐ Featured Event
-
-</label>
+</button>
 
 </div>
 
@@ -571,77 +467,589 @@ accent-color:#2563eb;
 
 
 
+<div class="table-responsive">
 
+<table class="events-table">
 
-<div class="input-group">
+<thead>
 
+<tr>
 
-<label>
+<th>Banner</th>
 
-Event Description
+<th>Event</th>
 
-</label>
+<th>Date</th>
 
+<th>Venue</th>
 
+<th>Category</th>
 
-<textarea
+<th>Status</th>
 
-id="eventDescription"
+<th>Capacity</th>
 
-rows="6"
+<th>Registered</th>
 
-placeholder="Write complete event details..."
+<th>Actions</th>
 
-required></textarea>
+</tr>
 
+</thead>
 
+<tbody id="eventsTableBody">
+
+<!-- JavaScript loads events here -->
+
+</tbody>
+
+</table>
 
 </div>
 
-<!-- ===========================
-BUTTONS
-=========================== -->
 
 
-<div class="button-group">
+<div
+id="emptyState"
+class="empty-state"
+style="display:none;">
+
+<i class="fas fa-calendar-xmark"></i>
+
+<h2>No Events Found</h2>
+
+<p>Create your first church event.</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+PAGINATION
+========================= -->
+
+<section class="pagination">
+
+<button
+id="previousPage"
+class="page-btn">
+
+<i class="fas fa-angle-left"></i>
+
+Previous
+
+</button>
+
+
+<div id="pageNumbers">
+
+</div>
 
 
 <button
+id="nextPage"
+class="page-btn">
 
+Next
+
+<i class="fas fa-angle-right"></i>
+
+</button>
+
+</section>
+
+
+
+<!-- =========================
+EVENT MODAL
+========================= -->
+
+<div
+id="eventModal"
+class="modal"
+aria-hidden="true">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2 id="modalTitle">
+
+<i class="fas fa-calendar-plus"></i>
+
+Create Event
+
+</h2>
+
+<button
+id="closeEventModal"
+class="close-btn">
+
+<i class="fas fa-times"></i>
+
+</button>
+
+</div>
+
+
+
+<form
+id="eventForm"
+enctype="multipart/form-data">
+
+<input
+type="hidden"
+id="eventId">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Title</label>
+
+<input
+type="text"
+id="title"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Subtitle</label>
+
+<input
+type="text"
+id="subtitle">
+
+</div>
+
+
+<div class="form-group full-width">
+
+<label>Description</label>
+
+<textarea
+id="description"
+rows="4"
+required></textarea>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Category</label>
+
+<select id="category">
+
+<option value="">Select</option>
+
+<option>Conference</option>
+
+<option>Prayer</option>
+
+<option>Youth</option>
+
+<option>Seminar</option>
+
+<option>Outreach</option>
+
+<option>Sunday Service</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Speaker</label>
+
+<input
+type="text"
+id="speaker">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Host</label>
+
+<input
+type="text"
+id="host">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Bible Reading</label>
+
+<input
+type="text"
+id="bibleVerse">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Start Date</label>
+
+<input
+type="date"
+id="startDate"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>End Date</label>
+
+<input
+type="date"
+id="endDate">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Start Time</label>
+
+<input
+type="time"
+id="startTime">
+
+</div>
+
+
+<div class="form-group">
+
+<label>End Time</label>
+
+<input
+type="time"
+id="endTime">
+
+</div>
+
+
+<div class="form-group full-width">
+
+<label>Venue</label>
+
+<input
+type="text"
+id="venue"
+required>
+
+</div>
+
+
+<div class="form-group full-width">
+
+<label>Google Maps Link</label>
+
+<input
+type="url"
+id="mapsLink">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Capacity</label>
+
+<input
+type="number"
+id="capacity"
+min="1">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Registration Deadline</label>
+
+<input
+type="datetime-local"
+id="deadline">
+
+</div>
+
+</div>
+<!-- =========================
+REGISTRATION SETTINGS
+========================= -->
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>
+Registration Required
+</label>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="registrationRequired">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>
+Featured Event
+</label>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="featured">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>
+Public Event
+</label>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="publicEvent"
+checked>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>
+Allow Comments
+</label>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="allowComments">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>
+Send Notification
+</label>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="sendNotification">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================
+MEDIA UPLOAD
+Matches FastAPI UploadFile
+========================= -->
+
+
+<div class="form-section">
+
+
+<h3>
+
+<i class="fas fa-image"></i>
+
+Event Media
+
+</h3>
+
+
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>
+Banner Image
+</label>
+
+<input
+type="file"
+id="banner"
+accept="image/*">
+
+
+<div
+id="bannerPreview"
+class="banner-preview">
+
+</div>
+
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>
+Attachment
+</label>
+
+<input
+type="file"
+id="attachment">
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================
+EVENT STATUS
+Matches backend status
+========================= -->
+
+
+<div class="form-group">
+
+
+<label>
+Status
+</label>
+
+
+<select
+id="status">
+
+
+<option value="draft">
+Draft
+</option>
+
+
+<option value="published">
+Published
+</option>
+
+
+<option value="completed">
+Completed
+</option>
+
+
+<option value="cancelled">
+Cancelled
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+<!-- =========================
+FORM ACTION BUTTONS
+========================= -->
+
+
+<div class="modal-footer">
+
+
+<button
+type="button"
+id="saveDraftBtn"
+class="btn secondary">
+
+
+<i class="fas fa-file"></i>
+
+Save Draft
+
+
+</button>
+
+
+
+
+<button
 type="submit"
-
-class="saveBtn"
-
-id="saveEventBtn">
+id="saveEventBtn"
+class="btn primary">
 
 
-<i class="fa-solid fa-floppy-disk"></i>
+<i class="fas fa-save"></i>
 
 Save Event
 
 
 </button>
-
-
-
-
-
-<button
-
-type="reset"
-
-class="cancelBtn"
-
-id="cancelBtn">
-
-
-<i class="fa-solid fa-xmark"></i>
-
-Clear
-
-
-</button>
-
 
 
 </div>
@@ -654,254 +1062,32 @@ Clear
 </div>
 
 
-
-
-
-
-
-<!-- ===========================
-LIVE PREVIEW
-=========================== -->
-
-
-<div class="card preview">
-
-
-<h2>
-
-<i class="fa-solid fa-eye"></i>
-
-Live Preview
-
-</h2>
-
-
-
-
-
-<div class="preview-card">
-
-
-
-<div class="preview-image">
-
-
-<img
-
-id="previewImage"
-
-src="images/default-event.jpg"
-
-alt="Event Preview">
-
-
 </div>
 
 
 
 
 
+<!-- =========================
+LOADING OVERLAY
+========================= -->
 
-<div class="preview-content">
 
+<div
+id="loadingOverlay"
+class="loading-overlay">
 
 
-<span
+<div class="loader">
 
-class="badge"
-
-id="previewStatus">
-
-
-Upcoming Event
-
-
-</span>
-
-
-
-
-
-<h3 id="previewTitle">
-
-Sunday Worship Service
-
-</h3>
-
-
-
-
-
-<p id="previewDescription">
-
-Your event description will appear here while typing.
-
-</p>
-
-
-
-
-
-
-
-<div class="preview-meta">
-
-
-
-
-
-<div>
-
-<i class="fa-solid fa-calendar-days"></i>
-
-<span id="previewDate">
-
-Select Date
-
-</span>
-
-</div>
-
-
-
-
-
-<div>
-
-<i class="fa-solid fa-clock"></i>
-
-<span id="previewTime">
-
-Select Time
-
-</span>
-
-</div>
-
-
-
-
-
-<div>
-
-<i class="fa-solid fa-location-dot"></i>
-
-<span id="previewVenue">
-
-Venue
-
-</span>
-
-</div>
-
-
-
-
-
-<div>
-
-<i class="fa-solid fa-microphone"></i>
-
-<span id="previewSpeaker">
-
-Speaker
-
-</span>
-
-</div>
-
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ===========================
-RECENT EVENTS
-=========================== -->
-
-
-
-<section class="card">
-
-
-
-<div class="section-header">
-
-
-
-<div>
-
-
-<h2>
-
-
-<i class="fa-solid fa-calendar-week"></i>
-
-
-Recent Events
-
-
-</h2>
-
-
-
+<i class="fas fa-spinner fa-spin"></i>
 
 <p>
-
-Recently created and upcoming church events.
-
+Loading...
 </p>
 
 
-
 </div>
-
-
-
-
-
-<div class="search-box">
-
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-
-<input
-
-type="search"
-
-id="searchEvent"
-
-placeholder="Search events...">
-
-
-</div>
-
 
 
 </div>
@@ -910,239 +1096,41 @@ placeholder="Search events...">
 
 
 
-
-
-<!-- JAVASCRIPT WILL LOAD EVENTS HERE -->
-
+<!-- =========================
+TOAST NOTIFICATIONS
+========================= -->
 
 
 <div
-
-class="events-list"
-
-id="eventsContainer">
-
+id="toastContainer"
+class="toast-container">
 
 
 </div>
-
-
-
-
-</section>
-
-
-
-
-
-</main>
+<!-- =========================
+MODAL END
+========================= -->
 
 
 </div>
+<!-- end modal-content -->
 
-
-
-
-
-
-
-
-
-<!-- ===========================
-GALLERY MODAL
-=========================== -->
-
-
-<div
-
-class="modal"
-
-id="galleryModal">
-
-
-
-<div class="modal-content">
-
-
-
-
-
-<div class="modal-header">
-
-
-<h2>
-
-<i class="fa-solid fa-images"></i>
-
-Church Gallery
-
-
-</h2>
-
-
-
-
-
-<button
-
-class="closeModal"
-
-id="closeGallery">
-<i class="fa-solid fa-xmark"></i>
-
-</button>
 
 </div>
+<!-- end eventModal -->
 
-<!-- ===========================
-GALLERY TOOLS
-=========================== -->
 
-<div style="
-padding:20px;
-background:#f8fafc;
-border-bottom:1px solid #e5e7eb;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-gap:15px;
-">
 
-<div>
 
-<h3 style="
-margin:0;
-color:#1e3a8a;
-font-size:18px;
-">
+<!-- =========================
+PAGE SCRIPTS
+========================= -->
 
-<i class="fas fa-image"></i>
-
-Choose Event Image
-
-</h3>
-
-<p style="
-margin:6px 0 0;
-font-size:13px;
-color:#64748b;
-">
-
-Click any gallery image to use it as the event banner.
-
-</p>
-
-</div>
-
-<button
-
-type="button"
-
-id="uploadImageBtn"
-
-style="
-padding:12px 22px;
-border:none;
-border-radius:12px;
-background:linear-gradient(135deg,#2563eb,#1d4ed8);
-color:white;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 10px 20px rgba(37,99,235,.25);
-transition:.3s;
-">
-
-<i class="fas fa-upload"></i>
-
-Upload New Image
-
-</button>
-
-<input
-type="file"
-id="eventImage"
-accept="image/*"
-style="display:none;">
-
-</div>
-
-<!-- ===========================
-GALLERY GRID
-=========================== -->
-
-<div
-
-class="galleryGrid"
-
-id="galleryGrid"
-
-style="
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-gap:18px;
-padding:22px;
-max-height:520px;
-overflow-y:auto;
-background:#f9fafb;
-">
-
-<div style="
-grid-column:1/-1;
-text-align:center;
-padding:60px 20px;
-color:#94a3b8;
-font-size:18px;
-">
-
-<i class="fas fa-spinner fa-spin"
-style="
-font-size:40px;
-margin-bottom:15px;
-display:block;
-"></i>
-
-Loading gallery...
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ===========================
-TOAST
-=========================== -->
-
-<div
-
-id="toast"
-
-class="toast"
-
-style="
-position:fixed;
-top:25px;
-right:25px;
-padding:15px 24px;
-background:#2563eb;
-color:#fff;
-font-weight:600;
-border-radius:12px;
-box-shadow:0 18px 45px rgba(0,0,0,.2);
-display:none;
-z-index:99999;
-animation:fadeIn .35s ease;
-">
-
-Saved Successfully
-
-</div>
 
 <script src="events.js"></script>
 
+
 </body>
+
 
 </html>
