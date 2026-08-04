@@ -5,8 +5,11 @@ from sqlalchemy import (
     Boolean,
     DateTime,
     ForeignKey,
-    Table
+    Text,
+    Table,
+    Float
 )
+
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from sqlalchemy import Date
@@ -316,6 +319,12 @@ class Member(Base):
         DateTime(timezone=True),
         server_default=func.now(),
         onupdate=func.now()
+    )
+
+    givings = relationship(
+        "Giving",
+        back_populates="member",
+        cascade="all, delete-orphan"
     )
 # ==========================================
 # SERMON
@@ -742,4 +751,201 @@ class Event(Base):
         DateTime,
         server_default=func.now(),
         onupdate=func.now()
+    )
+
+from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime, ForeignKey
+from datetime import datetime
+from app.database import Base
+
+class Conversation(Base):
+    __tablename__ = "conversations"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(100), nullable=True)
+    type = Column(String(20), default="private")
+    created_by = Column(String, ForeignKey("members.member_number"))
+    last_message = Column(Text, nullable=True)
+    last_message_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class ConversationMember(Base):
+    __tablename__ = "conversation_members"
+    id = Column(Integer, primary_key=True, index=True)
+    conversation_id = Column(Integer, ForeignKey("conversations.id"))
+    member_number = Column(String, ForeignKey("members.member_number"))
+    joined_at = Column(DateTime, default=datetime.utcnow)
+
+class Message(Base):
+    __tablename__ = "messages"
+    id = Column(Integer, primary_key=True, index=True)
+    conversation_id = Column(Integer, ForeignKey("conversations.id"))
+    member_number = Column(String, ForeignKey("members.member_number"))
+    sender_name = Column(String(100))
+    message = Column(Text)
+    is_read = Column(Boolean, default=False)
+    edited = Column(Boolean, default=False)
+    deleted = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
+
+# =====================================================
+# GIVING MODEL
+# Kingdom Ways Church CMS
+# =====================================================
+
+class Giving(Base):
+    __tablename__ = "givings"
+
+    # =================================================
+    # PRIMARY KEY
+    # =================================================
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    # =================================================
+    # RECEIPT
+    # =================================================
+
+    receipt_number = Column(
+        String(50),
+        unique=True,
+        nullable=False,
+        index=True
+    )
+
+    # =================================================
+    # MEMBER DETAILS
+    # =================================================
+
+    member_id = Column(
+        Integer,
+        ForeignKey(
+            "members.id",
+            ondelete="CASCADE"
+        ),
+        nullable=False,
+        index=True
+    )
+
+    member_number = Column(
+        String(50),
+        nullable=False,
+        index=True
+    )
+
+    member_name = Column(
+        String(150),
+        nullable=False
+    )
+
+    phone_number = Column(
+        String(20),
+        nullable=False
+    )
+
+    # =================================================
+    # GIVING DETAILS
+    # =================================================
+
+    category = Column(
+        String(50),
+        nullable=False,
+        index=True
+    )
+
+    amount = Column(
+        Float,
+        nullable=False
+    )
+
+    reference = Column(
+        Text,
+        nullable=True
+    )
+
+    status = Column(
+        String(20),
+        default="Pending",
+        nullable=False,
+        index=True
+    )
+
+    # =================================================
+    # M-PESA INFORMATION
+    # =================================================
+
+    checkout_request_id = Column(
+        String(100),
+        unique=True,
+        nullable=True,
+        index=True
+    )
+
+    merchant_request_id = Column(
+        String(100),
+        nullable=True
+    )
+
+    transaction_id = Column(
+        String(100),
+        unique=True,
+        nullable=True,
+        index=True
+    )
+
+    mpesa_receipt = Column(
+        String(50),
+        unique=True,
+        nullable=True,
+        index=True
+    )
+
+    safaricom_name = Column(
+        String(150),
+        nullable=True
+    )
+
+    result_code = Column(
+        Integer,
+        nullable=True
+    )
+
+    result_description = Column(
+        Text,
+        nullable=True
+    )
+
+    # =================================================
+    # TIMESTAMPS
+    # =================================================
+
+    created_at = Column(
+        DateTime,
+        default=datetime.utcnow,
+        nullable=False
+    )
+
+    confirmed_at = Column(
+        DateTime,
+        nullable=True
+    )
+
+    updated_at = Column(
+        DateTime,
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow
+    )
+
+    # =================================================
+    # RELATIONSHIP
+    # =================================================
+
+    member = relationship(
+        "Member",
+        back_populates="givings"
     )

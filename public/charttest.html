@@ -21,6 +21,95 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 <!-- Connect Hub Style -->
 <link rel="stylesheet" href="charttest.css">
 
+<style>
+.member-directory {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.directory-heading {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    opacity: .6;
+}
+.member-directory-list {
+    max-height: 160px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.member-directory-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.member-directory-item:hover {
+    background: rgba(255,255,255,0.06);
+}
+.member-directory-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #103B73;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+.member-directory-avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+.status-dot {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #0d1b33;
+}
+.status-dot.online {
+    background: #2ecc71;
+}
+.status-dot.offline {
+    background: #7a7a7a;
+}
+.member-directory-name {
+    font-size: 14px;
+}
+.member-directory-empty {
+    font-size: 13px;
+    opacity: .5;
+    padding: 4px 8px;
+}
+.conversation-item {
+    position: relative;
+}
+.unread-badge {
+    margin-left: auto;
+    background: #2ecc71;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+}
+</style>
+
 
 </head>
 
@@ -77,7 +166,7 @@ KWC-000000
 <div class="header-actions">
 
 
-<button title="New Group">
+<button id="newChatBtn" title="Start New Chat">
 
 <i class="fa-solid fa-users"></i>
 
@@ -129,6 +218,24 @@ placeholder="Search conversations..."
 </div>
 
 
+
+
+<!-- CHURCH MEMBERS DIRECTORY -->
+
+
+<div class="member-directory" id="memberDirectorySection">
+
+<h4 class="directory-heading">Church Members</h4>
+
+<div
+class="member-directory-list"
+id="memberDirectoryList">
+
+<!-- JavaScript loads approved members -->
+
+</div>
+
+</div>
 
 
 

@@ -353,3 +353,78 @@ class EventRegistrationCreate(BaseModel):
     event_id: int
 
     member_id: int
+
+# =====================================================
+# GIVING SCHEMAS
+# Kingdom Ways Church CMS
+# =====================================================
+
+class GivingCreate(BaseModel):
+    member_id: int
+    phone_number: str
+    category: str
+    amount: float
+    reference: Optional[str] = None
+
+
+# =====================================================
+# STK PUSH REQUEST
+# =====================================================
+
+class STKPushRequest(BaseModel):
+    member_id: int
+    phone_number: str
+    category: str
+    amount: float
+    reference: Optional[str] = None
+
+
+# =====================================================
+# GIVING RESPONSE
+# =====================================================
+
+class GivingResponse(BaseModel):
+    success: bool
+    message: str
+    receipt_number: Optional[str] = None
+    checkout_request_id: Optional[str] = None
+
+
+# =====================================================
+# GIVING HISTORY
+# =====================================================
+
+class GivingHistory(BaseModel):
+    id: int
+    receipt_number: str
+    category: str
+    amount: float
+    phone_number: str
+    reference: Optional[str] = None
+    status: str
+    mpesa_receipt: Optional[str] = None
+    created_at: datetime
+    confirmed_at: Optional[datetime] = None
+
+    class Config:
+        from_attributes = True
+
+
+# =====================================================
+# GIVING HISTORY LIST
+# =====================================================
+
+class GivingHistoryResponse(BaseModel):
+    success: bool
+    total: int
+    history: list[GivingHistory]
+
+
+# =====================================================
+# M-PESA CALLBACK
+# =====================================================
+
+class MpesaCallbackResponse(BaseModel):
+    success: bool
+    message: str
+

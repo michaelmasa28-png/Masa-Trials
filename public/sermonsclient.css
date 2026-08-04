@@ -2025,17 +2025,17 @@ SMOOTH PAGE LOAD
 
 @keyframes pageEnter{
 
-
     from{
-
-
         opacity:0;
+        transform:translateY(25px);
+    }
 
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 
-        transform:
-
-
-        translateY(25
+}
 
 /*==========================================================
         KINGDOM WAYS CHURCH
@@ -2882,50 +2882,141 @@ EMPTY SERMON MESSAGE
 
 
 /*==========================================================
-VIDEO READY AREA
-(Future sermon video player)
+SERMON MEDIA — thumbnail-to-player system
+(selectors match the actual DOM built by sermonsclient.js:
+.sermon-media > .sermon-thumbnail > img.sermon-image +
+.thumbnail-overlay > .play-button + .video-label, and the
+.active-video that replaces it on click)
+
+Fixed height means the box NEVER stretches tall/vertical
+like a TikTok clip, no matter what orientation the source
+video or thumbnail was recorded in — object-fit:cover always
+crops it into a clean landscape box.
 ==========================================================*/
 
-
-.sermon-video{
-
-
+.sermon-media{
     width:100%;
-
-
-    aspect-ratio:16/9;
-
-
-    border-radius:20px;
-
-
-    overflow:hidden;
-
-
-    background:#000;
-
-
     margin-bottom:20px;
-
-
 }
 
-
-
-
-.sermon-video video{
-
-
+.sermon-thumbnail{
+    position:relative;
     width:100%;
-
-
-    height:100%;
-
-
-    object-fit:cover;
-
-
+    height:230px;
+    border-radius:20px;
+    overflow:hidden;
+    cursor:pointer;
+    background:linear-gradient(135deg,#0b0b12,#1c1c28);
+    box-shadow:0 14px 34px rgba(0,0,0,.28);
+    transition:box-shadow .35s ease, transform .35s ease;
 }
+
+.sermon-card:hover .sermon-thumbnail{
+    transform:translateY(-4px);
+    box-shadow:0 20px 46px rgba(0,0,0,.4);
+}
+
+/* the <img class="sermon-image"> already gets width/height/object-fit
+   from the base .sermon-image rule earlier in this file — this just
+   pins it exactly to the thumbnail box and adds the hover zoom */
+
+.sermon-thumbnail .sermon-image{
+    position:absolute;
+    inset:0;
+    height:100%;
+    transition:transform .6s ease, filter .4s ease;
+}
+
+.sermon-card:hover .sermon-thumbnail .sermon-image{
+    transform:scale(1.08);
+    filter:brightness(.85);
+}
+
+/* dark gradient scrim behind the play button + label so they
+   read clearly over any thumbnail, light or dark */
+
+.thumbnail-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    background:linear-gradient(to top, rgba(0,0,0,.6), rgba(0,0,0,.05) 65%);
+    z-index:2;
+    pointer-events:none;
+}
+
+/*==========================================================
+PLAY BUTTON — glass badge with pulsing ring
+==========================================================*/
+
+.play-button{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(6px);
+    box-shadow:0 10px 26px rgba(0,0,0,.4);
+    color:var(--primary);
+    font-size:1.3rem;
+    position:relative;
+    transition:transform .3s ease, background .3s ease;
+}
+
+.play-button::after{
+    content:"";
+    position:absolute;
+    inset:-10px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.6);
+    animation:sermonPulse 2.2s ease-out infinite;
+}
+
+@keyframes sermonPulse{
+    0%{ transform:scale(.85); opacity:.9; }
+    80%{ transform:scale(1.35); opacity:0; }
+    100%{ transform:scale(1.35); opacity:0; }
+}
+
+.sermon-card:hover .play-button{
+    transform:scale(1.12);
+    background:#fff;
+}
+
+/*==========================================================
+ONCE A SERMON IS PLAYING
+(sermonsclient.js swaps thumb.innerHTML for a <video
+class="active-video">, so the overlay/image are already gone
+from the DOM at that point — this just styles the player)
+==========================================================*/
+
+.active-video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    background:#000;
+}
+
+/*==========================================================
+RESPONSIVE — shorter stage on small screens
+==========================================================*/
+
+@media(max-width:600px){
+    .sermon-thumbnail{
+        height:190px;
+    }
+}
+
+
+
+
 
 
 

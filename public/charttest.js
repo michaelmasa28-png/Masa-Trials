@@ -2,9 +2,8 @@
 // KINGDOM WAYS CHURCH
 // CONNECT HUB
 // charttest.js
-// PART 1
+// Rebuilt from scratch
 // =====================================================
-
 
 
 // ===============================
@@ -14,1530 +13,972 @@
 const API = "";
 
 
-
-
 // ===============================
 // ELEMENTS
 // ===============================
 
-
-const memberPhoto =
-document.getElementById("memberPhoto");
-
-
-const memberName =
-document.getElementById("memberName");
-
-
-const memberNumber =
-document.getElementById("memberNumber");
-
-
-const conversationList =
-document.getElementById("conversationList");
-
-
-const messageContainer =
-document.getElementById("messageContainer");
-
-
-const messageForm =
-document.getElementById("messageForm");
-
-
-const messageInput =
-document.getElementById("messageInput");
-
-
-const activeChatName =
-document.getElementById("activeChatName");
-
-
-const activeChatInfo =
-document.getElementById("activeChatInfo");
-
-
-const adminSection =
-document.getElementById("adminSection");
-
-
-
+const memberPhoto = document.getElementById("memberPhoto");
+const memberName = document.getElementById("memberName");
+const memberNumber = document.getElementById("memberNumber");
+const conversationList = document.getElementById("conversationList");
+const messageContainer = document.getElementById("messageContainer");
+const messageForm = document.getElementById("messageForm");
+const messageInput = document.getElementById("messageInput");
+const activeChatName = document.getElementById("activeChatName");
+const activeChatInfo = document.getElementById("activeChatInfo");
+const adminSection = document.getElementById("adminSection");
+const newChatBtn = document.getElementById("newChatBtn");
+const memberDirectoryList = document.getElementById("memberDirectoryList");
+const chatSearch = document.getElementById("chatSearch");
 
 
 // ===============================
-// CURRENT MEMBER
+// STATE
 // ===============================
-
 
 let currentMember = null;
-
-
 let activeConversation = null;
-
-
 let conversations = [];
+let lastMessagesSignature = null;
 
 
-
+// ===============================
+// SESSION
+// ===============================
 
 function loadMemberSession(){
 
-
-    const saved =
-    localStorage.getItem("member");
-
-
+    const saved = localStorage.getItem("memberSession");
 
     if(!saved){
-
-
-        console.log(
-            "No member session found"
-        );
-
-
-        window.location.href="btn.html";
-
-
+        console.log("No member session found");
+        window.location.href = "btn.html";
         return;
-
-
     }
 
+    currentMember = JSON.parse(saved);
 
+    if(currentMember.expiresAt && Date.now() >= currentMember.expiresAt){
+        console.log("Member session expired");
+        localStorage.removeItem("memberSession");
+        window.location.href = "btn.html";
+        return;
+    }
 
-
-    currentMember =
-    JSON.parse(saved);
-
-
-
-
-    console.log(
-        "CURRENT MEMBER:",
-        currentMember
-    );
-
-
+    console.log("CURRENT MEMBER:", currentMember);
 
     displayMember();
 
 }
 
 
-
-
-
 // ===============================
 // DISPLAY MEMBER
 // ===============================
 
-
 function displayMember(){
 
-
-    if(!currentMember)
-    return;
-
-
+    if(!currentMember) return;
 
     memberName.textContent =
-    currentMember.full_name ||
-    currentMember.username;
-
-
+        currentMember.full_name || currentMember.username;
 
     memberNumber.textContent =
-    currentMember.member_number ||
-    "KWC MEMBER";
+        currentMember.member_number || "KWC MEMBER";
 
-
-
-
-    if(currentMember.photo){
-
+    if(memberPhoto){
 
         memberPhoto.src =
-        currentMember.photo;
+            currentMember.photo || "images/default-avatar.png";
 
-
-    }
-
-    else{
-
-
-        memberPhoto.src =
-        "images/default-avatar.png";
-
+        memberPhoto.onerror = function(){
+            this.src = "images/default-avatar.png";
+        };
 
     }
-
-
-
 
     checkAdminAccess();
 
-
 }
-
-
-
-
-
-
 
 
 // ===============================
 // ADMIN CHECK
 // ===============================
 
-
 function checkAdminAccess(){
 
-
+    if(!adminSection) return;
 
     if(
         currentMember.role === "admin" ||
         currentMember.role === "superadmin"
     ){
-
-
-        adminSection.classList.remove(
-            "hidden"
-        );
-
-
-
+        adminSection.classList.remove("hidden");
     }
 
-
-
 }
-
-
-
-
-
 
 
 // ===============================
 // LOAD CONVERSATIONS
 // ===============================
 
-
 async function loadConversations(){
-
-
 
     try{
 
-
-        const response =
-        await fetch(
-        `${API}/connect/conversations`
+        const response = await fetch(
+            `${API}/api/chat/conversations/${currentMember.member_number}`
         );
 
-
-
         if(!response.ok){
-
-
-            throw new Error(
-            "Conversation loading failed"
-            );
-
-
+            throw new Error("Conversation loading failed");
         }
 
+        const data = await response.json();
 
-
-
-        conversations =
-        await response.json();
-
-
-
+        conversations = data.conversations || [];
 
         renderConversationList();
-
-
 
     }
 
     catch(error){
 
-
-
-        console.log(
-            "Using offline conversations"
-        );
-
-
+        console.log("Using offline conversations");
 
         createDemoConversations();
 
-
-
     }
-
-
 
 }
 
 
-
-
-
-
-
-
 // ===============================
-// DEMO DATA
-// REMOVE AFTER API READY
+// DEMO DATA (fallback only, network failure)
 // ===============================
-
 
 function createDemoConversations(){
 
-
-
     conversations = [
-
-
         {
-
-            id:1,
-
-            name:"KINGDOM WAYS COMMUNITY",
-
-            image:"images/logo.png",
-
-            last:"Welcome to Connect Hub"
-
-        },
-
-
-        {
-
-            id:2,
-
-            name:"Youth Fellowship",
-
-            image:"images/default-avatar.png",
-
-            last:"Weekly discussion"
-
-        },
-
-
-        {
-
-            id:3,
-
-            name:"Prayer Group",
-
-            image:"images/default-avatar.png",
-
-            last:"Share prayer requests"
-
+            id: 1,
+            name: "KINGDOM WAYS COMMUNITY",
+            image: "images/logo.png",
+            last_message: "Welcome to Connect Hub",
+            unread_count: 0
         }
-
-
     ];
-
-
 
     renderConversationList();
 
-
-
 }
-
-
-
-
-
 
 
 // ===============================
 // RENDER CHAT LIST
 // ===============================
 
-
 function renderConversationList(){
 
+    conversationList.innerHTML = "";
 
-    conversationList.innerHTML="";
+    conversations.forEach(chat => {
 
+        const item = document.createElement("div");
 
-
-    conversations.forEach(chat=>{
-
-
-
-        const item =
-        document.createElement("div");
-
-
-
-        item.className =
-        "conversation-item";
-
-
+        item.className = "conversation-item";
 
         item.innerHTML = `
 
+            <img src="${chat.image || 'images/default-avatar.png'}">
 
-        <img src="${chat.image}">
+            <div>
+                <h4>${chat.name}</h4>
+                <p>${chat.last_message || ""}</p>
+            </div>
 
-
-        <div>
-
-        <h4>
-
-        ${chat.name}
-
-        </h4>
-
-
-        <p>
-
-        ${chat.last || ""}
-
-        </p>
-
-
-        </div>
-
+            ${
+                chat.unread_count > 0
+                ? `<span class="unread-badge">${chat.unread_count}</span>`
+                : ""
+            }
 
         `;
 
-
-
-        item.onclick = ()=>{
-
-
+        item.onclick = () => {
             openConversation(chat);
-
-
         };
-
-
 
         conversationList.appendChild(item);
 
-
-
     });
-
-
 
 }
 
 
-// =====================================================
-// KINGDOM WAYS CHURCH
-// CONNECT HUB
-// charttest.js
-// PART 2
-// =====================================================
+// ===============================
+// LOAD APPROVED MEMBERS DIRECTORY
+// ===============================
+
+async function loadMemberDirectory(){
+
+    if(!memberDirectoryList) return;
+
+    try{
+
+        const response = await fetch(
+            `${API}/api/chat/members/${currentMember.member_number}`
+        );
+
+        if(!response.ok){
+            throw new Error("Member directory unavailable");
+        }
+
+        const data = await response.json();
+
+        renderMemberDirectory(data.members || []);
+
+    }
+
+    catch(error){
+
+        console.log("Member directory error:", error);
+
+        memberDirectoryList.innerHTML =
+            `<p class="member-directory-empty">Unable to load members.</p>`;
+
+    }
+
+}
+
+
+// ===============================
+// RENDER APPROVED MEMBERS DIRECTORY
+// ===============================
+
+function renderMemberDirectory(members){
+
+    memberDirectoryList.innerHTML = "";
+
+    if(members.length === 0){
+        memberDirectoryList.innerHTML =
+            `<p class="member-directory-empty">No other approved members yet.</p>`;
+        return;
+    }
+
+    members.forEach(member => {
+
+        const item = document.createElement("div");
+
+        item.className = "member-directory-item";
+
+        const initials = (member.full_name || "?")
+            .split(" ")
+            .map(part => part.charAt(0))
+            .slice(0, 2)
+            .join("")
+            .toUpperCase();
+
+        const statusClass = member.is_online ? "online" : "offline";
+
+        item.innerHTML = `
+            <div class="member-directory-avatar-wrap">
+                <div class="member-directory-avatar">${initials}</div>
+                <span class="status-dot ${statusClass}"></span>
+            </div>
+            <span class="member-directory-name">${member.full_name}</span>
+        `;
+
+        item.onclick = () => {
+            startChatWith(member.member_number);
+        };
+
+        memberDirectoryList.appendChild(item);
+
+    });
+
+}
+
+
+// ===============================
+// START OR OPEN A CHAT WITH A GIVEN MEMBER NUMBER
+// ===============================
+
+async function startChatWith(receiverNumber){
+
+    if(receiverNumber === currentMember.member_number){
+        alert("You can't start a chat with yourself.");
+        return;
+    }
+
+    try{
+
+        const response = await fetch(
+            `${API}/api/chat/private`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    sender_number: currentMember.member_number,
+                    receiver_number: receiverNumber
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if(!response.ok || !data.success){
+            alert(
+                data.detail || data.message ||
+                "Could not start conversation. Check the member number."
+            );
+            return;
+        }
+
+        await loadConversations();
+
+        const opened = conversations.find(c => c.id === data.conversation_id);
+
+        if(opened){
+            openConversation(opened);
+        }
+
+    }
+
+    catch(error){
+
+        console.error("Start Chat Error:", error);
+        alert("Unable to connect to the server.");
+
+    }
+
+}
+
+
+// ===============================
+// NEW CHAT BUTTON (manual fallback)
+// ===============================
+
+async function startNewChat(){
+
+    const receiverNumber = prompt(
+        "Enter the member number to start a chat with (e.g. KWC-2026-000004):"
+    );
+
+    if(!receiverNumber) return;
+
+    const trimmed = receiverNumber.trim();
+
+    if(!trimmed) return;
+
+    await startChatWith(trimmed);
+
+}
+
+if(newChatBtn){
+    newChatBtn.addEventListener("click", startNewChat);
+}
 
 
 // ===============================
 // OPEN CONVERSATION
 // ===============================
 
-
 function openConversation(chat){
-
 
     activeConversation = chat;
 
+    lastMessagesSignature = null;
 
-
-    activeChatName.textContent =
-    chat.name;
-
-
-
-    activeChatInfo.textContent =
-    "Kingdom Ways Connect";
-
-
+    activeChatName.textContent = chat.name;
+    activeChatInfo.textContent = "Kingdom Ways Connect";
 
     loadMessages(chat.id);
 
-
+    markConversationRead(chat.id);
 
 }
 
 
+// ===============================
+// MARK CONVERSATION READ
+// ===============================
 
+async function markConversationRead(conversationId){
+
+    try{
+
+        await fetch(
+            `${API}/api/chat/conversations/${conversationId}/read/${currentMember.member_number}`,
+            { method: "PUT" }
+        );
+
+        await loadConversations();
+
+    }
+
+    catch(error){
+
+        console.log("Mark read error:", error);
+
+    }
+
+}
 
 
 // ===============================
 // LOAD MESSAGES
 // ===============================
 
-
 async function loadMessages(chatId){
-
-
-
-    messageContainer.innerHTML="";
-
-
 
     try{
 
-
-        const response =
-        await fetch(
-        `${API}/connect/messages/${chatId}`
+        const response = await fetch(
+            `${API}/api/chat/messages/${chatId}`
         );
 
-
-
         if(!response.ok){
-
-            throw new Error(
-            "Message API unavailable"
-            );
-
+            throw new Error("Message API unavailable");
         }
 
+        const data = await response.json();
 
-
-        const messages =
-        await response.json();
-
-
-
-        renderMessages(messages);
-
-
+        renderMessages(data.messages || []);
 
     }
-
 
     catch(error){
 
-
-
-        console.log(
-        "Using empty conversation"
-        );
-
-
+        console.log("Using empty conversation");
 
         renderMessages([]);
 
-
-
     }
 
-
-
 }
-
-
-
-
-
-
 
 
 // ===============================
 // DISPLAY MESSAGES
 // ===============================
 
-
 function renderMessages(messages){
 
+    const signature =
+        messages.map(m => `${m.id}:${m.message}:${m.edited ? 1 : 0}`).join(",");
 
+    if(signature === lastMessagesSignature){
+        return;
+    }
 
-    messageContainer.innerHTML="";
+    lastMessagesSignature = signature;
 
+    messageContainer.innerHTML = "";
 
+    if(messages.length === 0){
 
-    if(messages.length===0){
-
-
-        messageContainer.innerHTML=`
-
-
-        <div class="no-conversation">
-
-
-        <i class="fa-solid fa-comments"></i>
-
-
-        <p>
-        Start your conversation
-        </p>
-
-
-        </div>
-
-
+        messageContainer.innerHTML = `
+            <div class="no-conversation">
+                <i class="fa-solid fa-comments"></i>
+                <p>Start your conversation</p>
+            </div>
         `;
-
-
 
         return;
 
-
     }
 
-
-
-
-
-
-
-    messages.forEach(message=>{
-
-
+    messages.forEach(message => {
         createMessageBubble(message);
-
-
     });
 
-
-
 }
-
-
-
-
-
-
 
 
 // ===============================
 // CREATE MESSAGE BUBBLE
 // ===============================
 
-
 function createMessageBubble(message){
 
-
-
-    const bubble =
-    document.createElement("div");
-
-
+    const bubble = document.createElement("div");
 
     const sender =
-    message.member_id ==
-    currentMember.member_id;
+        message.member_number == currentMember.member_number;
 
-
-
-    bubble.className =
-    sender
-
-    ?
-
-    "message-bubble sender"
-
-    :
-
-    "message-bubble receiver";
-
-
-
-
-
+    bubble.className = sender
+        ? "message-bubble sender"
+        : "message-bubble receiver";
 
     bubble.innerHTML = `
 
+        <strong>${message.sender_name || "Member"}</strong>
 
-    <strong>
+        <p>${message.message}</p>
 
-    ${message.sender_name || "Member"}
+        <span class="message-time">
+            ${formatTime(message.created_at)}
+            ${message.edited ? '<span class="edited-tag">(edited)</span>' : ""}
+        </span>
 
-    </strong>
-
-
-    <p>
-
-    ${message.message}
-
-    </p>
-
-
-
-    <span class="message-time">
-
-    ${formatTime(message.created_at)}
-
-    </span>
-
-
+        ${
+            sender
+            ? `<span class="message-actions">
+                <button class="msg-edit-btn" title="Edit">&#9998;</button>
+                <button class="msg-delete-btn" title="Delete">&#128465;</button>
+            </span>`
+            : ""
+        }
 
     `;
 
+    if(sender){
 
+        const editBtn = bubble.querySelector(".msg-edit-btn");
+        const deleteBtn = bubble.querySelector(".msg-delete-btn");
 
-    messageContainer.appendChild(
-    bubble
-    );
+        if(editBtn){
+            editBtn.onclick = () => {
+                editMessage(message.id, message.message);
+            };
+        }
 
+        if(deleteBtn){
+            deleteBtn.onclick = () => {
+                deleteMessageBubble(message.id);
+            };
+        }
 
+    }
 
-    messageContainer.scrollTop =
-    messageContainer.scrollHeight;
+    messageContainer.appendChild(bubble);
 
-
+    messageContainer.scrollTop = messageContainer.scrollHeight;
 
 }
 
 
+// ===============================
+// EDIT MESSAGE
+// ===============================
+
+async function editMessage(messageId, currentText){
+
+    const newText = prompt("Edit your message:", currentText);
+
+    if(newText === null) return;
+
+    const trimmed = newText.trim();
+
+    if(!trimmed || trimmed === currentText) return;
+
+    try{
+
+        const response = await fetch(
+            `${API}/api/chat/messages/${messageId}`,
+            {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    member_number: currentMember.member_number,
+                    text: trimmed
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if(!response.ok || !data.success){
+            alert(data.detail || data.message || "Could not edit message.");
+            return;
+        }
+
+        if(activeConversation){
+            loadMessages(activeConversation.id);
+        }
+
+    }
+
+    catch(error){
+
+        console.error("Edit message error:", error);
+        alert("Unable to connect to the server.");
+
+    }
+
+}
 
 
+// ===============================
+// DELETE MESSAGE
+// ===============================
 
+async function deleteMessageBubble(messageId){
 
+    if(!confirm("Delete this message?")) return;
 
+    try{
+
+        const response = await fetch(
+            `${API}/api/chat/messages/${messageId}?member_number=${encodeURIComponent(currentMember.member_number)}`,
+            { method: "DELETE" }
+        );
+
+        const data = await response.json();
+
+        if(!response.ok || !data.success){
+            alert(data.detail || data.message || "Could not delete message.");
+            return;
+        }
+
+        if(activeConversation){
+            loadMessages(activeConversation.id);
+        }
+
+    }
+
+    catch(error){
+
+        console.error("Delete message error:", error);
+        alert("Unable to connect to the server.");
+
+    }
+
+}
 
 
 // ===============================
 // SEND MESSAGE
 // ===============================
 
-
-messageForm.addEventListener(
-"submit",
-async function(e){
-
+messageForm.addEventListener("submit", async function(e){
 
     e.preventDefault();
 
+    const text = messageInput.value.trim();
 
-
-    const text =
-    messageInput.value.trim();
-
-
-
-    if(!text)
-    return;
-
-
+    if(!text) return;
 
     if(!activeConversation){
-
-
-        alert(
-        "Select a conversation first"
-        );
-
-
+        alert("Select a conversation first");
         return;
-
-
     }
 
-
-
-
-
-
-    const newMessage = {
-
-
-
-        member_id:
-        currentMember.member_id,
-
-
-
-        sender_name:
-        currentMember.full_name,
-
-
-
-        message:text,
-
-
-
-        created_at:
-        new Date().toISOString()
-
-
-
-    };
-
-
-
-
-
-    // Display instantly
-
-
-    createMessageBubble(
-    newMessage
-    );
-
-
-
-    messageInput.value="";
-
-
-
-
-    // Send to server
-
+    messageInput.value = "";
 
     try{
 
+        const response = await fetch(
+            `${API}/api/chat/messages`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    conversation_id: activeConversation.id,
+                    member_number: currentMember.member_number,
+                    sender_name: currentMember.full_name,
+                    text: text
+                })
+            }
+        );
 
-        await fetch(
-        `${API}/connect/messages`,
-        {
+        const data = await response.json();
 
+        if(!response.ok || !data.success){
+            alert(data.detail || data.message || "Message failed to send.");
+            return;
+        }
 
-            method:"POST",
-
-
-            headers:{
-
-
-            "Content-Type":
-            "application/json"
-
-
-            },
-
-
-            body:JSON.stringify({
-
-
-                conversation_id:
-                activeConversation.id,
-
-
-                member_id:
-                currentMember.member_id,
-
-
-                message:text
-
-
-            })
-
-
-        });
-
-
+        loadMessages(activeConversation.id);
 
     }
-
-
 
     catch(error){
 
-
-
-        console.log(
-        "Offline message saved locally"
-        );
-
-
-
-        saveOfflineMessage(
-        newMessage
-        );
-
+        console.error("Send message error:", error);
+        alert("Unable to connect to the server.");
 
     }
 
-
-
-
 });
-
-
-
-
-
-
-
-
-
-// ===============================
-// OFFLINE STORAGE
-// ===============================
-
-
-function saveOfflineMessage(message){
-
-
-
-    let saved =
-    JSON.parse(
-    localStorage.getItem(
-    "offlineMessages"
-    ) || "[]"
-    );
-
-
-
-    saved.push(message);
-
-
-
-    localStorage.setItem(
-
-    "offlineMessages",
-
-    JSON.stringify(saved)
-
-    );
-
-
-
-}
-
-
-
-
-
-
 
 
 // ===============================
 // TIME FORMAT
 // ===============================
 
-
 function formatTime(date){
 
+    if(!date) return "";
 
-
-    if(!date)
-
-    return "";
-
-
-
-    return new Date(date)
-
-    .toLocaleTimeString(
-
-    [],
-
-    {
-
-        hour:"2-digit",
-
-        minute:"2-digit"
-
-    }
-
+    return new Date(date).toLocaleTimeString(
+        [],
+        { hour: "2-digit", minute: "2-digit" }
     );
 
-
-
 }
-
-// =====================================================
-// KINGDOM WAYS CHURCH
-// CONNECT HUB
-// charttest.js
-// PART 3
-// =====================================================
-
-
-
-// ===============================
-// PHOTO UPLOAD SUPPORT
-// ===============================
-
-
-function updateMemberPhoto(file){
-
-
-
-    if(!file)
-
-    return;
-
-
-
-
-    const reader =
-    new FileReader();
-
-
-
-    reader.onload = function(e){
-
-
-
-        memberPhoto.src =
-        e.target.result;
-
-
-
-        currentMember.photo =
-        e.target.result;
-
-
-
-        localStorage.setItem(
-
-        "member",
-
-        JSON.stringify(currentMember)
-
-        );
-
-
-
-    };
-
-
-
-    reader.readAsDataURL(file);
-
-
-
-}
-
-
-
-
-
 
 
 // ===============================
 // SEARCH CONVERSATIONS
 // ===============================
 
-
-const chatSearch =
-document.getElementById(
-"chatSearch"
-);
-
-
-
 if(chatSearch){
 
+    chatSearch.addEventListener("input", () => {
 
+        const value = chatSearch.value.toLowerCase();
 
-chatSearch.addEventListener(
-"input",
-()=>{
+        const items = document.querySelectorAll(".conversation-item");
 
+        items.forEach(item => {
 
-    const value =
-    chatSearch.value
-    .toLowerCase();
+            const text = item.innerText.toLowerCase();
 
+            item.style.display = text.includes(value) ? "flex" : "none";
 
-
-    const items =
-    document.querySelectorAll(
-    ".conversation-item"
-    );
-
-
-
-    items.forEach(item=>{
-
-
-        const text =
-        item.innerText
-        .toLowerCase();
-
-
-
-        if(
-        text.includes(value)
-        ){
-
-
-            item.style.display =
-            "flex";
-
-
-        }
-
-        else{
-
-
-            item.style.display =
-            "none";
-
-
-        }
-
-
+        });
 
     });
 
-
-
-});
-
-
-
 }
-
-
-
-
-
-
-
 
 
 // ===============================
 // AUTO MESSAGE REFRESH
 // ===============================
 
-
 let refreshTimer = null;
-
-
 
 function startMessageRefresh(){
 
+    if(refreshTimer) clearInterval(refreshTimer);
 
-
-    if(refreshTimer)
-
-    clearInterval(refreshTimer);
-
-
-
-
-    refreshTimer =
-
-    setInterval(()=>{
-
-
+    refreshTimer = setInterval(() => {
 
         if(activeConversation){
-
-
-            loadMessages(
-            activeConversation.id
-            );
-
-
+            loadMessages(activeConversation.id);
         }
 
-
-
-    },5000);
-
-
+    }, 5000);
 
 }
 
 
+// ===============================
+// HEARTBEAT (KEEP MEMBER ONLINE)
+// ===============================
+
+let heartbeatTimer = null;
+
+async function sendHeartbeat(){
+
+    if(!currentMember) return;
+
+    try{
+
+        await fetch(
+            `${API}/api/chat/heartbeat`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    member_number: currentMember.member_number
+                })
+            }
+        );
+
+    }
+
+    catch(error){
+
+        console.log("Heartbeat error:", error);
+
+    }
+
+}
+
+function startHeartbeat(){
+
+    if(heartbeatTimer) clearInterval(heartbeatTimer);
+
+    sendHeartbeat();
+
+    heartbeatTimer = setInterval(sendHeartbeat, 20000);
+
+}
 
 
+// ===============================
+// DIRECTORY REFRESH
+// ===============================
 
+let directoryRefreshTimer = null;
+
+function startDirectoryRefresh(){
+
+    if(directoryRefreshTimer) clearInterval(directoryRefreshTimer);
+
+    directoryRefreshTimer = setInterval(loadMemberDirectory, 20000);
+
+}
 
 
 // ===============================
 // ADMIN ACTION HOOKS
 // ===============================
 
+const adminButtons = document.querySelectorAll(".admin-section button");
 
-const adminButtons =
-document.querySelectorAll(
-".admin-section button"
-);
+adminButtons.forEach(button => {
 
+    button.addEventListener("click", () => {
 
+        console.log("Admin action:", button.innerText);
 
-adminButtons.forEach(button=>{
-
-
-
-    button.addEventListener(
-    "click",
-    ()=>{
-
-
-
-        console.log(
-        "Admin action:",
-        button.innerText
-        );
-
-
-
-        alert(
-
-        button.innerText +
-
-        " feature will connect to CMS admin panel"
-
-        );
-
-
+        alert(button.innerText + " feature will connect to CMS admin panel");
 
     });
 
-
-
 });
-
-
-
-
-
-
-
 
 
 // ===============================
 // SEND ENTER KEY
 // ===============================
 
-
 if(messageInput){
 
+    messageInput.addEventListener("keydown", function(e){
 
+        if(e.key === "Enter" && !e.shiftKey){
+            e.preventDefault();
+            messageForm.dispatchEvent(new Event("submit"));
+        }
 
-messageInput.addEventListener(
-"keydown",
-function(e){
-
-
-
-    if(
-    e.key==="Enter" &&
-    !e.shiftKey
-    ){
-
-
-        e.preventDefault();
-
-
-        messageForm.dispatchEvent(
-
-        new Event(
-        "submit"
-
-        )
-
-        );
-
-
-    }
-
-
-
-});
-
-
+    });
 
 }
-
-
-
-
-
-
-
 
 
 // ===============================
 // ONLINE MEMBER PLACEHOLDER
 // ===============================
 
-
 function updateOnlineStatus(){
 
+    if(!currentMember) return;
 
-
-    if(!currentMember)
-
-    return;
-
-
-
-    console.log(
-
-    "Member active:",
-
-    currentMember.member_number
-
-    );
-
-
+    console.log("Member active:", currentMember.member_number);
 
 }
 
 
-
-
-
-
-
 // ==========================================
 // MASA7 3D INTRO SIGNATURE
-// CONNECT HUB ENTRY ANIMATION
+// Shows once per browser session
 // ==========================================
 
 function showMasa7Intro(){
 
-
     const intro = document.createElement("div");
-
 
     intro.style.position = "fixed";
     intro.style.inset = "0";
     intro.style.display = "flex";
     intro.style.alignItems = "center";
     intro.style.justifyContent = "center";
-
     intro.style.background =
-    "radial-gradient(circle,rgba(0,255,170,.25),rgba(5,10,30,.96))";
-
+        "radial-gradient(circle,rgba(0,255,170,.25),rgba(5,10,30,.96))";
     intro.style.zIndex = "999999";
-
-    intro.style.animation =
-    "masaFade 3s forwards";
-
-
+    intro.style.animation = "masaFade 3s forwards";
 
     const logo = document.createElement("div");
 
-
     logo.innerHTML = "MASA7";
-
-
-    logo.style.fontSize =
-    "clamp(70px,12vw,160px)";
-
-
+    logo.style.fontSize = "clamp(70px,12vw,160px)";
     logo.style.fontWeight = "900";
-
-
     logo.style.letterSpacing = "15px";
-
-
-    logo.style.fontFamily =
-    "Arial Black,Arial,sans-serif";
-
-
-    logo.style.color =
-    "#FFD700";
-
-
-    logo.style.textShadow =
-    `
-    0 0 20px gold,
-    0 0 50px #00ff88,
-    0 0 100px #2477ff
+    logo.style.fontFamily = "Arial Black,Arial,sans-serif";
+    logo.style.color = "#FFD700";
+    logo.style.textShadow = `
+        0 0 20px gold,
+        0 0 50px #00ff88,
+        0 0 100px #2477ff
     `;
-
-
-    logo.style.animation =
-    "masa3D 2.5s ease";
-
-
+    logo.style.animation = "masa3D 2.5s ease";
 
     intro.appendChild(logo);
-
-
     document.body.appendChild(intro);
 
-
-
-    setTimeout(()=>{
-
-
+    setTimeout(() => {
         intro.remove();
-
-
-    },3000);
-
-
+    }, 3000);
 
 }
 
-
-
-
-// Inject animation styles automatically
-
-const masaStyle =
-document.createElement("style");
-
+const masaStyle = document.createElement("style");
 
 masaStyle.innerHTML = `
 
-
 @keyframes masa3D{
-
-
-0%{
-
-opacity:0;
-
-transform:
-perspective(900px)
-rotateX(80deg)
-scale(.2);
-
+    0%{ opacity:0; transform:perspective(900px) rotateX(80deg) scale(.2); }
+    50%{ opacity:1; transform:perspective(900px) rotateX(0deg) scale(1.15); }
+    100%{ transform:perspective(900px) rotateY(360deg) scale(1); }
 }
-
-
-50%{
-
-opacity:1;
-
-transform:
-perspective(900px)
-rotateX(0deg)
-scale(1.15);
-
-}
-
-
-100%{
-
-transform:
-perspective(900px)
-rotateY(360deg)
-scale(1);
-
-}
-
-
-}
-
-
 
 @keyframes masaFade{
-
-
-0%{
-
-opacity:1;
-
+    0%{ opacity:1; }
+    80%{ opacity:1; }
+    100%{ opacity:0; }
 }
-
-
-80%{
-
-opacity:1;
-
-}
-
-
-100%{
-
-opacity:0;
-
-}
-
-
-}
-
 
 `;
 
-
 document.head.appendChild(masaStyle);
 
+window.addEventListener("load", () => {
 
+    const alreadyShown = sessionStorage.getItem("masa7IntroShown");
 
-
-// Run when Connect Hub opens
-
-window.addEventListener(
-"load",
-()=>{
-
-
-    showMasa7Intro();
-
+    if(!alreadyShown){
+        showMasa7Intro();
+        sessionStorage.setItem("masa7IntroShown", "true");
+    }
 
 });
+
 
 // ===============================
 // PAGE START
 // ===============================
 
+document.addEventListener("DOMContentLoaded", () => {
 
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-
-
-    console.log(
-    "KINGDOM WAYS CONNECT HUB LOADED"
-    );
-
-
+    console.log("KINGDOM WAYS CONNECT HUB LOADED");
 
     loadMemberSession();
-
-
-
     loadConversations();
-
-
-
+    loadMemberDirectory();
     startMessageRefresh();
-
-
-
+    startHeartbeat();
+    startDirectoryRefresh();
     updateOnlineStatus();
 
-
-
 });
-
-
-
-
-
 
 
 // ===============================
 // SECURITY CHECK
 // ===============================
 
-
-window.addEventListener(
-"beforeunload",
-()=>{
-
-
+window.addEventListener("beforeunload", () => {
 
     if(currentMember){
-
-
-
-        console.log(
-
-        "Leaving Connect Hub:",
-
-        currentMember.member_number
-
-        );
-
-
-
+        console.log("Leaving Connect Hub:", currentMember.member_number);
     }
 
-
-
 });
-
-
-
-
-

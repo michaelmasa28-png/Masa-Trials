@@ -59,8 +59,6 @@ Secure M-Pesa Giving
 
 
 
-
-
 <!-- ==========================================
 WELCOME CARD
 ========================================== -->
@@ -68,28 +66,18 @@ WELCOME CARD
 <section class="hero-card">
 
 <h2>
-
 Worship Through Giving
-
 </h2>
 
 <p>
-
 "Honor the Lord with your wealth and with the firstfruits of all your increase."
-
 </p>
 
 <span>
-
 Proverbs 3:9
-
 </span>
 
 </section>
-
-
-
-
 
 
 
@@ -101,9 +89,8 @@ MAIN GRID
 
 
 
-
 <!-- ==========================================
-LEFT
+LEFT CARD
 ========================================== -->
 
 <div class="card">
@@ -116,65 +103,56 @@ Member Information
 
 </h2>
 
+<div class="member-profile">
+
+<img
+id="memberPhoto"
+src="images/default-user.png"
+alt="Member Photo">
+
+</div>
 
 
 <div class="info-row">
 
 <label>
-
 Member Name
-
 </label>
 
 <p id="memberName">
-
 Loading...
-
 </p>
 
 </div>
 
 
 
-
-
 <div class="info-row">
 
 <label>
-
 Member Number
-
 </label>
 
 <p id="memberNumber">
-
 Loading...
-
 </p>
 
 </div>
-
-
 
 
 
 <div class="info-row">
 
 <label>
-
 Registered Phone
-
 </label>
 
-<p id="registeredPhone">
-
-Loading...
-
-</p>
+<input
+type="text"
+id="registeredPhone"
+readonly>
 
 </div>
-
-
 
 
 
@@ -184,7 +162,7 @@ Loading...
 
 <input
 type="checkbox"
-id="useAnotherPhone">
+id="useDifferentPhone">
 
 Use another M-Pesa number
 
@@ -194,11 +172,7 @@ Use another M-Pesa number
 
 
 
-
-
-<div
-id="anotherPhoneBox"
-style="display:none;">
+<div id="anotherPhoneBox">
 
 <label>
 
@@ -207,26 +181,19 @@ Alternative Number
 </label>
 
 <input
-
 type="tel"
-
-id="alternativePhone"
-
-placeholder="07XXXXXXXX">
-
-</div>
+id="optionalPhone"
+placeholder="07XXXXXXXX"
+disabled>
 
 </div>
 
-
-
-
-
+</div>
 
 
 
 <!-- ==========================================
-RIGHT
+RIGHT CARD
 ========================================== -->
 
 <div class="card">
@@ -239,12 +206,7 @@ Giving Details
 
 </h2>
 
-
-
-<form
-id="givingForm">
-
-
+<form id="paymentForm">
 
 <div class="input-group">
 
@@ -254,46 +216,83 @@ Giving Category
 
 </label>
 
-<select
-id="givingCategory"
-required>
+<div class="category-grid">
 
-<option value="">
+<label class="category-card">
 
-Select Category
+<input
+type="radio"
+name="giving"
+value="Tithe">
 
-</option>
+<div>
 
-<option value="Tithe">
+<i class="fa-solid fa-church"></i>
 
-Tithe
-
-</option>
-
-<option value="Offering">
-
-Offering
-
-</option>
-
-<option value="Donation">
-
-Donation
-
-</option>
-
-<option value="Pledge">
-
-Pledge
-
-</option>
-
-</select>
+<h4>Tithe</h4>
 
 </div>
 
+</label>
 
+<label class="category-card">
 
+<input
+type="radio"
+name="giving"
+value="Offering">
+
+<div>
+
+<i class="fa-solid fa-hand-holding-heart"></i>
+
+<h4>Offering</h4>
+
+</div>
+
+</label>
+
+<label class="category-card">
+
+<input
+type="radio"
+name="giving"
+value="Donation">
+
+<div>
+
+<i class="fa-solid fa-gift"></i>
+
+<h4>Donation</h4>
+
+</div>
+
+</label>
+
+<label class="category-card">
+
+<input
+type="radio"
+name="giving"
+value="Pledge">
+
+<div>
+
+<i class="fa-solid fa-coins"></i>
+
+<h4>Pledge</h4>
+
+</div>
+
+</label>
+
+</div>
+
+<input
+type="hidden"
+id="category">
+
+</div>
 
 
 
@@ -306,22 +305,13 @@ Amount (KES)
 </label>
 
 <input
-
 type="number"
-
-id="givingAmount"
-
+id="amount"
 min="1"
-
 required
-
 placeholder="1000">
 
 </div>
-
-
-
-
 
 
 
@@ -329,34 +319,74 @@ placeholder="1000">
 
 <label>
 
-Reference / Note
-
-(Optional)
+Reference / Note (Optional)
 
 </label>
 
 <textarea
-
-id="givingNote"
-
+id="notes"
 rows="4"
-
-placeholder="Optional message">
-
-</textarea>
+placeholder="Optional message"></textarea>
 
 </div>
 
 
 
+<!-- ==========================================
+LIVE PAYMENT SUMMARY
+========================================== -->
 
+<div class="summary-card">
+
+<h3>
+
+Payment Summary
+
+</h3>
+
+<div class="summary-row">
+
+<span>Amount</span>
+
+<strong id="summaryAmount">
+
+KES 0.00
+
+</strong>
+
+</div>
+
+<div class="summary-row">
+
+<span>Category</span>
+
+<strong id="summaryCategory">
+
+--
+
+</strong>
+
+</div>
+
+<div class="summary-row">
+
+<span>Phone</span>
+
+<strong id="summaryPhone">
+
+--
+
+</strong>
+
+</div>
+
+</div>
 
 
 
 <button
-
 type="submit"
-
+id="payBtn"
 class="payBtn">
 
 <i class="fa-solid fa-mobile-screen-button"></i>
@@ -371,24 +401,19 @@ Send M-Pesa Prompt
 
 </div>
 
-
-
-
-
-
-
-
 <!-- ==========================================
 CONFIRMATION MODAL
 ========================================== -->
 
 <div
-id="confirmModal"
+id="paymentModal"
 class="modal">
 
 <div class="modal-content">
 
 <h2>
+
+<i class="fa-solid fa-circle-check"></i>
 
 Confirm Giving
 
@@ -396,7 +421,7 @@ Confirm Giving
 
 <hr>
 
-<p>
+<div class="confirm-row">
 
 <strong>
 
@@ -408,39 +433,23 @@ Member
 
 </span>
 
-</p>
+</div>
 
-<p>
-
-<strong>
-
-Category
-
-</strong>
-
-<span id="confirmCategory">
-
-</span>
-
-</p>
-
-<p>
+<div class="confirm-row">
 
 <strong>
 
-Amount
+Member Number
 
 </strong>
 
-KES
-
-<span id="confirmAmount">
+<span id="confirmNumber">
 
 </span>
 
-</p>
+</div>
 
-<p>
+<div class="confirm-row">
 
 <strong>
 
@@ -452,21 +461,57 @@ Phone
 
 </span>
 
-</p>
+</div>
+
+<div class="confirm-row">
+
+<strong>
+
+Category
+
+</strong>
+
+<span id="confirmCategory">
+
+</span>
+
+</div>
+
+<div class="confirm-row">
+
+<strong>
+
+Amount
+
+</strong>
+
+<span id="confirmAmount">
+
+KES 0.00
+
+</span>
+
+</div>
 
 <div class="modal-buttons">
 
 <button
-id="cancelPayment"
+type="button"
+id="cancelBtn"
 class="cancelBtn">
+
+<i class="fa-solid fa-xmark"></i>
 
 Cancel
 
 </button>
 
 <button
-id="confirmPayment"
+type="button"
+id="confirmBtn"
 class="confirmBtn">
+
+<i class="fa-solid fa-check"></i>
 
 Confirm & Send
 
@@ -480,21 +525,27 @@ Confirm & Send
 
 
 
-
-
-
-
-
 <!-- ==========================================
 PAYMENT STATUS
 ========================================== -->
 
-<section
-id="paymentStatus"
-class="status-card"
-style="display:none;">
+<div id="paymentStatus">
 
-<i class="fa-solid fa-circle-check"></i>
+
+
+<!-- ==========================================
+WAITING CARD
+========================================== -->
+
+<div
+id="waitingCard"
+class="status-card">
+
+<div class="status-icon">
+
+<i class="fa-solid fa-mobile-screen-button"></i>
+
+</div>
 
 <h2>
 
@@ -502,38 +553,32 @@ Waiting for M-Pesa Confirmation
 
 </h2>
 
-<p>
+<p id="waitingText">
 
-An M-Pesa prompt has been sent.
-
-Please complete payment on your phone.
+An M-Pesa prompt has been sent to your phone.
+Please enter your M-Pesa PIN to complete payment.
 
 </p>
 
-<div
-id="statusMessage">
-
-Awaiting response...
+<div class="loading-spinner"></div>
 
 </div>
-
-</section>
-
-
-
-
-
 
 
 
 <!-- ==========================================
-RECEIPT
+SUCCESS CARD
 ========================================== -->
 
-<section
-id="receiptCard"
-class="receipt-card"
-style="display:none;">
+<div
+id="successCard"
+class="status-card">
+
+<div class="status-icon success">
+
+<i class="fa-solid fa-circle-check"></i>
+
+</div>
 
 <h2>
 
@@ -541,92 +586,73 @@ Payment Successful
 
 </h2>
 
-<hr>
-
 <p>
 
-Member
-
-<span id="receiptMember">
-
-</span>
+Your giving has been received successfully.
 
 </p>
 
-<p>
-
-Member Number
-
-<span id="receiptMemberNumber">
-
-</span>
-
-</p>
-
-<p>
-
-Category
-
-<span id="receiptCategory">
-
-</span>
-
-</p>
-
-<p>
-
-Amount
-
-KES
-
-<span id="receiptAmount">
-
-</span>
-
-</p>
-
-<p>
-
-M-Pesa Receipt
-
-<span id="receiptCode">
-
-</span>
-
-</p>
-
-<p>
-
-Date
-
-<span id="receiptDate">
-
-</span>
-
-</p>
+<div class="status-actions">
 
 <button
-id="finishBtn">
+type="button"
+id="newPaymentBtn"
+class="primary-btn">
 
-Return Home
+<i class="fa-solid fa-plus"></i>
+
+New Giving
 
 </button>
 
-</section>
+</div>
+
+</div>
 
 
 
+<!-- ==========================================
+FAILED CARD
+========================================== -->
 
+<div
+id="failedCard"
+class="status-card">
 
+<div class="status-icon failed">
 
-<footer>
+<i class="fa-solid fa-circle-xmark"></i>
 
-Kingdom Ways Church © 2026
+</div>
 
-</footer>
+<h2>
 
-<script src="offering.js"></script>
+Payment Failed
 
-</body>
+</h2>
 
-</html>
+<p id="failedMessage">
+
+The payment could not be completed.
+
+</p>
+
+<div class="status-actions">
+
+<button
+type="button"
+id="retryBtn"
+class="primary-btn">
+
+<i class="fa-solid fa-rotate-right"></i>
+
+Try Again
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+

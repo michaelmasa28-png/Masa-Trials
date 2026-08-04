@@ -314,96 +314,144 @@ function displaySermons(data){
 
 
 
-
-
-
 // =====================================================
 // CREATE SERMON CARD
 // =====================================================
 
-
 function createSermonCard(sermon){
 
+    const card = document.createElement("article");
+
+    card.className = "sermon-card";
 
 
-    const card =
-    document.createElement(
-        "article"
-    );
-
-
-
-    card.className =
-    "sermon-card";
-
-
-
-
-
-    // ===============================
-    // IMAGE HANDLING
-    // ===============================
-
-
-    let thumbnail =
-    sermon.thumbnail;
-
+    let thumbnail = sermon.thumbnail;
 
 
     if(!thumbnail){
 
-
-        thumbnail =
-        "images/default-sermon.jpg";
-
+        thumbnail = "images/default-sermon.jpg";
 
     }
-
-
-
-
-
-    // ===============================
-    // MEDIA SECTION
-    // ===============================
 
 
     let media = "";
 
 
 
-
+    // ===============================
+    // UPLOADED VIDEO
+    // ===============================
 
     if(sermon.video_file){
 
 
+        media = `
 
-        media += `
+        <div class="sermon-media">
 
-
-        <div class="sermon-video">
-
-
-            <video
-
-                controls
-
-                preload="metadata"
-
-                poster="${thumbnail}">
+            <div
+                class="sermon-thumbnail"
+                data-video="${sermon.video_file}"
+                data-poster="${thumbnail}"
+            >
 
 
-                <source
+                <img
 
-                    src="${sermon.video_file}"
+                    src="${thumbnail}"
 
-                    type="video/mp4">
+                    class="sermon-image"
+
+                    loading="lazy"
+
+                    alt="Sermon Thumbnail"
+
+                    onerror="this.src='images/default-sermon.jpg'"
+
+                >
 
 
-                Your browser does not support video.
+
+                <div class="thumbnail-overlay">
 
 
-            </video>
+                    <div class="play-button">
+
+                        ▶
+
+                    </div>
+
+
+
+                    <div class="video-label">
+
+                        Watch Sermon
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        `;
+
+
+    }
+
+
+
+    // ===============================
+    // YOUTUBE VIDEO
+    // ===============================
+
+    else if(sermon.youtube_url){
+
+
+        media = `
+
+
+        <a
+
+            href="${sermon.youtube_url}"
+
+            target="_blank"
+
+            rel="noopener noreferrer"
+
+            class="watch-btn"
+
+
+        >
+
+            ▶ Watch Sermon
+
+
+        </a>
+
+
+        `;
+
+
+    }
+
+
+
+    else{
+
+
+        media = `
+
+
+        <div class="watch-btn disabled">
+
+
+            🎬 Video Coming Soon
 
 
         </div>
@@ -417,196 +465,69 @@ function createSermonCard(sermon){
 
 
 
-
-    if(sermon.youtube_url){
-
-
-
-        media += `
-
-
-            <a
-
-            href="${sermon.youtube_url}"
-
-            target="_blank"
-
-            rel="noopener noreferrer"
-
-            class="watch-btn">
-
-
-                ▶ Watch on YouTube
-
-
-            </a>
-
-
-        `;
-
-
-    }
-
-
-
-
-
-    if(
-        !sermon.video_file &&
-        !sermon.youtube_url
-    ){
-
-
-
-        media += `
-
-
-            <div class="watch-btn">
-
-
-                🎬 Video Coming Soon
-
-
-            </div>
-
-
-        `;
-
-
-    }
-
-
-
-
-
-    // ===============================
-    // CARD CONTENT
-    // ===============================
-
-
-
     card.innerHTML = `
 
 
-        <img
-
-
-            src="${thumbnail}"
-
-
-            alt="${safeText(sermon.title)}"
-
-
-            class="sermon-image"
-
-
-            loading="lazy"
-
-
-            onerror="this.src='images/default-sermon.jpg'"
-
-        >
-
+        ${media}
 
 
 
         <div class="sermon-card-content">
 
 
-
-
-
             <span class="sermon-date">
 
-
-                📅 ${formatDate(
-                    sermon.sermon_date
-                )}
-
+                📅 ${formatDate(sermon.sermon_date)}
 
             </span>
 
 
 
-
-
             <h3>
-
 
                 ${safeText(
                     sermon.title ||
                     "Untitled Sermon"
                 )}
 
-
             </h3>
-
-
 
 
 
             <p>
 
-
-                <strong>
-
-                    Preacher:
-
-                </strong>
-
+                <strong>Preacher:</strong>
 
                 ${safeText(
                     sermon.preacher ||
                     "Church Minister"
                 )}
 
-
             </p>
-
-
 
 
 
             <p>
 
-
-                <strong>
-
-                    Bible Reading:
-
-                </strong>
-
+                <strong>Bible Reading:</strong>
 
                 ${safeText(
                     sermon.bible_reading ||
                     "Not Available"
                 )}
 
-
             </p>
 
 
 
-
-
             <p class="sermon-description">
-
 
                 ${safeText(
                     sermon.description ||
                     "A powerful message from the Word of God."
                 )}
 
-
             </p>
-
-
-
-
-
-            ${media}
-
-
 
 
         </div>
@@ -622,9 +543,52 @@ function createSermonCard(sermon){
 }
 
 
+// =====================================================
+// PLAY SERMON VIDEO
+// =====================================================
 
+document.addEventListener("click", function (e) {
 
+    const thumb = e.target.closest(".sermon-thumbnail");
 
+    if (!thumb) return;
+
+    if (thumb.dataset.loaded === "true") return;
+
+    thumb.dataset.loaded = "true";
+
+    const videoURL = thumb.dataset.video;
+    const poster = thumb.dataset.poster;
+
+    thumb.innerHTML = "";
+
+    const video = document.createElement("video");
+
+    video.className = "active-video";
+    video.controls = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.preload = "metadata";
+    video.poster = poster;
+    video.style.width = "100%";
+    video.style.height = "100%";
+
+    const source = document.createElement("source");
+    source.src = videoURL;
+    source.type = "video/mp4";
+
+    video.appendChild(source);
+
+    thumb.appendChild(video);
+
+    // Force the browser to load and play
+    video.load();
+
+    video.play().catch(err => {
+        console.log("Autoplay blocked:", err);
+    });
+
+});
 
 // =====================================================
 // SECURITY TEXT CLEANING
@@ -1168,248 +1132,157 @@ async function fetchDailyVerse(){
 
 
 
-
 // =====================================================
-// VERSE ROTATION FALLBACK
+// VERSE ROTATION (API + FALLBACK)
 // =====================================================
-
 
 const backupVerses = [
 
-
-
     {
-
-        verse:
-
-        "I can do all things through Christ who strengthens me.",
-
-
-        reference:
-
-        "Philippians 4:13"
-
+        verse: "I can do all things through Christ who strengthens me.",
+        reference: "Philippians 4:13"
     },
 
-
-
     {
-
-        verse:
-
-        "Trust in the Lord with all your heart.",
-
-
-        reference:
-
-        "Proverbs 3:5"
-
+        verse: "Trust in the Lord with all your heart.",
+        reference: "Proverbs 3:5"
     },
 
-
-
     {
-
-        verse:
-
-        "Be strong and courageous. Do not be afraid.",
-
-
-        reference:
-
-        "Joshua 1:9"
-
+        verse: "Be strong and courageous. Do not be afraid.",
+        reference: "Joshua 1:9"
     },
 
-
-
     {
-
-        verse:
-
-        "For with God nothing shall be impossible.",
-
-
-        reference:
-
-        "Luke 1:37"
-
+        verse: "For with God nothing shall be impossible.",
+        reference: "Luke 1:37"
     }
-
-
 
 ];
 
-
-
-
-
 let verseIndex = 0;
 
+// =====================================================
+// SHOW VERSE
+// =====================================================
 
+function showVerse(verse, reference){
 
-
-
-function rotateBackupVerse(){
-
-
-
-    if(
-        !verseText ||
-        !verseReference
-    ){
-
+    if(!verseText || !verseReference){
         return;
-
     }
 
-
-
-
-
-    verseText.style.opacity="0";
-
-    verseReference.style.opacity="0";
-
-
-
-
+    verseText.style.opacity = "0";
+    verseReference.style.opacity = "0";
 
     setTimeout(()=>{
 
+        verseText.textContent = `"${verse}"`;
+        verseReference.textContent = reference;
 
-
-        const item =
-        backupVerses[
-            verseIndex
-        ];
-
-
-
-        verseText.textContent =
-
-        `"${item.verse}"`;
-
-
-
-
-        verseReference.textContent =
-
-        item.reference;
-
-
-
-
-
-        verseText.style.opacity="1";
-
-        verseReference.style.opacity="1";
-
-
-
-
-
-        verseIndex++;
-
-
-
-
-
-        if(
-            verseIndex >=
-            backupVerses.length
-        ){
-
-
-            verseIndex=0;
-
-
-        }
-
-
-
+        verseText.style.opacity = "1";
+        verseReference.style.opacity = "1";
 
     },500);
 
+}
 
+// =====================================================
+// ROTATE LOCAL BACKUP
+// =====================================================
+
+function rotateBackupVerse(){
+
+    const item = backupVerses[verseIndex];
+
+    showVerse(
+        item.verse,
+        item.reference
+    );
+
+    verseIndex++;
+
+    if(verseIndex >= backupVerses.length){
+
+        verseIndex = 0;
+
+    }
+
+}
+
+// =====================================================
+// FETCH ONLINE VERSE
+// =====================================================
+
+async function fetchBibleVerse(){
+
+    try{
+
+        const response = await fetch(
+            "https://beta.ourmanna.com/api/v1/get/?format=json"
+        );
+
+        if(!response.ok){
+
+            throw new Error("Bible API unavailable");
+
+        }
+
+        const data = await response.json();
+
+        const verse =
+            data.verse.details.text;
+
+        const reference =
+            data.verse.details.reference;
+
+        showVerse(
+            verse,
+            reference
+        );
+
+        localStorage.setItem(
+            "dailyVerse",
+            JSON.stringify({
+                verse,
+                reference
+            })
+        );
+
+        console.log("Bible verse updated.");
+
+    }
+
+    catch(error){
+
+        console.log(
+            "Using backup verse.",
+            error.message
+        );
+
+        rotateBackupVerse();
+
+    }
 
 }
 
 
 
-
-
-
-
-
-// =====================================================
 // STARTUP
-// =====================================================
 
+loadSavedVerse();
 
-document.addEventListener(
+// Get latest verse immediately
+fetchBibleVerse();
 
-"DOMContentLoaded",
+// Refresh every 3 hours
+setInterval(
 
-()=>{
+    fetchBibleVerse,
 
-
-
-    console.log(
-
-        "Kingdom Ways Sermon Client Loaded"
-
-    );
-
-
-
-
-    loadSavedVerse();
-
-
-
-
-    loadSermons();
-
-
-
-
-    fetchDailyVerse();
-
-
-
-
-    // refresh verse every hour
-
-
-    setInterval(
-
-        fetchDailyVerse,
-
-        3600000
-
-    );
-
-
-
-
-    // backup rotation every 20 seconds
-
-
-    setInterval(
-
-        rotateBackupVerse,
-
-        20000
-
-    );
-
-
-
-}
+    3 * 60 * 60 * 1000
 
 );
-
 
 // =====================================================
 // KINGDOM WAYS CHURCH
@@ -1790,8 +1663,6 @@ window.addEventListener(
 
     }
 );
-
-
 
 // =====================================================
 // FUTURE FEATURES RESERVED

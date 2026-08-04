@@ -833,7 +833,7 @@ async function pollPaymentStatus(){
 
                 stopPolling();
 
-                paymentSuccessful(result);
+              afterSuccessfulPayment(result);
 
                 break;
 
@@ -869,7 +869,7 @@ async function pollPaymentStatus(){
 
             paymentFailed(
 
-                "Request timed out."
+                "Hey relax try again later ,Thanks for interacting withous..|@masa7 DeV|."
 
             );
 
@@ -2613,3 +2613,1758 @@ opacity:0;
 
 document.head.appendChild(verifiedStyle);
 
+
+// ======================================================
+// KINGDOM WAYS CHURCH CMS
+// OFFERING.JS
+// PART 2
+// Category Selection, Validation & Confirmation Modal
+// ======================================================
+
+// ======================================================
+// CATEGORY SELECTION
+// ======================================================
+
+const categoryCards = document.querySelectorAll(".category-card");
+
+categoryCards.forEach(card => {
+
+    card.addEventListener("click", () => {
+
+        categoryCards.forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+        card.classList.add("active");
+
+        const radio = card.querySelector("input[type='radio']");
+
+        if (!radio) return;
+
+        radio.checked = true;
+
+        payment.category = radio.value;
+
+        if (category) {
+
+            category.value = radio.value;
+
+        }
+
+        refreshSummary();
+
+    });
+
+});
+
+// ======================================================
+// LIVE AMOUNT UPDATE
+// ======================================================
+
+if (amount) {
+
+    amount.addEventListener("input", () => {
+
+        refreshSummary();
+
+    });
+
+}
+
+// ======================================================
+// LIVE NOTES UPDATE
+// ======================================================
+
+if (notes) {
+
+    notes.addEventListener("input", () => {
+
+        payment.notes = notes.value.trim();
+
+    });
+
+}
+
+// ======================================================
+// OPTIONAL PHONE UPDATE
+// ======================================================
+
+if (optionalPhone) {
+
+    optionalPhone.addEventListener("input", () => {
+
+        refreshSummary();
+
+    });
+
+}
+
+// ======================================================
+// VALIDATE PAYMENT
+// ======================================================
+
+function validatePayment() {
+
+    payment.amount = Number(amount.value);
+
+    payment.notes = notes.value.trim();
+
+    payment.phone_used = normalizePhone(
+
+        getPaymentPhone()
+
+    );
+
+    if (!payment.category) {
+
+        showToast(
+
+            "Please select a giving category.",
+
+            "error"
+
+        );
+
+        return false;
+
+    }
+
+    if (!payment.amount || payment.amount <= 0) {
+
+        showToast(
+
+            "Enter a valid amount.",
+
+            "error"
+
+        );
+
+        amount.focus();
+
+        return false;
+
+    }
+
+    if (!validPhone(payment.phone_used)) {
+
+        showToast(
+
+            "Invalid M-Pesa phone number.",
+
+            "error"
+
+        );
+
+        optionalPhone.focus();
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
+// ======================================================
+// CONFIRMATION MODAL
+// ======================================================
+
+function openConfirmationModal() {
+
+    if (!validatePayment()) {
+
+        return;
+
+    }
+
+    document.getElementById("confirmMember").textContent =
+        payment.member_name;
+
+    document.getElementById("confirmNumber").textContent =
+        payment.member_number;
+
+    document.getElementById("confirmPhone").textContent =
+        payment.phone_used;
+
+    document.getElementById("confirmCategory").textContent =
+        payment.category;
+
+    document.getElementById("confirmAmount").textContent =
+        "KES " + payment.amount.toLocaleString();
+
+    paymentModal.classList.add("active");
+
+}
+
+// ======================================================
+// CLOSE MODAL
+// ======================================================
+
+function closeConfirmationModal() {
+
+    paymentModal.classList.remove("active");
+
+}
+
+// ======================================================
+// FORM SUBMIT
+// ======================================================
+
+if (paymentForm) {
+
+    paymentForm.addEventListener("submit", function (e) {
+
+        e.preventDefault();
+
+        openConfirmationModal();
+
+    });
+
+}
+
+// ======================================================
+// CANCEL BUTTON
+// ======================================================
+
+if (cancelBtn) {
+
+    cancelBtn.addEventListener("click", () => {
+
+        closeConfirmationModal();
+
+    });
+
+}
+
+// ======================================================
+// CONFIRM BUTTON
+// ======================================================
+
+if (confirmBtn) {
+
+    confirmBtn.addEventListener("click", async () => {
+
+        closeConfirmationModal();
+
+        await requestSTKPush();
+
+    });
+
+}
+
+// ======================================================
+// RESET UI
+// ======================================================
+
+function resetStatusCards() {
+
+    waitingCard.classList.remove("active");
+
+    successCard.classList.remove("active");
+
+    failedCard.classList.remove("active");
+
+}
+
+// ======================================================
+// SHOW WAITING
+// ======================================================
+
+function showWaitingCard() {
+
+    resetStatusCards();
+
+    waitingCard.classList.add("active");
+
+}
+
+// ======================================================
+// SHOW SUCCESS
+// ======================================================
+
+function showSuccessCard() {
+
+    resetStatusCards();
+
+    successCard.classList.add("active");
+
+}
+
+// ======================================================
+// SHOW FAILED
+// ======================================================
+
+function showFailedCard(message) {
+
+    resetStatusCards();
+
+    failedCard.classList.add("active");
+
+    const failedMessage = document.getElementById("failedMessage");
+
+    if (failedMessage) {
+
+        failedMessage.textContent = message;
+
+    }
+
+}
+
+// ======================================================
+// UPDATE WAITING MESSAGE
+// ======================================================
+
+function updateWaitingMessage(message) {
+
+    const waitingText = document.getElementById("waitingText");
+
+    if (waitingText) {
+
+        waitingText.textContent = message;
+
+    }
+
+}
+
+// ======================================================
+// PART 2 COMPLETE
+//
+// Part 3 will:
+// ✓ Send STK Push to FastAPI
+// ✓ Save CheckoutRequestID
+// ✓ Show waiting screen
+// ✓ Start automatic payment polling
+// ======================================================
+
+// ======================================================
+// KINGDOM WAYS CHURCH CMS
+// OFFERING.JS
+// PART 3
+// STK PUSH REQUEST & PAYMENT POLLING
+// ======================================================
+
+// ======================================================
+// POLLING VARIABLES
+// ======================================================
+
+let pollingTimer = null;
+
+const POLLING_INTERVAL = 5000;
+
+const MAX_POLLING_ATTEMPTS = 60;
+
+let pollingAttempts = 0;
+
+// ======================================================
+// REQUEST STK PUSH
+// ======================================================
+
+async function requestSTKPush() {
+
+    payBtn.disabled = true;
+
+    payBtn.classList.add("loading");
+
+    showWaitingCard();
+
+    updateWaitingMessage(
+        "Sending M-Pesa request..."
+    );
+
+    try {
+
+        const response = await fetch(
+
+            `${API_BASE}/finance/mpesa/stkpush`,
+
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type": "application/json"
+
+                },
+
+                body: JSON.stringify({
+
+                    member_id: payment.member_id,
+
+                    member_number: payment.member_number,
+
+                    member_name: payment.member_name,
+
+                    phone: payment.phone_used,
+
+                    amount: payment.amount,
+
+                    category: payment.category,
+
+                    notes: payment.notes
+
+                })
+
+            }
+
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+
+                result.detail ||
+
+                result.message ||
+
+                "Unable to initiate payment."
+
+            );
+
+        }
+
+        payment.checkout_request_id =
+
+            result.checkout_request_id;
+
+        payment.transaction_id =
+
+            result.transaction_id || "";
+
+        payment.status = "Pending";
+
+        saveActivePayment();
+
+        showToast(
+
+            "M-Pesa prompt sent successfully."
+
+        );
+
+        updateWaitingMessage(
+
+            "Check your phone and enter your M-Pesa PIN."
+
+        );
+
+        startPaymentPolling();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        paymentFailed(
+
+            error.message ||
+
+            "Unable to send M-Pesa request."
+
+        );
+
+    }
+
+}
+
+// ======================================================
+// START PAYMENT POLLING
+// ======================================================
+
+function startPaymentPolling() {
+
+    stopPaymentPolling();
+
+    pollingAttempts = 0;
+
+    pollPaymentStatus();
+
+    pollingTimer = setInterval(
+
+        pollPaymentStatus,
+
+        POLLING_INTERVAL
+
+    );
+
+}
+
+// ======================================================
+// STOP PAYMENT POLLING
+// ======================================================
+
+function stopPaymentPolling() {
+
+    if (pollingTimer) {
+
+        clearInterval(pollingTimer);
+
+        pollingTimer = null;
+
+    }
+
+}
+
+// ======================================================
+// CHECK PAYMENT STATUS
+// ======================================================
+
+async function pollPaymentStatus() {
+
+    pollingAttempts++;
+
+    try {
+
+        const response = await fetch(
+
+            `${API_BASE}/finance/mpesa/status/${payment.checkout_request_id}`
+
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+
+                result.detail ||
+
+                "Unable to verify payment."
+
+            );
+
+        }
+
+        switch (result.status) {
+
+            case "Pending":
+
+                updateWaitingMessage(
+
+                    "Waiting for PIN confirmation..."
+
+                );
+
+                break;
+
+            case "Processing":
+
+                updateWaitingMessage(
+
+                    "Processing your payment..."
+
+                );
+
+                break;
+
+            case "Success":
+
+                stopPaymentPolling();
+
+                paymentSuccessful(result);
+
+                break;
+
+            case "Failed":
+
+                stopPaymentPolling();
+
+                paymentFailed(
+
+                    result.message ||
+
+                    "Payment failed."
+
+                );
+
+                break;
+
+            case "Cancelled":
+
+                stopPaymentPolling();
+
+                paymentFailed(
+
+                    "Payment cancelled from phone."
+
+                );
+
+                break;
+
+        }
+
+        if (
+
+            pollingAttempts >=
+
+            MAX_POLLING_ATTEMPTS
+
+        ) {
+
+            stopPaymentPolling();
+
+            paymentFailed(
+
+                "Payment request timed out."
+
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+// ======================================================
+// SUCCESS
+// ======================================================
+
+function paymentSuccessful(result) {
+
+    showSuccessCard();
+
+    payBtn.disabled = false;
+
+    payBtn.classList.remove("loading");
+
+    payment.status = "Success";
+
+    payment.transaction_id =
+        result.transaction_id;
+
+    payment.checkout_request_id =
+        result.checkout_request_id;
+
+    payment.mpesa_receipt =
+        result.mpesa_receipt;
+
+    payment.safaricom_name =
+        result.safaricom_name;
+
+    payment.phone_used =
+        result.phone;
+
+    payment.amount =
+        result.amount;
+
+    payment.category =
+        result.category;
+
+    generateReceipt(result);
+
+    showVerifiedThankYou(
+
+        payment.member_name,
+
+        payment.category
+
+    );
+
+    showToast(
+
+        "Payment received successfully."
+
+    );
+
+}
+
+// ======================================================
+// PAYMENT FAILED
+// ======================================================
+
+function paymentFailed(message) {
+
+    showFailedCard(message);
+
+    payBtn.disabled = false;
+
+    payBtn.classList.remove("loading");
+
+    stopPaymentPolling();
+
+    showToast(
+
+        message,
+
+        "error"
+
+    );
+
+}
+
+// ======================================================
+// SAVE ACTIVE PAYMENT
+// ======================================================
+
+function saveActivePayment() {
+
+    localStorage.setItem(
+
+        "kw_active_payment",
+
+        JSON.stringify({
+
+            checkout_request_id:
+
+                payment.checkout_request_id,
+
+            transaction_id:
+
+                payment.transaction_id,
+
+            amount:
+
+                payment.amount,
+
+            category:
+
+                payment.category,
+
+            phone:
+
+                payment.phone_used,
+
+            started:
+
+                Date.now()
+
+        })
+
+    );
+
+}
+
+// ======================================================
+// REMOVE ACTIVE PAYMENT
+// ======================================================
+
+function clearActivePayment() {
+
+    localStorage.removeItem(
+
+        "kw_active_payment"
+
+    );
+
+}
+
+
+// ======================================================
+// KINGDOM WAYS CHURCH CMS
+// OFFERING.JS
+// PART 4
+// RECEIPT, HISTORY & NEW PAYMENT
+// ======================================================
+
+// ======================================================
+// RECEIPT ELEMENTS
+// ======================================================
+
+const receiptMember =
+document.getElementById("receiptMember");
+
+const receiptMemberNumber =
+document.getElementById("receiptMemberNumber");
+
+const receiptSafaricomName =
+document.getElementById("receiptSafaricomName");
+
+const receiptPhone =
+document.getElementById("receiptPhone");
+
+const receiptCategory =
+document.getElementById("receiptCategory");
+
+const receiptAmount =
+document.getElementById("receiptAmount");
+
+const receiptReference =
+document.getElementById("receiptReference");
+
+const receiptDate =
+document.getElementById("receiptDate");
+
+const receiptCheckout =
+document.getElementById("receiptCheckout");
+
+const receiptTransaction =
+document.getElementById("receiptTransaction");
+
+const printBtn =
+document.getElementById("printBtn");
+
+const downloadReceiptBtn =
+document.getElementById("downloadReceiptBtn");
+
+const newPaymentBtn =
+document.getElementById("newPaymentBtn");
+
+const retryBtn =
+document.getElementById("retryBtn");
+
+const historyContainer =
+document.getElementById("historyContainer");
+
+// ======================================================
+// GENERATE RECEIPT
+// ======================================================
+
+function generateReceipt(result){
+
+    clearActivePayment();
+
+    receiptCard.classList.add("active");
+
+    receiptMember.textContent =
+        payment.member_name;
+
+    receiptMemberNumber.textContent =
+        payment.member_number;
+
+    receiptSafaricomName.textContent =
+        result.safaricom_name || "--";
+
+    receiptPhone.textContent =
+        result.phone || "--";
+
+    receiptCategory.textContent =
+        result.category || "--";
+
+    receiptAmount.textContent =
+        "KES " +
+        Number(result.amount).toLocaleString();
+
+    receiptReference.textContent =
+        result.mpesa_receipt || "--";
+
+    receiptDate.textContent =
+        result.transaction_date || "--";
+
+    receiptCheckout.textContent =
+        result.checkout_request_id || "--";
+
+    receiptTransaction.textContent =
+        result.transaction_id || "--";
+
+}
+
+// ======================================================
+// PRINT RECEIPT
+// ======================================================
+
+if(printBtn){
+
+    printBtn.addEventListener(
+
+        "click",
+
+        ()=>{
+
+            window.print();
+
+        }
+
+    );
+
+}
+
+// ======================================================
+// DOWNLOAD RECEIPT
+// ======================================================
+
+if(downloadReceiptBtn){
+
+    downloadReceiptBtn.addEventListener(
+
+        "click",
+
+        async ()=>{
+
+            try{
+
+                const response = await fetch(
+
+                    `${API_BASE}/finance/receipt/${payment.transaction_id}`
+
+                );
+
+                if(!response.ok){
+
+                    throw new Error(
+
+                        "Unable to download receipt."
+
+                    );
+
+                }
+
+                const blob =
+
+                    await response.blob();
+
+                const url =
+
+                    window.URL.createObjectURL(blob);
+
+                const a =
+
+                    document.createElement("a");
+
+                a.href = url;
+
+                a.download =
+
+                    `Receipt_${payment.transaction_id}.pdf`;
+
+                a.click();
+
+                window.URL.revokeObjectURL(url);
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                showToast(
+
+                    error.message,
+
+                    "error"
+
+                );
+
+            }
+
+        }
+
+    );
+
+}
+
+// ======================================================
+// LOAD HISTORY
+// ======================================================
+
+async function loadTransactionHistory(){
+
+    if(!historyContainer) return;
+
+    historyContainer.innerHTML =
+    "<p>Loading...</p>";
+
+    try{
+
+        const response = await fetch(
+
+            `${API_BASE}/finance/member-history/${payment.member_number}`
+
+        );
+
+        const history = await response.json();
+
+        if(!response.ok){
+
+            throw new Error(
+
+                history.detail ||
+
+                "Unable to load history."
+
+            );
+
+        }
+
+        renderHistory(history);
+
+    }
+
+    catch(error){
+
+        historyContainer.innerHTML =
+
+        "<p>No giving history found.</p>";
+
+    }
+
+}
+
+// ======================================================
+// RENDER HISTORY
+// ======================================================
+
+function renderHistory(history){
+
+    if(!history.length){
+
+        historyContainer.innerHTML =
+
+        "<p>No previous transactions.</p>";
+
+        return;
+
+    }
+
+    historyContainer.innerHTML = "";
+
+    history.forEach(item=>{
+
+        const row =
+
+        document.createElement("div");
+
+        row.className = "history-row";
+
+        row.innerHTML = `
+
+            <div>${item.category}</div>
+
+            <div>
+
+                KES ${Number(item.amount).toLocaleString()}
+
+            </div>
+
+            <div>${item.mpesa_receipt}</div>
+
+            <div>${item.transaction_date}</div>
+
+        `;
+
+        historyContainer.appendChild(row);
+
+    });
+
+}
+
+// ======================================================
+// NEW PAYMENT
+// ======================================================
+
+function resetPayment(){
+
+    payment.amount = 0;
+
+    payment.category = "";
+
+    payment.notes = "";
+
+    payment.checkout_request_id = "";
+
+    payment.transaction_id = "";
+
+    payment.mpesa_receipt = "";
+
+    payment.safaricom_name = "";
+
+    payment.status = "Pending";
+
+    payment.phone_used =
+        payment.registered_phone;
+
+    paymentForm.reset();
+
+    categoryCards.forEach(card=>{
+
+        card.classList.remove("active");
+
+    });
+
+    if(category){
+
+        category.value = "";
+
+    }
+
+    receiptCard.classList.remove("active");
+
+    successCard.classList.remove("active");
+
+    failedCard.classList.remove("active");
+
+    waitingCard.classList.remove("active");
+
+    payBtn.disabled = false;
+
+    payBtn.classList.remove("loading");
+
+    refreshSummary();
+
+}
+
+// ======================================================
+// BUTTON EVENTS
+// ======================================================
+
+if(newPaymentBtn){
+
+    newPaymentBtn.addEventListener(
+
+        "click",
+
+        resetPayment
+
+    );
+
+}
+
+if(retryBtn){
+
+    retryBtn.addEventListener(
+
+        "click",
+
+        resetPayment
+
+    );
+
+}
+
+
+// ======================================================
+// KINGDOM WAYS CHURCH CMS
+// OFFERING.JS
+// PART 5
+// PAYMENT RECOVERY, SESSION & PAGE EVENTS
+// ======================================================
+
+// ======================================================
+// ACTIVE PAYMENT STORAGE KEY
+// ======================================================
+
+const ACTIVE_PAYMENT_KEY = "kw_active_payment";
+
+// ======================================================
+// PAYMENT LOCK
+// ======================================================
+
+let paymentBusy = false;
+
+// ======================================================
+// BEGIN PAYMENT
+// ======================================================
+
+function beginPayment() {
+
+    if (paymentBusy) {
+
+        showToast(
+            "Another payment is already in progress.",
+            "error"
+        );
+
+        return false;
+
+    }
+
+    paymentBusy = true;
+
+    return true;
+
+}
+
+// ======================================================
+// FINISH PAYMENT
+// ======================================================
+
+function finishPayment() {
+
+    paymentBusy = false;
+
+}
+
+// ======================================================
+// RESUME SAVED PAYMENT
+// ======================================================
+
+function resumePendingPayment() {
+
+    const saved = localStorage.getItem(ACTIVE_PAYMENT_KEY);
+
+    if (!saved) {
+
+        return;
+
+    }
+
+    try {
+
+        const active = JSON.parse(saved);
+
+        payment.checkout_request_id =
+            active.checkout_request_id || "";
+
+        payment.transaction_id =
+            active.transaction_id || "";
+
+        payment.amount =
+            active.amount || 0;
+
+        payment.category =
+            active.category || "";
+
+        payment.phone_used =
+            active.phone || payment.registered_phone;
+
+        refreshSummary();
+
+        showWaitingCard();
+
+        updateWaitingMessage(
+            "Resuming pending payment..."
+        );
+
+        startPaymentPolling();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        clearActivePayment();
+
+    }
+
+}
+
+// ======================================================
+// VERIFY LOGIN SESSION
+// ======================================================
+
+function verifySession() {
+
+    const saved = localStorage.getItem("member");
+
+    if (!saved) {
+
+        showToast(
+            "Your login session has expired.",
+            "error"
+        );
+
+        setTimeout(() => {
+
+            location.href = "memberlogin.html";
+
+        }, 1500);
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
+// ======================================================
+// PREPARE PAYMENT
+// ======================================================
+
+function preparePayment() {
+
+    if (!verifySession()) {
+
+        return false;
+
+    }
+
+    if (!validatePayment()) {
+
+        return false;
+
+    }
+
+    if (!beginPayment()) {
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
+// ======================================================
+// UPDATE SUCCESS
+// ======================================================
+
+function paymentFinishedSuccessfully(result) {
+
+    finishPayment();
+
+    clearActivePayment();
+
+    paymentSuccessful(result);
+
+    loadTransactionHistory();
+
+}
+
+// ======================================================
+// UPDATE FAILURE
+// ======================================================
+
+function paymentFinishedFailed(message) {
+
+    finishPayment();
+
+    clearActivePayment();
+
+    paymentFailed(message);
+
+}
+
+// ======================================================
+// ONLINE
+// ======================================================
+
+window.addEventListener(
+
+    "online",
+
+    () => {
+
+        showToast(
+            "Internet connection restored."
+        );
+
+    }
+
+);
+
+// ======================================================
+// OFFLINE
+// ======================================================
+
+window.addEventListener(
+
+    "offline",
+
+    () => {
+
+        showToast(
+            "No internet connection.",
+            "error"
+        );
+
+    }
+
+);
+
+// ======================================================
+// BEFORE PAGE CLOSE
+// ======================================================
+
+window.addEventListener(
+
+    "beforeunload",
+
+    () => {
+
+        stopPaymentPolling();
+
+    }
+
+);
+
+// ======================================================
+// PAGE STARTUP
+// ======================================================
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    () => {
+
+        if (!verifySession()) {
+
+            return;
+
+        }
+
+        loadMemberSession();
+
+        refreshSummary();
+
+        loadTransactionHistory();
+
+        resumePendingPayment();
+
+    }
+
+);
+
+// ======================================================
+// DEBUG
+// ======================================================
+
+console.log(
+
+    "%cKINGDOM WAYS CHURCH CMS",
+
+    "color:#2563eb;font-size:18px;font-weight:bold;"
+
+);
+
+console.log(
+
+    "Offering Module Loaded Successfully."
+
+);
+
+// ======================================================
+// KINGDOM WAYS CHURCH CMS
+// OFFERING.JS
+// PART 6 (FINAL)
+// FINAL UTILITIES & APPLICATION INITIALIZATION
+// ======================================================
+
+// ======================================================
+// CLEAR PAYMENT FORM
+// ======================================================
+
+function clearPaymentForm() {
+
+    payment.amount = 0;
+    payment.category = "";
+    payment.notes = "";
+    payment.phone_used = payment.registered_phone;
+
+    payment.checkout_request_id = "";
+    payment.transaction_id = "";
+    payment.mpesa_receipt = "";
+    payment.safaricom_name = "";
+    payment.status = "Pending";
+
+    paymentForm.reset();
+
+    if (category) {
+
+        category.value = "";
+
+    }
+
+    categoryCards.forEach(card => {
+
+        card.classList.remove("active");
+
+    });
+
+    if (optionalPhone) {
+
+        optionalPhone.value = "";
+        optionalPhone.disabled = true;
+
+    }
+
+    if (useDifferentPhone) {
+
+        useDifferentPhone.checked = false;
+
+    }
+
+    refreshSummary();
+
+}
+
+// ======================================================
+// FORMAT MONEY
+// ======================================================
+
+function formatMoney(value) {
+
+    return Number(value || 0).toLocaleString(
+
+        "en-KE",
+
+        {
+
+            style: "currency",
+
+            currency: "KES"
+
+        }
+
+    );
+
+}
+
+// ======================================================
+// FORMAT DATE
+// ======================================================
+
+function formatDate(value) {
+
+    if (!value) return "--";
+
+    return new Date(value).toLocaleString(
+
+        "en-KE",
+
+        {
+
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+
+        }
+
+    );
+
+}
+
+// ======================================================
+// GLOBAL ERROR HANDLER
+// ======================================================
+
+window.addEventListener(
+
+    "error",
+
+    function (event) {
+
+        console.error(event.error);
+
+        showToast(
+
+            "Unexpected system error.",
+
+            "error"
+
+        );
+
+    }
+
+);
+
+// ======================================================
+// UNHANDLED PROMISES
+// ======================================================
+
+window.addEventListener(
+
+    "unhandledrejection",
+
+    function (event) {
+
+        console.error(event.reason);
+
+        showToast(
+
+            "Unexpected server response.",
+
+            "error"
+
+        );
+
+    }
+
+);
+
+// ======================================================
+// PAYMENT SUCCESS HOOK
+// ======================================================
+
+function afterSuccessfulPayment(result) {
+
+    paymentFinishedSuccessfully(result);
+
+    showVerifiedThankYou(
+
+        payment.member_name,
+
+        payment.category
+
+    );
+
+}
+
+// ======================================================
+// PAGE INITIALIZATION
+// ======================================================
+
+function initializeGivingPortal() {
+
+    if (!verifySession()) {
+
+        return;
+
+    }
+
+    loadMemberSession();
+
+    refreshSummary();
+
+    loadTransactionHistory();
+
+    resumePendingPayment();
+
+}
+
+// ======================================================
+// APPLICATION START
+// ======================================================
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    initializeGivingPortal
+
+);
+
+// ======================================================
+// APPLICATION SHUTDOWN
+// ======================================================
+
+window.addEventListener(
+
+    "beforeunload",
+
+    () => {
+
+        stopPaymentPolling();
+
+    }
+
+);
+
+// ======================================================
+// DEVELOPMENT LOG
+// ======================================================
+
+console.log(
+    "%cKINGDOM WAYS CHURCH CMS",
+    "color:#1d4ed8;font-size:18px;font-weight:bold;"
+);
+
+console.log(
+    "%cGiving Module Ready",
+    "color:#16a34a;font-size:14px;"
+);
+
+// ======================================================
+// REQUIRED FASTAPI ENDPOINTS
+// ======================================================
+
+/*
+
+POST   /api/finance/mpesa/stkpush
+
+Request
+{
+    member_id,
+    member_number,
+    member_name,
+    phone,
+    amount,
+    category,
+    notes
+}
+
+Response
+{
+    success,
+    checkout_request_id,
+    transaction_id,
+    customer_message
+}
+
+--------------------------------------------------
+
+GET
+
+/api/finance/mpesa/status/{checkout_request_id}
+
+Response
+{
+    status,
+    transaction_id,
+    checkout_request_id,
+    mpesa_receipt,
+    safaricom_name,
+    phone,
+    amount,
+    category,
+    transaction_date
+}
+
+--------------------------------------------------
+
+GET
+
+/api/finance/member-history/{member_number}
+
+--------------------------------------------------
+
+GET
+
+/finance/receipt/{transaction_id}
+
+--------------------------------------------------
+
+POST
+
+/api/finance/mpesa/callback
+
+*/
+
+// ======================================================
+// FINAL NOTES
+// ======================================================
+
+/*
+
+✓ Member logs in
+
+✓ Member details load automatically
+
+✓ Registered phone displayed
+
+✓ Optional M-Pesa number supported
+
+✓ Category selection
+
+✓ Amount validation
+
+✓ Confirmation modal
+
+✓ STK Push request
+
+✓ Payment polling
+
+✓ Success / Failed handling
+
+✓ Receipt generation
+
+✓ Print receipt
+
+✓ Download receipt
+
+✓ Transaction history
+
+✓ Resume interrupted payment
+
+✓ Duplicate payment protection
+
+✓ Session validation
+
+✓ Thank-you animation
+
+✓ Ready for FastAPI + PostgreSQL + Daraja API
+
+*/

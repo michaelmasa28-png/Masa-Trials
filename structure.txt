@@ -1,0 +1,4542 @@
+Folder PATH listing
+Volume serial number is 0610-4E6C
+C:.
+³   .env
+³   .gallery.js.swp
+³   .gitignore
+³   .settings.html.swp
+³   add_message_type_column.pynotepad add_message_type_column.py
+³   church_backup.dump
+³   church_backup.sql
+³   cloudflared-linux-amd64.deb
+³   fix_db.py
+³   fix_messages_table.py
+³   migrate_to_neon.py
+³   README.md
+³   requirements.txt
+³   reset_superadmin.py
+³   structure.txt
+³   To
+³   
+ÃÄÄÄadmin
+³   ³   .dashboard.js.swp
+³   ³   announcements.html
+³   ³   attendance.html
+³   ³   dashboard.html
+³   ³   dashboard.js
+³   ³   donations.html
+³   ³   events.html
+³   ³   gallary.html
+³   ³   login.html
+³   ³   members.html
+³   ³   ministries.html
+³   ³   settings.html
+³   ³   
+³   ÃÄÄÄcss
+³   ³       clientMode.css
+³   ³       login.css
+³   ³       members.css
+³   ³       sermons-admin.css
+³   ³       
+³   ÀÄÄÄjs
+³           sermons-admin.js.backup
+³           
+ÃÄÄÄapp
+³   ³   admin.py
+³   ³   auth.py
+³   ³   config.py
+³   ³   create_permissions.py
+³   ³   create_super_admin.py
+³   ³   database.py
+³   ³   dependencies.py
+³   ³   dependencies.py.save
+³   ³   main.py
+³   ³   models.py
+³   ³   models.py.save
+³   ³   permissions.py
+³   ³   schema.py
+³   ³   utils.py
+³   ³   
+³   ÃÄÄÄroutes
+³   ³   ³   admin.py
+³   ³   ³   admin_routes.py
+³   ³   ³   admin_routes.py.save
+³   ³   ³   attendance_routes.py
+³   ³   ³   auth_routes.py
+³   ³   ³   chat_routes.py
+³   ³   ³   chat_socket.py
+³   ³   ³   dashboard_routes.py
+³   ³   ³   events_routes.py
+³   ³   ³   gallery_routes.py
+³   ³   ³   member_routes.py
+³   ³   ³   sermon_routes.py
+³   ³   ³   websocket_routes.py
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           admin.cpython-314.pyc
+³   ³           attendance_routes.cpython-314.pyc
+³   ³           auth_routes.cpython-314.pyc
+³   ³           chat_routes.cpython-314.pyc
+³   ³           chat_socket.cpython-314.pyc
+³   ³           dashboard_routes.cpython-314.pyc
+³   ³           events_routes.cpython-314.pyc
+³   ³           gallery_routes.cpython-314.pyc
+³   ³           member_routes.cpython-314.pyc
+³   ³           sermon_routes.cpython-314.pyc
+³   ³           websocket_routes.cpython-314.pyc
+³   ³           __init__.cpython-314.pyc
+³   ³           
+³   ÃÄÄÄstatic
+³   ³   ÀÄÄÄimages
+³   ³           default-sermon.jpg
+³   ³           
+³   ÃÄÄÄuploads
+³   ÀÄÄÄ__pycache__
+³           auth.cpython-314.pyc
+³           config.cpython-314.pyc
+³           database.cpython-314.pyc
+³           dependencies.cpython-314.pyc
+³           main.cpython-314.pyc
+³           models.cpython-314.pyc
+³           schema.cpython-314.pyc
+³           utils.cpython-314.pyc
+³           
+ÃÄÄÄpublic
+³   ³   attendance.backup.js
+³   ³   attendance.css
+³   ³   attendance.html
+³   ³   attendance.js
+³   ³   btn.css
+³   ³   btn.html
+³   ³   btn.js
+³   ³   charttest.css
+³   ³   charttest.html
+³   ³   charttest.js
+³   ³   charttest.js.backup
+³   ³   clientMode.css
+³   ³   clientMode.html
+³   ³   clientMode.js
+³   ³   communication.css
+³   ³   communication.html
+³   ³   communication.js
+³   ³   connect.css
+³   ³   connect.html
+³   ³   connect.js
+³   ³   dashboard.css
+³   ³   dashboard.html
+³   ³   dashboard.js
+³   ³   database.js
+³   ³   donations.css
+³   ³   donations.html
+³   ³   eventclient.css
+³   ³   eventclient.html
+³   ³   eventclient.js
+³   ³   events.css
+³   ³   events.html
+³   ³   events.js
+³   ³   fix_db.py
+³   ³   gallery.css
+³   ³   gallery.html
+³   ³   gallery.js
+³   ³   galleryadmin.css
+³   ³   galleryadmin.html
+³   ³   galleryadmin.js
+³   ³   index.html
+³   ³   login.css
+³   ³   login.html
+³   ³   login.js
+³   ³   members.css
+³   ³   members.html
+³   ³   members.js
+³   ³   member_session.js
+³   ³   ministries.html
+³   ³   offering.css
+³   ³   offering.js
+³   ³   offerings.css
+³   ³   offerings.html
+³   ³   rolelogin.css
+³   ³   rolelogin.html
+³   ³   rolelogin.js
+³   ³   script.js
+³   ³   sermons-admin.css
+³   ³   sermons-admin.html
+³   ³   sermons-admin.js
+³   ³   sermons-admin.js.save
+³   ³   sermonsclient.css
+³   ³   sermonsclient.html
+³   ³   sermonsclient.js
+³   ³   sermonsclient.js.bak
+³   ³   server.js
+³   ³   session.js
+³   ³   settings.css
+³   ³   settings.html
+³   ³   settings.js
+³   ³   style.css
+³   ³   websocket.js
+³   ³   
+³   ÃÄÄÄadmin
+³   ³   ³   .dashboard.js.swp
+³   ³   ³   
+³   ³   ÀÄÄÄcss
+³   ³           clientMode.css
+³   ³           login.css
+³   ³           members.css
+³   ³           sermons-admin.css
+³   ³           
+³   ÃÄÄÄimages
+³   ³   ³   default-avatar.png
+³   ³   ³   default-sermon.jpg
+³   ³   ³   logo.png
+³   ³   ³   
+³   ³   ÃÄÄÄchurch.jpg
+³   ³   ÀÄÄÄNew folder
+³   ÀÄÄÄuploads
+³       ÃÄÄÄevents
+³       ³       d6ffc7bf-28ac-4353-8192-2a0b8083f02e_20260217_173719 (2).jpg
+³       ³       fe333b20-cc15-41d0-961c-28eb67fa293f_20260202_142939.jpg
+³       ³       
+³       ÃÄÄÄgallery
+³       ³       02c60bce-7624-46eb-b7e3-2f4465d67d22.png (deleted)
+³       ³       0e8d5624-d707-4efb-90f4-956f49685f3b.png
+³       ³       12a15af6-be4b-4a03-a2b8-770ee0ada686.jpg
+³       ³       1783728125349-325137.png
+³       ³       1783759520479-381489.png
+³       ³       1783780736772-967428.png
+³       ³       1783782501793-475109.png
+³       ³       1783782665960-536376.png
+³       ³       1783785505639-785747.png
+³       ³       1783785973372-863712.png
+³       ³       1783787373019-785870.png
+³       ³       1783788163124-120272.png
+³       ³       1783797771253-789800.png
+³       ³       1783798472536-317477.png
+³       ³       1783798848618-342409.png
+³       ³       1783801509126-873833.png
+³       ³       1783801617144-35125.png
+³       ³       1783801667523-628971.png
+³       ³       1783892110913-15152.png
+³       ³       1bfbcb5b-aed4-4d5e-ab74-39ff6fab4372.jpg
+³       ³       217cb812-660c-4a28-918a-b451215c1db5.jpg
+³       ³       2ab52a46-80a9-4cf8-b18c-aa29d10c60ac.jpg
+³       ³       3473a8ff-0908-4172-bdfe-f3f132b12022.png (deleted)
+³       ³       4a5af81e-05a4-472a-9686-f11fa51b4988.png (deleted)
+³       ³       6a36968c-54d3-4db7-b055-2cf9b6176c85.png
+³       ³       7226b68a-affa-46ac-ac6c-4b2197cdf9f6.jpg
+³       ³       8c46313a-9f52-4cbc-8b36-b29d72254002.jpg
+³       ³       8efbaf16-b8a8-4d41-8ea5-4909dcfbd9a0.jpg
+³       ³       9f5ab9de-0e2d-4ab9-99dd-3f57f379f122.jpg
+³       ³       b1dbd0e5-c6cc-4dc4-8f63-3b07df3d91d1.jpg
+³       ³       e3104329-07de-4a90-99a7-8e93c82cdb6a.jpg
+³       ³       e8f30211-5345-477c-b27a-ef11a02fcb3d.jpg
+³       ³       
+³       ÃÄÄÄprofiles
+³       ³       default-avatar.png
+³       ³       KWC-2026-000001.jpg
+³       ³       
+³       ÀÄÄÄsermons
+³           ÃÄÄÄimages
+³           ³       0208ac6b-f538-4e0f-9c60-fee94136a3aa_Screenshot_2026-06-29_05_48_03.png
+³           ³       09bcfe17-51b0-4208-b2b9-157f66f62a06_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       0f75d231-b44d-4d4e-9580-af1de3e46eb3_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       1ea52b89-f85f-4a78-a9ea-988f0c21bdee_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       1f6b1e48-1365-4f15-8067-9d51f96bc9b0_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       20b69b1e-e2ba-4783-a854-0e02ff8d73d8_20260217_173719 (2).jpg
+³           ³       29df917c-92b2-4518-abeb-ea5363342d06_Screenshot_2026-06-27_13_52_30.png
+³           ³       2edd4b44-ca3a-4f1a-b70e-f3cdbc17d891_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       362d3cc6-33d9-492f-8143-5f7bcb0ec002_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       3da67553-aff7-476a-881d-3e437723070f_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       4ead3af8-f217-450e-b4e7-b90ac1b485fe_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       835ebae5-5844-4ce7-acd7-7763d33ff641_Screenshot_2026-07-04_10_29_02.png
+³           ³       83bc61f2-074d-4bb4-8d02-1d50b79ef557_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       861b0c01-9378-4ddc-899e-04db25503257_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       875ec27f-ecfd-476f-ba38-090bbf551e97_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       89d3ebfe-b606-4406-81f8-55f49e9cf887_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       93042718-b4b0-4d72-baa7-727bbace0d1b_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       93462f6f-0c16-4e2e-a474-10fde149faea_Screenshot_2026-07-17_18_44_01.png
+³           ³       94dd8695-998c-4830-a8e7-5c6972b4df4a_Screenshot_2026-06-27_13_52_30.png
+³           ³       97f32c18-51d2-4f83-9322-add722d675b2_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       a12057ba-6c9f-4dda-94f7-9af64e70568e_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       a847999c-6ee3-4342-993f-0d01c8a3ac86_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       bdd80e9e-cd46-4bf9-bda7-87131b23e688_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       c2fb8e06-3917-498f-bbd8-cab7d7031892_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       c59295df-d7c8-4eb1-9b23-6ec8913da935_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       e28e3540-9685-41bb-844a-9234cb11c614_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       f89f5cfe-544d-462f-9ee3-d6628f99bb4e_Screenshot_2026-06-29_05_48_02.png
+³           ³       fae01d20-f6c2-4fe6-9309-6de0c503e929_ChatGPT Image Jul 18, 2026, 05_45_41 PM.png
+³           ³       
+³           ÃÄÄÄnotes
+³           ³       00f737b3-096d-4729-a466-cfb4f65002f3_
+³           ³       16d95ead-479d-4a4f-863b-98f7d16dd788_
+³           ³       20b34caf-c94c-477d-95de-34c101326eb6_
+³           ³       3ee3582e-d3f1-445c-8fea-7171f2bc6e6c_
+³           ³       568988c4-ebb7-418b-a172-4a7fbe6d3ced_
+³           ³       640ab569-8e38-4e4e-a527-93e170a58940_
+³           ³       695e8a37-0c2b-4546-b87b-a40f181d1a91_
+³           ³       6e4748f2-a6de-466e-9bd6-68495d5bd014_
+³           ³       78b69657-3173-4bdc-876f-8c274a2d5d1d_
+³           ³       8d84ca80-bd4f-4916-8dc7-d3cd59fec33e_
+³           ³       8eb7ae15-6195-49d6-9beb-815bc373fddd_
+³           ³       917cc206-2f22-4c93-9bd7-a138883f3bd8_
+³           ³       9732619b-1833-41a9-94db-3182d2e96597_
+³           ³       a827cab3-33ff-4b46-930b-a2971637993a_
+³           ³       b07375e1-7b47-4f11-b95f-125149649938_
+³           ³       b102adf2-603b-460a-bba0-4b6d3870779a_
+³           ³       bd935291-83bd-403f-a2f9-e02ec9747896_
+³           ³       ca027e66-4c06-49e5-9cd6-50684841dc69_
+³           ³       cb62b199-2c44-4754-be08-f73953c88ddf_
+³           ³       e125f7b7-1159-47b7-aaec-8433bf36f6c4_
+³           ³       eb4739ba-731a-42bd-9da9-fccc110d6c09_
+³           ³       f746d498-11b2-4085-bb07-cd62bab6bdab_
+³           ³       
+³           ÀÄÄÄvideos
+³                   0101271b-c78d-4e81-80b5-77acd0b68bf6_Download (14).mp4
+³                   0260ce27-0913-472a-802e-a70e30c90162_Download (14).mp4
+³                   07cea643-2aa3-4450-9072-13a20f9b7b5c_Download (14).mp4
+³                   0ffec07a-6377-4aeb-9b72-c204b456b76f_Download (12).mp4
+³                   31d1c523-3d85-4fa4-a239-d4b1eb92cb2b_Download (9).mp4
+³                   469669fb-2fbd-4a1c-9bd1-afa5b6dc469e_Download (14).mp4
+³                   500ecd7d-f0c7-4acf-8d68-479f434b5d1e_Download (14).mp4
+³                   51d1e603-ddd4-4e89-86c2-984cf2f48682_Download (12).mp4
+³                   57c4a74a-9abf-4dfb-a153-b46e41b1e309_Download (12).mp4
+³                   59655e54-eed6-42d3-af45-7c7734c77a77_Download (12).mp4
+³                   5b7b0d07-a407-4f43-941a-69df5208950b_Download (14).mp4
+³                   610608be-7c5e-418e-8972-d01a028f9350_Download (14).mp4
+³                   66abb7e8-f056-4e46-b426-413e33e99c71_Download (12).mp4
+³                   6b537182-97cd-47f6-9ebf-28703c2748aa_Download (11).mp4
+³                   6bedf2ab-5fe8-4dea-808d-185778fb5c2a_Download (9).mp4
+³                   6ca6aeb5-bd11-44fa-a5ed-ea032c6f168e_Download (12).mp4
+³                   780618d8-a4bf-4192-9954-4d78ee4f01ac_Download (12).mp4
+³                   85cb20b2-e49d-4695-b5e5-c803fdb1c84a_Download (14).mp4
+³                   8d5cd858-20e8-478b-98af-82840a5c068d_Download (14).mp4
+³                   afac9b07-696b-4d35-978b-2ca0aea38c6d_Download (14).mp4
+³                   c01d8333-191d-4368-b2a3-e978e558f2d4_Download (14).mp4
+³                   cf087f81-6ac9-497a-9813-81f9d51fc5e4_Download (12).mp4
+³                   e8162cb2-a42b-4668-8304-f0f1c112b194_Download (14).mp4
+³                   test.mp4
+³                   
+ÀÄÄÄvenv
+    ³   .gitignore
+    ³   pyvenv.cfg
+    ³   
+    ÃÄÄÄInclude
+    ³   ÀÄÄÄsite
+    ³       ÀÄÄÄpython3.14
+    ³           ÀÄÄÄgreenlet
+    ³                   greenlet.h
+    ³                   
+    ÃÄÄÄLib
+    ³   ÀÄÄÄsite-packages
+    ³       ³   six.py
+    ³       ³   typing_extensions.py
+    ³       ³   
+    ³       ÃÄÄÄalembic
+    ³       ³   ³   command.py
+    ³       ³   ³   config.py
+    ³       ³   ³   context.py
+    ³       ³   ³   context.pyi
+    ³       ³   ³   environment.py
+    ³       ³   ³   migration.py
+    ³       ³   ³   op.py
+    ³       ³   ³   op.pyi
+    ³       ³   ³   py.typed
+    ³       ³   ³   __init__.py
+    ³       ³   ³   __main__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄautogenerate
+    ³       ³   ³   ³   api.py
+    ³       ³   ³   ³   render.py
+    ³       ³   ³   ³   rewriter.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄcompare
+    ³       ³   ³   ³   ³   comments.py
+    ³       ³   ³   ³   ³   constraints.py
+    ³       ³   ³   ³   ³   schema.py
+    ³       ³   ³   ³   ³   server_defaults.py
+    ³       ³   ³   ³   ³   tables.py
+    ³       ³   ³   ³   ³   types.py
+    ³       ³   ³   ³   ³   util.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           comments.cpython-314.pyc
+    ³       ³   ³   ³           constraints.cpython-314.pyc
+    ³       ³   ³   ³           schema.cpython-314.pyc
+    ³       ³   ³   ³           server_defaults.cpython-314.pyc
+    ³       ³   ³   ³           tables.cpython-314.pyc
+    ³       ³   ³   ³           types.cpython-314.pyc
+    ³       ³   ³   ³           util.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           api.cpython-314.pyc
+    ³       ³   ³           render.cpython-314.pyc
+    ³       ³   ³           rewriter.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄddl
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   impl.py
+    ³       ³   ³   ³   mssql.py
+    ³       ³   ³   ³   mysql.py
+    ³       ³   ³   ³   oracle.py
+    ³       ³   ³   ³   postgresql.py
+    ³       ³   ³   ³   sqlite.py
+    ³       ³   ³   ³   _autogen.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           impl.cpython-314.pyc
+    ³       ³   ³           mssql.cpython-314.pyc
+    ³       ³   ³           mysql.cpython-314.pyc
+    ³       ³   ³           oracle.cpython-314.pyc
+    ³       ³   ³           postgresql.cpython-314.pyc
+    ³       ³   ³           sqlite.cpython-314.pyc
+    ³       ³   ³           _autogen.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄoperations
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   batch.py
+    ³       ³   ³   ³   ops.py
+    ³       ³   ³   ³   schemaobj.py
+    ³       ³   ³   ³   toimpl.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           batch.cpython-314.pyc
+    ³       ³   ³           ops.cpython-314.pyc
+    ³       ³   ³           schemaobj.cpython-314.pyc
+    ³       ³   ³           toimpl.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄruntime
+    ³       ³   ³   ³   environment.py
+    ³       ³   ³   ³   migration.py
+    ³       ³   ³   ³   plugins.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           environment.cpython-314.pyc
+    ³       ³   ³           migration.cpython-314.pyc
+    ³       ³   ³           plugins.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄscript
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   revision.py
+    ³       ³   ³   ³   write_hooks.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           revision.cpython-314.pyc
+    ³       ³   ³           write_hooks.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄtemplates
+    ³       ³   ³   ÃÄÄÄasync
+    ³       ³   ³   ³   ³   alembic.ini.mako
+    ³       ³   ³   ³   ³   env.py
+    ³       ³   ³   ³   ³   README
+    ³       ³   ³   ³   ³   script.py.mako
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           env.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄgeneric
+    ³       ³   ³   ³   ³   alembic.ini.mako
+    ³       ³   ³   ³   ³   env.py
+    ³       ³   ³   ³   ³   README
+    ³       ³   ³   ³   ³   script.py.mako
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           env.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄmultidb
+    ³       ³   ³   ³   ³   alembic.ini.mako
+    ³       ³   ³   ³   ³   env.py
+    ³       ³   ³   ³   ³   README
+    ³       ³   ³   ³   ³   script.py.mako
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           env.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄpyproject
+    ³       ³   ³   ³   ³   alembic.ini.mako
+    ³       ³   ³   ³   ³   env.py
+    ³       ³   ³   ³   ³   pyproject.toml.mako
+    ³       ³   ³   ³   ³   README
+    ³       ³   ³   ³   ³   script.py.mako
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           env.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄpyproject_async
+    ³       ³   ³       ³   alembic.ini.mako
+    ³       ³   ³       ³   env.py
+    ³       ³   ³       ³   pyproject.toml.mako
+    ³       ³   ³       ³   README
+    ³       ³   ³       ³   script.py.mako
+    ³       ³   ³       ³   
+    ³       ³   ³       ÀÄÄÄ__pycache__
+    ³       ³   ³               env.cpython-314.pyc
+    ³       ³   ³               
+    ³       ³   ÃÄÄÄtesting
+    ³       ³   ³   ³   assertions.py
+    ³       ³   ³   ³   env.py
+    ³       ³   ³   ³   fixtures.py
+    ³       ³   ³   ³   requirements.py
+    ³       ³   ³   ³   schemacompare.py
+    ³       ³   ³   ³   util.py
+    ³       ³   ³   ³   warnings.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄplugin
+    ³       ³   ³   ³   ³   bootstrap.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           bootstrap.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄsuite
+    ³       ³   ³   ³   ³   test_autogen_comments.py
+    ³       ³   ³   ³   ³   test_autogen_computed.py
+    ³       ³   ³   ³   ³   test_autogen_diffs.py
+    ³       ³   ³   ³   ³   test_autogen_fks.py
+    ³       ³   ³   ³   ³   test_autogen_identity.py
+    ³       ³   ³   ³   ³   test_environment.py
+    ³       ³   ³   ³   ³   test_op.py
+    ³       ³   ³   ³   ³   _autogen_fixtures.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           test_autogen_comments.cpython-314.pyc
+    ³       ³   ³   ³           test_autogen_computed.cpython-314.pyc
+    ³       ³   ³   ³           test_autogen_diffs.cpython-314.pyc
+    ³       ³   ³   ³           test_autogen_fks.cpython-314.pyc
+    ³       ³   ³   ³           test_autogen_identity.cpython-314.pyc
+    ³       ³   ³   ³           test_environment.cpython-314.pyc
+    ³       ³   ³   ³           test_op.cpython-314.pyc
+    ³       ³   ³   ³           _autogen_fixtures.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           assertions.cpython-314.pyc
+    ³       ³   ³           env.cpython-314.pyc
+    ³       ³   ³           fixtures.cpython-314.pyc
+    ³       ³   ³           requirements.cpython-314.pyc
+    ³       ³   ³           schemacompare.cpython-314.pyc
+    ³       ³   ³           util.cpython-314.pyc
+    ³       ³   ³           warnings.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄutil
+    ³       ³   ³   ³   compat.py
+    ³       ³   ³   ³   editor.py
+    ³       ³   ³   ³   exc.py
+    ³       ³   ³   ³   langhelpers.py
+    ³       ³   ³   ³   messaging.py
+    ³       ³   ³   ³   pyfiles.py
+    ³       ³   ³   ³   sqla_compat.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           compat.cpython-314.pyc
+    ³       ³   ³           editor.cpython-314.pyc
+    ³       ³   ³           exc.cpython-314.pyc
+    ³       ³   ³           langhelpers.cpython-314.pyc
+    ³       ³   ³           messaging.cpython-314.pyc
+    ³       ³   ³           pyfiles.cpython-314.pyc
+    ³       ³   ³           sqla_compat.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           command.cpython-314.pyc
+    ³       ³           config.cpython-314.pyc
+    ³       ³           context.cpython-314.pyc
+    ³       ³           environment.cpython-314.pyc
+    ³       ³           migration.cpython-314.pyc
+    ³       ³           op.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           __main__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄalembic-1.18.5.dist-info
+    ³       ³   ³   entry_points.txt
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄannotated_doc
+    ³       ³   ³   main.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           main.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄannotated_doc-0.0.4.dist-info
+    ³       ³   ³   entry_points.txt
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄannotated_types
+    ³       ³   ³   py.typed
+    ³       ³   ³   test_cases.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           test_cases.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄannotated_types-0.7.0.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄanyio
+    ³       ³   ³   from_thread.py
+    ³       ³   ³   functools.py
+    ³       ³   ³   itertools.py
+    ³       ³   ³   lowlevel.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   pytest_plugin.py
+    ³       ³   ³   to_interpreter.py
+    ³       ³   ³   to_process.py
+    ³       ³   ³   to_thread.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄabc
+    ³       ³   ³   ³   _eventloop.py
+    ³       ³   ³   ³   _resources.py
+    ³       ³   ³   ³   _sockets.py
+    ³       ³   ³   ³   _streams.py
+    ³       ³   ³   ³   _subprocesses.py
+    ³       ³   ³   ³   _tasks.py
+    ³       ³   ³   ³   _testing.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           _eventloop.cpython-314.pyc
+    ³       ³   ³           _resources.cpython-314.pyc
+    ³       ³   ³           _sockets.cpython-314.pyc
+    ³       ³   ³           _streams.cpython-314.pyc
+    ³       ³   ³           _subprocesses.cpython-314.pyc
+    ³       ³   ³           _tasks.cpython-314.pyc
+    ³       ³   ³           _testing.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄstreams
+    ³       ³   ³   ³   buffered.py
+    ³       ³   ³   ³   file.py
+    ³       ³   ³   ³   memory.py
+    ³       ³   ³   ³   stapled.py
+    ³       ³   ³   ³   text.py
+    ³       ³   ³   ³   tls.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           buffered.cpython-314.pyc
+    ³       ³   ³           file.cpython-314.pyc
+    ³       ³   ³           memory.cpython-314.pyc
+    ³       ³   ³           stapled.cpython-314.pyc
+    ³       ³   ³           text.cpython-314.pyc
+    ³       ³   ³           tls.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄ_backends
+    ³       ³   ³   ³   _asyncio.py
+    ³       ³   ³   ³   _trio.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           _asyncio.cpython-314.pyc
+    ³       ³   ³           _trio.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄ_core
+    ³       ³   ³   ³   _asyncio_selector_thread.py
+    ³       ³   ³   ³   _contextmanagers.py
+    ³       ³   ³   ³   _eventloop.py
+    ³       ³   ³   ³   _exceptions.py
+    ³       ³   ³   ³   _fileio.py
+    ³       ³   ³   ³   _resources.py
+    ³       ³   ³   ³   _signals.py
+    ³       ³   ³   ³   _sockets.py
+    ³       ³   ³   ³   _streams.py
+    ³       ³   ³   ³   _subprocesses.py
+    ³       ³   ³   ³   _synchronization.py
+    ³       ³   ³   ³   _tasks.py
+    ³       ³   ³   ³   _tempfile.py
+    ³       ³   ³   ³   _testing.py
+    ³       ³   ³   ³   _typedattr.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           _asyncio_selector_thread.cpython-314.pyc
+    ³       ³   ³           _contextmanagers.cpython-314.pyc
+    ³       ³   ³           _eventloop.cpython-314.pyc
+    ³       ³   ³           _exceptions.cpython-314.pyc
+    ³       ³   ³           _fileio.cpython-314.pyc
+    ³       ³   ³           _resources.cpython-314.pyc
+    ³       ³   ³           _signals.cpython-314.pyc
+    ³       ³   ³           _sockets.cpython-314.pyc
+    ³       ³   ³           _streams.cpython-314.pyc
+    ³       ³   ³           _subprocesses.cpython-314.pyc
+    ³       ³   ³           _synchronization.cpython-314.pyc
+    ³       ³   ³           _tasks.cpython-314.pyc
+    ³       ³   ³           _tempfile.cpython-314.pyc
+    ³       ³   ³           _testing.cpython-314.pyc
+    ³       ³   ³           _typedattr.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           from_thread.cpython-314.pyc
+    ³       ³           functools.cpython-314.pyc
+    ³       ³           itertools.cpython-314.pyc
+    ³       ³           lowlevel.cpython-314.pyc
+    ³       ³           pytest_plugin.cpython-314.pyc
+    ³       ³           to_interpreter.cpython-314.pyc
+    ³       ³           to_process.cpython-314.pyc
+    ³       ³           to_thread.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄanyio-4.14.2.dist-info
+    ³       ³   ³   entry_points.txt
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   scm_file_list.json
+    ³       ³   ³   scm_version.json
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄbcrypt
+    ³       ³   ³   py.typed
+    ³       ³   ³   _bcrypt.pyd
+    ³       ³   ³   __init__.py
+    ³       ³   ³   __init__.pyi
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄbcrypt-4.1.3.dist-info
+    ³       ³       INSTALLER
+    ³       ³       LICENSE
+    ³       ³       METADATA
+    ³       ³       RECORD
+    ³       ³       REQUESTED
+    ³       ³       top_level.txt
+    ³       ³       WHEEL
+    ³       ³       
+    ³       ÃÄÄÄclick
+    ³       ³   ³   core.py
+    ³       ³   ³   decorators.py
+    ³       ³   ³   exceptions.py
+    ³       ³   ³   formatting.py
+    ³       ³   ³   globals.py
+    ³       ³   ³   parser.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   shell_completion.py
+    ³       ³   ³   termui.py
+    ³       ³   ³   testing.py
+    ³       ³   ³   types.py
+    ³       ³   ³   utils.py
+    ³       ³   ³   _compat.py
+    ³       ³   ³   _termui_impl.py
+    ³       ³   ³   _textwrap.py
+    ³       ³   ³   _utils.py
+    ³       ³   ³   _winconsole.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           core.cpython-314.pyc
+    ³       ³           decorators.cpython-314.pyc
+    ³       ³           exceptions.cpython-314.pyc
+    ³       ³           formatting.cpython-314.pyc
+    ³       ³           globals.cpython-314.pyc
+    ³       ³           parser.cpython-314.pyc
+    ³       ³           shell_completion.cpython-314.pyc
+    ³       ³           termui.cpython-314.pyc
+    ³       ³           testing.cpython-314.pyc
+    ³       ³           types.cpython-314.pyc
+    ³       ³           utils.cpython-314.pyc
+    ³       ³           _compat.cpython-314.pyc
+    ³       ³           _termui_impl.cpython-314.pyc
+    ³       ³           _textwrap.cpython-314.pyc
+    ³       ³           _utils.cpython-314.pyc
+    ³       ³           _winconsole.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄclick-8.4.2.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE.txt
+    ³       ³           
+    ³       ÃÄÄÄcolorama
+    ³       ³   ³   ansi.py
+    ³       ³   ³   ansitowin32.py
+    ³       ³   ³   initialise.py
+    ³       ³   ³   win32.py
+    ³       ³   ³   winterm.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄtests
+    ³       ³   ³   ³   ansitowin32_test.py
+    ³       ³   ³   ³   ansi_test.py
+    ³       ³   ³   ³   initialise_test.py
+    ³       ³   ³   ³   isatty_test.py
+    ³       ³   ³   ³   utils.py
+    ³       ³   ³   ³   winterm_test.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           ansitowin32_test.cpython-314.pyc
+    ³       ³   ³           ansi_test.cpython-314.pyc
+    ³       ³   ³           initialise_test.cpython-314.pyc
+    ³       ³   ³           isatty_test.cpython-314.pyc
+    ³       ³   ³           utils.cpython-314.pyc
+    ³       ³   ³           winterm_test.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           ansi.cpython-314.pyc
+    ³       ³           ansitowin32.cpython-314.pyc
+    ³       ³           initialise.cpython-314.pyc
+    ³       ³           win32.cpython-314.pyc
+    ³       ³           winterm.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄcolorama-0.4.6.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE.txt
+    ³       ³           
+    ³       ÃÄÄÄdotenv
+    ³       ³   ³   cli.py
+    ³       ³   ³   ipython.py
+    ³       ³   ³   main.py
+    ³       ³   ³   parser.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   variables.py
+    ³       ³   ³   version.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   __main__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           cli.cpython-314.pyc
+    ³       ³           ipython.cpython-314.pyc
+    ³       ³           main.cpython-314.pyc
+    ³       ³           parser.cpython-314.pyc
+    ³       ³           variables.cpython-314.pyc
+    ³       ³           version.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           __main__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄecdsa
+    ³       ³   ³   curves.py
+    ³       ³   ³   der.py
+    ³       ³   ³   ecdh.py
+    ³       ³   ³   ecdsa.py
+    ³       ³   ³   eddsa.py
+    ³       ³   ³   ellipticcurve.py
+    ³       ³   ³   errors.py
+    ³       ³   ³   keys.py
+    ³       ³   ³   numbertheory.py
+    ³       ³   ³   rfc6979.py
+    ³       ³   ³   ssh.py
+    ³       ³   ³   test_curves.py
+    ³       ³   ³   test_der.py
+    ³       ³   ³   test_ecdh.py
+    ³       ³   ³   test_ecdsa.py
+    ³       ³   ³   test_eddsa.py
+    ³       ³   ³   test_ellipticcurve.py
+    ³       ³   ³   test_jacobi.py
+    ³       ³   ³   test_keys.py
+    ³       ³   ³   test_malformed_sigs.py
+    ³       ³   ³   test_numbertheory.py
+    ³       ³   ³   test_pyecdsa.py
+    ³       ³   ³   test_rw_lock.py
+    ³       ³   ³   test_sha3.py
+    ³       ³   ³   util.py
+    ³       ³   ³   _compat.py
+    ³       ³   ³   _rwlock.py
+    ³       ³   ³   _sha3.py
+    ³       ³   ³   _version.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           curves.cpython-314.pyc
+    ³       ³           der.cpython-314.pyc
+    ³       ³           ecdh.cpython-314.pyc
+    ³       ³           ecdsa.cpython-314.pyc
+    ³       ³           eddsa.cpython-314.pyc
+    ³       ³           ellipticcurve.cpython-314.pyc
+    ³       ³           errors.cpython-314.pyc
+    ³       ³           keys.cpython-314.pyc
+    ³       ³           numbertheory.cpython-314.pyc
+    ³       ³           rfc6979.cpython-314.pyc
+    ³       ³           ssh.cpython-314.pyc
+    ³       ³           test_curves.cpython-314.pyc
+    ³       ³           test_der.cpython-314.pyc
+    ³       ³           test_ecdh.cpython-314.pyc
+    ³       ³           test_ecdsa.cpython-314.pyc
+    ³       ³           test_eddsa.cpython-314.pyc
+    ³       ³           test_ellipticcurve.cpython-314.pyc
+    ³       ³           test_jacobi.cpython-314.pyc
+    ³       ³           test_keys.cpython-314.pyc
+    ³       ³           test_malformed_sigs.cpython-314.pyc
+    ³       ³           test_numbertheory.cpython-314.pyc
+    ³       ³           test_pyecdsa.cpython-314.pyc
+    ³       ³           test_rw_lock.cpython-314.pyc
+    ³       ³           test_sha3.cpython-314.pyc
+    ³       ³           util.cpython-314.pyc
+    ³       ³           _compat.cpython-314.pyc
+    ³       ³           _rwlock.cpython-314.pyc
+    ³       ³           _sha3.cpython-314.pyc
+    ³       ³           _version.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄecdsa-0.19.2.dist-info
+    ³       ³       INSTALLER
+    ³       ³       LICENSE
+    ³       ³       METADATA
+    ³       ³       RECORD
+    ³       ³       REQUESTED
+    ³       ³       top_level.txt
+    ³       ³       WHEEL
+    ³       ³       
+    ³       ÃÄÄÄfastapi
+    ³       ³   ³   applications.py
+    ³       ³   ³   background.py
+    ³       ³   ³   cli.py
+    ³       ³   ³   concurrency.py
+    ³       ³   ³   datastructures.py
+    ³       ³   ³   encoders.py
+    ³       ³   ³   exceptions.py
+    ³       ³   ³   exception_handlers.py
+    ³       ³   ³   logger.py
+    ³       ³   ³   params.py
+    ³       ³   ³   param_functions.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   requests.py
+    ³       ³   ³   responses.py
+    ³       ³   ³   routing.py
+    ³       ³   ³   sse.py
+    ³       ³   ³   staticfiles.py
+    ³       ³   ³   templating.py
+    ³       ³   ³   testclient.py
+    ³       ³   ³   types.py
+    ³       ³   ³   utils.py
+    ³       ³   ³   websockets.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   __main__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄ.agents
+    ³       ³   ³   ÀÄÄÄskills
+    ³       ³   ³       ÀÄÄÄfastapi
+    ³       ³   ³           ³   SKILL.md
+    ³       ³   ³           ³   
+    ³       ³   ³           ÀÄÄÄreferences
+    ³       ³   ³                   dependencies.md
+    ³       ³   ³                   other-tools.md
+    ³       ³   ³                   path-operations.md
+    ³       ³   ³                   pydantic.md
+    ³       ³   ³                   responses.md
+    ³       ³   ³                   streaming.md
+    ³       ³   ³                   
+    ³       ³   ÃÄÄÄdependencies
+    ³       ³   ³   ³   models.py
+    ³       ³   ³   ³   utils.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           models.cpython-314.pyc
+    ³       ³   ³           utils.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄmiddleware
+    ³       ³   ³   ³   asyncexitstack.py
+    ³       ³   ³   ³   cors.py
+    ³       ³   ³   ³   gzip.py
+    ³       ³   ³   ³   httpsredirect.py
+    ³       ³   ³   ³   trustedhost.py
+    ³       ³   ³   ³   wsgi.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           asyncexitstack.cpython-314.pyc
+    ³       ³   ³           cors.cpython-314.pyc
+    ³       ³   ³           gzip.cpython-314.pyc
+    ³       ³   ³           httpsredirect.cpython-314.pyc
+    ³       ³   ³           trustedhost.cpython-314.pyc
+    ³       ³   ³           wsgi.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄopenapi
+    ³       ³   ³   ³   constants.py
+    ³       ³   ³   ³   docs.py
+    ³       ³   ³   ³   models.py
+    ³       ³   ³   ³   utils.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           constants.cpython-314.pyc
+    ³       ³   ³           docs.cpython-314.pyc
+    ³       ³   ³           models.cpython-314.pyc
+    ³       ³   ³           utils.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄsecurity
+    ³       ³   ³   ³   api_key.py
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   http.py
+    ³       ³   ³   ³   oauth2.py
+    ³       ³   ³   ³   open_id_connect_url.py
+    ³       ³   ³   ³   utils.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           api_key.cpython-314.pyc
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           http.cpython-314.pyc
+    ³       ³   ³           oauth2.cpython-314.pyc
+    ³       ³   ³           open_id_connect_url.cpython-314.pyc
+    ³       ³   ³           utils.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄ_compat
+    ³       ³   ³   ³   shared.py
+    ³       ³   ³   ³   v2.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           shared.cpython-314.pyc
+    ³       ³   ³           v2.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           applications.cpython-314.pyc
+    ³       ³           background.cpython-314.pyc
+    ³       ³           cli.cpython-314.pyc
+    ³       ³           concurrency.cpython-314.pyc
+    ³       ³           datastructures.cpython-314.pyc
+    ³       ³           encoders.cpython-314.pyc
+    ³       ³           exceptions.cpython-314.pyc
+    ³       ³           exception_handlers.cpython-314.pyc
+    ³       ³           logger.cpython-314.pyc
+    ³       ³           params.cpython-314.pyc
+    ³       ³           param_functions.cpython-314.pyc
+    ³       ³           requests.cpython-314.pyc
+    ³       ³           responses.cpython-314.pyc
+    ³       ³           routing.cpython-314.pyc
+    ³       ³           sse.cpython-314.pyc
+    ³       ³           staticfiles.cpython-314.pyc
+    ³       ³           templating.cpython-314.pyc
+    ³       ³           testclient.cpython-314.pyc
+    ³       ³           types.cpython-314.pyc
+    ³       ³           utils.cpython-314.pyc
+    ³       ³           websockets.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           __main__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄfastapi-0.139.2.dist-info
+    ³       ³   ³   entry_points.txt
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄgreenlet
+    ³       ³   ³   CObjects.cpp
+    ³       ³   ³   greenlet.cpp
+    ³       ³   ³   greenlet.h
+    ³       ³   ³   greenlet_allocator.hpp
+    ³       ³   ³   greenlet_compiler_compat.hpp
+    ³       ³   ³   greenlet_cpython_compat.hpp
+    ³       ³   ³   greenlet_exceptions.hpp
+    ³       ³   ³   greenlet_internal.hpp
+    ³       ³   ³   greenlet_msvc_compat.hpp
+    ³       ³   ³   greenlet_refs.hpp
+    ³       ³   ³   greenlet_slp_switch.hpp
+    ³       ³   ³   greenlet_thread_support.hpp
+    ³       ³   ³   PyGreenlet.cpp
+    ³       ³   ³   PyGreenlet.hpp
+    ³       ³   ³   PyGreenletUnswitchable.cpp
+    ³       ³   ³   PyModule.cpp
+    ³       ³   ³   slp_platformselect.h
+    ³       ³   ³   TBrokenGreenlet.cpp
+    ³       ³   ³   TExceptionState.cpp
+    ³       ³   ³   TGreenlet.cpp
+    ³       ³   ³   TGreenlet.hpp
+    ³       ³   ³   TGreenletGlobals.cpp
+    ³       ³   ³   TMainGreenlet.cpp
+    ³       ³   ³   TPythonState.cpp
+    ³       ³   ³   TStackState.cpp
+    ³       ³   ³   TThreadState.hpp
+    ³       ³   ³   TThreadStateCreator.hpp
+    ³       ³   ³   TThreadStateDestroy.cpp
+    ³       ³   ³   TUserGreenlet.cpp
+    ³       ³   ³   _greenlet.cp314-win_amd64.pyd
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄplatform
+    ³       ³   ³   ³   setup_switch_x64_masm.cmd
+    ³       ³   ³   ³   switch_aarch64_gcc.h
+    ³       ³   ³   ³   switch_alpha_unix.h
+    ³       ³   ³   ³   switch_amd64_unix.h
+    ³       ³   ³   ³   switch_arm32_gcc.h
+    ³       ³   ³   ³   switch_arm32_ios.h
+    ³       ³   ³   ³   switch_arm64_masm.asm
+    ³       ³   ³   ³   switch_arm64_masm.obj
+    ³       ³   ³   ³   switch_arm64_msvc.h
+    ³       ³   ³   ³   switch_csky_gcc.h
+    ³       ³   ³   ³   switch_loongarch64_linux.h
+    ³       ³   ³   ³   switch_m68k_gcc.h
+    ³       ³   ³   ³   switch_mips_unix.h
+    ³       ³   ³   ³   switch_ppc64_aix.h
+    ³       ³   ³   ³   switch_ppc64_linux.h
+    ³       ³   ³   ³   switch_ppc_aix.h
+    ³       ³   ³   ³   switch_ppc_linux.h
+    ³       ³   ³   ³   switch_ppc_macosx.h
+    ³       ³   ³   ³   switch_ppc_unix.h
+    ³       ³   ³   ³   switch_riscv_unix.h
+    ³       ³   ³   ³   switch_s390_unix.h
+    ³       ³   ³   ³   switch_sh_gcc.h
+    ³       ³   ³   ³   switch_sparc_sun_gcc.h
+    ³       ³   ³   ³   switch_x32_unix.h
+    ³       ³   ³   ³   switch_x64_masm.asm
+    ³       ³   ³   ³   switch_x64_masm.obj
+    ³       ³   ³   ³   switch_x64_msvc.h
+    ³       ³   ³   ³   switch_x86_msvc.h
+    ³       ³   ³   ³   switch_x86_unix.h
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄtests
+    ³       ³   ³   ³   fail_clearing_run_switches.py
+    ³       ³   ³   ³   fail_cpp_exception.py
+    ³       ³   ³   ³   fail_initialstub_already_started.py
+    ³       ³   ³   ³   fail_slp_switch.py
+    ³       ³   ³   ³   fail_switch_three_greenlets.py
+    ³       ³   ³   ³   fail_switch_three_greenlets2.py
+    ³       ³   ³   ³   fail_switch_two_greenlets.py
+    ³       ³   ³   ³   leakcheck.py
+    ³       ³   ³   ³   test_contextvars.py
+    ³       ³   ³   ³   test_cpp.py
+    ³       ³   ³   ³   test_extension_interface.py
+    ³       ³   ³   ³   test_gc.py
+    ³       ³   ³   ³   test_generator.py
+    ³       ³   ³   ³   test_generator_nested.py
+    ³       ³   ³   ³   test_greenlet.py
+    ³       ³   ³   ³   test_greenlet_trash.py
+    ³       ³   ³   ³   test_interpreter_shutdown.py
+    ³       ³   ³   ³   test_leaks.py
+    ³       ³   ³   ³   test_stack_saved.py
+    ³       ³   ³   ³   test_throw.py
+    ³       ³   ³   ³   test_tracing.py
+    ³       ³   ³   ³   test_version.py
+    ³       ³   ³   ³   test_weakref.py
+    ³       ³   ³   ³   _test_extension.c
+    ³       ³   ³   ³   _test_extension.cp314-win_amd64.pyd
+    ³       ³   ³   ³   _test_extension_cpp.cp314-win_amd64.pyd
+    ³       ³   ³   ³   _test_extension_cpp.cpp
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           fail_clearing_run_switches.cpython-314.pyc
+    ³       ³   ³           fail_cpp_exception.cpython-314.pyc
+    ³       ³   ³           fail_initialstub_already_started.cpython-314.pyc
+    ³       ³   ³           fail_slp_switch.cpython-314.pyc
+    ³       ³   ³           fail_switch_three_greenlets.cpython-314.pyc
+    ³       ³   ³           fail_switch_three_greenlets2.cpython-314.pyc
+    ³       ³   ³           fail_switch_two_greenlets.cpython-314.pyc
+    ³       ³   ³           leakcheck.cpython-314.pyc
+    ³       ³   ³           test_contextvars.cpython-314.pyc
+    ³       ³   ³           test_cpp.cpython-314.pyc
+    ³       ³   ³           test_extension_interface.cpython-314.pyc
+    ³       ³   ³           test_gc.cpython-314.pyc
+    ³       ³   ³           test_generator.cpython-314.pyc
+    ³       ³   ³           test_generator_nested.cpython-314.pyc
+    ³       ³   ³           test_greenlet.cpython-314.pyc
+    ³       ³   ³           test_greenlet_trash.cpython-314.pyc
+    ³       ³   ³           test_interpreter_shutdown.cpython-314.pyc
+    ³       ³   ³           test_leaks.cpython-314.pyc
+    ³       ³   ³           test_stack_saved.cpython-314.pyc
+    ³       ³   ³           test_throw.cpython-314.pyc
+    ³       ³   ³           test_tracing.cpython-314.pyc
+    ³       ³   ³           test_version.cpython-314.pyc
+    ³       ³   ³           test_weakref.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄgreenlet-3.5.3.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           LICENSE.PSF
+    ³       ³           
+    ³       ÃÄÄÄh11
+    ³       ³   ³   py.typed
+    ³       ³   ³   _abnf.py
+    ³       ³   ³   _connection.py
+    ³       ³   ³   _events.py
+    ³       ³   ³   _headers.py
+    ³       ³   ³   _readers.py
+    ³       ³   ³   _receivebuffer.py
+    ³       ³   ³   _state.py
+    ³       ³   ³   _util.py
+    ³       ³   ³   _version.py
+    ³       ³   ³   _writers.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           _abnf.cpython-314.pyc
+    ³       ³           _connection.cpython-314.pyc
+    ³       ³           _events.cpython-314.pyc
+    ³       ³           _headers.cpython-314.pyc
+    ³       ³           _readers.cpython-314.pyc
+    ³       ³           _receivebuffer.cpython-314.pyc
+    ³       ³           _state.cpython-314.pyc
+    ³       ³           _util.cpython-314.pyc
+    ³       ³           _version.cpython-314.pyc
+    ³       ³           _writers.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄh11-0.16.0.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE.txt
+    ³       ³           
+    ³       ÃÄÄÄhttptools
+    ³       ³   ³   py.typed
+    ³       ³   ³   _version.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄparser
+    ³       ³   ³   ³   cparser.pxd
+    ³       ³   ³   ³   errors.py
+    ³       ³   ³   ³   parser.cp314-win_amd64.pyd
+    ³       ³   ³   ³   parser.pyi
+    ³       ³   ³   ³   parser.pyx
+    ³       ³   ³   ³   protocol.py
+    ³       ³   ³   ³   python.pxd
+    ³       ³   ³   ³   url_cparser.pxd
+    ³       ³   ³   ³   url_parser.cp314-win_amd64.pyd
+    ³       ³   ³   ³   url_parser.pyi
+    ³       ³   ³   ³   url_parser.pyx
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           errors.cpython-314.pyc
+    ³       ³   ³           protocol.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           _version.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄhttptools-0.8.0.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³       ³   LICENSE
+    ³       ³       ³   
+    ³       ³       ÀÄÄÄvendor
+    ³       ³           ÃÄÄÄhttp-parser
+    ³       ³           ³       LICENSE-MIT
+    ³       ³           ³       
+    ³       ³           ÀÄÄÄllhttp
+    ³       ³                   LICENSE
+    ³       ³                   
+    ³       ÃÄÄÄidna
+    ³       ³   ³   cli.py
+    ³       ³   ³   codec.py
+    ³       ³   ³   compat.py
+    ³       ³   ³   core.py
+    ³       ³   ³   idnadata.py
+    ³       ³   ³   intranges.py
+    ³       ³   ³   package_data.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   uts46data.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   __main__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           cli.cpython-314.pyc
+    ³       ³           codec.cpython-314.pyc
+    ³       ³           compat.cpython-314.pyc
+    ³       ³           core.cpython-314.pyc
+    ³       ³           idnadata.cpython-314.pyc
+    ³       ³           intranges.cpython-314.pyc
+    ³       ³           package_data.cpython-314.pyc
+    ³       ³           uts46data.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           __main__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄidna-3.18.dist-info
+    ³       ³   ³   entry_points.txt
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE.md
+    ³       ³           
+    ³       ÃÄÄÄjose
+    ³       ³   ³   constants.py
+    ³       ³   ³   exceptions.py
+    ³       ³   ³   jwe.py
+    ³       ³   ³   jwk.py
+    ³       ³   ³   jws.py
+    ³       ³   ³   jwt.py
+    ³       ³   ³   utils.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄbackends
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   cryptography_backend.py
+    ³       ³   ³   ³   ecdsa_backend.py
+    ³       ³   ³   ³   native.py
+    ³       ³   ³   ³   rsa_backend.py
+    ³       ³   ³   ³   _asn1.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           cryptography_backend.cpython-314.pyc
+    ³       ³   ³           ecdsa_backend.cpython-314.pyc
+    ³       ³   ³           native.cpython-314.pyc
+    ³       ³   ³           rsa_backend.cpython-314.pyc
+    ³       ³   ³           _asn1.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           constants.cpython-314.pyc
+    ³       ³           exceptions.cpython-314.pyc
+    ³       ³           jwe.cpython-314.pyc
+    ³       ³           jwk.cpython-314.pyc
+    ³       ³           jws.cpython-314.pyc
+    ³       ³           jwt.cpython-314.pyc
+    ³       ³           utils.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄmako
+    ³       ³   ³   ast.py
+    ³       ³   ³   cache.py
+    ³       ³   ³   cmd.py
+    ³       ³   ³   codegen.py
+    ³       ³   ³   compat.py
+    ³       ³   ³   exceptions.py
+    ³       ³   ³   filters.py
+    ³       ³   ³   lexer.py
+    ³       ³   ³   lookup.py
+    ³       ³   ³   parsetree.py
+    ³       ³   ³   pygen.py
+    ³       ³   ³   pyparser.py
+    ³       ³   ³   runtime.py
+    ³       ³   ³   template.py
+    ³       ³   ³   util.py
+    ³       ³   ³   _ast_util.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄext
+    ³       ³   ³   ³   autohandler.py
+    ³       ³   ³   ³   babelplugin.py
+    ³       ³   ³   ³   beaker_cache.py
+    ³       ³   ³   ³   extract.py
+    ³       ³   ³   ³   linguaplugin.py
+    ³       ³   ³   ³   preprocessors.py
+    ³       ³   ³   ³   pygmentplugin.py
+    ³       ³   ³   ³   turbogears.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           autohandler.cpython-314.pyc
+    ³       ³   ³           babelplugin.cpython-314.pyc
+    ³       ³   ³           beaker_cache.cpython-314.pyc
+    ³       ³   ³           extract.cpython-314.pyc
+    ³       ³   ³           linguaplugin.cpython-314.pyc
+    ³       ³   ³           preprocessors.cpython-314.pyc
+    ³       ³   ³           pygmentplugin.cpython-314.pyc
+    ³       ³   ³           turbogears.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄtesting
+    ³       ³   ³   ³   assertions.py
+    ³       ³   ³   ³   config.py
+    ³       ³   ³   ³   exclusions.py
+    ³       ³   ³   ³   fixtures.py
+    ³       ³   ³   ³   helpers.py
+    ³       ³   ³   ³   _config.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           assertions.cpython-314.pyc
+    ³       ³   ³           config.cpython-314.pyc
+    ³       ³   ³           exclusions.cpython-314.pyc
+    ³       ³   ³           fixtures.cpython-314.pyc
+    ³       ³   ³           helpers.cpython-314.pyc
+    ³       ³   ³           _config.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           ast.cpython-314.pyc
+    ³       ³           cache.cpython-314.pyc
+    ³       ³           cmd.cpython-314.pyc
+    ³       ³           codegen.cpython-314.pyc
+    ³       ³           compat.cpython-314.pyc
+    ³       ³           exceptions.cpython-314.pyc
+    ³       ³           filters.cpython-314.pyc
+    ³       ³           lexer.cpython-314.pyc
+    ³       ³           lookup.cpython-314.pyc
+    ³       ³           parsetree.cpython-314.pyc
+    ³       ³           pygen.cpython-314.pyc
+    ³       ³           pyparser.cpython-314.pyc
+    ³       ³           runtime.cpython-314.pyc
+    ³       ³           template.cpython-314.pyc
+    ³       ³           util.cpython-314.pyc
+    ³       ³           _ast_util.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄmako-1.3.12.dist-info
+    ³       ³   ³   entry_points.txt
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄmarkupsafe
+    ³       ³   ³   py.typed
+    ³       ³   ³   _native.py
+    ³       ³   ³   _speedups.c
+    ³       ³   ³   _speedups.cp314-win_amd64.pyd
+    ³       ³   ³   _speedups.pyi
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           _native.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄmarkupsafe-3.0.3.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE.txt
+    ³       ³           
+    ³       ÃÄÄÄmultipart
+    ³       ³   ³   decoders.py
+    ³       ³   ³   exceptions.py
+    ³       ³   ³   multipart.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           decoders.cpython-314.pyc
+    ³       ³           exceptions.cpython-314.pyc
+    ³       ³           multipart.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄpasslib
+    ³       ³   ³   apache.py
+    ³       ³   ³   apps.py
+    ³       ³   ³   context.py
+    ³       ³   ³   exc.py
+    ³       ³   ³   hash.py
+    ³       ³   ³   hosts.py
+    ³       ³   ³   ifc.py
+    ³       ³   ³   pwd.py
+    ³       ³   ³   registry.py
+    ³       ³   ³   totp.py
+    ³       ³   ³   win32.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄcrypto
+    ³       ³   ³   ³   des.py
+    ³       ³   ³   ³   digest.py
+    ³       ³   ³   ³   _md4.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄscrypt
+    ³       ³   ³   ³   ³   _builtin.py
+    ³       ³   ³   ³   ³   _gen_files.py
+    ³       ³   ³   ³   ³   _salsa.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           _builtin.cpython-314.pyc
+    ³       ³   ³   ³           _gen_files.cpython-314.pyc
+    ³       ³   ³   ³           _salsa.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄ_blowfish
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   unrolled.py
+    ³       ³   ³   ³   ³   _gen_files.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           unrolled.cpython-314.pyc
+    ³       ³   ³   ³           _gen_files.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           des.cpython-314.pyc
+    ³       ³   ³           digest.cpython-314.pyc
+    ³       ³   ³           _md4.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄext
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄdjango
+    ³       ³   ³   ³   ³   models.py
+    ³       ³   ³   ³   ³   utils.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           models.cpython-314.pyc
+    ³       ³   ³   ³           utils.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄhandlers
+    ³       ³   ³   ³   argon2.py
+    ³       ³   ³   ³   bcrypt.py
+    ³       ³   ³   ³   cisco.py
+    ³       ³   ³   ³   des_crypt.py
+    ³       ³   ³   ³   digests.py
+    ³       ³   ³   ³   django.py
+    ³       ³   ³   ³   fshp.py
+    ³       ³   ³   ³   ldap_digests.py
+    ³       ³   ³   ³   md5_crypt.py
+    ³       ³   ³   ³   misc.py
+    ³       ³   ³   ³   mssql.py
+    ³       ³   ³   ³   mysql.py
+    ³       ³   ³   ³   oracle.py
+    ³       ³   ³   ³   pbkdf2.py
+    ³       ³   ³   ³   phpass.py
+    ³       ³   ³   ³   postgres.py
+    ³       ³   ³   ³   roundup.py
+    ³       ³   ³   ³   scram.py
+    ³       ³   ³   ³   scrypt.py
+    ³       ³   ³   ³   sha1_crypt.py
+    ³       ³   ³   ³   sha2_crypt.py
+    ³       ³   ³   ³   sun_md5_crypt.py
+    ³       ³   ³   ³   windows.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           argon2.cpython-314.pyc
+    ³       ³   ³           bcrypt.cpython-314.pyc
+    ³       ³   ³           cisco.cpython-314.pyc
+    ³       ³   ³           des_crypt.cpython-314.pyc
+    ³       ³   ³           digests.cpython-314.pyc
+    ³       ³   ³           django.cpython-314.pyc
+    ³       ³   ³           fshp.cpython-314.pyc
+    ³       ³   ³           ldap_digests.cpython-314.pyc
+    ³       ³   ³           md5_crypt.cpython-314.pyc
+    ³       ³   ³           misc.cpython-314.pyc
+    ³       ³   ³           mssql.cpython-314.pyc
+    ³       ³   ³           mysql.cpython-314.pyc
+    ³       ³   ³           oracle.cpython-314.pyc
+    ³       ³   ³           pbkdf2.cpython-314.pyc
+    ³       ³   ³           phpass.cpython-314.pyc
+    ³       ³   ³           postgres.cpython-314.pyc
+    ³       ³   ³           roundup.cpython-314.pyc
+    ³       ³   ³           scram.cpython-314.pyc
+    ³       ³   ³           scrypt.cpython-314.pyc
+    ³       ³   ³           sha1_crypt.cpython-314.pyc
+    ³       ³   ³           sha2_crypt.cpython-314.pyc
+    ³       ³   ³           sun_md5_crypt.cpython-314.pyc
+    ³       ³   ³           windows.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄtests
+    ³       ³   ³   ³   backports.py
+    ³       ³   ³   ³   sample1.cfg
+    ³       ³   ³   ³   sample1b.cfg
+    ³       ³   ³   ³   sample1c.cfg
+    ³       ³   ³   ³   sample_config_1s.cfg
+    ³       ³   ³   ³   test_apache.py
+    ³       ³   ³   ³   test_apps.py
+    ³       ³   ³   ³   test_context.py
+    ³       ³   ³   ³   test_context_deprecated.py
+    ³       ³   ³   ³   test_crypto_builtin_md4.py
+    ³       ³   ³   ³   test_crypto_des.py
+    ³       ³   ³   ³   test_crypto_digest.py
+    ³       ³   ³   ³   test_crypto_scrypt.py
+    ³       ³   ³   ³   test_ext_django.py
+    ³       ³   ³   ³   test_ext_django_source.py
+    ³       ³   ³   ³   test_handlers.py
+    ³       ³   ³   ³   test_handlers_argon2.py
+    ³       ³   ³   ³   test_handlers_bcrypt.py
+    ³       ³   ³   ³   test_handlers_cisco.py
+    ³       ³   ³   ³   test_handlers_django.py
+    ³       ³   ³   ³   test_handlers_pbkdf2.py
+    ³       ³   ³   ³   test_handlers_scrypt.py
+    ³       ³   ³   ³   test_hosts.py
+    ³       ³   ³   ³   test_pwd.py
+    ³       ³   ³   ³   test_registry.py
+    ³       ³   ³   ³   test_totp.py
+    ³       ³   ³   ³   test_utils.py
+    ³       ³   ³   ³   test_utils_handlers.py
+    ³       ³   ³   ³   test_utils_md4.py
+    ³       ³   ³   ³   test_utils_pbkdf2.py
+    ³       ³   ³   ³   test_win32.py
+    ³       ³   ³   ³   tox_support.py
+    ³       ³   ³   ³   utils.py
+    ³       ³   ³   ³   _test_bad_register.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   __main__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           backports.cpython-314.pyc
+    ³       ³   ³           test_apache.cpython-314.pyc
+    ³       ³   ³           test_apps.cpython-314.pyc
+    ³       ³   ³           test_context.cpython-314.pyc
+    ³       ³   ³           test_context_deprecated.cpython-314.pyc
+    ³       ³   ³           test_crypto_builtin_md4.cpython-314.pyc
+    ³       ³   ³           test_crypto_des.cpython-314.pyc
+    ³       ³   ³           test_crypto_digest.cpython-314.pyc
+    ³       ³   ³           test_crypto_scrypt.cpython-314.pyc
+    ³       ³   ³           test_ext_django.cpython-314.pyc
+    ³       ³   ³           test_ext_django_source.cpython-314.pyc
+    ³       ³   ³           test_handlers.cpython-314.pyc
+    ³       ³   ³           test_handlers_argon2.cpython-314.pyc
+    ³       ³   ³           test_handlers_bcrypt.cpython-314.pyc
+    ³       ³   ³           test_handlers_cisco.cpython-314.pyc
+    ³       ³   ³           test_handlers_django.cpython-314.pyc
+    ³       ³   ³           test_handlers_pbkdf2.cpython-314.pyc
+    ³       ³   ³           test_handlers_scrypt.cpython-314.pyc
+    ³       ³   ³           test_hosts.cpython-314.pyc
+    ³       ³   ³           test_pwd.cpython-314.pyc
+    ³       ³   ³           test_registry.cpython-314.pyc
+    ³       ³   ³           test_totp.cpython-314.pyc
+    ³       ³   ³           test_utils.cpython-314.pyc
+    ³       ³   ³           test_utils_handlers.cpython-314.pyc
+    ³       ³   ³           test_utils_md4.cpython-314.pyc
+    ³       ³   ³           test_utils_pbkdf2.cpython-314.pyc
+    ³       ³   ³           test_win32.cpython-314.pyc
+    ³       ³   ³           tox_support.cpython-314.pyc
+    ³       ³   ³           utils.cpython-314.pyc
+    ³       ³   ³           _test_bad_register.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           __main__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄutils
+    ³       ³   ³   ³   binary.py
+    ³       ³   ³   ³   decor.py
+    ³       ³   ³   ³   des.py
+    ³       ³   ³   ³   handlers.py
+    ³       ³   ³   ³   md4.py
+    ³       ³   ³   ³   pbkdf2.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄcompat
+    ³       ³   ³   ³   ³   _ordered_dict.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           _ordered_dict.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           binary.cpython-314.pyc
+    ³       ³   ³           decor.cpython-314.pyc
+    ³       ³   ³           des.cpython-314.pyc
+    ³       ³   ³           handlers.cpython-314.pyc
+    ³       ³   ³           md4.cpython-314.pyc
+    ³       ³   ³           pbkdf2.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄ_data
+    ³       ³   ³   ÀÄÄÄwordsets
+    ³       ³   ³           bip39.txt
+    ³       ³   ³           eff_long.txt
+    ³       ³   ³           eff_prefixed.txt
+    ³       ³   ³           eff_short.txt
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           apache.cpython-314.pyc
+    ³       ³           apps.cpython-314.pyc
+    ³       ³           context.cpython-314.pyc
+    ³       ³           exc.cpython-314.pyc
+    ³       ³           hash.cpython-314.pyc
+    ³       ³           hosts.cpython-314.pyc
+    ³       ³           ifc.cpython-314.pyc
+    ³       ³           pwd.cpython-314.pyc
+    ³       ³           registry.cpython-314.pyc
+    ³       ³           totp.cpython-314.pyc
+    ³       ³           win32.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄpasslib-1.7.4.dist-info
+    ³       ³       INSTALLER
+    ³       ³       LICENSE
+    ³       ³       METADATA
+    ³       ³       RECORD
+    ³       ³       REQUESTED
+    ³       ³       top_level.txt
+    ³       ³       WHEEL
+    ³       ³       zip-safe
+    ³       ³       
+    ³       ÃÄÄÄpip
+    ³       ³   ³   py.typed
+    ³       ³   ³   __init__.py
+    ³       ³   ³   __main__.py
+    ³       ³   ³   __pip-runner__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄ_internal
+    ³       ³   ³   ³   build_env.py
+    ³       ³   ³   ³   cache.py
+    ³       ³   ³   ³   configuration.py
+    ³       ³   ³   ³   exceptions.py
+    ³       ³   ³   ³   main.py
+    ³       ³   ³   ³   pyproject.py
+    ³       ³   ³   ³   self_outdated_check.py
+    ³       ³   ³   ³   wheel_builder.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄcli
+    ³       ³   ³   ³   ³   autocompletion.py
+    ³       ³   ³   ³   ³   base_command.py
+    ³       ³   ³   ³   ³   cmdoptions.py
+    ³       ³   ³   ³   ³   command_context.py
+    ³       ³   ³   ³   ³   index_command.py
+    ³       ³   ³   ³   ³   main.py
+    ³       ³   ³   ³   ³   main_parser.py
+    ³       ³   ³   ³   ³   parser.py
+    ³       ³   ³   ³   ³   progress_bars.py
+    ³       ³   ³   ³   ³   req_command.py
+    ³       ³   ³   ³   ³   spinners.py
+    ³       ³   ³   ³   ³   status_codes.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           autocompletion.cpython-314.pyc
+    ³       ³   ³   ³           base_command.cpython-314.pyc
+    ³       ³   ³   ³           cmdoptions.cpython-314.pyc
+    ³       ³   ³   ³           command_context.cpython-314.pyc
+    ³       ³   ³   ³           index_command.cpython-314.pyc
+    ³       ³   ³   ³           main.cpython-314.pyc
+    ³       ³   ³   ³           main_parser.cpython-314.pyc
+    ³       ³   ³   ³           parser.cpython-314.pyc
+    ³       ³   ³   ³           progress_bars.cpython-314.pyc
+    ³       ³   ³   ³           req_command.cpython-314.pyc
+    ³       ³   ³   ³           spinners.cpython-314.pyc
+    ³       ³   ³   ³           status_codes.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄcommands
+    ³       ³   ³   ³   ³   cache.py
+    ³       ³   ³   ³   ³   check.py
+    ³       ³   ³   ³   ³   completion.py
+    ³       ³   ³   ³   ³   configuration.py
+    ³       ³   ³   ³   ³   debug.py
+    ³       ³   ³   ³   ³   download.py
+    ³       ³   ³   ³   ³   freeze.py
+    ³       ³   ³   ³   ³   hash.py
+    ³       ³   ³   ³   ³   help.py
+    ³       ³   ³   ³   ³   index.py
+    ³       ³   ³   ³   ³   inspect.py
+    ³       ³   ³   ³   ³   install.py
+    ³       ³   ³   ³   ³   list.py
+    ³       ³   ³   ³   ³   lock.py
+    ³       ³   ³   ³   ³   search.py
+    ³       ³   ³   ³   ³   show.py
+    ³       ³   ³   ³   ³   uninstall.py
+    ³       ³   ³   ³   ³   wheel.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           cache.cpython-314.pyc
+    ³       ³   ³   ³           check.cpython-314.pyc
+    ³       ³   ³   ³           completion.cpython-314.pyc
+    ³       ³   ³   ³           configuration.cpython-314.pyc
+    ³       ³   ³   ³           debug.cpython-314.pyc
+    ³       ³   ³   ³           download.cpython-314.pyc
+    ³       ³   ³   ³           freeze.cpython-314.pyc
+    ³       ³   ³   ³           hash.cpython-314.pyc
+    ³       ³   ³   ³           help.cpython-314.pyc
+    ³       ³   ³   ³           index.cpython-314.pyc
+    ³       ³   ³   ³           inspect.cpython-314.pyc
+    ³       ³   ³   ³           install.cpython-314.pyc
+    ³       ³   ³   ³           list.cpython-314.pyc
+    ³       ³   ³   ³           lock.cpython-314.pyc
+    ³       ³   ³   ³           search.cpython-314.pyc
+    ³       ³   ³   ³           show.cpython-314.pyc
+    ³       ³   ³   ³           uninstall.cpython-314.pyc
+    ³       ³   ³   ³           wheel.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄdistributions
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   installed.py
+    ³       ³   ³   ³   ³   sdist.py
+    ³       ³   ³   ³   ³   wheel.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           installed.cpython-314.pyc
+    ³       ³   ³   ³           sdist.cpython-314.pyc
+    ³       ³   ³   ³           wheel.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄindex
+    ³       ³   ³   ³   ³   collector.py
+    ³       ³   ³   ³   ³   package_finder.py
+    ³       ³   ³   ³   ³   sources.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           collector.cpython-314.pyc
+    ³       ³   ³   ³           package_finder.cpython-314.pyc
+    ³       ³   ³   ³           sources.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄlocations
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   _distutils.py
+    ³       ³   ³   ³   ³   _sysconfig.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           _distutils.cpython-314.pyc
+    ³       ³   ³   ³           _sysconfig.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄmetadata
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   pkg_resources.py
+    ³       ³   ³   ³   ³   _json.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÃÄÄÄimportlib
+    ³       ³   ³   ³   ³   ³   _compat.py
+    ³       ³   ³   ³   ³   ³   _dists.py
+    ³       ³   ³   ³   ³   ³   _envs.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           _compat.cpython-314.pyc
+    ³       ³   ³   ³   ³           _dists.cpython-314.pyc
+    ³       ³   ³   ³   ³           _envs.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           pkg_resources.cpython-314.pyc
+    ³       ³   ³   ³           _json.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄmodels
+    ³       ³   ³   ³   ³   candidate.py
+    ³       ³   ³   ³   ³   direct_url.py
+    ³       ³   ³   ³   ³   format_control.py
+    ³       ³   ³   ³   ³   index.py
+    ³       ³   ³   ³   ³   installation_report.py
+    ³       ³   ³   ³   ³   link.py
+    ³       ³   ³   ³   ³   pylock.py
+    ³       ³   ³   ³   ³   scheme.py
+    ³       ³   ³   ³   ³   search_scope.py
+    ³       ³   ³   ³   ³   selection_prefs.py
+    ³       ³   ³   ³   ³   target_python.py
+    ³       ³   ³   ³   ³   wheel.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           candidate.cpython-314.pyc
+    ³       ³   ³   ³           direct_url.cpython-314.pyc
+    ³       ³   ³   ³           format_control.cpython-314.pyc
+    ³       ³   ³   ³           index.cpython-314.pyc
+    ³       ³   ³   ³           installation_report.cpython-314.pyc
+    ³       ³   ³   ³           link.cpython-314.pyc
+    ³       ³   ³   ³           pylock.cpython-314.pyc
+    ³       ³   ³   ³           scheme.cpython-314.pyc
+    ³       ³   ³   ³           search_scope.cpython-314.pyc
+    ³       ³   ³   ³           selection_prefs.cpython-314.pyc
+    ³       ³   ³   ³           target_python.cpython-314.pyc
+    ³       ³   ³   ³           wheel.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄnetwork
+    ³       ³   ³   ³   ³   auth.py
+    ³       ³   ³   ³   ³   cache.py
+    ³       ³   ³   ³   ³   download.py
+    ³       ³   ³   ³   ³   lazy_wheel.py
+    ³       ³   ³   ³   ³   session.py
+    ³       ³   ³   ³   ³   utils.py
+    ³       ³   ³   ³   ³   xmlrpc.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           auth.cpython-314.pyc
+    ³       ³   ³   ³           cache.cpython-314.pyc
+    ³       ³   ³   ³           download.cpython-314.pyc
+    ³       ³   ³   ³           lazy_wheel.cpython-314.pyc
+    ³       ³   ³   ³           session.cpython-314.pyc
+    ³       ³   ³   ³           utils.cpython-314.pyc
+    ³       ³   ³   ³           xmlrpc.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄoperations
+    ³       ³   ³   ³   ³   check.py
+    ³       ³   ³   ³   ³   freeze.py
+    ³       ³   ³   ³   ³   prepare.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÃÄÄÄbuild
+    ³       ³   ³   ³   ³   ³   build_tracker.py
+    ³       ³   ³   ³   ³   ³   metadata.py
+    ³       ³   ³   ³   ³   ³   metadata_editable.py
+    ³       ³   ³   ³   ³   ³   wheel.py
+    ³       ³   ³   ³   ³   ³   wheel_editable.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           build_tracker.cpython-314.pyc
+    ³       ³   ³   ³   ³           metadata.cpython-314.pyc
+    ³       ³   ³   ³   ³           metadata_editable.cpython-314.pyc
+    ³       ³   ³   ³   ³           wheel.cpython-314.pyc
+    ³       ³   ³   ³   ³           wheel_editable.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÃÄÄÄinstall
+    ³       ³   ³   ³   ³   ³   wheel.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           wheel.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           check.cpython-314.pyc
+    ³       ³   ³   ³           freeze.cpython-314.pyc
+    ³       ³   ³   ³           prepare.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄreq
+    ³       ³   ³   ³   ³   constructors.py
+    ³       ³   ³   ³   ³   req_dependency_group.py
+    ³       ³   ³   ³   ³   req_file.py
+    ³       ³   ³   ³   ³   req_install.py
+    ³       ³   ³   ³   ³   req_set.py
+    ³       ³   ³   ³   ³   req_uninstall.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           constructors.cpython-314.pyc
+    ³       ³   ³   ³           req_dependency_group.cpython-314.pyc
+    ³       ³   ³   ³           req_file.cpython-314.pyc
+    ³       ³   ³   ³           req_install.cpython-314.pyc
+    ³       ³   ³   ³           req_set.cpython-314.pyc
+    ³       ³   ³   ³           req_uninstall.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄresolution
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÃÄÄÄlegacy
+    ³       ³   ³   ³   ³   ³   resolver.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           resolver.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÃÄÄÄresolvelib
+    ³       ³   ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   ³   candidates.py
+    ³       ³   ³   ³   ³   ³   factory.py
+    ³       ³   ³   ³   ³   ³   found_candidates.py
+    ³       ³   ³   ³   ³   ³   provider.py
+    ³       ³   ³   ³   ³   ³   reporter.py
+    ³       ³   ³   ³   ³   ³   requirements.py
+    ³       ³   ³   ³   ³   ³   resolver.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³   ³           candidates.cpython-314.pyc
+    ³       ³   ³   ³   ³           factory.cpython-314.pyc
+    ³       ³   ³   ³   ³           found_candidates.cpython-314.pyc
+    ³       ³   ³   ³   ³           provider.cpython-314.pyc
+    ³       ³   ³   ³   ³           reporter.cpython-314.pyc
+    ³       ³   ³   ³   ³           requirements.cpython-314.pyc
+    ³       ³   ³   ³   ³           resolver.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄutils
+    ³       ³   ³   ³   ³   appdirs.py
+    ³       ³   ³   ³   ³   compat.py
+    ³       ³   ³   ³   ³   compatibility_tags.py
+    ³       ³   ³   ³   ³   datetime.py
+    ³       ³   ³   ³   ³   deprecation.py
+    ³       ³   ³   ³   ³   direct_url_helpers.py
+    ³       ³   ³   ³   ³   egg_link.py
+    ³       ³   ³   ³   ³   entrypoints.py
+    ³       ³   ³   ³   ³   filesystem.py
+    ³       ³   ³   ³   ³   filetypes.py
+    ³       ³   ³   ³   ³   glibc.py
+    ³       ³   ³   ³   ³   hashes.py
+    ³       ³   ³   ³   ³   logging.py
+    ³       ³   ³   ³   ³   misc.py
+    ³       ³   ³   ³   ³   packaging.py
+    ³       ³   ³   ³   ³   retry.py
+    ³       ³   ³   ³   ³   subprocess.py
+    ³       ³   ³   ³   ³   temp_dir.py
+    ³       ³   ³   ³   ³   unpacking.py
+    ³       ³   ³   ³   ³   urls.py
+    ³       ³   ³   ³   ³   virtualenv.py
+    ³       ³   ³   ³   ³   wheel.py
+    ³       ³   ³   ³   ³   _jaraco_text.py
+    ³       ³   ³   ³   ³   _log.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           appdirs.cpython-314.pyc
+    ³       ³   ³   ³           compat.cpython-314.pyc
+    ³       ³   ³   ³           compatibility_tags.cpython-314.pyc
+    ³       ³   ³   ³           datetime.cpython-314.pyc
+    ³       ³   ³   ³           deprecation.cpython-314.pyc
+    ³       ³   ³   ³           direct_url_helpers.cpython-314.pyc
+    ³       ³   ³   ³           egg_link.cpython-314.pyc
+    ³       ³   ³   ³           entrypoints.cpython-314.pyc
+    ³       ³   ³   ³           filesystem.cpython-314.pyc
+    ³       ³   ³   ³           filetypes.cpython-314.pyc
+    ³       ³   ³   ³           glibc.cpython-314.pyc
+    ³       ³   ³   ³           hashes.cpython-314.pyc
+    ³       ³   ³   ³           logging.cpython-314.pyc
+    ³       ³   ³   ³           misc.cpython-314.pyc
+    ³       ³   ³   ³           packaging.cpython-314.pyc
+    ³       ³   ³   ³           retry.cpython-314.pyc
+    ³       ³   ³   ³           subprocess.cpython-314.pyc
+    ³       ³   ³   ³           temp_dir.cpython-314.pyc
+    ³       ³   ³   ³           unpacking.cpython-314.pyc
+    ³       ³   ³   ³           urls.cpython-314.pyc
+    ³       ³   ³   ³           virtualenv.cpython-314.pyc
+    ³       ³   ³   ³           wheel.cpython-314.pyc
+    ³       ³   ³   ³           _jaraco_text.cpython-314.pyc
+    ³       ³   ³   ³           _log.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄvcs
+    ³       ³   ³   ³   ³   bazaar.py
+    ³       ³   ³   ³   ³   git.py
+    ³       ³   ³   ³   ³   mercurial.py
+    ³       ³   ³   ³   ³   subversion.py
+    ³       ³   ³   ³   ³   versioncontrol.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           bazaar.cpython-314.pyc
+    ³       ³   ³   ³           git.cpython-314.pyc
+    ³       ³   ³   ³           mercurial.cpython-314.pyc
+    ³       ³   ³   ³           subversion.cpython-314.pyc
+    ³       ³   ³   ³           versioncontrol.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           build_env.cpython-314.pyc
+    ³       ³   ³           cache.cpython-314.pyc
+    ³       ³   ³           configuration.cpython-314.pyc
+    ³       ³   ³           exceptions.cpython-314.pyc
+    ³       ³   ³           main.cpython-314.pyc
+    ³       ³   ³           pyproject.cpython-314.pyc
+    ³       ³   ³           self_outdated_check.cpython-314.pyc
+    ³       ³   ³           wheel_builder.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄ_vendor
+    ³       ³   ³   ³   README.rst
+    ³       ³   ³   ³   vendor.txt
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄcachecontrol
+    ³       ³   ³   ³   ³   adapter.py
+    ³       ³   ³   ³   ³   cache.py
+    ³       ³   ³   ³   ³   controller.py
+    ³       ³   ³   ³   ³   filewrapper.py
+    ³       ³   ³   ³   ³   heuristics.py
+    ³       ³   ³   ³   ³   LICENSE.txt
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   serialize.py
+    ³       ³   ³   ³   ³   wrapper.py
+    ³       ³   ³   ³   ³   _cmd.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÃÄÄÄcaches
+    ³       ³   ³   ³   ³   ³   file_cache.py
+    ³       ³   ³   ³   ³   ³   redis_cache.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           file_cache.cpython-314.pyc
+    ³       ³   ³   ³   ³           redis_cache.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           adapter.cpython-314.pyc
+    ³       ³   ³   ³           cache.cpython-314.pyc
+    ³       ³   ³   ³           controller.cpython-314.pyc
+    ³       ³   ³   ³           filewrapper.cpython-314.pyc
+    ³       ³   ³   ³           heuristics.cpython-314.pyc
+    ³       ³   ³   ³           serialize.cpython-314.pyc
+    ³       ³   ³   ³           wrapper.cpython-314.pyc
+    ³       ³   ³   ³           _cmd.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄcertifi
+    ³       ³   ³   ³   ³   cacert.pem
+    ³       ³   ³   ³   ³   core.py
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   __main__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           core.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           __main__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄdependency_groups
+    ³       ³   ³   ³   ³   LICENSE.txt
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   _implementation.py
+    ³       ³   ³   ³   ³   _lint_dependency_groups.py
+    ³       ³   ³   ³   ³   _pip_wrapper.py
+    ³       ³   ³   ³   ³   _toml_compat.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   __main__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           _implementation.cpython-314.pyc
+    ³       ³   ³   ³           _lint_dependency_groups.cpython-314.pyc
+    ³       ³   ³   ³           _pip_wrapper.cpython-314.pyc
+    ³       ³   ³   ³           _toml_compat.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           __main__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄdistlib
+    ³       ³   ³   ³   ³   compat.py
+    ³       ³   ³   ³   ³   LICENSE.txt
+    ³       ³   ³   ³   ³   resources.py
+    ³       ³   ³   ³   ³   scripts.py
+    ³       ³   ³   ³   ³   t32.exe
+    ³       ³   ³   ³   ³   t64-arm.exe
+    ³       ³   ³   ³   ³   t64.exe
+    ³       ³   ³   ³   ³   util.py
+    ³       ³   ³   ³   ³   w32.exe
+    ³       ³   ³   ³   ³   w64-arm.exe
+    ³       ³   ³   ³   ³   w64.exe
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           compat.cpython-314.pyc
+    ³       ³   ³   ³           resources.cpython-314.pyc
+    ³       ³   ³   ³           scripts.cpython-314.pyc
+    ³       ³   ³   ³           util.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄdistro
+    ³       ³   ³   ³   ³   distro.py
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   __main__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           distro.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           __main__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄidna
+    ³       ³   ³   ³   ³   codec.py
+    ³       ³   ³   ³   ³   compat.py
+    ³       ³   ³   ³   ³   core.py
+    ³       ³   ³   ³   ³   idnadata.py
+    ³       ³   ³   ³   ³   intranges.py
+    ³       ³   ³   ³   ³   LICENSE.md
+    ³       ³   ³   ³   ³   package_data.py
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   uts46data.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           codec.cpython-314.pyc
+    ³       ³   ³   ³           compat.cpython-314.pyc
+    ³       ³   ³   ³           core.cpython-314.pyc
+    ³       ³   ³   ³           idnadata.cpython-314.pyc
+    ³       ³   ³   ³           intranges.cpython-314.pyc
+    ³       ³   ³   ³           package_data.cpython-314.pyc
+    ³       ³   ³   ³           uts46data.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄmsgpack
+    ³       ³   ³   ³   ³   COPYING
+    ³       ³   ³   ³   ³   exceptions.py
+    ³       ³   ³   ³   ³   ext.py
+    ³       ³   ³   ³   ³   fallback.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           exceptions.cpython-314.pyc
+    ³       ³   ³   ³           ext.cpython-314.pyc
+    ³       ³   ³   ³           fallback.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄpackaging
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   LICENSE.APACHE
+    ³       ³   ³   ³   ³   LICENSE.BSD
+    ³       ³   ³   ³   ³   markers.py
+    ³       ³   ³   ³   ³   metadata.py
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   requirements.py
+    ³       ³   ³   ³   ³   specifiers.py
+    ³       ³   ³   ³   ³   tags.py
+    ³       ³   ³   ³   ³   utils.py
+    ³       ³   ³   ³   ³   version.py
+    ³       ³   ³   ³   ³   _elffile.py
+    ³       ³   ³   ³   ³   _manylinux.py
+    ³       ³   ³   ³   ³   _musllinux.py
+    ³       ³   ³   ³   ³   _parser.py
+    ³       ³   ³   ³   ³   _structures.py
+    ³       ³   ³   ³   ³   _tokenizer.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÃÄÄÄlicenses
+    ³       ³   ³   ³   ³   ³   _spdx.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           _spdx.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           markers.cpython-314.pyc
+    ³       ³   ³   ³           metadata.cpython-314.pyc
+    ³       ³   ³   ³           requirements.cpython-314.pyc
+    ³       ³   ³   ³           specifiers.cpython-314.pyc
+    ³       ³   ³   ³           tags.cpython-314.pyc
+    ³       ³   ³   ³           utils.cpython-314.pyc
+    ³       ³   ³   ³           version.cpython-314.pyc
+    ³       ³   ³   ³           _elffile.cpython-314.pyc
+    ³       ³   ³   ³           _manylinux.cpython-314.pyc
+    ³       ³   ³   ³           _musllinux.cpython-314.pyc
+    ³       ³   ³   ³           _parser.cpython-314.pyc
+    ³       ³   ³   ³           _structures.cpython-314.pyc
+    ³       ³   ³   ³           _tokenizer.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄpkg_resources
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄplatformdirs
+    ³       ³   ³   ³   ³   android.py
+    ³       ³   ³   ³   ³   api.py
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   macos.py
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   unix.py
+    ³       ³   ³   ³   ³   version.py
+    ³       ³   ³   ³   ³   windows.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   __main__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           android.cpython-314.pyc
+    ³       ³   ³   ³           api.cpython-314.pyc
+    ³       ³   ³   ³           macos.cpython-314.pyc
+    ³       ³   ³   ³           unix.cpython-314.pyc
+    ³       ³   ³   ³           version.cpython-314.pyc
+    ³       ³   ³   ³           windows.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           __main__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄpygments
+    ³       ³   ³   ³   ³   console.py
+    ³       ³   ³   ³   ³   filter.py
+    ³       ³   ³   ³   ³   formatter.py
+    ³       ³   ³   ³   ³   lexer.py
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   modeline.py
+    ³       ³   ³   ³   ³   plugin.py
+    ³       ³   ³   ³   ³   regexopt.py
+    ³       ³   ³   ³   ³   scanner.py
+    ³       ³   ³   ³   ³   sphinxext.py
+    ³       ³   ³   ³   ³   style.py
+    ³       ³   ³   ³   ³   token.py
+    ³       ³   ³   ³   ³   unistring.py
+    ³       ³   ³   ³   ³   util.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   __main__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÃÄÄÄfilters
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÃÄÄÄformatters
+    ³       ³   ³   ³   ³   ³   _mapping.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           _mapping.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÃÄÄÄlexers
+    ³       ³   ³   ³   ³   ³   python.py
+    ³       ³   ³   ³   ³   ³   _mapping.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           python.cpython-314.pyc
+    ³       ³   ³   ³   ³           _mapping.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÃÄÄÄstyles
+    ³       ³   ³   ³   ³   ³   _mapping.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           _mapping.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           console.cpython-314.pyc
+    ³       ³   ³   ³           filter.cpython-314.pyc
+    ³       ³   ³   ³           formatter.cpython-314.pyc
+    ³       ³   ³   ³           lexer.cpython-314.pyc
+    ³       ³   ³   ³           modeline.cpython-314.pyc
+    ³       ³   ³   ³           plugin.cpython-314.pyc
+    ³       ³   ³   ³           regexopt.cpython-314.pyc
+    ³       ³   ³   ³           scanner.cpython-314.pyc
+    ³       ³   ³   ³           sphinxext.cpython-314.pyc
+    ³       ³   ³   ³           style.cpython-314.pyc
+    ³       ³   ³   ³           token.cpython-314.pyc
+    ³       ³   ³   ³           unistring.cpython-314.pyc
+    ³       ³   ³   ³           util.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           __main__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄpyproject_hooks
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   _impl.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÃÄÄÄ_in_process
+    ³       ³   ³   ³   ³   ³   _in_process.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           _in_process.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           _impl.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄrequests
+    ³       ³   ³   ³   ³   adapters.py
+    ³       ³   ³   ³   ³   api.py
+    ³       ³   ³   ³   ³   auth.py
+    ³       ³   ³   ³   ³   certs.py
+    ³       ³   ³   ³   ³   compat.py
+    ³       ³   ³   ³   ³   cookies.py
+    ³       ³   ³   ³   ³   exceptions.py
+    ³       ³   ³   ³   ³   help.py
+    ³       ³   ³   ³   ³   hooks.py
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   models.py
+    ³       ³   ³   ³   ³   packages.py
+    ³       ³   ³   ³   ³   sessions.py
+    ³       ³   ³   ³   ³   status_codes.py
+    ³       ³   ³   ³   ³   structures.py
+    ³       ³   ³   ³   ³   utils.py
+    ³       ³   ³   ³   ³   _internal_utils.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   __version__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           adapters.cpython-314.pyc
+    ³       ³   ³   ³           api.cpython-314.pyc
+    ³       ³   ³   ³           auth.cpython-314.pyc
+    ³       ³   ³   ³           certs.cpython-314.pyc
+    ³       ³   ³   ³           compat.cpython-314.pyc
+    ³       ³   ³   ³           cookies.cpython-314.pyc
+    ³       ³   ³   ³           exceptions.cpython-314.pyc
+    ³       ³   ³   ³           help.cpython-314.pyc
+    ³       ³   ³   ³           hooks.cpython-314.pyc
+    ³       ³   ³   ³           models.cpython-314.pyc
+    ³       ³   ³   ³           packages.cpython-314.pyc
+    ³       ³   ³   ³           sessions.cpython-314.pyc
+    ³       ³   ³   ³           status_codes.cpython-314.pyc
+    ³       ³   ³   ³           structures.cpython-314.pyc
+    ³       ³   ³   ³           utils.cpython-314.pyc
+    ³       ³   ³   ³           _internal_utils.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           __version__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄresolvelib
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   providers.py
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   reporters.py
+    ³       ³   ³   ³   ³   structs.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÃÄÄÄresolvers
+    ³       ³   ³   ³   ³   ³   abstract.py
+    ³       ³   ³   ³   ³   ³   criterion.py
+    ³       ³   ³   ³   ³   ³   exceptions.py
+    ³       ³   ³   ³   ³   ³   resolution.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           abstract.cpython-314.pyc
+    ³       ³   ³   ³   ³           criterion.cpython-314.pyc
+    ³       ³   ³   ³   ³           exceptions.cpython-314.pyc
+    ³       ³   ³   ³   ³           resolution.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           providers.cpython-314.pyc
+    ³       ³   ³   ³           reporters.cpython-314.pyc
+    ³       ³   ³   ³           structs.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄrich
+    ³       ³   ³   ³   ³   abc.py
+    ³       ³   ³   ³   ³   align.py
+    ³       ³   ³   ³   ³   ansi.py
+    ³       ³   ³   ³   ³   bar.py
+    ³       ³   ³   ³   ³   box.py
+    ³       ³   ³   ³   ³   cells.py
+    ³       ³   ³   ³   ³   color.py
+    ³       ³   ³   ³   ³   color_triplet.py
+    ³       ³   ³   ³   ³   columns.py
+    ³       ³   ³   ³   ³   console.py
+    ³       ³   ³   ³   ³   constrain.py
+    ³       ³   ³   ³   ³   containers.py
+    ³       ³   ³   ³   ³   control.py
+    ³       ³   ³   ³   ³   default_styles.py
+    ³       ³   ³   ³   ³   diagnose.py
+    ³       ³   ³   ³   ³   emoji.py
+    ³       ³   ³   ³   ³   errors.py
+    ³       ³   ³   ³   ³   filesize.py
+    ³       ³   ³   ³   ³   file_proxy.py
+    ³       ³   ³   ³   ³   highlighter.py
+    ³       ³   ³   ³   ³   json.py
+    ³       ³   ³   ³   ³   jupyter.py
+    ³       ³   ³   ³   ³   layout.py
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   live.py
+    ³       ³   ³   ³   ³   live_render.py
+    ³       ³   ³   ³   ³   logging.py
+    ³       ³   ³   ³   ³   markup.py
+    ³       ³   ³   ³   ³   measure.py
+    ³       ³   ³   ³   ³   padding.py
+    ³       ³   ³   ³   ³   pager.py
+    ³       ³   ³   ³   ³   palette.py
+    ³       ³   ³   ³   ³   panel.py
+    ³       ³   ³   ³   ³   pretty.py
+    ³       ³   ³   ³   ³   progress.py
+    ³       ³   ³   ³   ³   progress_bar.py
+    ³       ³   ³   ³   ³   prompt.py
+    ³       ³   ³   ³   ³   protocol.py
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   region.py
+    ³       ³   ³   ³   ³   repr.py
+    ³       ³   ³   ³   ³   rule.py
+    ³       ³   ³   ³   ³   scope.py
+    ³       ³   ³   ³   ³   screen.py
+    ³       ³   ³   ³   ³   segment.py
+    ³       ³   ³   ³   ³   spinner.py
+    ³       ³   ³   ³   ³   status.py
+    ³       ³   ³   ³   ³   style.py
+    ³       ³   ³   ³   ³   styled.py
+    ³       ³   ³   ³   ³   syntax.py
+    ³       ³   ³   ³   ³   table.py
+    ³       ³   ³   ³   ³   terminal_theme.py
+    ³       ³   ³   ³   ³   text.py
+    ³       ³   ³   ³   ³   theme.py
+    ³       ³   ³   ³   ³   themes.py
+    ³       ³   ³   ³   ³   traceback.py
+    ³       ³   ³   ³   ³   tree.py
+    ³       ³   ³   ³   ³   _cell_widths.py
+    ³       ³   ³   ³   ³   _emoji_codes.py
+    ³       ³   ³   ³   ³   _emoji_replace.py
+    ³       ³   ³   ³   ³   _export_format.py
+    ³       ³   ³   ³   ³   _extension.py
+    ³       ³   ³   ³   ³   _fileno.py
+    ³       ³   ³   ³   ³   _inspect.py
+    ³       ³   ³   ³   ³   _log_render.py
+    ³       ³   ³   ³   ³   _loop.py
+    ³       ³   ³   ³   ³   _null_file.py
+    ³       ³   ³   ³   ³   _palettes.py
+    ³       ³   ³   ³   ³   _pick.py
+    ³       ³   ³   ³   ³   _ratio.py
+    ³       ³   ³   ³   ³   _spinners.py
+    ³       ³   ³   ³   ³   _stack.py
+    ³       ³   ³   ³   ³   _timer.py
+    ³       ³   ³   ³   ³   _win32_console.py
+    ³       ³   ³   ³   ³   _windows.py
+    ³       ³   ³   ³   ³   _windows_renderer.py
+    ³       ³   ³   ³   ³   _wrap.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   __main__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           abc.cpython-314.pyc
+    ³       ³   ³   ³           align.cpython-314.pyc
+    ³       ³   ³   ³           ansi.cpython-314.pyc
+    ³       ³   ³   ³           bar.cpython-314.pyc
+    ³       ³   ³   ³           box.cpython-314.pyc
+    ³       ³   ³   ³           cells.cpython-314.pyc
+    ³       ³   ³   ³           color.cpython-314.pyc
+    ³       ³   ³   ³           color_triplet.cpython-314.pyc
+    ³       ³   ³   ³           columns.cpython-314.pyc
+    ³       ³   ³   ³           console.cpython-314.pyc
+    ³       ³   ³   ³           constrain.cpython-314.pyc
+    ³       ³   ³   ³           containers.cpython-314.pyc
+    ³       ³   ³   ³           control.cpython-314.pyc
+    ³       ³   ³   ³           default_styles.cpython-314.pyc
+    ³       ³   ³   ³           diagnose.cpython-314.pyc
+    ³       ³   ³   ³           emoji.cpython-314.pyc
+    ³       ³   ³   ³           errors.cpython-314.pyc
+    ³       ³   ³   ³           filesize.cpython-314.pyc
+    ³       ³   ³   ³           file_proxy.cpython-314.pyc
+    ³       ³   ³   ³           highlighter.cpython-314.pyc
+    ³       ³   ³   ³           json.cpython-314.pyc
+    ³       ³   ³   ³           jupyter.cpython-314.pyc
+    ³       ³   ³   ³           layout.cpython-314.pyc
+    ³       ³   ³   ³           live.cpython-314.pyc
+    ³       ³   ³   ³           live_render.cpython-314.pyc
+    ³       ³   ³   ³           logging.cpython-314.pyc
+    ³       ³   ³   ³           markup.cpython-314.pyc
+    ³       ³   ³   ³           measure.cpython-314.pyc
+    ³       ³   ³   ³           padding.cpython-314.pyc
+    ³       ³   ³   ³           pager.cpython-314.pyc
+    ³       ³   ³   ³           palette.cpython-314.pyc
+    ³       ³   ³   ³           panel.cpython-314.pyc
+    ³       ³   ³   ³           pretty.cpython-314.pyc
+    ³       ³   ³   ³           progress.cpython-314.pyc
+    ³       ³   ³   ³           progress_bar.cpython-314.pyc
+    ³       ³   ³   ³           prompt.cpython-314.pyc
+    ³       ³   ³   ³           protocol.cpython-314.pyc
+    ³       ³   ³   ³           region.cpython-314.pyc
+    ³       ³   ³   ³           repr.cpython-314.pyc
+    ³       ³   ³   ³           rule.cpython-314.pyc
+    ³       ³   ³   ³           scope.cpython-314.pyc
+    ³       ³   ³   ³           screen.cpython-314.pyc
+    ³       ³   ³   ³           segment.cpython-314.pyc
+    ³       ³   ³   ³           spinner.cpython-314.pyc
+    ³       ³   ³   ³           status.cpython-314.pyc
+    ³       ³   ³   ³           style.cpython-314.pyc
+    ³       ³   ³   ³           styled.cpython-314.pyc
+    ³       ³   ³   ³           syntax.cpython-314.pyc
+    ³       ³   ³   ³           table.cpython-314.pyc
+    ³       ³   ³   ³           terminal_theme.cpython-314.pyc
+    ³       ³   ³   ³           text.cpython-314.pyc
+    ³       ³   ³   ³           theme.cpython-314.pyc
+    ³       ³   ³   ³           themes.cpython-314.pyc
+    ³       ³   ³   ³           traceback.cpython-314.pyc
+    ³       ³   ³   ³           tree.cpython-314.pyc
+    ³       ³   ³   ³           _cell_widths.cpython-314.pyc
+    ³       ³   ³   ³           _emoji_codes.cpython-314.pyc
+    ³       ³   ³   ³           _emoji_replace.cpython-314.pyc
+    ³       ³   ³   ³           _export_format.cpython-314.pyc
+    ³       ³   ³   ³           _extension.cpython-314.pyc
+    ³       ³   ³   ³           _fileno.cpython-314.pyc
+    ³       ³   ³   ³           _inspect.cpython-314.pyc
+    ³       ³   ³   ³           _log_render.cpython-314.pyc
+    ³       ³   ³   ³           _loop.cpython-314.pyc
+    ³       ³   ³   ³           _null_file.cpython-314.pyc
+    ³       ³   ³   ³           _palettes.cpython-314.pyc
+    ³       ³   ³   ³           _pick.cpython-314.pyc
+    ³       ³   ³   ³           _ratio.cpython-314.pyc
+    ³       ³   ³   ³           _spinners.cpython-314.pyc
+    ³       ³   ³   ³           _stack.cpython-314.pyc
+    ³       ³   ³   ³           _timer.cpython-314.pyc
+    ³       ³   ³   ³           _win32_console.cpython-314.pyc
+    ³       ³   ³   ³           _windows.cpython-314.pyc
+    ³       ³   ³   ³           _windows_renderer.cpython-314.pyc
+    ³       ³   ³   ³           _wrap.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           __main__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄtomli
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   _parser.py
+    ³       ³   ³   ³   ³   _re.py
+    ³       ³   ³   ³   ³   _types.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           _parser.cpython-314.pyc
+    ³       ³   ³   ³           _re.cpython-314.pyc
+    ³       ³   ³   ³           _types.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄtomli_w
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   _writer.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           _writer.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄtruststore
+    ³       ³   ³   ³   ³   LICENSE
+    ³       ³   ³   ³   ³   py.typed
+    ³       ³   ³   ³   ³   _api.py
+    ³       ³   ³   ³   ³   _macos.py
+    ³       ³   ³   ³   ³   _openssl.py
+    ³       ³   ³   ³   ³   _ssl_constants.py
+    ³       ³   ³   ³   ³   _windows.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           _api.cpython-314.pyc
+    ³       ³   ³   ³           _macos.cpython-314.pyc
+    ³       ³   ³   ³           _openssl.cpython-314.pyc
+    ³       ³   ³   ³           _ssl_constants.cpython-314.pyc
+    ³       ³   ³   ³           _windows.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄurllib3
+    ³       ³   ³   ³   ³   connection.py
+    ³       ³   ³   ³   ³   connectionpool.py
+    ³       ³   ³   ³   ³   exceptions.py
+    ³       ³   ³   ³   ³   fields.py
+    ³       ³   ³   ³   ³   filepost.py
+    ³       ³   ³   ³   ³   LICENSE.txt
+    ³       ³   ³   ³   ³   poolmanager.py
+    ³       ³   ³   ³   ³   request.py
+    ³       ³   ³   ³   ³   response.py
+    ³       ³   ³   ³   ³   _collections.py
+    ³       ³   ³   ³   ³   _version.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÃÄÄÄcontrib
+    ³       ³   ³   ³   ³   ³   appengine.py
+    ³       ³   ³   ³   ³   ³   ntlmpool.py
+    ³       ³   ³   ³   ³   ³   pyopenssl.py
+    ³       ³   ³   ³   ³   ³   securetransport.py
+    ³       ³   ³   ³   ³   ³   socks.py
+    ³       ³   ³   ³   ³   ³   _appengine_environ.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÃÄÄÄ_securetransport
+    ³       ³   ³   ³   ³   ³   ³   bindings.py
+    ³       ³   ³   ³   ³   ³   ³   low_level.py
+    ³       ³   ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³   ³           bindings.cpython-314.pyc
+    ³       ³   ³   ³   ³   ³           low_level.cpython-314.pyc
+    ³       ³   ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³   ³           
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           appengine.cpython-314.pyc
+    ³       ³   ³   ³   ³           ntlmpool.cpython-314.pyc
+    ³       ³   ³   ³   ³           pyopenssl.cpython-314.pyc
+    ³       ³   ³   ³   ³           securetransport.cpython-314.pyc
+    ³       ³   ³   ³   ³           socks.cpython-314.pyc
+    ³       ³   ³   ³   ³           _appengine_environ.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÃÄÄÄpackages
+    ³       ³   ³   ³   ³   ³   six.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÃÄÄÄbackports
+    ³       ³   ³   ³   ³   ³   ³   makefile.py
+    ³       ³   ³   ³   ³   ³   ³   weakref_finalize.py
+    ³       ³   ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³   ³           makefile.cpython-314.pyc
+    ³       ³   ³   ³   ³   ³           weakref_finalize.cpython-314.pyc
+    ³       ³   ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³   ³           
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           six.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÃÄÄÄutil
+    ³       ³   ³   ³   ³   ³   connection.py
+    ³       ³   ³   ³   ³   ³   proxy.py
+    ³       ³   ³   ³   ³   ³   queue.py
+    ³       ³   ³   ³   ³   ³   request.py
+    ³       ³   ³   ³   ³   ³   response.py
+    ³       ³   ³   ³   ³   ³   retry.py
+    ³       ³   ³   ³   ³   ³   ssltransport.py
+    ³       ³   ³   ³   ³   ³   ssl_.py
+    ³       ³   ³   ³   ³   ³   ssl_match_hostname.py
+    ³       ³   ³   ³   ³   ³   timeout.py
+    ³       ³   ³   ³   ³   ³   url.py
+    ³       ³   ³   ³   ³   ³   wait.py
+    ³       ³   ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   ³   
+    ³       ³   ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³   ³           connection.cpython-314.pyc
+    ³       ³   ³   ³   ³           proxy.cpython-314.pyc
+    ³       ³   ³   ³   ³           queue.cpython-314.pyc
+    ³       ³   ³   ³   ³           request.cpython-314.pyc
+    ³       ³   ³   ³   ³           response.cpython-314.pyc
+    ³       ³   ³   ³   ³           retry.cpython-314.pyc
+    ³       ³   ³   ³   ³           ssltransport.cpython-314.pyc
+    ³       ³   ³   ³   ³           ssl_.cpython-314.pyc
+    ³       ³   ³   ³   ³           ssl_match_hostname.cpython-314.pyc
+    ³       ³   ³   ³   ³           timeout.cpython-314.pyc
+    ³       ³   ³   ³   ³           url.cpython-314.pyc
+    ³       ³   ³   ³   ³           wait.cpython-314.pyc
+    ³       ³   ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³   ³           
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           connection.cpython-314.pyc
+    ³       ³   ³   ³           connectionpool.cpython-314.pyc
+    ³       ³   ³   ³           exceptions.cpython-314.pyc
+    ³       ³   ³   ³           fields.cpython-314.pyc
+    ³       ³   ³   ³           filepost.cpython-314.pyc
+    ³       ³   ³   ³           poolmanager.cpython-314.pyc
+    ³       ³   ³   ³           request.cpython-314.pyc
+    ³       ³   ³   ³           response.cpython-314.pyc
+    ³       ³   ³   ³           _collections.cpython-314.pyc
+    ³       ³   ³   ³           _version.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           __main__.cpython-314.pyc
+    ³       ³           __pip-runner__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄpip-25.3.dist-info
+    ³       ³   ³   entry_points.txt
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³       ³   AUTHORS.txt
+    ³       ³       ³   LICENSE.txt
+    ³       ³       ³   
+    ³       ³       ÀÄÄÄsrc
+    ³       ³           ÀÄÄÄpip
+    ³       ³               ÀÄÄÄ_vendor
+    ³       ³                   ÃÄÄÄcachecontrol
+    ³       ³                   ³       LICENSE.txt
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄcertifi
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄdependency_groups
+    ³       ³                   ³       LICENSE.txt
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄdistlib
+    ³       ³                   ³       LICENSE.txt
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄdistro
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄidna
+    ³       ³                   ³       LICENSE.md
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄmsgpack
+    ³       ³                   ³       COPYING
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄpackaging
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       LICENSE.APACHE
+    ³       ³                   ³       LICENSE.BSD
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄpkg_resources
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄplatformdirs
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄpygments
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄpyproject_hooks
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄrequests
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄresolvelib
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄrich
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄtomli
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄtomli_w
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÃÄÄÄtruststore
+    ³       ³                   ³       LICENSE
+    ³       ³                   ³       
+    ³       ³                   ÀÄÄÄurllib3
+    ³       ³                           LICENSE.txt
+    ³       ³                           
+    ³       ÃÄÄÄpsycopg2
+    ³       ³   ³   errorcodes.py
+    ³       ³   ³   errors.py
+    ³       ³   ³   extensions.py
+    ³       ³   ³   extras.py
+    ³       ³   ³   pool.py
+    ³       ³   ³   sql.py
+    ³       ³   ³   tz.py
+    ³       ³   ³   _ipaddress.py
+    ³       ³   ³   _json.py
+    ³       ³   ³   _psycopg.cp314-win_amd64.pyd
+    ³       ³   ³   _range.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           errorcodes.cpython-314.pyc
+    ³       ³           errors.cpython-314.pyc
+    ³       ³           extensions.cpython-314.pyc
+    ³       ³           extras.cpython-314.pyc
+    ³       ³           pool.cpython-314.pyc
+    ³       ³           sql.cpython-314.pyc
+    ³       ³           tz.cpython-314.pyc
+    ³       ³           _ipaddress.cpython-314.pyc
+    ³       ³           _json.cpython-314.pyc
+    ³       ³           _range.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄpsycopg2_binary-2.9.12.dist-info
+    ³       ³   ³   DELVEWHEEL
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄpsycopg2_binary.libs
+    ³       ³       libcrypto-3-x64-a541aa02e9207ebe82a6024a9b4cbecb.dll
+    ³       ³       libpq-f42384d3c1939d42a6a0d0621313fd37.dll
+    ³       ³       libssl-3-x64-2b03928d9b6537a6d961c5bc118ed43e.dll
+    ³       ³       
+    ³       ÃÄÄÄpyasn1
+    ³       ³   ³   debug.py
+    ³       ³   ³   error.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄcodec
+    ³       ³   ³   ³   streaming.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄber
+    ³       ³   ³   ³   ³   decoder.py
+    ³       ³   ³   ³   ³   encoder.py
+    ³       ³   ³   ³   ³   eoo.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           decoder.cpython-314.pyc
+    ³       ³   ³   ³           encoder.cpython-314.pyc
+    ³       ³   ³   ³           eoo.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄcer
+    ³       ³   ³   ³   ³   decoder.py
+    ³       ³   ³   ³   ³   encoder.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           decoder.cpython-314.pyc
+    ³       ³   ³   ³           encoder.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄder
+    ³       ³   ³   ³   ³   decoder.py
+    ³       ³   ³   ³   ³   encoder.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           decoder.cpython-314.pyc
+    ³       ³   ³   ³           encoder.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄnative
+    ³       ³   ³   ³   ³   decoder.py
+    ³       ³   ³   ³   ³   encoder.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           decoder.cpython-314.pyc
+    ³       ³   ³   ³           encoder.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           streaming.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄcompat
+    ³       ³   ³   ³   integer.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           integer.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄtype
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   char.py
+    ³       ³   ³   ³   constraint.py
+    ³       ³   ³   ³   error.py
+    ³       ³   ³   ³   namedtype.py
+    ³       ³   ³   ³   namedval.py
+    ³       ³   ³   ³   opentype.py
+    ³       ³   ³   ³   tag.py
+    ³       ³   ³   ³   tagmap.py
+    ³       ³   ³   ³   univ.py
+    ³       ³   ³   ³   useful.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           char.cpython-314.pyc
+    ³       ³   ³           constraint.cpython-314.pyc
+    ³       ³   ³           error.cpython-314.pyc
+    ³       ³   ³           namedtype.cpython-314.pyc
+    ³       ³   ³           namedval.cpython-314.pyc
+    ³       ³   ³           opentype.cpython-314.pyc
+    ³       ³   ³           tag.cpython-314.pyc
+    ³       ³   ³           tagmap.cpython-314.pyc
+    ³       ³   ³           univ.cpython-314.pyc
+    ³       ³   ³           useful.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           debug.cpython-314.pyc
+    ³       ³           error.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄpyasn1-0.6.4.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   zip-safe
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE.rst
+    ³       ³           
+    ³       ÃÄÄÄpydantic
+    ³       ³   ³   aliases.py
+    ³       ³   ³   alias_generators.py
+    ³       ³   ³   annotated_handlers.py
+    ³       ³   ³   class_validators.py
+    ³       ³   ³   color.py
+    ³       ³   ³   config.py
+    ³       ³   ³   dataclasses.py
+    ³       ³   ³   datetime_parse.py
+    ³       ³   ³   decorator.py
+    ³       ³   ³   env_settings.py
+    ³       ³   ³   errors.py
+    ³       ³   ³   error_wrappers.py
+    ³       ³   ³   fields.py
+    ³       ³   ³   functional_serializers.py
+    ³       ³   ³   functional_validators.py
+    ³       ³   ³   generics.py
+    ³       ³   ³   json.py
+    ³       ³   ³   json_schema.py
+    ³       ³   ³   main.py
+    ³       ³   ³   mypy.py
+    ³       ³   ³   networks.py
+    ³       ³   ³   parse.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   root_model.py
+    ³       ³   ³   schema.py
+    ³       ³   ³   tools.py
+    ³       ³   ³   types.py
+    ³       ³   ³   type_adapter.py
+    ³       ³   ³   typing.py
+    ³       ³   ³   utils.py
+    ³       ³   ³   validate_call_decorator.py
+    ³       ³   ³   validators.py
+    ³       ³   ³   version.py
+    ³       ³   ³   warnings.py
+    ³       ³   ³   _migration.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄdeprecated
+    ³       ³   ³   ³   class_validators.py
+    ³       ³   ³   ³   config.py
+    ³       ³   ³   ³   copy_internals.py
+    ³       ³   ³   ³   decorator.py
+    ³       ³   ³   ³   json.py
+    ³       ³   ³   ³   parse.py
+    ³       ³   ³   ³   tools.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           class_validators.cpython-314.pyc
+    ³       ³   ³           config.cpython-314.pyc
+    ³       ³   ³           copy_internals.cpython-314.pyc
+    ³       ³   ³           decorator.cpython-314.pyc
+    ³       ³   ³           json.cpython-314.pyc
+    ³       ³   ³           parse.cpython-314.pyc
+    ³       ³   ³           tools.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄexperimental
+    ³       ³   ³   ³   arguments_schema.py
+    ³       ³   ³   ³   missing_sentinel.py
+    ³       ³   ³   ³   pipeline.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           arguments_schema.cpython-314.pyc
+    ³       ³   ³           missing_sentinel.cpython-314.pyc
+    ³       ³   ³           pipeline.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄplugin
+    ³       ³   ³   ³   _loader.py
+    ³       ³   ³   ³   _schema_validator.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           _loader.cpython-314.pyc
+    ³       ³   ³           _schema_validator.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄv1
+    ³       ³   ³   ³   annotated_types.py
+    ³       ³   ³   ³   class_validators.py
+    ³       ³   ³   ³   color.py
+    ³       ³   ³   ³   config.py
+    ³       ³   ³   ³   dataclasses.py
+    ³       ³   ³   ³   datetime_parse.py
+    ³       ³   ³   ³   decorator.py
+    ³       ³   ³   ³   env_settings.py
+    ³       ³   ³   ³   errors.py
+    ³       ³   ³   ³   error_wrappers.py
+    ³       ³   ³   ³   fields.py
+    ³       ³   ³   ³   generics.py
+    ³       ³   ³   ³   json.py
+    ³       ³   ³   ³   main.py
+    ³       ³   ³   ³   mypy.py
+    ³       ³   ³   ³   networks.py
+    ³       ³   ³   ³   parse.py
+    ³       ³   ³   ³   py.typed
+    ³       ³   ³   ³   schema.py
+    ³       ³   ³   ³   tools.py
+    ³       ³   ³   ³   types.py
+    ³       ³   ³   ³   typing.py
+    ³       ³   ³   ³   utils.py
+    ³       ³   ³   ³   validators.py
+    ³       ³   ³   ³   version.py
+    ³       ³   ³   ³   _hypothesis_plugin.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           annotated_types.cpython-314.pyc
+    ³       ³   ³           class_validators.cpython-314.pyc
+    ³       ³   ³           color.cpython-314.pyc
+    ³       ³   ³           config.cpython-314.pyc
+    ³       ³   ³           dataclasses.cpython-314.pyc
+    ³       ³   ³           datetime_parse.cpython-314.pyc
+    ³       ³   ³           decorator.cpython-314.pyc
+    ³       ³   ³           env_settings.cpython-314.pyc
+    ³       ³   ³           errors.cpython-314.pyc
+    ³       ³   ³           error_wrappers.cpython-314.pyc
+    ³       ³   ³           fields.cpython-314.pyc
+    ³       ³   ³           generics.cpython-314.pyc
+    ³       ³   ³           json.cpython-314.pyc
+    ³       ³   ³           main.cpython-314.pyc
+    ³       ³   ³           mypy.cpython-314.pyc
+    ³       ³   ³           networks.cpython-314.pyc
+    ³       ³   ³           parse.cpython-314.pyc
+    ³       ³   ³           schema.cpython-314.pyc
+    ³       ³   ³           tools.cpython-314.pyc
+    ³       ³   ³           types.cpython-314.pyc
+    ³       ³   ³           typing.cpython-314.pyc
+    ³       ³   ³           utils.cpython-314.pyc
+    ³       ³   ³           validators.cpython-314.pyc
+    ³       ³   ³           version.cpython-314.pyc
+    ³       ³   ³           _hypothesis_plugin.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄ_internal
+    ³       ³   ³   ³   _config.py
+    ³       ³   ³   ³   _core_metadata.py
+    ³       ³   ³   ³   _core_utils.py
+    ³       ³   ³   ³   _dataclasses.py
+    ³       ³   ³   ³   _decorators.py
+    ³       ³   ³   ³   _decorators_v1.py
+    ³       ³   ³   ³   _discriminated_union.py
+    ³       ³   ³   ³   _docs_extraction.py
+    ³       ³   ³   ³   _fields.py
+    ³       ³   ³   ³   _forward_ref.py
+    ³       ³   ³   ³   _generate_schema.py
+    ³       ³   ³   ³   _generics.py
+    ³       ³   ³   ³   _git.py
+    ³       ³   ³   ³   _import_utils.py
+    ³       ³   ³   ³   _internal_dataclass.py
+    ³       ³   ³   ³   _known_annotated_metadata.py
+    ³       ³   ³   ³   _mock_val_ser.py
+    ³       ³   ³   ³   _model_construction.py
+    ³       ³   ³   ³   _namespace_utils.py
+    ³       ³   ³   ³   _repr.py
+    ³       ³   ³   ³   _schema_gather.py
+    ³       ³   ³   ³   _schema_generation_shared.py
+    ³       ³   ³   ³   _serializers.py
+    ³       ³   ³   ³   _signature.py
+    ³       ³   ³   ³   _typing_extra.py
+    ³       ³   ³   ³   _utils.py
+    ³       ³   ³   ³   _validate_call.py
+    ³       ³   ³   ³   _validators.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           _config.cpython-314.pyc
+    ³       ³   ³           _core_metadata.cpython-314.pyc
+    ³       ³   ³           _core_utils.cpython-314.pyc
+    ³       ³   ³           _dataclasses.cpython-314.pyc
+    ³       ³   ³           _decorators.cpython-314.pyc
+    ³       ³   ³           _decorators_v1.cpython-314.pyc
+    ³       ³   ³           _discriminated_union.cpython-314.pyc
+    ³       ³   ³           _docs_extraction.cpython-314.pyc
+    ³       ³   ³           _fields.cpython-314.pyc
+    ³       ³   ³           _forward_ref.cpython-314.pyc
+    ³       ³   ³           _generate_schema.cpython-314.pyc
+    ³       ³   ³           _generics.cpython-314.pyc
+    ³       ³   ³           _git.cpython-314.pyc
+    ³       ³   ³           _import_utils.cpython-314.pyc
+    ³       ³   ³           _internal_dataclass.cpython-314.pyc
+    ³       ³   ³           _known_annotated_metadata.cpython-314.pyc
+    ³       ³   ³           _mock_val_ser.cpython-314.pyc
+    ³       ³   ³           _model_construction.cpython-314.pyc
+    ³       ³   ³           _namespace_utils.cpython-314.pyc
+    ³       ³   ³           _repr.cpython-314.pyc
+    ³       ³   ³           _schema_gather.cpython-314.pyc
+    ³       ³   ³           _schema_generation_shared.cpython-314.pyc
+    ³       ³   ³           _serializers.cpython-314.pyc
+    ³       ³   ³           _signature.cpython-314.pyc
+    ³       ³   ³           _typing_extra.cpython-314.pyc
+    ³       ³   ³           _utils.cpython-314.pyc
+    ³       ³   ³           _validate_call.cpython-314.pyc
+    ³       ³   ³           _validators.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           aliases.cpython-314.pyc
+    ³       ³           alias_generators.cpython-314.pyc
+    ³       ³           annotated_handlers.cpython-314.pyc
+    ³       ³           class_validators.cpython-314.pyc
+    ³       ³           color.cpython-314.pyc
+    ³       ³           config.cpython-314.pyc
+    ³       ³           dataclasses.cpython-314.pyc
+    ³       ³           datetime_parse.cpython-314.pyc
+    ³       ³           decorator.cpython-314.pyc
+    ³       ³           env_settings.cpython-314.pyc
+    ³       ³           errors.cpython-314.pyc
+    ³       ³           error_wrappers.cpython-314.pyc
+    ³       ³           fields.cpython-314.pyc
+    ³       ³           functional_serializers.cpython-314.pyc
+    ³       ³           functional_validators.cpython-314.pyc
+    ³       ³           generics.cpython-314.pyc
+    ³       ³           json.cpython-314.pyc
+    ³       ³           json_schema.cpython-314.pyc
+    ³       ³           main.cpython-314.pyc
+    ³       ³           mypy.cpython-314.pyc
+    ³       ³           networks.cpython-314.pyc
+    ³       ³           parse.cpython-314.pyc
+    ³       ³           root_model.cpython-314.pyc
+    ³       ³           schema.cpython-314.pyc
+    ³       ³           tools.cpython-314.pyc
+    ³       ³           types.cpython-314.pyc
+    ³       ³           type_adapter.cpython-314.pyc
+    ³       ³           typing.cpython-314.pyc
+    ³       ³           utils.cpython-314.pyc
+    ³       ³           validate_call_decorator.cpython-314.pyc
+    ³       ³           validators.cpython-314.pyc
+    ³       ³           version.cpython-314.pyc
+    ³       ³           warnings.cpython-314.pyc
+    ³       ³           _migration.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄpydantic-2.13.4.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄpydantic_core
+    ³       ³   ³   core_schema.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   _pydantic_core.cp314-win_amd64.pyd
+    ³       ³   ³   _pydantic_core.pyi
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           core_schema.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄpydantic_core-2.46.4.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄlicenses
+    ³       ³   ³       LICENSE
+    ³       ³   ³       
+    ³       ³   ÀÄÄÄsboms
+    ³       ³           pydantic-core.cyclonedx.json
+    ³       ³           
+    ³       ÃÄÄÄpython_dotenv-1.2.2.dist-info
+    ³       ³   ³   entry_points.txt
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄpython_jose-3.5.0.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄpython_multipart
+    ³       ³   ³   decoders.py
+    ³       ³   ³   exceptions.py
+    ³       ³   ³   multipart.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           decoders.cpython-314.pyc
+    ³       ³           exceptions.cpython-314.pyc
+    ³       ³           multipart.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄpython_multipart-0.0.32.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE.txt
+    ³       ³           
+    ³       ÃÄÄÄpyyaml-6.0.3.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄrsa
+    ³       ³   ³   asn1.py
+    ³       ³   ³   cli.py
+    ³       ³   ³   common.py
+    ³       ³   ³   core.py
+    ³       ³   ³   key.py
+    ³       ³   ³   parallel.py
+    ³       ³   ³   pem.py
+    ³       ³   ³   pkcs1.py
+    ³       ³   ³   pkcs1_v2.py
+    ³       ³   ³   prime.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   randnum.py
+    ³       ³   ³   transform.py
+    ³       ³   ³   util.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           asn1.cpython-314.pyc
+    ³       ³           cli.cpython-314.pyc
+    ³       ³           common.cpython-314.pyc
+    ³       ³           core.cpython-314.pyc
+    ³       ³           key.cpython-314.pyc
+    ³       ³           parallel.cpython-314.pyc
+    ³       ³           pem.cpython-314.pyc
+    ³       ³           pkcs1.cpython-314.pyc
+    ³       ³           pkcs1_v2.cpython-314.pyc
+    ³       ³           prime.cpython-314.pyc
+    ³       ³           randnum.cpython-314.pyc
+    ³       ³           transform.cpython-314.pyc
+    ³       ³           util.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄrsa-4.9.1.dist-info
+    ³       ³       entry_points.txt
+    ³       ³       INSTALLER
+    ³       ³       LICENSE
+    ³       ³       METADATA
+    ³       ³       RECORD
+    ³       ³       REQUESTED
+    ³       ³       WHEEL
+    ³       ³       
+    ³       ÃÄÄÄsix-1.17.0.dist-info
+    ³       ³       INSTALLER
+    ³       ³       LICENSE
+    ³       ³       METADATA
+    ³       ³       RECORD
+    ³       ³       REQUESTED
+    ³       ³       top_level.txt
+    ³       ³       WHEEL
+    ³       ³       
+    ³       ÃÄÄÄsqlalchemy
+    ³       ³   ³   events.py
+    ³       ³   ³   exc.py
+    ³       ³   ³   inspection.py
+    ³       ³   ³   log.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   schema.py
+    ³       ³   ³   types.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄconnectors
+    ³       ³   ³   ³   aioodbc.py
+    ³       ³   ³   ³   asyncio.py
+    ³       ³   ³   ³   pyodbc.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           aioodbc.cpython-314.pyc
+    ³       ³   ³           asyncio.cpython-314.pyc
+    ³       ³   ³           pyodbc.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄcyextension
+    ³       ³   ³   ³   collections.cp314-win_amd64.pyd
+    ³       ³   ³   ³   collections.pyx
+    ³       ³   ³   ³   immutabledict.cp314-win_amd64.pyd
+    ³       ³   ³   ³   immutabledict.pxd
+    ³       ³   ³   ³   immutabledict.pyx
+    ³       ³   ³   ³   processors.cp314-win_amd64.pyd
+    ³       ³   ³   ³   processors.pyx
+    ³       ³   ³   ³   resultproxy.cp314-win_amd64.pyd
+    ³       ³   ³   ³   resultproxy.pyx
+    ³       ³   ³   ³   util.cp314-win_amd64.pyd
+    ³       ³   ³   ³   util.pyx
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄdialects
+    ³       ³   ³   ³   type_migration_guidelines.txt
+    ³       ³   ³   ³   _typing.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄmssql
+    ³       ³   ³   ³   ³   aioodbc.py
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   information_schema.py
+    ³       ³   ³   ³   ³   json.py
+    ³       ³   ³   ³   ³   provision.py
+    ³       ³   ³   ³   ³   pymssql.py
+    ³       ³   ³   ³   ³   pyodbc.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           aioodbc.cpython-314.pyc
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           information_schema.cpython-314.pyc
+    ³       ³   ³   ³           json.cpython-314.pyc
+    ³       ³   ³   ³           provision.cpython-314.pyc
+    ³       ³   ³   ³           pymssql.cpython-314.pyc
+    ³       ³   ³   ³           pyodbc.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄmysql
+    ³       ³   ³   ³   ³   aiomysql.py
+    ³       ³   ³   ³   ³   asyncmy.py
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   cymysql.py
+    ³       ³   ³   ³   ³   dml.py
+    ³       ³   ³   ³   ³   enumerated.py
+    ³       ³   ³   ³   ³   expression.py
+    ³       ³   ³   ³   ³   json.py
+    ³       ³   ³   ³   ³   mariadb.py
+    ³       ³   ³   ³   ³   mariadbconnector.py
+    ³       ³   ³   ³   ³   mysqlconnector.py
+    ³       ³   ³   ³   ³   mysqldb.py
+    ³       ³   ³   ³   ³   provision.py
+    ³       ³   ³   ³   ³   pymysql.py
+    ³       ³   ³   ³   ³   pyodbc.py
+    ³       ³   ³   ³   ³   reflection.py
+    ³       ³   ³   ³   ³   reserved_words.py
+    ³       ³   ³   ³   ³   types.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           aiomysql.cpython-314.pyc
+    ³       ³   ³   ³           asyncmy.cpython-314.pyc
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           cymysql.cpython-314.pyc
+    ³       ³   ³   ³           dml.cpython-314.pyc
+    ³       ³   ³   ³           enumerated.cpython-314.pyc
+    ³       ³   ³   ³           expression.cpython-314.pyc
+    ³       ³   ³   ³           json.cpython-314.pyc
+    ³       ³   ³   ³           mariadb.cpython-314.pyc
+    ³       ³   ³   ³           mariadbconnector.cpython-314.pyc
+    ³       ³   ³   ³           mysqlconnector.cpython-314.pyc
+    ³       ³   ³   ³           mysqldb.cpython-314.pyc
+    ³       ³   ³   ³           provision.cpython-314.pyc
+    ³       ³   ³   ³           pymysql.cpython-314.pyc
+    ³       ³   ³   ³           pyodbc.cpython-314.pyc
+    ³       ³   ³   ³           reflection.cpython-314.pyc
+    ³       ³   ³   ³           reserved_words.cpython-314.pyc
+    ³       ³   ³   ³           types.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄoracle
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   cx_oracle.py
+    ³       ³   ³   ³   ³   dictionary.py
+    ³       ³   ³   ³   ³   oracledb.py
+    ³       ³   ³   ³   ³   provision.py
+    ³       ³   ³   ³   ³   types.py
+    ³       ³   ³   ³   ³   vector.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           cx_oracle.cpython-314.pyc
+    ³       ³   ³   ³           dictionary.cpython-314.pyc
+    ³       ³   ³   ³           oracledb.cpython-314.pyc
+    ³       ³   ³   ³           provision.cpython-314.pyc
+    ³       ³   ³   ³           types.cpython-314.pyc
+    ³       ³   ³   ³           vector.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄpostgresql
+    ³       ³   ³   ³   ³   array.py
+    ³       ³   ³   ³   ³   asyncpg.py
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   dml.py
+    ³       ³   ³   ³   ³   ext.py
+    ³       ³   ³   ³   ³   hstore.py
+    ³       ³   ³   ³   ³   json.py
+    ³       ³   ³   ³   ³   named_types.py
+    ³       ³   ³   ³   ³   operators.py
+    ³       ³   ³   ³   ³   pg8000.py
+    ³       ³   ³   ³   ³   pg_catalog.py
+    ³       ³   ³   ³   ³   provision.py
+    ³       ³   ³   ³   ³   psycopg.py
+    ³       ³   ³   ³   ³   psycopg2.py
+    ³       ³   ³   ³   ³   psycopg2cffi.py
+    ³       ³   ³   ³   ³   ranges.py
+    ³       ³   ³   ³   ³   types.py
+    ³       ³   ³   ³   ³   _psycopg_common.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           array.cpython-314.pyc
+    ³       ³   ³   ³           asyncpg.cpython-314.pyc
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           dml.cpython-314.pyc
+    ³       ³   ³   ³           ext.cpython-314.pyc
+    ³       ³   ³   ³           hstore.cpython-314.pyc
+    ³       ³   ³   ³           json.cpython-314.pyc
+    ³       ³   ³   ³           named_types.cpython-314.pyc
+    ³       ³   ³   ³           operators.cpython-314.pyc
+    ³       ³   ³   ³           pg8000.cpython-314.pyc
+    ³       ³   ³   ³           pg_catalog.cpython-314.pyc
+    ³       ³   ³   ³           provision.cpython-314.pyc
+    ³       ³   ³   ³           psycopg.cpython-314.pyc
+    ³       ³   ³   ³           psycopg2.cpython-314.pyc
+    ³       ³   ³   ³           psycopg2cffi.cpython-314.pyc
+    ³       ³   ³   ³           ranges.cpython-314.pyc
+    ³       ³   ³   ³           types.cpython-314.pyc
+    ³       ³   ³   ³           _psycopg_common.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄsqlite
+    ³       ³   ³   ³   ³   aiosqlite.py
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   dml.py
+    ³       ³   ³   ³   ³   json.py
+    ³       ³   ³   ³   ³   provision.py
+    ³       ³   ³   ³   ³   pysqlcipher.py
+    ³       ³   ³   ³   ³   pysqlite.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           aiosqlite.cpython-314.pyc
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           dml.cpython-314.pyc
+    ³       ³   ³   ³           json.cpython-314.pyc
+    ³       ³   ³   ³           provision.cpython-314.pyc
+    ³       ³   ³   ³           pysqlcipher.cpython-314.pyc
+    ³       ³   ³   ³           pysqlite.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           _typing.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄengine
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   characteristics.py
+    ³       ³   ³   ³   create.py
+    ³       ³   ³   ³   cursor.py
+    ³       ³   ³   ³   default.py
+    ³       ³   ³   ³   events.py
+    ³       ³   ³   ³   interfaces.py
+    ³       ³   ³   ³   mock.py
+    ³       ³   ³   ³   processors.py
+    ³       ³   ³   ³   reflection.py
+    ³       ³   ³   ³   result.py
+    ³       ³   ³   ³   row.py
+    ³       ³   ³   ³   strategies.py
+    ³       ³   ³   ³   url.py
+    ³       ³   ³   ³   util.py
+    ³       ³   ³   ³   _py_processors.py
+    ³       ³   ³   ³   _py_row.py
+    ³       ³   ³   ³   _py_util.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           characteristics.cpython-314.pyc
+    ³       ³   ³           create.cpython-314.pyc
+    ³       ³   ³           cursor.cpython-314.pyc
+    ³       ³   ³           default.cpython-314.pyc
+    ³       ³   ³           events.cpython-314.pyc
+    ³       ³   ³           interfaces.cpython-314.pyc
+    ³       ³   ³           mock.cpython-314.pyc
+    ³       ³   ³           processors.cpython-314.pyc
+    ³       ³   ³           reflection.cpython-314.pyc
+    ³       ³   ³           result.cpython-314.pyc
+    ³       ³   ³           row.cpython-314.pyc
+    ³       ³   ³           strategies.cpython-314.pyc
+    ³       ³   ³           url.cpython-314.pyc
+    ³       ³   ³           util.cpython-314.pyc
+    ³       ³   ³           _py_processors.cpython-314.pyc
+    ³       ³   ³           _py_row.cpython-314.pyc
+    ³       ³   ³           _py_util.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄevent
+    ³       ³   ³   ³   api.py
+    ³       ³   ³   ³   attr.py
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   legacy.py
+    ³       ³   ³   ³   registry.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           api.cpython-314.pyc
+    ³       ³   ³           attr.cpython-314.pyc
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           legacy.cpython-314.pyc
+    ³       ³   ³           registry.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄext
+    ³       ³   ³   ³   associationproxy.py
+    ³       ³   ³   ³   automap.py
+    ³       ³   ³   ³   baked.py
+    ³       ³   ³   ³   compiler.py
+    ³       ³   ³   ³   horizontal_shard.py
+    ³       ³   ³   ³   hybrid.py
+    ³       ³   ³   ³   indexable.py
+    ³       ³   ³   ³   instrumentation.py
+    ³       ³   ³   ³   mutable.py
+    ³       ³   ³   ³   orderinglist.py
+    ³       ³   ³   ³   serializer.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄasyncio
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   engine.py
+    ³       ³   ³   ³   ³   exc.py
+    ³       ³   ³   ³   ³   result.py
+    ³       ³   ³   ³   ³   scoping.py
+    ³       ³   ³   ³   ³   session.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           engine.cpython-314.pyc
+    ³       ³   ³   ³           exc.cpython-314.pyc
+    ³       ³   ³   ³           result.cpython-314.pyc
+    ³       ³   ³   ³           scoping.cpython-314.pyc
+    ³       ³   ³   ³           session.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄdeclarative
+    ³       ³   ³   ³   ³   extensions.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           extensions.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄmypy
+    ³       ³   ³   ³   ³   apply.py
+    ³       ³   ³   ³   ³   decl_class.py
+    ³       ³   ³   ³   ³   infer.py
+    ³       ³   ³   ³   ³   names.py
+    ³       ³   ³   ³   ³   plugin.py
+    ³       ³   ³   ³   ³   util.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           apply.cpython-314.pyc
+    ³       ³   ³   ³           decl_class.cpython-314.pyc
+    ³       ³   ³   ³           infer.cpython-314.pyc
+    ³       ³   ³   ³           names.cpython-314.pyc
+    ³       ³   ³   ³           plugin.cpython-314.pyc
+    ³       ³   ³   ³           util.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           associationproxy.cpython-314.pyc
+    ³       ³   ³           automap.cpython-314.pyc
+    ³       ³   ³           baked.cpython-314.pyc
+    ³       ³   ³           compiler.cpython-314.pyc
+    ³       ³   ³           horizontal_shard.cpython-314.pyc
+    ³       ³   ³           hybrid.cpython-314.pyc
+    ³       ³   ³           indexable.cpython-314.pyc
+    ³       ³   ³           instrumentation.cpython-314.pyc
+    ³       ³   ³           mutable.cpython-314.pyc
+    ³       ³   ³           orderinglist.cpython-314.pyc
+    ³       ³   ³           serializer.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄfuture
+    ³       ³   ³   ³   engine.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           engine.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄorm
+    ³       ³   ³   ³   attributes.py
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   bulk_persistence.py
+    ³       ³   ³   ³   clsregistry.py
+    ³       ³   ³   ³   collections.py
+    ³       ³   ³   ³   context.py
+    ³       ³   ³   ³   decl_api.py
+    ³       ³   ³   ³   decl_base.py
+    ³       ³   ³   ³   dependency.py
+    ³       ³   ³   ³   descriptor_props.py
+    ³       ³   ³   ³   dynamic.py
+    ³       ³   ³   ³   evaluator.py
+    ³       ³   ³   ³   events.py
+    ³       ³   ³   ³   exc.py
+    ³       ³   ³   ³   identity.py
+    ³       ³   ³   ³   instrumentation.py
+    ³       ³   ³   ³   interfaces.py
+    ³       ³   ³   ³   loading.py
+    ³       ³   ³   ³   mapped_collection.py
+    ³       ³   ³   ³   mapper.py
+    ³       ³   ³   ³   path_registry.py
+    ³       ³   ³   ³   persistence.py
+    ³       ³   ³   ³   properties.py
+    ³       ³   ³   ³   query.py
+    ³       ³   ³   ³   relationships.py
+    ³       ³   ³   ³   scoping.py
+    ³       ³   ³   ³   session.py
+    ³       ³   ³   ³   state.py
+    ³       ³   ³   ³   state_changes.py
+    ³       ³   ³   ³   strategies.py
+    ³       ³   ³   ³   strategy_options.py
+    ³       ³   ³   ³   sync.py
+    ³       ³   ³   ³   unitofwork.py
+    ³       ³   ³   ³   util.py
+    ³       ³   ³   ³   writeonly.py
+    ³       ³   ³   ³   _orm_constructors.py
+    ³       ³   ³   ³   _typing.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           attributes.cpython-314.pyc
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           bulk_persistence.cpython-314.pyc
+    ³       ³   ³           clsregistry.cpython-314.pyc
+    ³       ³   ³           collections.cpython-314.pyc
+    ³       ³   ³           context.cpython-314.pyc
+    ³       ³   ³           decl_api.cpython-314.pyc
+    ³       ³   ³           decl_base.cpython-314.pyc
+    ³       ³   ³           dependency.cpython-314.pyc
+    ³       ³   ³           descriptor_props.cpython-314.pyc
+    ³       ³   ³           dynamic.cpython-314.pyc
+    ³       ³   ³           evaluator.cpython-314.pyc
+    ³       ³   ³           events.cpython-314.pyc
+    ³       ³   ³           exc.cpython-314.pyc
+    ³       ³   ³           identity.cpython-314.pyc
+    ³       ³   ³           instrumentation.cpython-314.pyc
+    ³       ³   ³           interfaces.cpython-314.pyc
+    ³       ³   ³           loading.cpython-314.pyc
+    ³       ³   ³           mapped_collection.cpython-314.pyc
+    ³       ³   ³           mapper.cpython-314.pyc
+    ³       ³   ³           path_registry.cpython-314.pyc
+    ³       ³   ³           persistence.cpython-314.pyc
+    ³       ³   ³           properties.cpython-314.pyc
+    ³       ³   ³           query.cpython-314.pyc
+    ³       ³   ³           relationships.cpython-314.pyc
+    ³       ³   ³           scoping.cpython-314.pyc
+    ³       ³   ³           session.cpython-314.pyc
+    ³       ³   ³           state.cpython-314.pyc
+    ³       ³   ³           state_changes.cpython-314.pyc
+    ³       ³   ³           strategies.cpython-314.pyc
+    ³       ³   ³           strategy_options.cpython-314.pyc
+    ³       ³   ³           sync.cpython-314.pyc
+    ³       ³   ³           unitofwork.cpython-314.pyc
+    ³       ³   ³           util.cpython-314.pyc
+    ³       ³   ³           writeonly.cpython-314.pyc
+    ³       ³   ³           _orm_constructors.cpython-314.pyc
+    ³       ³   ³           _typing.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄpool
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   events.py
+    ³       ³   ³   ³   impl.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           events.cpython-314.pyc
+    ³       ³   ³           impl.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄsql
+    ³       ³   ³   ³   annotation.py
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   cache_key.py
+    ³       ³   ³   ³   coercions.py
+    ³       ³   ³   ³   compiler.py
+    ³       ³   ³   ³   crud.py
+    ³       ³   ³   ³   ddl.py
+    ³       ³   ³   ³   default_comparator.py
+    ³       ³   ³   ³   dml.py
+    ³       ³   ³   ³   elements.py
+    ³       ³   ³   ³   events.py
+    ³       ³   ³   ³   expression.py
+    ³       ³   ³   ³   functions.py
+    ³       ³   ³   ³   lambdas.py
+    ³       ³   ³   ³   naming.py
+    ³       ³   ³   ³   operators.py
+    ³       ³   ³   ³   roles.py
+    ³       ³   ³   ³   schema.py
+    ³       ³   ³   ³   selectable.py
+    ³       ³   ³   ³   sqltypes.py
+    ³       ³   ³   ³   traversals.py
+    ³       ³   ³   ³   type_api.py
+    ³       ³   ³   ³   util.py
+    ³       ³   ³   ³   visitors.py
+    ³       ³   ³   ³   _dml_constructors.py
+    ³       ³   ³   ³   _elements_constructors.py
+    ³       ³   ³   ³   _orm_types.py
+    ³       ³   ³   ³   _py_util.py
+    ³       ³   ³   ³   _selectable_constructors.py
+    ³       ³   ³   ³   _typing.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           annotation.cpython-314.pyc
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           cache_key.cpython-314.pyc
+    ³       ³   ³           coercions.cpython-314.pyc
+    ³       ³   ³           compiler.cpython-314.pyc
+    ³       ³   ³           crud.cpython-314.pyc
+    ³       ³   ³           ddl.cpython-314.pyc
+    ³       ³   ³           default_comparator.cpython-314.pyc
+    ³       ³   ³           dml.cpython-314.pyc
+    ³       ³   ³           elements.cpython-314.pyc
+    ³       ³   ³           events.cpython-314.pyc
+    ³       ³   ³           expression.cpython-314.pyc
+    ³       ³   ³           functions.cpython-314.pyc
+    ³       ³   ³           lambdas.cpython-314.pyc
+    ³       ³   ³           naming.cpython-314.pyc
+    ³       ³   ³           operators.cpython-314.pyc
+    ³       ³   ³           roles.cpython-314.pyc
+    ³       ³   ³           schema.cpython-314.pyc
+    ³       ³   ³           selectable.cpython-314.pyc
+    ³       ³   ³           sqltypes.cpython-314.pyc
+    ³       ³   ³           traversals.cpython-314.pyc
+    ³       ³   ³           type_api.cpython-314.pyc
+    ³       ³   ³           util.cpython-314.pyc
+    ³       ³   ³           visitors.cpython-314.pyc
+    ³       ³   ³           _dml_constructors.cpython-314.pyc
+    ³       ³   ³           _elements_constructors.cpython-314.pyc
+    ³       ³   ³           _orm_types.cpython-314.pyc
+    ³       ³   ³           _py_util.cpython-314.pyc
+    ³       ³   ³           _selectable_constructors.cpython-314.pyc
+    ³       ³   ³           _typing.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄtesting
+    ³       ³   ³   ³   assertions.py
+    ³       ³   ³   ³   assertsql.py
+    ³       ³   ³   ³   asyncio.py
+    ³       ³   ³   ³   config.py
+    ³       ³   ³   ³   engines.py
+    ³       ³   ³   ³   entities.py
+    ³       ³   ³   ³   exclusions.py
+    ³       ³   ³   ³   pickleable.py
+    ³       ³   ³   ³   profiling.py
+    ³       ³   ³   ³   provision.py
+    ³       ³   ³   ³   requirements.py
+    ³       ³   ³   ³   schema.py
+    ³       ³   ³   ³   util.py
+    ³       ³   ³   ³   warnings.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄfixtures
+    ³       ³   ³   ³   ³   base.py
+    ³       ³   ³   ³   ³   mypy.py
+    ³       ³   ³   ³   ³   orm.py
+    ³       ³   ³   ³   ³   sql.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           base.cpython-314.pyc
+    ³       ³   ³   ³           mypy.cpython-314.pyc
+    ³       ³   ³   ³           orm.cpython-314.pyc
+    ³       ³   ³   ³           sql.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄplugin
+    ³       ³   ³   ³   ³   bootstrap.py
+    ³       ³   ³   ³   ³   plugin_base.py
+    ³       ³   ³   ³   ³   pytestplugin.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           bootstrap.cpython-314.pyc
+    ³       ³   ³   ³           plugin_base.cpython-314.pyc
+    ³       ³   ³   ³           pytestplugin.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄsuite
+    ³       ³   ³   ³   ³   test_cte.py
+    ³       ³   ³   ³   ³   test_ddl.py
+    ³       ³   ³   ³   ³   test_deprecations.py
+    ³       ³   ³   ³   ³   test_dialect.py
+    ³       ³   ³   ³   ³   test_insert.py
+    ³       ³   ³   ³   ³   test_reflection.py
+    ³       ³   ³   ³   ³   test_results.py
+    ³       ³   ³   ³   ³   test_rowcount.py
+    ³       ³   ³   ³   ³   test_select.py
+    ³       ³   ³   ³   ³   test_sequence.py
+    ³       ³   ³   ³   ³   test_types.py
+    ³       ³   ³   ³   ³   test_unicode_ddl.py
+    ³       ³   ³   ³   ³   test_update_delete.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           test_cte.cpython-314.pyc
+    ³       ³   ³   ³           test_ddl.cpython-314.pyc
+    ³       ³   ³   ³           test_deprecations.cpython-314.pyc
+    ³       ³   ³   ³           test_dialect.cpython-314.pyc
+    ³       ³   ³   ³           test_insert.cpython-314.pyc
+    ³       ³   ³   ³           test_reflection.cpython-314.pyc
+    ³       ³   ³   ³           test_results.cpython-314.pyc
+    ³       ³   ³   ³           test_rowcount.cpython-314.pyc
+    ³       ³   ³   ³           test_select.cpython-314.pyc
+    ³       ³   ³   ³           test_sequence.cpython-314.pyc
+    ³       ³   ³   ³           test_types.cpython-314.pyc
+    ³       ³   ³   ³           test_unicode_ddl.cpython-314.pyc
+    ³       ³   ³   ³           test_update_delete.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           assertions.cpython-314.pyc
+    ³       ³   ³           assertsql.cpython-314.pyc
+    ³       ³   ³           asyncio.cpython-314.pyc
+    ³       ³   ³           config.cpython-314.pyc
+    ³       ³   ³           engines.cpython-314.pyc
+    ³       ³   ³           entities.cpython-314.pyc
+    ³       ³   ³           exclusions.cpython-314.pyc
+    ³       ³   ³           pickleable.cpython-314.pyc
+    ³       ³   ³           profiling.cpython-314.pyc
+    ³       ³   ³           provision.cpython-314.pyc
+    ³       ³   ³           requirements.cpython-314.pyc
+    ³       ³   ³           schema.cpython-314.pyc
+    ³       ³   ³           util.cpython-314.pyc
+    ³       ³   ³           warnings.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄutil
+    ³       ³   ³   ³   compat.py
+    ³       ³   ³   ³   concurrency.py
+    ³       ³   ³   ³   deprecations.py
+    ³       ³   ³   ³   langhelpers.py
+    ³       ³   ³   ³   preloaded.py
+    ³       ³   ³   ³   queue.py
+    ³       ³   ³   ³   tool_support.py
+    ³       ³   ³   ³   topological.py
+    ³       ³   ³   ³   typing.py
+    ³       ³   ³   ³   _collections.py
+    ³       ³   ³   ³   _concurrency_py3k.py
+    ³       ³   ³   ³   _has_cy.py
+    ³       ³   ³   ³   _py_collections.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           compat.cpython-314.pyc
+    ³       ³   ³           concurrency.cpython-314.pyc
+    ³       ³   ³           deprecations.cpython-314.pyc
+    ³       ³   ³           langhelpers.cpython-314.pyc
+    ³       ³   ³           preloaded.cpython-314.pyc
+    ³       ³   ³           queue.cpython-314.pyc
+    ³       ³   ³           tool_support.cpython-314.pyc
+    ³       ³   ³           topological.cpython-314.pyc
+    ³       ³   ³           typing.cpython-314.pyc
+    ³       ³   ³           _collections.cpython-314.pyc
+    ³       ³   ³           _concurrency_py3k.cpython-314.pyc
+    ³       ³   ³           _has_cy.cpython-314.pyc
+    ³       ³   ³           _py_collections.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           events.cpython-314.pyc
+    ³       ³           exc.cpython-314.pyc
+    ³       ³           inspection.cpython-314.pyc
+    ³       ³           log.cpython-314.pyc
+    ³       ³           schema.cpython-314.pyc
+    ³       ³           types.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄsqlalchemy-2.0.51.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄstarlette
+    ³       ³   ³   applications.py
+    ³       ³   ³   authentication.py
+    ³       ³   ³   background.py
+    ³       ³   ³   concurrency.py
+    ³       ³   ³   config.py
+    ³       ³   ³   convertors.py
+    ³       ³   ³   datastructures.py
+    ³       ³   ³   endpoints.py
+    ³       ³   ³   exceptions.py
+    ³       ³   ³   formparsers.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   requests.py
+    ³       ³   ³   responses.py
+    ³       ³   ³   routing.py
+    ³       ³   ³   schemas.py
+    ³       ³   ³   staticfiles.py
+    ³       ³   ³   status.py
+    ³       ³   ³   templating.py
+    ³       ³   ³   testclient.py
+    ³       ³   ³   types.py
+    ³       ³   ³   websockets.py
+    ³       ³   ³   _exception_handler.py
+    ³       ³   ³   _utils.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄmiddleware
+    ³       ³   ³   ³   authentication.py
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   cors.py
+    ³       ³   ³   ³   errors.py
+    ³       ³   ³   ³   exceptions.py
+    ³       ³   ³   ³   gzip.py
+    ³       ³   ³   ³   httpsredirect.py
+    ³       ³   ³   ³   sessions.py
+    ³       ³   ³   ³   trustedhost.py
+    ³       ³   ³   ³   wsgi.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           authentication.cpython-314.pyc
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           cors.cpython-314.pyc
+    ³       ³   ³           errors.cpython-314.pyc
+    ³       ³   ³           exceptions.cpython-314.pyc
+    ³       ³   ³           gzip.cpython-314.pyc
+    ³       ³   ³           httpsredirect.cpython-314.pyc
+    ³       ³   ³           sessions.cpython-314.pyc
+    ³       ³   ³           trustedhost.cpython-314.pyc
+    ³       ³   ³           wsgi.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           applications.cpython-314.pyc
+    ³       ³           authentication.cpython-314.pyc
+    ³       ³           background.cpython-314.pyc
+    ³       ³           concurrency.cpython-314.pyc
+    ³       ³           config.cpython-314.pyc
+    ³       ³           convertors.cpython-314.pyc
+    ³       ³           datastructures.cpython-314.pyc
+    ³       ³           endpoints.cpython-314.pyc
+    ³       ³           exceptions.cpython-314.pyc
+    ³       ³           formparsers.cpython-314.pyc
+    ³       ³           requests.cpython-314.pyc
+    ³       ³           responses.cpython-314.pyc
+    ³       ³           routing.cpython-314.pyc
+    ³       ³           schemas.cpython-314.pyc
+    ³       ³           staticfiles.cpython-314.pyc
+    ³       ³           status.cpython-314.pyc
+    ³       ³           templating.cpython-314.pyc
+    ³       ³           testclient.cpython-314.pyc
+    ³       ³           types.cpython-314.pyc
+    ³       ³           websockets.cpython-314.pyc
+    ³       ³           _exception_handler.cpython-314.pyc
+    ³       ³           _utils.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄstarlette-1.3.1.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE.md
+    ³       ³           
+    ³       ÃÄÄÄtyping_extensions-4.16.0.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄtyping_inspection
+    ³       ³   ³   introspection.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   typing_objects.py
+    ³       ³   ³   typing_objects.pyi
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           introspection.cpython-314.pyc
+    ³       ³           typing_objects.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄtyping_inspection-0.4.2.dist-info
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄuvicorn
+    ³       ³   ³   config.py
+    ³       ³   ³   importer.py
+    ³       ³   ³   logging.py
+    ³       ³   ³   main.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   server.py
+    ³       ³   ³   workers.py
+    ³       ³   ³   _ansi.py
+    ³       ³   ³   _compat.py
+    ³       ³   ³   _subprocess.py
+    ³       ³   ³   _types.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   __main__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄlifespan
+    ³       ³   ³   ³   off.py
+    ³       ³   ³   ³   on.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           off.cpython-314.pyc
+    ³       ³   ³           on.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄloops
+    ³       ³   ³   ³   asyncio.py
+    ³       ³   ³   ³   auto.py
+    ³       ³   ³   ³   uvloop.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           asyncio.cpython-314.pyc
+    ³       ³   ³           auto.cpython-314.pyc
+    ³       ³   ³           uvloop.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄmiddleware
+    ³       ³   ³   ³   asgi2.py
+    ³       ³   ³   ³   message_logger.py
+    ³       ³   ³   ³   proxy_headers.py
+    ³       ³   ³   ³   wsgi.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           asgi2.cpython-314.pyc
+    ³       ³   ³           message_logger.cpython-314.pyc
+    ³       ³   ³           proxy_headers.cpython-314.pyc
+    ³       ³   ³           wsgi.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄprotocols
+    ³       ³   ³   ³   utils.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÃÄÄÄhttp
+    ³       ³   ³   ³   ³   auto.py
+    ³       ³   ³   ³   ³   flow_control.py
+    ³       ³   ³   ³   ³   h11_impl.py
+    ³       ³   ³   ³   ³   httptools_impl.py
+    ³       ³   ³   ³   ³   zttp_impl.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           auto.cpython-314.pyc
+    ³       ³   ³   ³           flow_control.cpython-314.pyc
+    ³       ³   ³   ³           h11_impl.cpython-314.pyc
+    ³       ³   ³   ³           httptools_impl.cpython-314.pyc
+    ³       ³   ³   ³           zttp_impl.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÃÄÄÄwebsockets
+    ³       ³   ³   ³   ³   auto.py
+    ³       ³   ³   ³   ³   websockets_impl.py
+    ³       ³   ³   ³   ³   websockets_sansio_impl.py
+    ³       ³   ³   ³   ³   wsproto_impl.py
+    ³       ³   ³   ³   ³   __init__.py
+    ³       ³   ³   ³   ³   
+    ³       ³   ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³   ³           auto.cpython-314.pyc
+    ³       ³   ³   ³           websockets_impl.cpython-314.pyc
+    ³       ³   ³   ³           websockets_sansio_impl.cpython-314.pyc
+    ³       ³   ³   ³           wsproto_impl.cpython-314.pyc
+    ³       ³   ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³   ³           
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           utils.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄsupervisors
+    ³       ³   ³   ³   basereload.py
+    ³       ³   ³   ³   multiprocess.py
+    ³       ³   ³   ³   statreload.py
+    ³       ³   ³   ³   watchfilesreload.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           basereload.cpython-314.pyc
+    ³       ³   ³           multiprocess.cpython-314.pyc
+    ³       ³   ³           statreload.cpython-314.pyc
+    ³       ³   ³           watchfilesreload.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           config.cpython-314.pyc
+    ³       ³           importer.cpython-314.pyc
+    ³       ³           logging.cpython-314.pyc
+    ³       ³           main.cpython-314.pyc
+    ³       ³           server.cpython-314.pyc
+    ³       ³           workers.cpython-314.pyc
+    ³       ³           _ansi.cpython-314.pyc
+    ³       ³           _compat.cpython-314.pyc
+    ³       ³           _subprocess.cpython-314.pyc
+    ³       ³           _types.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           __main__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄuvicorn-0.52.0.dist-info
+    ³       ³   ³   entry_points.txt
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   REQUESTED
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE.md
+    ³       ³           
+    ³       ÃÄÄÄwatchfiles
+    ³       ³   ³   cli.py
+    ³       ³   ³   filters.py
+    ³       ³   ³   main.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   run.py
+    ³       ³   ³   version.py
+    ³       ³   ³   _rust_notify.cp314-win_amd64.pyd
+    ³       ³   ³   _rust_notify.pyi
+    ³       ³   ³   __init__.py
+    ³       ³   ³   __main__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           cli.cpython-314.pyc
+    ³       ³           filters.cpython-314.pyc
+    ³       ³           main.cpython-314.pyc
+    ³       ³           run.cpython-314.pyc
+    ³       ³           version.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           __main__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄwatchfiles-1.2.0.dist-info
+    ³       ³   ³   entry_points.txt
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄlicenses
+    ³       ³   ³       LICENSE
+    ³       ³   ³       
+    ³       ³   ÀÄÄÄsboms
+    ³       ³           watchfiles_rust_notify.cyclonedx.json
+    ³       ³           
+    ³       ÃÄÄÄwebsockets
+    ³       ³   ³   auth.py
+    ³       ³   ³   cli.py
+    ³       ³   ³   client.py
+    ³       ³   ³   connection.py
+    ³       ³   ³   datastructures.py
+    ³       ³   ³   exceptions.py
+    ³       ³   ³   frames.py
+    ³       ³   ³   headers.py
+    ³       ³   ³   http11.py
+    ³       ³   ³   imports.py
+    ³       ³   ³   protocol.py
+    ³       ³   ³   proxy.py
+    ³       ³   ³   py.typed
+    ³       ³   ³   server.py
+    ³       ³   ³   speedups.c
+    ³       ³   ³   speedups.cp314-win_amd64.pyd
+    ³       ³   ³   speedups.pyi
+    ³       ³   ³   streams.py
+    ³       ³   ³   typing.py
+    ³       ³   ³   uri.py
+    ³       ³   ³   utils.py
+    ³       ³   ³   version.py
+    ³       ³   ³   __init__.py
+    ³       ³   ³   __main__.py
+    ³       ³   ³   
+    ³       ³   ÃÄÄÄasyncio
+    ³       ³   ³   ³   client.py
+    ³       ³   ³   ³   connection.py
+    ³       ³   ³   ³   messages.py
+    ³       ³   ³   ³   router.py
+    ³       ³   ³   ³   server.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           client.cpython-314.pyc
+    ³       ³   ³           connection.cpython-314.pyc
+    ³       ³   ³           messages.cpython-314.pyc
+    ³       ³   ³           router.cpython-314.pyc
+    ³       ³   ³           server.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄextensions
+    ³       ³   ³   ³   base.py
+    ³       ³   ³   ³   permessage_deflate.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           base.cpython-314.pyc
+    ³       ³   ³           permessage_deflate.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄlegacy
+    ³       ³   ³   ³   auth.py
+    ³       ³   ³   ³   client.py
+    ³       ³   ³   ³   exceptions.py
+    ³       ³   ³   ³   framing.py
+    ³       ³   ³   ³   handshake.py
+    ³       ³   ³   ³   http.py
+    ³       ³   ³   ³   protocol.py
+    ³       ³   ³   ³   server.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           auth.cpython-314.pyc
+    ³       ³   ³           client.cpython-314.pyc
+    ³       ³   ³           exceptions.cpython-314.pyc
+    ³       ³   ³           framing.cpython-314.pyc
+    ³       ³   ³           handshake.cpython-314.pyc
+    ³       ³   ³           http.cpython-314.pyc
+    ³       ³   ³           protocol.cpython-314.pyc
+    ³       ³   ³           server.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄsync
+    ³       ³   ³   ³   client.py
+    ³       ³   ³   ³   connection.py
+    ³       ³   ³   ³   messages.py
+    ³       ³   ³   ³   router.py
+    ³       ³   ³   ³   server.py
+    ³       ³   ³   ³   utils.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           client.cpython-314.pyc
+    ³       ³   ³           connection.cpython-314.pyc
+    ³       ³   ³           messages.cpython-314.pyc
+    ³       ³   ³           router.cpython-314.pyc
+    ³       ³   ³           server.cpython-314.pyc
+    ³       ³   ³           utils.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÃÄÄÄtrio
+    ³       ³   ³   ³   client.py
+    ³       ³   ³   ³   connection.py
+    ³       ³   ³   ³   messages.py
+    ³       ³   ³   ³   router.py
+    ³       ³   ³   ³   server.py
+    ³       ³   ³   ³   utils.py
+    ³       ³   ³   ³   __init__.py
+    ³       ³   ³   ³   
+    ³       ³   ³   ÀÄÄÄ__pycache__
+    ³       ³   ³           client.cpython-314.pyc
+    ³       ³   ³           connection.cpython-314.pyc
+    ³       ³   ³           messages.cpython-314.pyc
+    ³       ³   ³           router.cpython-314.pyc
+    ³       ³   ³           server.cpython-314.pyc
+    ³       ³   ³           utils.cpython-314.pyc
+    ³       ³   ³           __init__.cpython-314.pyc
+    ³       ³   ³           
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           auth.cpython-314.pyc
+    ³       ³           cli.cpython-314.pyc
+    ³       ³           client.cpython-314.pyc
+    ³       ³           connection.cpython-314.pyc
+    ³       ³           datastructures.cpython-314.pyc
+    ³       ³           exceptions.cpython-314.pyc
+    ³       ³           frames.cpython-314.pyc
+    ³       ³           headers.cpython-314.pyc
+    ³       ³           http11.cpython-314.pyc
+    ³       ³           imports.cpython-314.pyc
+    ³       ³           protocol.cpython-314.pyc
+    ³       ³           proxy.cpython-314.pyc
+    ³       ³           server.cpython-314.pyc
+    ³       ³           streams.cpython-314.pyc
+    ³       ³           typing.cpython-314.pyc
+    ³       ³           uri.cpython-314.pyc
+    ³       ³           utils.cpython-314.pyc
+    ³       ³           version.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           __main__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄwebsockets-17.0.dist-info
+    ³       ³   ³   entry_points.txt
+    ³       ³   ³   INSTALLER
+    ³       ³   ³   METADATA
+    ³       ³   ³   RECORD
+    ³       ³   ³   top_level.txt
+    ³       ³   ³   WHEEL
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄlicenses
+    ³       ³           LICENSE
+    ³       ³           
+    ³       ÃÄÄÄyaml
+    ³       ³   ³   composer.py
+    ³       ³   ³   constructor.py
+    ³       ³   ³   cyaml.py
+    ³       ³   ³   dumper.py
+    ³       ³   ³   emitter.py
+    ³       ³   ³   error.py
+    ³       ³   ³   events.py
+    ³       ³   ³   loader.py
+    ³       ³   ³   nodes.py
+    ³       ³   ³   parser.py
+    ³       ³   ³   reader.py
+    ³       ³   ³   representer.py
+    ³       ³   ³   resolver.py
+    ³       ³   ³   scanner.py
+    ³       ³   ³   serializer.py
+    ³       ³   ³   tokens.py
+    ³       ³   ³   _yaml.cp314-win_amd64.pyd
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           composer.cpython-314.pyc
+    ³       ³           constructor.cpython-314.pyc
+    ³       ³           cyaml.cpython-314.pyc
+    ³       ³           dumper.cpython-314.pyc
+    ³       ³           emitter.cpython-314.pyc
+    ³       ³           error.cpython-314.pyc
+    ³       ³           events.cpython-314.pyc
+    ³       ³           loader.cpython-314.pyc
+    ³       ³           nodes.cpython-314.pyc
+    ³       ³           parser.cpython-314.pyc
+    ³       ³           reader.cpython-314.pyc
+    ³       ³           representer.cpython-314.pyc
+    ³       ³           resolver.cpython-314.pyc
+    ³       ³           scanner.cpython-314.pyc
+    ³       ³           serializer.cpython-314.pyc
+    ³       ³           tokens.cpython-314.pyc
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÃÄÄÄ_yaml
+    ³       ³   ³   __init__.py
+    ³       ³   ³   
+    ³       ³   ÀÄÄÄ__pycache__
+    ³       ³           __init__.cpython-314.pyc
+    ³       ³           
+    ³       ÀÄÄÄ__pycache__
+    ³               six.cpython-314.pyc
+    ³               typing_extensions.cpython-314.pyc
+    ³               
+    ÀÄÄÄScripts
+            activate
+            activate.bat
+            activate.fish
+            Activate.ps1
+            alembic.exe
+            deactivate.bat
+            dotenv.exe
+            fastapi.exe
+            idna.exe
+            mako-render.exe
+            pip.exe
+            pip3.14.exe
+            pip3.exe
+            pyrsa-decrypt.exe
+            pyrsa-encrypt.exe
+            pyrsa-keygen.exe
+            pyrsa-priv2pub.exe
+            pyrsa-sign.exe
+            pyrsa-verify.exe
+            python.exe
+            pythonw.exe
+            uvicorn.exe
+            watchfiles.exe
+            websockets.exe
+            

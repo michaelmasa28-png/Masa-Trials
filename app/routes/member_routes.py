@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime, date
 
 from app.dependencies import get_current_admin
+from app.auth import hash_password
 from app.models import Admin
 from app.database import SessionLocal
 from app.models import Member, Attendance
@@ -24,6 +25,63 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+# ==========================================
+# SERIALIZE MEMBER
+# Converts a Member ORM object into a plain
+# dict so FastAPI can return it as JSON
+# ==========================================
+
+def serialize_member(member: Member):
+    return {
+        "id": member.id,
+        "member_number": member.member_number,
+        "system_id": member.system_id,
+        "username": member.username,
+        "full_name": member.full_name,
+        "phone": member.phone,
+        "gender": member.gender,
+        "date_of_birth": (
+            member.date_of_birth.isoformat()
+            if member.date_of_birth else None
+        ),
+        "email": member.email,
+        "national_id": member.national_id,
+        "occupation": member.occupation,
+        "marital_status": member.marital_status,
+        "address": member.address,
+        "emergency_contact": member.emergency_contact,
+        "emergency_phone": member.emergency_phone,
+        "ministry": member.ministry,
+        "baptism_status": member.baptism_status,
+        "baptism_date": (
+            member.baptism_date.isoformat()
+            if member.baptism_date else None
+        ),
+        "status": member.status,
+        "is_active": member.is_active,
+        "profile_completed": member.profile_completed,
+        "approved_by": member.approved_by,
+        "approved_at": (
+            member.approved_at.isoformat()
+            if member.approved_at else None
+        ),
+        "rejected_reason": member.rejected_reason,
+        "online": member.online,
+        "last_seen": (
+            member.last_seen.isoformat()
+            if member.last_seen else None
+        ),
+        "last_login": (
+            member.last_login.isoformat()
+            if member.last_login else None
+        ),
+        "created_at": (
+            member.created_at.isoformat()
+            if member.created_at else None
+        )
+    }
 
 
 # ==========================================
@@ -77,12 +135,8 @@ def get_members(
     return {
         "success": True,
         "total": len(members),
-        "members": members
+        "members": [serialize_member(m) for m in members]
     }
-
-
-# ==========================================
-# GET ONE MEMBER
 # ==========================================
 @router.post("/member/login")
 def member_login(
@@ -170,7 +224,7 @@ def get_member(
 
     return {
         "success": True,
-        "member": member
+        "member": serialize_member(member)
     }
 
 
@@ -192,7 +246,7 @@ def pending_members(
     return {
         "success": True,
         "total": len(members),
-        "members": members
+        "members": [serialize_member(m) for m in members]
     }
 
 
@@ -214,7 +268,7 @@ def approved_members(
     return {
         "success": True,
         "total": len(members),
-        "members": members
+        "members": [serialize_member(m) for m in members]
     }
 
 @router.post("/member/activate")
@@ -281,7 +335,7 @@ def active_members(
     return {
         "success": True,
         "total": len(members),
-        "members": members
+        "members": [serialize_member(m) for m in members]
     }
 
 @router.put("/member/{member_id}/approve")
