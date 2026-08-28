@@ -271,9 +271,12 @@ function processDetections(predictions){
         }
 
         // 4) ROBUST CROSSING DETECTION (side-consistent, trajectory-based)
-        // Maintain a short history of which side the centroid was on. A real
-        // crossing is only counted when the person is clearly on the OLD side,
-        // then clearly on the NEW side, with the line crossed in between.
+        // Every confirmed crossing of the CENTER line is counted by direction:
+        //   OUT -> IN  : "Entered" (person walks into view / passes the line)
+        //   IN -> OUT  : "Exited"  (person crosses back the opposite direction)
+        // The trajectory + re-entry cooldown guarantee a single crossing is
+        // never counted twice, so each clear pass of the line is exactly one
+        // enter or one exit.
         if(track.seen >= CONFIRM_FRAMES){
             const cur = track.zone;
             if(cur){
@@ -291,26 +294,23 @@ function processDetections(predictions){
                     // side changed: only commit once seen consistently on new side
                     track.sideCount++;
                     if(track.sideCount >= SIDE_FRAMES){
-                        // actual committed transition OUT->IN  (a person entering)
-                        if(track.side === "OUT" && cur === "IN"){
-                            if(!track.entered && track.crossCool === 0){
-                                // confirm we really came from the other side in history
-                                const hist = track.hist;
-                                const oldCount = hist.slice(0, CROSS_REQUIRE_OLD).filter(s => s === "OUT").length;
-                                const newCount = hist.slice(-CROSS_REQUIRE_NEW).filter(s => s === "IN").length;
-                                if(oldCount >= CROSS_REQUIRE_OLD && newCount >= CROSS_REQUIRE_NEW){
-                                    track.entered = true;
-                                    track.crossCool = REENTRY_COOLDOWN;
-                                    if(!enteredIds.has(trackId)){
-                                        enteredIds.add(trackId);
-                                        enteredCount++;
-                                    }
+                        // history confirms we truly came from the other side
+                        const hist = track.hist;
+                        // OUT -> IN : ENTERED
+                        if(track.side === "OUT" && cur === "IN" && track.crossCool === 0){
+                            const oldCount = hist.slice(0, CROSS_REQUIRE_OLD).filter(s => s === "OUT").length;
+                            const newCount = hist.slice(-CROSS_REQUIRE_NEW).filter(s => s === "IN").length;
+                            if(oldCount >= CROSS_REQUIRE_OLD && newCount >= CROSS_REQUIRE_NEW){
+                                track.entered = true;
+                                track.crossCool = REENTRY_COOLDOWN;
+                                if(!enteredIds.has(trackId)){
+                                    enteredIds.add(trackId);
                                 }
+                                enteredCount++;
                             }
                         }
-                        // IN->OUT : EXITED by this person (only when already counted in)
-                        else if(track.side === "IN" && cur === "OUT" && !track.exited && track.crossCool === 0){
-                            const hist = track.hist;
+                        // IN -> OUT : EXITED (person crossed back the opposite direction)
+                        else if(track.side === "IN" && cur === "OUT" && track.crossCool === 0){
                             const oldCount = hist.slice(0, CROSS_REQUIRE_OLD).filter(s => s === "IN").length;
                             const newCount = hist.slice(-CROSS_REQUIRE_NEW).filter(s => s === "OUT").length;
                             if(oldCount >= CROSS_REQUIRE_OLD && newCount >= CROSS_REQUIRE_NEW){
