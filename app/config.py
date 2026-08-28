@@ -41,6 +41,18 @@ MPESA_PASSKEY = os.getenv("MPESA_PASSKEY", "")
 MPESA_CALLBACK_URL = os.getenv("MPESA_CALLBACK_URL", "")
 MPESA_CALLBACK_SECRET = os.getenv("MPESA_CALLBACK_SECRET", "")
 
+# ===========================================
+# CLOUDINARY IMAGE HOSTING + CDN
+# Uploads go to Cloudinary when configured (free tier).
+# Falls back to local disk otherwise (local dev).
+# ===========================================
+CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_CLOUD_NAME", "")
+CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY", "")
+CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET", "")
+CLOUDINARY_FOLDER = os.getenv(
+    "CLOUDINARY_FOLDER", "churchweb"
+).strip("/")
+
 
 class Settings:
     DATABASE_URL = DATABASE_URL
@@ -58,6 +70,10 @@ class Settings:
     MPESA_CALLBACK_SECRET = MPESA_CALLBACK_SECRET
 
     CORS_ORIGINS = CORS_ORIGINS
+
+    CLOUDINARY_CLOUD_NAME = CLOUDINARY_CLOUD_NAME
+    CLOUDINARY_API_KEY = CLOUDINARY_API_KEY
+    CLOUDINARY_API_SECRET = CLOUDINARY_API_SECRET
 
 
 settings = Settings()

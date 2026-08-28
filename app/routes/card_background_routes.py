@@ -1,6 +1,4 @@
 import os
-import shutil
-import uuid
 import time
 
 from fastapi import APIRouter, Depends, UploadFile, File, Form
@@ -9,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.dependencies import get_current_admin
 from app.models import CardBackground, Admin
+from app.services import storage
 
 router = APIRouter(
     prefix="/api/card-backgrounds",
@@ -78,14 +77,11 @@ async def upload_card_background(
         }
 
     # Save new image
-    ext = os.path.splitext(image.filename or "")[1] or ".jpg"
-    filename = f"{card_key}_{uuid.uuid4().hex}{ext}"
-    filepath = os.path.join(UPLOAD_DIR, filename)
-
-    with open(filepath, "wb") as buffer:
-        shutil.copyfileobj(image.file, buffer)
-
-    image_url = f"/uploads/cards/{filename}"
+    image_url = storage.upload_file_object(
+        image,
+        "uploads/cards",
+        optimize_images=True,
+    )
 
     # Delete old image if exists
     existing = db.query(CardBackground).filter(
@@ -93,11 +89,9 @@ async def upload_card_background(
     ).first()
 
     if existing:
-        # Remove old file from disk
+        # Remove old file from storage (local and/or R2)
         if existing.image_url:
-            old_path = os.path.join("public", existing.image_url.lstrip("/"))
-            if os.path.exists(old_path):
-                os.remove(old_path)
+            storage.delete_upload(existing.image_url)
         existing.image_url = image_url
         existing.updated_by = current_admin.id
     else:
@@ -140,11 +134,9 @@ def delete_card_background(
             "message": "No background found for this card."
         }
 
-    # Remove file from disk
+    # Remove file from storage (local and/or R2)
     if existing.image_url:
-        old_path = os.path.join("public", existing.image_url.lstrip("/"))
-        if os.path.exists(old_path):
-            os.remove(old_path)
+        storage.delete_upload(existing.image_url)
 
     db.delete(existing)
     db.commit()

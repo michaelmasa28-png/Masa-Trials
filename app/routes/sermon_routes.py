@@ -1,6 +1,3 @@
-import os
-import shutil
-import uuid
 from datetime import date
 
 from fastapi import (
@@ -21,6 +18,7 @@ from app.utils import (
     ALLOWED_IMAGE_TYPES, ALLOWED_VIDEO_TYPES, ALLOWED_PDF_TYPES,
 )
 from app.schema import SermonCreate, SermonResponse
+from app.services import storage
 
 
 router = APIRouter(
@@ -116,30 +114,21 @@ async def create_sermon(
 
     if thumbnail:
         await validate_upload(thumbnail, MAX_IMAGE_SIZE, ALLOWED_IMAGE_TYPES, "Thumbnail")
-
-        filename = f"{uuid.uuid4()}_{thumbnail.filename}"
-
-        filepath = f"public/uploads/sermons/images/{filename}"
-
-        with open(filepath, "wb") as buffer:
-            shutil.copyfileobj(thumbnail.file, buffer)
-
-        thumbnail_path = f"/uploads/sermons/images/{filename}"
+        thumbnail_path = storage.upload_file_object(
+            thumbnail,
+            "uploads/sermons/images",
+            optimize_images=True,
+        )
     # -------------------------
     # Video
     # -------------------------
 
     if video_file:
         await validate_upload(video_file, MAX_VIDEO_SIZE, ALLOWED_VIDEO_TYPES, "Video")
-
-        filename = f"{uuid.uuid4()}_{video_file.filename}"
-
-        filepath = f"public/uploads/sermons/videos/{filename}"
-
-        with open(filepath, "wb") as buffer:
-            shutil.copyfileobj(video_file.file, buffer)
-
-        video_path = f"/uploads/sermons/videos/{filename}"
+        video_path = storage.upload_file_object(
+            video_file,
+            "uploads/sermons/videos",
+        )
 
     # -------------------------
     # Notes PDF
@@ -147,15 +136,10 @@ async def create_sermon(
 
     if notes:
         await validate_upload(notes, MAX_PDF_SIZE, ALLOWED_PDF_TYPES, "Notes")
-
-        filename = f"{uuid.uuid4()}_{notes.filename}"
-
-        filepath = f"public/uploads/sermons/notes/{filename}"
-
-        with open(filepath, "wb") as buffer:
-            shutil.copyfileobj(notes.file, buffer)
-
-        notes_path = f"/uploads/sermons/notes/{filename}"
+        notes_path = storage.upload_file_object(
+            notes,
+            "uploads/sermons/notes",
+        )
 
 
     new_sermon = Sermon(
@@ -239,33 +223,31 @@ async def update_sermon(
     # -------------------------
     if thumbnail and thumbnail.filename:
         await validate_upload(thumbnail, MAX_IMAGE_SIZE, ALLOWED_IMAGE_TYPES, "Thumbnail")
-        filename = f"{uuid.uuid4()}_{thumbnail.filename}"
-        filepath = f"public/uploads/sermons/images/{filename}"
-        with open(filepath, "wb") as buffer:
-            shutil.copyfileobj(thumbnail.file, buffer)
-        sermon.thumbnail = f"/uploads/sermons/images/{filename}"
+        sermon.thumbnail = storage.upload_file_object(
+            thumbnail,
+            "uploads/sermons/images",
+            optimize_images=True,
+        )
 
     # -------------------------
     # Video
     # -------------------------
     if video_file and video_file.filename:
         await validate_upload(video_file, MAX_VIDEO_SIZE, ALLOWED_VIDEO_TYPES, "Video")
-        filename = f"{uuid.uuid4()}_{video_file.filename}"
-        filepath = f"public/uploads/sermons/videos/{filename}"
-        with open(filepath, "wb") as buffer:
-            shutil.copyfileobj(video_file.file, buffer)
-        sermon.video_file = f"/uploads/sermons/videos/{filename}"
+        sermon.video_file = storage.upload_file_object(
+            video_file,
+            "uploads/sermons/videos",
+        )
 
     # -------------------------
     # Notes PDF
     # -------------------------
     if notes and notes.filename:
         await validate_upload(notes, MAX_PDF_SIZE, ALLOWED_PDF_TYPES, "Notes")
-        filename = f"{uuid.uuid4()}_{notes.filename}"
-        filepath = f"public/uploads/sermons/notes/{filename}"
-        with open(filepath, "wb") as buffer:
-            shutil.copyfileobj(notes.file, buffer)
-        sermon.notes_file = f"/uploads/sermons/notes/{filename}"
+        sermon.notes_file = storage.upload_file_object(
+            notes,
+            "uploads/sermons/notes",
+        )
 
 
     db.commit()

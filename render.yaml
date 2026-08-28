@@ -3,7 +3,7 @@ services:
     name: kingdom-ways-cms
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 2
     envVars:
       - key: SECRET_KEY
         generateValue: true
@@ -17,6 +17,12 @@ services:
         value: production
       - key: SEED_ADMIN
         value: "false"
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
 
 databases:
   - name: churchweb-db

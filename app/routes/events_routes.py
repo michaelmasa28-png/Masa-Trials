@@ -4,8 +4,6 @@
 # ============================================
 
 import os
-import shutil
-from uuid import uuid4
 from datetime import date, time, datetime
 from typing import Optional
 
@@ -27,6 +25,7 @@ from app.schema import (
     EventResponse,
     EventListResponse
 )
+from app.services import storage
 
 router = APIRouter(
     prefix="/api/events",
@@ -116,32 +115,17 @@ def create_event(
     attachment_path = None
 
     if banner:
-
-        banner_name = f"{uuid4()}_{banner.filename}"
-        banner_path = f"uploads/events/{banner_name}"
-
-        with open(
-            os.path.join(upload_folder, banner_name),
-            "wb"
-        ) as buffer:
-            shutil.copyfileobj(
-                banner.file,
-                buffer
-            )
+        banner_path = storage.upload_file_object(
+            banner,
+            "uploads/events",
+            optimize_images=True,
+        ).lstrip("/")
 
     if attachment:
-
-        attachment_name = f"{uuid4()}_{attachment.filename}"
-        attachment_path = f"uploads/events/{attachment_name}"
-
-        with open(
-            os.path.join(upload_folder, attachment_name),
-            "wb"
-        ) as buffer:
-            shutil.copyfileobj(
-                attachment.file,
-                buffer
-            )
+        attachment_path = storage.upload_file_object(
+            attachment,
+            "uploads/events",
+        ).lstrip("/")
 
     new_event = Event(
 
@@ -299,21 +283,20 @@ def update_event(
     if banner:
         upload_folder = "public/uploads/events"
         os.makedirs(upload_folder, exist_ok=True)
-        banner_name = f"{uuid4()}_{banner.filename}"
-        banner_path = f"uploads/events/{banner_name}"
-        with open(os.path.join(upload_folder, banner_name), "wb") as buffer:
-            shutil.copyfileobj(banner.file, buffer)
-        event.banner = banner_path
+        event.banner = storage.upload_file_object(
+            banner,
+            "uploads/events",
+            optimize_images=True,
+        ).lstrip("/")
 
 
     if attachment:
         upload_folder = "public/uploads/events"
         os.makedirs(upload_folder, exist_ok=True)
-        attachment_name = f"{uuid4()}_{attachment.filename}"
-        attachment_path = f"uploads/events/{attachment_name}"
-        with open(os.path.join(upload_folder, attachment_name), "wb") as buffer:
-            shutil.copyfileobj(attachment.file, buffer)
-        event.attachment = attachment_path
+        event.attachment = storage.upload_file_object(
+            attachment,
+            "uploads/events",
+        ).lstrip("/")
 
 
 
@@ -345,6 +328,13 @@ def delete_event(
             status_code=404,
             detail="Event not found"
         )
+
+
+    # Remove stored media files
+    if event.banner:
+        storage.delete_upload(event.banner)
+    if event.attachment:
+        storage.delete_upload(event.attachment)
 
 
     db.delete(event)

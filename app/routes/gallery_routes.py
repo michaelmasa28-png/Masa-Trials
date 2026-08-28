@@ -1,7 +1,5 @@
 import logging
 import os
-import shutil
-import uuid
 from datetime import date
 
 from fastapi import (
@@ -20,6 +18,7 @@ from app.dependencies import get_current_admin
 from app.models import Gallery, Admin
 from app.utils import validate_upload, MAX_IMAGE_SIZE, ALLOWED_IMAGE_TYPES
 from app.schema import GalleryResponse
+from app.services import storage
 
 logger = logging.getLogger(__name__)
 
@@ -86,26 +85,11 @@ async def upload_gallery_image(
 
     await validate_upload(image, MAX_IMAGE_SIZE, ALLOWED_IMAGE_TYPES, "Image")
 
-    extension = os.path.splitext(
-        image.filename
-    )[1]
-
-    filename = (
-        str(uuid.uuid4()) +
-        extension
+    image_url = storage.upload_file_object(
+        image,
+        "uploads/gallery",
+        optimize_images=True,
     )
-
-    filepath = os.path.join(
-        UPLOAD_DIR,
-        filename
-    )
-
-    with open(filepath, "wb") as buffer:
-
-        shutil.copyfileobj(
-            image.file,
-            buffer
-        )
 
     gallery = Gallery(
 
@@ -117,7 +101,7 @@ async def upload_gallery_image(
 
         event_date=event_date,
 
-        image=f"/uploads/gallery/{filename}"
+        image=image_url
 
     )
 
@@ -140,11 +124,9 @@ def delete_gallery(id: int, current_admin: Admin = Depends(get_current_admin), d
     if not image:
         raise HTTPException(status_code=404, detail="Image not found")
 
-    # Delete image file from disk
+    # Delete image file from storage (local and/or R2)
     if image.image:
-        file_path = image.image.replace("/uploads/", "public/uploads/")
-        if os.path.exists(file_path):
-            os.remove(file_path)
+        storage.delete_upload(image.image)
 
     # Delete database record
     db.delete(image)

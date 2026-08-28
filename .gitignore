@@ -58,3 +58,7 @@ test_*.py
 camera_test.py
 person_detect.py
 test_hash.txt
+
+# Cloudflare wrangler CLI (contains OAuth token)
+.wrangler/
+.wrangler
