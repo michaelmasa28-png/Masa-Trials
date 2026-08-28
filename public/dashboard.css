@@ -252,6 +252,7 @@ tr:hover{
     z-index:100;
     transition:left .3s ease;
     overflow-y:auto;
+    padding-bottom:40px;
 }
 
 .sidebar.open{
@@ -282,17 +283,68 @@ tr:hover{
 
 }
 
+@media(max-width:768px){
+    .main-content{
+        padding:14px;
+    }
+    .topbar{
+        margin-bottom:16px;
+        flex-direction:row;
+        justify-content:flex-start;
+        gap:12px;
+        text-align:left;
+        padding:14px 16px;
+    }
+    .topbar h1{
+        font-size:18px;
+        flex:1;
+    }
+    .admin{
+        display:none; /* save vertical space on small screens */
+    }
+    .cards{
+        gap:14px;
+        margin-bottom:20px;
+    }
+}
+
 @media(max-width:480px){
     .topbar h1{
-        font-size:16px;
+        font-size:15px;
     }
     .cards{
         grid-template-columns:1fr;
+        gap:12px;
+    }
+    .card{
+        padding:18px;
+    }
+    .card p{
+        font-size:26px;
     }
     .main-content{
-        padding:15px;
+        padding:10px;
     }
     .topbar{
-        padding:15px;
+        padding:12px;
+        border-radius:12px;
+    }
+    .sidebar{
+        width:230px;
+        left:-250px;
+        padding:20px 16px;
+    }
+    .sidebar.open{
+        left:0;
+    }
+    .logo{
+        margin-bottom:24px;
+    }
+    .logo h2{
+        font-size:18px;
+    }
+    .menu a{
+        padding:12px 14px;
+        font-size:14px;
     }
 }

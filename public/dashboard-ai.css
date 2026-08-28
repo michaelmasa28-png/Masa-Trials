@@ -1,5 +1,5 @@
 /* =============================================
-   AI ATTENDANCE CAMERA - dashboard-ai.css
+   CAMERA ATTENDANCE - dashboard-ai.css
 ============================================= */
 
 /* Clickable Attendance card */
@@ -108,21 +108,98 @@
     overflow:hidden;
     background:#000;
     aspect-ratio:16/9;
-    max-height:60vh;
+    max-height:62vh;
 }
 #aiVideo{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
-    
 }
 #aiCanvas{
     position:absolute;
     inset:0;
     width:100%;
     height:100%;
-    
+}
+
+/* Mirror (selfie) mode */
+#aiVideo.mirror{
+    transform:scaleX(-1);
+}
+#aiCanvas.mirror{
+    transform:scaleX(-1);
+}
+.ai-video-wrap.mirror .ai-line,
+.ai-video-wrap.mirror .ai-line-label{
+    transform:translateY(-50%) scaleX(-1);
+}
+
+/* Camera control bar */
+.ai-camcontrol{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+.ai-camselect-wrap{
+    flex:1;
+    min-width:180px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:12px;
+    padding:8px 12px;
+}
+.ai-camselect-label{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:#94a3b8;
+    font-size:12px;
+    white-space:nowrap;
+}
+.ai-camselect{
+    flex:1;
+    background:transparent;
+    color:#e2e8f0;
+    border:none;
+    outline:none;
+    font-family:inherit;
+    font-size:13px;
+    cursor:pointer;
+}
+.ai-camselect option{
+    color:#0f172a;
+}
+.ai-camtool{
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
+    color:#e2e8f0;
+    cursor:pointer;
+    transition:.25s;
+    flex-shrink:0;
+}
+.ai-camtool:hover:not(:disabled){
+    background:rgba(255,255,255,.16);
+}
+.ai-camtool:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+}
+.ai-camtool.active{
+    background:linear-gradient(135deg,#3b82f6,#06b6d4);
+    border-color:transparent;
+    color:#fff;
 }
 
 /* Door line overlay */
@@ -244,4 +321,19 @@
     .ai-counter-icon{ width:36px; height:36px; font-size:15px; }
     .ai-actions{ flex-direction:column; }
     .ai-line-label{ font-size:10px; }
+    /* Taller video on portrait phones fills more of the screen */
+    .ai-video-wrap{
+        aspect-ratio:auto;
+        height:44vh;
+        min-height:260px;
+    }
+    .ai-camselect-wrap{
+        min-width:0;
+        flex:1 1 100%;
+    }
+    .ai-camtool{
+        flex:1;
+        width:auto;
+        height:44px;
+    }
 }

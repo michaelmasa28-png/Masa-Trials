@@ -50,37 +50,155 @@ table tbody tr:hover{
    BUTTONS
 =========================== */
 
-.edit-btn{
+.memberAdd-button{
+    background:#28a745;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    margin-bottom:14px;
+}
+.memberAdd-button:hover{
+    background:#218838;
+}
+.approve-btn{
     background:#0d6efd;
-    color:white;
+    color:#fff;
     border:none;
     padding:8px 14px;
     border-radius:5px;
+    font-size:13px;
+    font-weight:600;
     cursor:pointer;
     margin-right:5px;
 }
-
-.edit-btn:hover{
+.approve-btn:hover{
     background:#0b5ed7;
 }
-
-.delete-btn{
+.reject-btn{
     background:#dc3545;
-    color:white;
+    color:#fff;
     border:none;
     padding:8px 14px;
     border-radius:5px;
+    font-size:13px;
+    font-weight:600;
     cursor:pointer;
 }
-
-.delete-btn:hover{
+.reject-btn:hover{
     background:#bb2d3b;
 }
 
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+/* Large screens: allow the table to breathe and center the photo */
+@media(min-width:1200px){
+    .members-table{
+        padding:28px 32px;
+    }
+    table th,
+    table td{
+        padding:16px 20px;
+    }
+}
+
+/* Tablets / small laptops: keep readable, shrink padding */
+@media(max-width:900px){
+    table th,
+    table td{
+        padding:12px 10px;
+    }
+}
+
+/* Small screens: keep horizontal scroll for wide tables as a fallback */
 @media(max-width:768px) {
-    table {
+    .members-table{
+        padding:14px 12px;
+    }
+    table{
         display: block;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
+    .member-photo{
+        width:40px;
+        height:40px;
+    }
 }
+
+/* Phones: stack each member row as a card so no sideways scrolling
+   and the photo, name and number are all clearly visible */
+@media(max-width:600px){
+    .members-table h2{
+        font-size:20px;
+    }
+    table{
+        display:block;
+        width:100%;
+    }
+    table,
+    table thead,
+    table tbody,
+    table tr,
+    table td{
+        display:block;
+        width:100%;
+    }
+    table thead{
+        display:none; /* headers become the data-label text */
+    }
+    table tbody tr{
+        background:#ffffff;
+        border:1px solid #e2e6ea;
+        border-radius:10px;
+        box-shadow:0 2px 8px rgba(0,0,0,.06);
+        margin-bottom:14px;
+        overflow:hidden;
+    }
+    table tbody tr:hover{
+        background:#ffffff;
+    }
+    table td{
+        border-bottom:1px solid #f0f2f5;
+        padding:10px 14px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:12px;
+        text-align:right;
+    }
+    table td:last-child{
+        border-bottom:none;
+    }
+    table td::before{
+        content:attr(data-label);
+        font-weight:600;
+        color:#1d3557;
+        text-align:left;
+        flex-shrink:0;
+    }
+    table td[data-label="Actions"]{
+        justify-content:space-between;
+        flex-wrap:wrap;
+        row-gap:6px;
+    }
+    .approve-btn,
+    .reject-btn{
+        padding:10px 16px;
+        font-size:14px;
+        margin:0;
+    }
+    .member-photo{
+        width:42px;
+        height:42px;
+    }
+    .member-photo{
+        margin-left:auto;
+    }
+}
+

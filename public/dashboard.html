@@ -10,7 +10,7 @@
     <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- AI Attendance camera styles -->
+    <!-- Camera attendance styles -->
     <link rel="stylesheet" href="dashboard-ai.css">
 </head>
 
@@ -78,10 +78,10 @@
                 <p>5</p>
             </div>
 
-            <div class="card attendance-card" id="attendanceCard" role="button" tabindex="0" title="Open AI Attendance Camera">
+            <div class="card attendance-card" id="attendanceCard" role="button" tabindex="0" title="Open Camera Attendance">
                 <h3>Attendance</h3>
                 <h2 id="attendanceCount">198</h2>
-                <p class="card-hint"><i class="fa-solid fa-video"></i> Tap to open AI camera</p>
+                <p class="card-hint"><i class="fa-solid fa-video"></i> Tap to open camera attendance</p>
             </div>
 
             <div class="card">
@@ -139,7 +139,7 @@
 
 
 <!-- =============================================
-     AI ATTENDANCE CAMERA MODAL
+     CAMERA ATTENDANCE MODAL
 ============================================= -->
 
 <div class="ai-overlay hidden" id="aiOverlay">
@@ -148,7 +148,7 @@
 
         <header class="ai-panel-header">
             <div>
-                <h2><i class="fa-solid fa-camera"></i> AI Attendance</h2>
+                <h2><i class="fa-solid fa-camera"></i> Camera Attendance</h2>
                 <p>Person detection · unique counting · enter/exit</p>
             </div>
             <button class="ai-close" id="aiCloseBtn" type="button" title="Close">
@@ -157,17 +157,35 @@
         </header>
 
         <div class="ai-status" id="aiStatus">
-            Loading AI model&hellip;
+            Loading recognition model&hellip;
         </div>
 
         <div class="ai-stage hidden" id="aiStage">
 
-            <div class="ai-video-wrap">
+            <div class="ai-video-wrap" id="aiVideoWrap">
                 <video id="aiVideo" autoplay playsinline muted></video>
                 <canvas id="aiCanvas"></canvas>
 
                 <div class="ai-line" id="aiLine"></div>
                 <div class="ai-line-label" id="aiLineLabel">DOOR / CROSSING LINE</div>
+            </div>
+
+            <!-- Camera controls: pick a device, toggle flash / mirror -->
+            <div class="ai-camcontrol">
+                <div class="ai-camselect-wrap">
+                    <label class="ai-camselect-label" for="aiCameraSelect">
+                        <i class="fa-solid fa-camera-retro"></i> Camera
+                    </label>
+                    <select id="aiCameraSelect" class="ai-camselect">
+                        <option value="auto">Auto (default)</option>
+                    </select>
+                </div>
+                <button class="ai-camtool" id="aiFlashBtn" type="button" title="Flashlight / torch" disabled>
+                    <i class="fa-solid fa-bolt"></i>
+                </button>
+                <button class="ai-camtool" id="aiMirrorBtn" type="button" title="Mirror (selfie view)">
+                    <i class="fa-solid fa-arrows-left-right-to-line"></i>
+                </button>
             </div>
 
             <!-- Live counters -->
@@ -209,7 +227,7 @@
         </div>
 
         <div class="ai-note">
-            Runs on this device with TensorFlow.js. People are tracked by unique ID so no one is counted twice.
+            Runs on this device — no internet needed. People are tracked by unique ID so no one is counted twice.
         </div>
 
     </div>
@@ -217,11 +235,11 @@
 </div>
 
 
-<!-- TensorFlow.js + Coco-SSD -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js"></script>
+<!-- TensorFlow.js + Coco-SSD (local, works offline) -->
+<script src="vendor/tf.min.js"></script>
+<script src="vendor/coco-ssd.min.js"></script>
 
-<!-- AI Attendance logic -->
+<!-- Camera attendance logic -->
 <script src="dashboard-ai.js"></script>
 
 </body>
