@@ -2,18 +2,10 @@ from datetime import date, datetime, timedelta, timezone
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app.database import SessionLocal
+from app.database import get_db
 from app.models import Member, Attendance
 
 router = APIRouter(tags=["Attendance"])
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.get("/attendance/today")
 def attendance_today(db: Session = Depends(get_db)):
@@ -41,11 +33,7 @@ def attendance_today(db: Session = Depends(get_db)):
         for item in attendance
     }
 
-    online_limit = (
-        datetime.now(timezone.utc)
-        .astimezone()
-        - timedelta(minutes=5)
-    )
+    online_limit = datetime.now(timezone.utc) - timedelta(minutes=5)
 
     for member in approved_members:
 

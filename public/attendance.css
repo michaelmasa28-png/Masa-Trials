@@ -499,3 +499,11 @@ input{
 
 
 }
+
+@media(max-width:768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}

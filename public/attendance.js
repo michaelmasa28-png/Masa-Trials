@@ -66,7 +66,7 @@ async function loadApprovedCount(){
     try{
 
         const response =
-        await fetch("/api/members/approved/count");
+        await fetch("/members/approved/count");
 
 
         const data =

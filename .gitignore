@@ -1,5 +1,60 @@
+# Environment
 .env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+myenv/
+
+# Database
 *.dump
 *.sql
-__pycache__/
-venv/
+*.sqlite3
+*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backups
+*.save
+*.backup
+
+# Uploads (user-generated content)
+public/uploads/
+uploads/
+
+# Logs
+*.log
+
+# Machine learning / model files
+*.pt
+*.onnx
+*.pkl
+*.joblib
+
+# Temporary / test files
+*_test.py
+test_*.py
+camera_test.py
+person_detect.py
+test_hash.txt

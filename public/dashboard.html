@@ -6,6 +6,12 @@
     <title>Church Management Dashboard</title>
 
     <link rel="stylesheet" href="dashboard.css">
+
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AI Attendance camera styles -->
+    <link rel="stylesheet" href="dashboard-ai.css">
 </head>
 
 <body>
@@ -35,11 +41,17 @@
 
     </aside>
 
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <!-- Main Content -->
     <main class="main-content">
 
         <!-- Top Bar -->
         <header class="topbar">
+
+            <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
 
             <div>
                 <h1>KINGDOMWAYS MANAGEMENT  DASHBOARD</h1>
@@ -66,9 +78,10 @@
                 <p>5</p>
             </div>
 
-            <div class="card">
+            <div class="card attendance-card" id="attendanceCard" role="button" tabindex="0" title="Open AI Attendance Camera">
                 <h3>Attendance</h3>
-                <p>198</p>
+                <h2 id="attendanceCount">198</h2>
+                <p class="card-hint"><i class="fa-solid fa-video"></i> Tap to open AI camera</p>
             </div>
 
             <div class="card">
@@ -123,6 +136,93 @@
 
 
 <script src="dashboard.js"></script>
+
+
+<!-- =============================================
+     AI ATTENDANCE CAMERA MODAL
+============================================= -->
+
+<div class="ai-overlay hidden" id="aiOverlay">
+
+    <div class="ai-panel">
+
+        <header class="ai-panel-header">
+            <div>
+                <h2><i class="fa-solid fa-camera"></i> AI Attendance</h2>
+                <p>Person detection · unique counting · enter/exit</p>
+            </div>
+            <button class="ai-close" id="aiCloseBtn" type="button" title="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </header>
+
+        <div class="ai-status" id="aiStatus">
+            Loading AI model&hellip;
+        </div>
+
+        <div class="ai-stage hidden" id="aiStage">
+
+            <div class="ai-video-wrap">
+                <video id="aiVideo" autoplay playsinline muted></video>
+                <canvas id="aiCanvas"></canvas>
+
+                <div class="ai-line" id="aiLine"></div>
+                <div class="ai-line-label" id="aiLineLabel">DOOR / CROSSING LINE</div>
+            </div>
+
+            <!-- Live counters -->
+            <div class="ai-counters">
+                <div class="ai-counter">
+                    <span class="ai-counter-icon in"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+                    <div>
+                        <small>Entered</small>
+                        <b id="aiEntered">0</b>
+                    </div>
+                </div>
+
+                <div class="ai-counter">
+                    <span class="ai-counter-icon out"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
+                    <div>
+                        <small>Exited</small>
+                        <b id="aiExited">0</b>
+                    </div>
+                </div>
+
+                <div class="ai-counter">
+                    <span class="ai-counter-icon unique"><i class="fa-solid fa-user-check"></i></span>
+                    <div>
+                        <small>Unique</small>
+                        <b id="aiUnique">0</b>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ai-actions">
+            <button class="ai-start" id="aiStartBtn" type="button">
+                <i class="fa-solid fa-video"></i> Start Camera
+            </button>
+            <button class="ai-save hidden" id="aiSaveBtn" type="button" disabled>
+                <i class="fa-solid fa-floppy-disk"></i> Save to Dashboard
+            </button>
+        </div>
+
+        <div class="ai-note">
+            Runs on this device with TensorFlow.js. People are tracked by unique ID so no one is counted twice.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TensorFlow.js + Coco-SSD -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js"></script>
+
+<!-- AI Attendance logic -->
+<script src="dashboard-ai.js"></script>
 
 </body>
 </html>

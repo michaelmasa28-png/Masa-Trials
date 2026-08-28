@@ -61,6 +61,70 @@ body{
     transform:translateX(8px);
 }
 
+/* Sidebar Toggle Button */
+.sidebar-toggle{
+    display:none;
+    position:relative;
+    width:44px;
+    height:40px;
+    background:none;
+    border:2px solid #2563eb;
+    border-radius:8px;
+    cursor:pointer;
+    padding:0;
+    transition:.3s;
+    flex-shrink:0;
+}
+
+.sidebar-toggle:hover{
+    background:#e0e7ff;
+}
+
+.sidebar-toggle span{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    width:24px;
+    height:3px;
+    background:#2563eb;
+    border-radius:3px;
+    transition:.3s;
+    display:block;
+}
+
+.sidebar-toggle span:nth-child(1){ top:9px; }
+.sidebar-toggle span:nth-child(2){ top:18px; }
+.sidebar-toggle span:nth-child(3){ top:27px; }
+
+.sidebar-toggle.open span:nth-child(1){
+    top:18px;
+    transform:translateX(-50%) rotate(45deg);
+}
+
+.sidebar-toggle.open span:nth-child(2){
+    opacity:0;
+}
+
+.sidebar-toggle.open span:nth-child(3){
+    top:18px;
+    transform:translateX(-50%) rotate(-45deg);
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:90;
+    opacity:0;
+    transition:opacity .3s;
+}
+
+.sidebar-overlay.active{
+    opacity:1;
+}
+
 /* Main */
 .main-content{
     flex:1;
@@ -175,12 +239,27 @@ tr:hover{
 /* Responsive */
 @media(max-width:900px){
 
-.dashboard{
-    flex-direction:column;
+.sidebar-toggle{
+    display:block;
 }
 
 .sidebar{
-    width:100%;
+    position:fixed;
+    top:0;
+    left:-280px;
+    width:260px;
+    height:100vh;
+    z-index:100;
+    transition:left .3s ease;
+    overflow-y:auto;
+}
+
+.sidebar.open{
+    left:0;
+}
+
+.sidebar-overlay{
+    display:block;
 }
 
 .topbar{
@@ -189,8 +268,31 @@ tr:hover{
     text-align:center;
 }
 
+.topbar > div:first-of-type{
+    text-align:center;
+}
+
 .admin{
     text-align:left;
 }
 
+.main-content{
+    width:100%;
+}
+
+}
+
+@media(max-width:480px){
+    .topbar h1{
+        font-size:16px;
+    }
+    .cards{
+        grid-template-columns:1fr;
+    }
+    .main-content{
+        padding:15px;
+    }
+    .topbar{
+        padding:15px;
+    }
 }

@@ -1688,3 +1688,230 @@ footer{
 /* ==========================
    END OF BTN.CSS
 ===================================================== */
+
+/* =====================================================
+   PREMIUM POLISH OVERLAY
+   Cooler, more modern look while keeping everything clear
+===================================================== */
+
+/* --------------------------
+   BRAND HEADER & CENTER
+-------------------------- */
+body{
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+}
+
+.brand-header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:6px;
+    margin:0 auto 34px;
+    text-align:center;
+    max-width:700px;
+    z-index:5;
+}
+
+.button-container{
+    margin:0 auto;
+}
+
+.brand-church-name{
+    font-size:clamp(1.9rem, 5vw, 3rem);
+    font-weight:800;
+    letter-spacing:8px;
+    color:#fff;
+    background:linear-gradient(135deg,#ffffff,#ffd95c,#ffffff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:0 6px 24px rgba(212,175,55,.35);
+    filter:drop-shadow(0 4px 12px rgba(0,0,0,.35));
+}
+
+.brand-tagline{
+    color:rgba(255,255,255,.75);
+    font-size:.95rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-weight:500;
+}
+
+/* --------------------------
+   CONTAINER - wider so cards are not narrow
+-------------------------- */
+.button-container{
+    max-width:1280px;
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+    gap:38px;
+}
+
+/* --------------------------
+   CARDS - glassmorphism
+   Wide, frosted, see-through glass look
+-------------------------- */
+#signup,
+#signin{
+    background:
+        linear-gradient(150deg, rgba(255,255,255,.14), rgba(255,255,255,.05));
+    backdrop-filter:blur(22px) saturate(150%);
+    -webkit-backdrop-filter:blur(22px) saturate(150%);
+    border:1px solid rgba(255,255,255,.28);
+    border-radius:26px;
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,.06) inset,
+        0 40px 80px rgba(0,0,0,.35),
+        0 0 50px rgba(212,175,55,.10);
+}
+
+#signup::before,
+#signin::before{
+    height:6px;
+    background:linear-gradient(90deg,#103B73,#D4AF37,#FFD95C,#D4AF37,#103B73);
+    background-size:200% 100%;
+    animation:accentSlide 6s linear infinite;
+}
+
+@keyframes accentSlide{
+    0%{ background-position:0% 0; }
+    100%{ background-position:200% 0; }
+}
+
+#signup::after,
+#signin::after{
+    width:240px;
+    height:240px;
+    background:radial-gradient(circle, rgba(212,175,55,.10), transparent 68%);
+    right:-90px;
+    top:-90px;
+}
+
+/* --------------------------
+   HEADINGS - cool gradient
+-------------------------- */
+#signup h1,
+#signin h2{
+    background:linear-gradient(135deg,#ffffff,#FFD95C);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:0 4px 18px rgba(0,0,0,.3);
+}
+
+#signup h1::after,
+#signin h2::after{
+    width:78px;
+    height:5px;
+    border-radius:100px;
+    background:linear-gradient(90deg,#D4AF37,#FFD95C);
+}
+
+#signup p,
+#signin p{
+    color:rgba(255,255,255,.8);
+}
+
+label{
+    color:#fff;
+    font-weight:600;
+    text-shadow:0 1px 4px rgba(0,0,0,.3);
+}
+
+/* --------------------------
+   INPUTS - premium glass fields
+-------------------------- */
+input{
+    height:58px;
+    border-radius:16px;
+    border:2px solid rgba(255,255,255,.28);
+    background:rgba(255,255,255,.12);
+    color:#fff;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.15) inset,
+        0 4px 14px rgba(0,0,0,.08);
+    transition:all .3s ease;
+}
+
+input::placeholder{
+    color:rgba(255,255,255,.55);
+}
+
+input:hover{
+    border-color:rgba(255,255,255,.42);
+    background:rgba(255,255,255,.16);
+}
+
+input:focus{
+    border-color:var(--secondary);
+    background:rgba(255,255,255,.18);
+    box-shadow:
+        0 0 0 5px rgba(212,175,55,.16),
+        0 8px 24px rgba(0,0,0,.2);
+    transform:translateY(-2px);
+}
+
+input:-webkit-autofill{
+    -webkit-box-shadow:0 0 0 1000px rgba(255,255,255,.15) inset;
+    -webkit-text-fill-color:#fff;
+    transition:background-color 5000s ease-in-out 0s;
+}
+
+/* --------------------------
+   BUTTONS - cool gradient + shine
+-------------------------- */
+button{
+    border-radius:18px;
+    background:linear-gradient(135deg,#D4AF37,#E9BF3E 45%,#B8860B);
+    font-size:16.5px;
+    box-shadow:
+        0 12px 28px rgba(184,134,11,.35),
+        inset 0 1px 0 rgba(255,255,255,.4);
+    letter-spacing:.6px;
+    text-transform:uppercase;
+}
+
+button::before{
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
+}
+
+button:hover{
+    background:linear-gradient(135deg,#E0BE44,#F0C94C 45%,#C69A1D);
+    box-shadow:
+        0 20px 40px rgba(184,134,11,.42),
+        inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+/* --------------------------
+   FOOTER
+-------------------------- */
+footer{
+    color:rgba(255,255,255,.8);
+}
+
+footer span{
+    color:#FFD95C;
+}
+
+/* --------------------------
+   RESPONSIVE - brand header
+-------------------------- */
+@media(max-width:768px){
+    .brand-header{
+        margin-bottom:24px;
+    }
+    .brand-church-name{
+        letter-spacing:5px;
+    }
+    .brand-tagline{
+        font-size:.8rem;
+        letter-spacing:1px;
+    }
+}

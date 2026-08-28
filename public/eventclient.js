@@ -119,7 +119,7 @@ function createEventCard(event) {
         <img
             class="event-image"
             src="${image}"
-            onerror="this.src='images/default-event.jpg'"
+            onerror="this.onerror=null;this.src='images/default-event.jpg'"
         >
 
         <div class="event-content">

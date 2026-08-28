@@ -48,7 +48,7 @@ function logoutMember(){
     );
 
 
-    window.location.href = "/login.html";
+    window.location.href = "login.html";
 
 }
 
@@ -62,7 +62,7 @@ function requireMemberLogin(){
 
     if(!member){
 
-        window.location.href="/login.html";
+        window.location.href="login.html";
 
         return false;
 

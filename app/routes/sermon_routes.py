@@ -1,9 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
-
 import os
 import shutil
 import uuid
+from datetime import date
 
 from fastapi import (
     APIRouter,
@@ -13,8 +11,15 @@ from fastapi import (
     File,
     Form
 )
+from sqlalchemy.orm import Session
 from app.database import get_db
-from app.models import Sermon
+from app.dependencies import get_current_admin
+from app.models import Sermon, Admin
+from app.utils import (
+    validate_upload,
+    MAX_IMAGE_SIZE, MAX_VIDEO_SIZE, MAX_PDF_SIZE,
+    ALLOWED_IMAGE_TYPES, ALLOWED_VIDEO_TYPES, ALLOWED_PDF_TYPES,
+)
 from app.schema import SermonCreate, SermonResponse
 
 
@@ -72,9 +77,6 @@ def get_sermon(
 # ==========================================
 # CREATE SERMON
 # ==========================================
-# ==========================================
-# CREATE SERMON
-# ==========================================
 
 @router.post("/", response_model=SermonResponse)
 async def create_sermon(
@@ -99,7 +101,8 @@ async def create_sermon(
 
     notes: UploadFile = File(None),
 
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_admin: Admin = Depends(get_current_admin)
 
 ):
 
@@ -107,12 +110,12 @@ async def create_sermon(
     video_path = None
     notes_path = None
 
-
-    # -------------------------
-    # Thumbnail
-    # -------------------------
+    sermon_date_parsed = None
+    if sermon_date:
+        sermon_date_parsed = date.fromisoformat(sermon_date)
 
     if thumbnail:
+        await validate_upload(thumbnail, MAX_IMAGE_SIZE, ALLOWED_IMAGE_TYPES, "Thumbnail")
 
         filename = f"{uuid.uuid4()}_{thumbnail.filename}"
 
@@ -127,26 +130,7 @@ async def create_sermon(
     # -------------------------
 
     if video_file:
-
-        allowed_extensions = (
-            ".mp4",
-            ".webm",
-            ".ogg",
-            ".mov",
-            ".m4v"
-        )
-
-        filename = video_file.filename.lower()
-
-        if not filename.endswith(allowed_extensions):
-
-            raise HTTPException(
-                status_code=400,
-                detail=(
-                    "Unsupported video format. "
-                    "Allowed: MP4, WEBM, OGG, MOV, M4V."
-                )
-            )
+        await validate_upload(video_file, MAX_VIDEO_SIZE, ALLOWED_VIDEO_TYPES, "Video")
 
         filename = f"{uuid.uuid4()}_{video_file.filename}"
 
@@ -162,6 +146,7 @@ async def create_sermon(
     # -------------------------
 
     if notes:
+        await validate_upload(notes, MAX_PDF_SIZE, ALLOWED_PDF_TYPES, "Notes")
 
         filename = f"{uuid.uuid4()}_{notes.filename}"
 
@@ -183,7 +168,7 @@ async def create_sermon(
 
         description=description,
 
-        sermon_date=sermon_date,
+        sermon_date=sermon_date_parsed,
 
         thumbnail=thumbnail_path,
 
@@ -211,10 +196,20 @@ async def create_sermon(
 # ==========================================
 
 @router.put("/{sermon_id}", response_model=SermonResponse)
-def update_sermon(
+async def update_sermon(
     sermon_id: int,
-    sermon_data: SermonCreate,
-    db: Session = Depends(get_db)
+    title: str = Form(...),
+    preacher: str = Form(...),
+    bible_reading: str = Form(None),
+    description: str = Form(None),
+    sermon_date: str = Form(None),
+    youtube_url: str = Form(None),
+    featured: bool = Form(False),
+    thumbnail: UploadFile = File(None),
+    video_file: UploadFile = File(None),
+    notes: UploadFile = File(None),
+    db: Session = Depends(get_db),
+    current_admin: Admin = Depends(get_current_admin)
 ):
 
     sermon = db.query(Sermon).filter(
@@ -229,17 +224,48 @@ def update_sermon(
             detail="Sermon not found"
         )
 
+    sermon.title = title
+    sermon.preacher = preacher
+    sermon.bible_reading = bible_reading
+    sermon.description = description
+    sermon.youtube_url = youtube_url
+    sermon.featured = featured
 
-    sermon.title = sermon_data.title
-    sermon.preacher = sermon_data.preacher
-    sermon.bible_reading = sermon_data.bible_reading
-    sermon.description = sermon_data.description
-    sermon.sermon_date = sermon_data.sermon_date
-    sermon.thumbnail = sermon_data.thumbnail
-    sermon.video_file = sermon_data.video_file
-    sermon.youtube_url = sermon_data.youtube_url
-    sermon.notes_file = sermon_data.notes_file
-    sermon.featured = sermon_data.featured
+    if sermon_date:
+        sermon.sermon_date = date.fromisoformat(sermon_date)
+
+    # -------------------------
+    # Thumbnail
+    # -------------------------
+    if thumbnail and thumbnail.filename:
+        await validate_upload(thumbnail, MAX_IMAGE_SIZE, ALLOWED_IMAGE_TYPES, "Thumbnail")
+        filename = f"{uuid.uuid4()}_{thumbnail.filename}"
+        filepath = f"public/uploads/sermons/images/{filename}"
+        with open(filepath, "wb") as buffer:
+            shutil.copyfileobj(thumbnail.file, buffer)
+        sermon.thumbnail = f"/uploads/sermons/images/{filename}"
+
+    # -------------------------
+    # Video
+    # -------------------------
+    if video_file and video_file.filename:
+        await validate_upload(video_file, MAX_VIDEO_SIZE, ALLOWED_VIDEO_TYPES, "Video")
+        filename = f"{uuid.uuid4()}_{video_file.filename}"
+        filepath = f"public/uploads/sermons/videos/{filename}"
+        with open(filepath, "wb") as buffer:
+            shutil.copyfileobj(video_file.file, buffer)
+        sermon.video_file = f"/uploads/sermons/videos/{filename}"
+
+    # -------------------------
+    # Notes PDF
+    # -------------------------
+    if notes and notes.filename:
+        await validate_upload(notes, MAX_PDF_SIZE, ALLOWED_PDF_TYPES, "Notes")
+        filename = f"{uuid.uuid4()}_{notes.filename}"
+        filepath = f"public/uploads/sermons/notes/{filename}"
+        with open(filepath, "wb") as buffer:
+            shutil.copyfileobj(notes.file, buffer)
+        sermon.notes_file = f"/uploads/sermons/notes/{filename}"
 
 
     db.commit()
@@ -258,7 +284,8 @@ def update_sermon(
 @router.delete("/{sermon_id}")
 def delete_sermon(
     sermon_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_admin: Admin = Depends(get_current_admin)
 ):
 
     sermon = db.query(Sermon).filter(

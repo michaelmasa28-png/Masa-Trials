@@ -86,6 +86,12 @@ function getMemberSession(){
 }
 
 // ======================================================
+// MIGRATE OLD SESSION (must run before validation)
+// ======================================================
+
+migrateOldSession();
+
+// ======================================================
 // SESSION VALIDATION
 // ======================================================
 
@@ -101,13 +107,19 @@ if(!session){
     window.location.href =
     "btn.html";
 
-    throw new Error(
-        "SESSION NOT FOUND"
-    );
+    // Do NOT throw — just stop further init
+    // Return early from an IIFE or set a flag
+    window.__noSession = true;
 
 }
 
-if(Date.now() >= session.expiresAt){
+const __sessionValid = session && session.expiresAt && Date.now() < session.expiresAt;
+
+if(session && !__sessionValid){
+
+    console.log(
+        "SESSION EXPIRED"
+    );
 
     localStorage.removeItem(
         SESSION_KEY
@@ -116,24 +128,24 @@ if(Date.now() >= session.expiresAt){
     window.location.href =
     "btn.html";
 
-    throw new Error(
-        "SESSION EXPIRED"
-    );
+    window.__noSession = true;
 
 }
 
-console.log(
-    "SESSION VERIFIED"
-);
+if(!window.__noSession){
+    console.log(
+        "SESSION VERIFIED"
+    );
+}
 
 // ======================================================
 // WELCOME POPUP
 // ======================================================
 
-if(welcomePopup && memberName){
+if(!window.__noSession && welcomePopup && memberName){
 
     memberName.innerHTML =
-    session.full_name;
+    session.full_name || "Member";
 
     welcomePopup.classList.add(
         "show"
@@ -223,30 +235,7 @@ console.log(
 // ======================================================
 // LOGOUT
 // ======================================================
-
-if(logoutBtn){
-
-    logoutBtn.addEventListener(
-
-        "click",
-
-        ()=>{
-
-            localStorage.removeItem(
-
-                SESSION_KEY
-
-            );
-
-            window.location.href =
-
-            "btn.html";
-
-        }
-
-    );
-
-}
+// Handled in Part 5 (logoutMember + logoutButton)
 
 console.log(
 
@@ -264,19 +253,7 @@ console.log(
 
 const verses = [
 
-    '"I can do all things through Christ who strengthens me." — Philippians 4:13',
-
-    '"The Lord is my Shepherd; I shall not want." — Psalm 23:1',
-
-    '"Trust in the Lord with all your heart." — Proverbs 3:5',
-
-    '"For with God nothing shall be impossible." — Luke 1:37',
-
-    '"Be strong and courageous." — Joshua 1:9',
-
-    '"The joy of the Lord is your strength." — Nehemiah 8:10',
-
-    '"Cast all your anxiety on Him because He cares for you." — 1 Peter 5:7'
+   
 
 ];
 
@@ -298,7 +275,7 @@ verse.style.opacity = "0";
 verse.style.transition =
 "opacity .8s ease";
 
-if(hero){
+if(hero && verses.length > 0){
 
     hero.appendChild(verse);
 
@@ -312,7 +289,7 @@ let currentVerse = 0;
 
 function rotateVerse(){
 
-    if(!hero){
+    if(!hero || !verse || verses.length === 0){
 
         return;
 
@@ -344,7 +321,11 @@ function rotateVerse(){
 // START
 // ======================================
 
-rotateVerse();
+if(verses.length > 0){
+
+    rotateVerse();
+
+}
 
 // Change every 8 seconds
 setInterval(
@@ -391,7 +372,7 @@ document
 
 .querySelectorAll(
 
-".theme-box,.vision-box"
+".info-box"
 
 )
 
@@ -476,7 +457,7 @@ async function loadChurchTheme(){
         const response =
         await fetch(
 
-            `${API}/theme`
+            `${API}/api/theme`
 
         );
 
@@ -536,7 +517,7 @@ async function loadChurchVision(){
         const response =
         await fetch(
 
-            `${API}/vision`
+            `${API}/api/vision`
 
         );
 
@@ -736,6 +717,78 @@ cards.forEach(card=>{
 });
 
 // ======================================
+// CARD BACKGROUND IMAGES
+// ======================================
+
+async function loadCardBackgrounds(){
+
+    try{
+
+        const response =
+        await fetch(
+            `${API}/api/card-backgrounds`
+        );
+
+        if(!response.ok){
+
+            throw new Error(
+                "Unable to load card backgrounds."
+            );
+
+        }
+
+        const data =
+        await response.json();
+
+        if(!data.backgrounds){
+
+            return;
+
+        }
+
+        data.backgrounds.forEach(bg=>{
+
+            const card =
+            document.querySelector(
+                `.card[data-card="${bg.card_key}"]`
+            );
+
+            if(!card || !bg.image_url){
+
+                return;
+
+            }
+
+            const bgEl =
+            card.querySelector(".card-bg");
+
+            if(bgEl){
+
+                bgEl.style.backgroundImage =
+                `url('${bg.image_url}')`;
+
+                card.classList.add("has-bg");
+
+            }
+
+        });
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Card Background Error:",
+            error
+        );
+
+    }
+
+}
+
+loadCardBackgrounds();
+
+// ======================================
 // SECRET ADMIN ENTRY
 // Five clicks opens Admin Login
 // ======================================
@@ -815,32 +868,7 @@ window.addEventListener(
 // ======================================
 // BACK BUTTON
 // ======================================
-
-const backButton =
-
-document.querySelector(
-
-    ".back-btn"
-
-);
-
-if(backButton){
-
-    backButton.addEventListener(
-
-        "click",
-
-        ()=>{
-
-            window.location.href =
-
-            "index.html";
-
-        }
-
-    );
-
-}
+// Handled via onclick in HTML
 
 // ======================================
 // PAGE FADE-IN
@@ -1160,7 +1188,8 @@ function registerActivity(){
 
     }
 
-
+    // Refresh session on user activity
+    refreshSession();
 
     clearTimeout(
 
@@ -1198,8 +1227,6 @@ function registerActivity(){
 "click",
 
 "keypress",
-
-"mousemove",
 
 "touchstart"
 
@@ -1425,10 +1452,6 @@ function migrateOldSession(){
 
 
 }
-
-
-
-migrateOldSession();
 
 
 

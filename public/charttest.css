@@ -2099,3 +2099,706 @@ input:focus{
 }
 
 
+
+/*==========================================================
+    ROYAL MIDNIGHT OVERRIDE
+    Premium dark-glass chat with gold + electric blue
+==========================================================*/
+
+/* ---- PAGE ---- */
+body{
+    background:
+        radial-gradient(1200px 800px at 15% -10%, rgba(36,119,255,.35), transparent 60%),
+        radial-gradient(1000px 700px at 110% 110%, rgba(212,175,55,.28), transparent 60%),
+        linear-gradient(160deg, rgba(6,10,24,.96), rgba(13,27,51,.96)),
+        url("images/church.jpg");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+/* ---- OUTER GLASS SHELL ---- */
+.connect-wrapper{
+    background:rgba(9,15,31,.66);
+    backdrop-filter:blur(22px) saturate(150%);
+    -webkit-backdrop-filter:blur(22px) saturate(150%);
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,.5),
+        0 40px 90px rgba(0,0,0,.6),
+        inset 0 0 0 1px rgba(255,255,255,.04);
+}
+
+/* ---- SIDEBAR ---- */
+.connect-sidebar{
+    background:rgba(10,16,32,.72);
+    border-right:2px solid rgba(212,175,55,.28);
+}
+
+/* ---- MEMBER HEADER ---- */
+.connect-header{
+    background:
+        linear-gradient(135deg, rgba(11,31,58,.9), rgba(36,119,255,.45)),
+        #0b1f3a;
+    border-bottom:1px solid rgba(212,175,55,.3);
+}
+
+.member-profile img{
+    border:3px solid #d4af37;
+    box-shadow:0 0 0 4px rgba(212,175,55,.18), 0 8px 20px rgba(0,0,0,.4);
+}
+
+.member-profile p{
+    color:#ffd54a;
+}
+
+.header-actions button{
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.12);
+}
+.header-actions button:hover{
+    background:#d4af37;
+    border-color:#d4af37;
+    box-shadow:0 6px 18px rgba(212,175,55,.4);
+}
+
+/* ---- VIEW TABS (Members / Messages) ---- */
+.connect-nav{
+    display:flex;
+    gap:8px;
+    padding:14px 14px 4px;
+}
+
+.nav-tab{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:12px 10px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;
+    background:rgba(255,255,255,.06);
+    color:rgba(255,255,255,.7);
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+    position:relative;
+    transition:.3s ease;
+}
+
+.nav-tab:hover{
+    background:rgba(255,255,255,.1);
+    color:#fff;
+}
+
+.nav-tab.active{
+    background:linear-gradient(135deg, rgba(212,175,55,.25), rgba(255,159,28,.2));
+    border-color:rgba(212,175,55,.6);
+    color:#ffd95c;
+    box-shadow:0 10px 24px rgba(212,175,55,.2), inset 0 1px 0 rgba(255,255,255,.15);
+}
+
+.nav-badge{
+    position:absolute;
+    top:-6px;
+    right:-6px;
+    min-width:20px;
+    height:20px;
+    padding:0 6px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#ff4757,#ff6b81);
+    color:#fff;
+    font-size:11px;
+    font-weight:800;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 4px 12px rgba(255,71,87,.5);
+}
+
+/* ---- VIEW PANELS ---- */
+.view-panel{
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    overflow:hidden;
+}
+
+/* ---- SEARCH ---- */
+.chat-search{
+    background:rgba(255,255,255,.04);
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.chat-search input{
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 4px 14px rgba(0,0,0,.3);
+}
+.chat-search input::placeholder{ color:rgba(255,255,255,.5); }
+.chat-search input:focus{
+    box-shadow:0 0 0 3px rgba(212,175,55,.25);
+    border-color:#d4af37;
+}
+
+/* ---- MEMBER DIRECTORY ---- */
+.member-directory{
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+.directory-heading{
+    color:rgba(255,255,255,.6);
+}
+.member-directory-item:hover{
+    background:rgba(255,255,255,.08);
+}
+.member-directory-avatar{
+    background:linear-gradient(135deg,#103B73,#2477ff);
+    color:#fff;
+    box-shadow:0 4px 12px rgba(0,0,0,.35);
+}
+.member-directory-name{
+    color:#fff;
+}
+.status-dot{
+    border:2px solid #0d1b33;
+}
+.status-dot.online{
+    background:#2ecc71;
+    box-shadow:0 0 8px rgba(46,204,113,.8);
+}
+.status-dot.offline{ background:#67718a; }
+.member-directory-empty{ color:rgba(255,255,255,.5); }
+
+/* ---- CONVERSATION LIST ---- */
+.conversation-list{
+    padding:10px;
+}
+
+.conversation-item{
+    background:rgba(255,255,255,.03);
+    margin-bottom:8px;
+    border-radius:16px;
+    border:1px solid transparent;
+}
+.conversation-item:hover{
+    background:rgba(36,119,255,.14);
+    border-color:rgba(36,119,255,.3);
+    transform:translateX(4px);
+}
+.conversation-item.active{
+    background:linear-gradient(90deg, rgba(212,175,55,.16), rgba(36,119,255,.12));
+    border-left:4px solid #d4af37;
+}
+.conversation-item img{
+    border:2px solid rgba(212,175,55,.6);
+}
+.conversation-item h4{ color:#fff; }
+.conversation-item p{ color:rgba(255,255,255,.55); }
+
+.unread-badge{
+    background:linear-gradient(135deg,#d4af37,#ff9f1c);
+    color:#0b1f3a;
+    font-weight:800;
+    box-shadow:0 4px 12px rgba(212,175,55,.4);
+}
+
+/* ---- ADMIN SECTION ---- */
+.admin-section{
+    background:linear-gradient(135deg, rgba(11,31,58,.9), rgba(36,119,255,.4));
+    border-top:1px solid rgba(212,175,55,.3);
+}
+
+/* ---- CHAT AREA ---- */
+.chat-area{
+    background:rgba(8,13,28,.7);
+}
+
+.chat-header{
+    background:rgba(12,21,41,.85);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+}
+.active-chat-profile h2{ color:#fff; }
+.active-chat-profile p{ color:rgba(255,255,255,.6); }
+
+.group-avatar{
+    background:linear-gradient(135deg,#0b1f3a,#d4af37);
+    box-shadow:0 8px 20px rgba(0,0,0,.45), 0 0 0 3px rgba(212,175,55,.18);
+}
+
+/* ---- MESSAGE AREA ---- */
+.message-container{
+    background:
+        radial-gradient(800px 500px at 110% -10%, rgba(36,119,255,.08), transparent 60%),
+        radial-gradient(700px 500px at -10% 110%, rgba(212,175,55,.08), transparent 60%),
+        linear-gradient(rgba(8,13,28,.9), rgba(10,17,35,.9));
+}
+
+.empty-chat{ color:rgba(255,255,255,.5); }
+.empty-chat i{ color:#d4af37; }
+.no-conversation{ color:rgba(255,255,255,.6); }
+.no-conversation i{ color:#d4af37; }
+
+/* ---- MESSAGE BUBBLES ---- */
+.message-bubble.sender{
+    background:
+        linear-gradient(135deg, rgba(36,119,255,.95), rgba(147,51,234,.9));
+    box-shadow:0 10px 26px rgba(36,119,255,.35), 0 0 0 1px rgba(255,255,255,.08);
+    color:#fff;
+}
+.message-bubble.receiver{
+    background:rgba(255,255,255,.10);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.12);
+    color:#eef2ff;
+    box-shadow:0 8px 22px rgba(0,0,0,.3);
+}
+.message-bubble strong{ color:#ffd95c; }
+.message-time{ color:rgba(255,255,255,.6); }
+
+/* ---- INPUT TRAY ---- */
+.message-box{
+    background:rgba(12,21,41,.85);
+    border-top:1px solid rgba(255,255,255,.08);
+}
+.message-box input{
+    background:rgba(255,255,255,.08);
+    border:2px solid rgba(255,255,255,.12);
+    color:#fff;
+}
+.message-box input::placeholder{ color:rgba(255,255,255,.5); }
+.message-box input:focus{
+    border-color:#d4af37;
+    box-shadow:0 0 18px rgba(212,175,55,.25);
+}
+.attach-btn{
+    background:rgba(255,255,255,.08);
+    color:#d4af37;
+    border:1px solid rgba(255,255,255,.12);
+}
+.attach-btn:hover{
+    background:#d4af37;
+    color:#0b1f3a;
+}
+.send-btn{
+    background:linear-gradient(135deg,#d4af37,#ff9f1c);
+    color:#0b1f3a;
+    box-shadow:0 10px 24px rgba(212,175,55,.4);
+}
+.send-btn:hover{
+    box-shadow:0 14px 32px rgba(212,175,55,.55);
+}
+
+/* ---- SCROLLBAR ---- */
+.message-container::-webkit-scrollbar-thumb,
+.conversation-list::-webkit-scrollbar-thumb,
+.member-directory-list::-webkit-scrollbar-thumb{
+    background:linear-gradient(#2477ff,#d4af37);
+    background-image:linear-gradient(#2477ff,#d4af37);
+}
+
+/* ---- FOOTER NOTE / DARK GLOW ---- */
+.connect-wrapper::before{
+    background:radial-gradient(circle, rgba(212,175,55,.4), transparent 70%);
+    filter:blur(8px);
+}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:700px){
+    .connect-nav{ padding:10px; }
+    .nav-tab{ padding:11px 8px; font-size:13px; }
+}
+
+@media(max-width:420px){
+    .nav-tab span{ display:none; }
+    .nav-tab{ font-size:15px; }
+}
+
+
+/* Ensure hidden view panels are truly hidden */
+.view-panel.hidden{ display:none !important; }
+
+
+
+/*==========================================================
+    SMALL / ANDROID DEVICE ENHANCEMENTS
+    Dynamic viewport heights, safe areas, touch targets
+==========================================================*/
+
+/* ---- Dynamic viewport height (handles Android/desktop URL bars) ---- */
+.connect-wrapper{
+    height:100vh;
+    height:100svh;
+    height:100dvh;
+}
+
+/* ---- Safe-area insets for notched / gesture devices ---- */
+.connect-header{
+    padding-top:max(15px, env(safe-area-inset-top));
+}
+.message-container{
+    padding-bottom:env(safe-area-inset-bottom);
+}
+.message-box{
+    padding-bottom:max(12px, env(safe-area-inset-bottom));
+}
+
+/* ---- Avoid weird text scaling on Android ---- */
+html, body{
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+    overscroll-behavior-y:none;
+    touch-action:manipulation;
+}
+
+/* ---- Consistent tap targets ---- */
+.nav-tab,
+.header-actions button,
+.attach-btn,
+.send-btn{
+    touch-action:manipulation;
+}
+.nav-tab{
+    min-height:48px;
+}
+
+/* ---- Prevent horizontal overflow ---- */
+.connect-wrapper,
+.connect-sidebar,
+.chat-area,
+.conversation-item,
+.member-directory-item{
+    max-width:100%;
+    overflow-x:hidden;
+}
+
+.conversation-item,
+.member-directory-item{
+    overflow:hidden;
+}
+.conversation-item h4,
+.conversation-item p,
+.member-directory-name{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+
+/* ---- NARROW PHONES (<=560px) ---- */
+@media(max-width:560px){
+
+    .connect-wrapper{
+        height:100vh;
+        height:100svh;
+        height:100dvh;
+    }
+
+    /* Give the directory/chat list more room on phones */
+    .connect-sidebar{
+        height:48%;
+        min-height:0;
+    }
+    .chat-area{
+        height:52%;
+    }
+
+    /* Tighten the header so more content fits */
+    .connect-header{
+        padding:12px;
+    }
+    .member-profile h3{
+        font-size:15px;
+    }
+    .member-profile p{
+        font-size:11px;
+    }
+
+    /* Make tabs readable and comfortable on small screens */
+    .connect-nav{
+        padding:10px 10px 6px;
+    }
+    .nav-tab{
+        font-size:13px;
+        gap:6px;
+        padding:11px 8px;
+        min-height:44px;
+    }
+
+    .chat-search{
+        padding:8px 10px;
+    }
+    .chat-search input{
+        padding:11px 14px;
+        font-size:14px;
+    }
+
+    /* Roomier list items for fingers */
+    .conversation-item{
+        padding:12px 10px;
+        margin-bottom:10px;
+    }
+    .conversation-item img,
+    .member-directory-avatar{
+        width:42px;
+        height:42px;
+        flex:0 0 42px;
+    }
+    .member-directory-item{
+        padding:12px 10px;
+    }
+
+    /* Chat header compact */
+    .chat-header{
+        height:64px;
+        padding:0 12px;
+    }
+
+    .message-container{
+        padding:12px;
+    }
+    .message-bubble{
+        max-width:92%;
+        padding:10px 13px;
+        font-size:14px;
+    }
+
+    .message-box{
+        padding:10px;
+        gap:8px;
+    }
+    .message-box input{
+        padding:13px 14px;
+        font-size:15px;
+    }
+    .attach-btn,
+    .send-btn{
+        width:46px;
+        height:46px;
+        flex:0 0 46px;
+    }
+}
+
+/* ---- VERIFY SMALL ANDROID (<=360px) ---- */
+@media(max-width:380px){
+
+    .connect-nav .nav-tab span{
+        font-size:12px;
+    }
+
+    .nav-badge{
+        min-width:18px;
+        height:18px;
+        font-size:10px;
+        top:-5px;
+        right:-5px;
+    }
+
+    .member-profile h3{
+        font-size:13px;
+    }
+
+    .message-box input{
+        font-size:16px; /* prevents iOS auto-zoom on focus */
+    }
+}
+
+/* ---- LANDSCAPE / VERY SHORT (Android landscape) ---- */
+@media(max-height:460px) and (orientation:landscape){
+
+    body{
+        overflow:auto;
+    }
+    .connect-wrapper{
+        height:auto;
+        min-height:100vh;
+    }
+    .connect-sidebar{
+        height:auto;
+        max-height:90vh;
+    }
+}
+
+
+
+/*==========================================================
+    FLEX SAFETY / NO OVERLAP FIX
+    min-height:0 lets flex children shrink & scroll instead
+    of overflowing and piling on top of each other on short
+    / narrow / Android screens.
+==========================================================*/
+
+.connect-wrapper,
+.connect-sidebar,
+.view-panel,
+.member-directory,
+.chat-area,
+.message-container,
+.conversation-list{
+    min-height:0;
+}
+
+.member-directory,
+.view-panel{
+    overflow:hidden;
+}
+
+
+/* ---- MOBILE (<=700px): lists scroll internally, never overlap ---- */
+@media(max-width:700px){
+
+    .connect-sidebar{
+        overflow:hidden;
+    }
+
+    /* Fixed toolbar bits must not shrink */
+    .connect-header,
+    .connect-nav,
+    .chat-search{
+        flex-shrink:0;
+    }
+
+    /* MEMBERS panel: directory fills & scrolls in place */
+    #memberDirectorySection{
+        display:flex;
+        flex-direction:column;
+        flex:1;
+        min-height:0;
+        overflow:hidden;
+    }
+    #memberDirectoryList{
+        flex:1;
+        max-height:none;      /* override the 160px cap */
+        min-height:0;
+        overflow-y:auto;
+        padding-bottom:10px;
+    }
+
+    /* MESSAGES panel: conversation list scrolls in place */
+    #messagesPanel{
+        min-height:0;
+    }
+    #conversationList{
+        flex:1;
+        min-height:0;
+        overflow-y:auto;
+        padding-bottom:10px;
+    }
+    #adminSection{
+        flex-shrink:0;
+    }
+
+    /* Chat thread scrolls in place */
+    .chat-area .message-container{
+        flex:1;
+        min-height:0;
+        overflow-y:auto;
+    }
+}
+
+
+/* ---- Very short (Android landscape) ---- */
+@media(max-height:460px) and (orientation:landscape){
+    .connect-header{ padding:8px 12px; }
+    .connect-nav{ padding:6px 10px; }
+    .chat-search{ padding:6px 10px; }
+    .member-directory-avatar,
+    .member-directory-avatar-wrap,
+    .conversation-item img{ width:36px; height:36px; }
+}
+
+
+
+/*==========================================================
+    MOBILE SINGLE-PANE NAVIGATION
+    One pane at a time, full-height, so the conversation list
+    is not squeezed under the chat on phones.
+==========================================================*/
+
+/* Back button: hidden on desktop */
+.chat-back{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.1);
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+    flex-shrink:0;
+    margin-right:6px;
+    transition:.3s ease;
+}
+.chat-back:hover{
+    background:#d4af37;
+    color:#0b1f3a;
+}
+
+
+@media(max-width:700px){
+
+    /* Fill the whole viewport */
+    .connect-wrapper{
+        height:100vh;
+        height:100svh;
+        height:100dvh;
+    }
+
+    /* Sidebar takes the full height */
+    .connect-sidebar{
+        width:100%;
+        height:100%;
+        flex-basis:100%;
+    }
+
+    /* Chat becomes a full-screen slide-in pane */
+    .chat-area{
+        position:fixed;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        width:100%;
+        height:100%;
+        z-index:60;
+        transform:translateX(100%);
+        transition:transform .32s ease;
+        display:flex;
+        flex-direction:column;
+        background:rgba(8,13,28,.98);
+    }
+
+    .connect-wrapper.chat-open .chat-area{
+        transform:translateX(0);
+    }
+
+    /* Show the back button on phones */
+    .chat-back{
+        display:flex;
+    }
+
+    .chat-header{
+        padding:0 10px;
+    }
+
+    /* Keep the chat body scrollable inside the slide-in pane */
+    .chat-area .message-container{
+        flex:1;
+        min-height:0;
+        overflow-y:auto;
+    }
+    .chat-area .message-box{
+        flex-shrink:0;
+    }
+}
+
+@media(min-width:701px){
+    .chat-back{
+        display:none;
+    }
+}
+

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy import (
     Column,
     Integer,
@@ -7,15 +9,14 @@ from sqlalchemy import (
     ForeignKey,
     Text,
     Table,
-    Float
+    Float,
+    Date,
+    Time
 )
 
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from sqlalchemy import Date
-from app.database import Base
-from sqlalchemy import Text
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text, Date
+from app.database import Base, DateTimeTZ
 
 # ==========================================
 # MANY TO MANY
@@ -105,7 +106,7 @@ class Admin(Base):
     )
 
     locked_until = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         nullable=True
     )
 
@@ -116,12 +117,12 @@ class Admin(Base):
     )
 
     created_at = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         server_default=func.now()
     )
 
     last_login = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         nullable=True
     )
 
@@ -208,7 +209,7 @@ class AuditLog(Base):
     )
 
     created_at = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         server_default=func.now()
     )
 
@@ -286,7 +287,7 @@ class Member(Base):
     )
 
     approved_at = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         nullable=True
     )
 
@@ -301,22 +302,22 @@ class Member(Base):
     )
 
     last_seen = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         nullable=True
     )
 
     last_login = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         nullable=True
     )
 
     created_at = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         server_default=func.now()
     )
 
     updated_at = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         server_default=func.now(),
         onupdate=func.now()
     )
@@ -326,6 +327,131 @@ class Member(Base):
         back_populates="member",
         cascade="all, delete-orphan"
     )
+
+# ==========================================
+# GIVING MODEL
+# ==========================================
+
+class Giving(Base):
+    __tablename__ = "givings"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    member_id = Column(
+        Integer,
+        ForeignKey("members.id"),
+        nullable=False
+    )
+
+    receipt_number = Column(
+        String(50),
+        unique=True,
+        nullable=True
+    )
+
+    transaction_id = Column(
+        String(100),
+        unique=True,
+        nullable=True
+    )
+
+    checkout_request_id = Column(
+        String(150),
+        unique=True,
+        nullable=True
+    )
+
+    merchant_request_id = Column(
+        String(150),
+        nullable=True
+    )
+
+    mpesa_receipt = Column(
+        String(100),
+        nullable=True
+    )
+
+    phone_number = Column(
+        String(20),
+        nullable=False
+    )
+
+    category = Column(
+        String(50),
+        nullable=False
+    )
+
+    amount = Column(
+        Float,
+        nullable=False
+    )
+
+    status = Column(
+        String(30),
+        default="Pending"
+    )
+
+    payment_method = Column(
+        String(30),
+        default="M-Pesa"
+    )
+
+    transaction_date = Column(
+        DateTimeTZ(),
+        nullable=True
+    )
+
+    confirmed_at = Column(
+        DateTimeTZ(),
+        nullable=True
+    )
+
+    safaricom_name = Column(
+        String(150),
+        nullable=True
+    )
+
+    reference = Column(
+        String(255),
+        nullable=True
+    )
+
+    created_at = Column(
+        DateTimeTZ(),
+        server_default=func.now()
+    )
+
+    member = relationship(
+        "Member",
+        back_populates="givings"
+    )
+
+
+# ==========================================
+# GIVING ACCOUNTS
+# Receiving accounts configured by admin.
+# type = "paybill"  -> M-Pesa PayBill (STK push target)
+# type = "phone"    -> M-Pesa number shown for manual giving (display)
+# ==========================================
+
+class GivingAccount(Base):
+    __tablename__ = "giving_accounts"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    name = Column(String(100), nullable=False)          # e.g. Tithe PayBill
+    account_type = Column(String(20), nullable=False)   # "paybill" | "phone"
+    number = Column(String(50), nullable=False)         # paybill no. or phone no.
+    account_name = Column(String(150), nullable=True)   # name on the account
+    is_active = Column(Boolean, default=True)
+    sort_order = Column(Integer, default=0)
+
+    created_at = Column(
+        DateTimeTZ(),
+        server_default=func.now()
+    )
+
+
 # ==========================================
 # SERMON
 # ==========================================
@@ -409,13 +535,13 @@ class Sermon(Base):
 
 
     created_at = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         server_default=func.now()
     )
 
 
     updated_at = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         server_default=func.now(),
         onupdate=func.now()
     )
@@ -446,12 +572,12 @@ class Attendance(Base):
     )
 
     time_in = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         nullable=False
     )
 
     time_out = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         nullable=True
     )
 
@@ -461,7 +587,7 @@ class Attendance(Base):
     )
 
     created_at = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         server_default=func.now()
     )
 
@@ -506,7 +632,7 @@ class Gallery(Base):
     )
 
     created_at = Column(
-        DateTime(timezone=True),
+        DateTimeTZ(),
         server_default=func.now()
     )
 
@@ -515,22 +641,6 @@ class Gallery(Base):
 # EVENTS MODEL
 # Kingdom Ways Church CMS
 # ============================================
-
-from sqlalchemy import (
-    Column,
-    Integer,
-    String,
-    Text,
-    Boolean,
-    Date,
-    Time,
-    DateTime,
-    ForeignKey
-)
-
-from sqlalchemy.sql import func
-
-from app.database import Base
 
 
 
@@ -753,10 +863,6 @@ class Event(Base):
         onupdate=func.now()
     )
 
-from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime, ForeignKey
-from datetime import datetime
-from app.database import Base
-
 class Conversation(Base):
     __tablename__ = "conversations"
     id = Column(Integer, primary_key=True, index=True)
@@ -765,15 +871,15 @@ class Conversation(Base):
     created_by = Column(String, ForeignKey("members.member_number"))
     last_message = Column(Text, nullable=True)
     last_message_at = Column(DateTime, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
 class ConversationMember(Base):
     __tablename__ = "conversation_members"
     id = Column(Integer, primary_key=True, index=True)
     conversation_id = Column(Integer, ForeignKey("conversations.id"))
     member_number = Column(String, ForeignKey("members.member_number"))
-    joined_at = Column(DateTime, default=datetime.utcnow)
+    joined_at = Column(DateTime, server_default=func.now())
 
 class Message(Base):
     __tablename__ = "messages"
@@ -785,167 +891,185 @@ class Message(Base):
     is_read = Column(Boolean, default=False)
     edited = Column(Boolean, default=False)
     deleted = Column(Boolean, default=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, server_default=func.now())
 
 
+# ==========================================================
+# APPEND THIS BLOCK TO THE END OF app/models.py
+# (uses Column/Integer/String/Boolean/DateTime/Text/ForeignKey/
+#  Date and func, all already imported at the top of models.py)
+# ==========================================================
 
-# =====================================================
-# GIVING MODEL
-# Kingdom Ways Church CMS
-# =====================================================
+# ==========================================================
+# COMMUNICATION LOG
+# One row per SMS broadcast or internal message sent
+# ==========================================================
 
-class Giving(Base):
-    __tablename__ = "givings"
+class CommunicationLog(Base):
+    __tablename__ = "communication_logs"
 
-    # =================================================
-    # PRIMARY KEY
-    # =================================================
+    id = Column(Integer, primary_key=True, index=True)
 
-    id = Column(
-        Integer,
-        primary_key=True,
-        index=True
-    )
+    type = Column(String(20), nullable=False)          # "sms" or "internal"
+    category = Column(String(50), nullable=True)        # SMS category / internal priority
+    subject = Column(String(150), nullable=True)         # internal messages only
+    message = Column(Text, nullable=False)
 
-    # =================================================
-    # RECEIPT
-    # =================================================
+    recipient_count = Column(Integer, default=0)
+    sent_count = Column(Integer, default=0)
+    failed_count = Column(Integer, default=0)
 
-    receipt_number = Column(
-        String(50),
-        unique=True,
-        nullable=False,
-        index=True
-    )
+    status = Column(String(20), default="Pending")       # Pending / Delivered / Failed
 
-    # =================================================
-    # MEMBER DETAILS
-    # =================================================
+    admin_id = Column(Integer, ForeignKey("admins.id"), nullable=True)
 
-    member_id = Column(
-        Integer,
-        ForeignKey(
-            "members.id",
-            ondelete="CASCADE"
-        ),
-        nullable=False,
-        index=True
-    )
+    created_at = Column(DateTimeTZ(), server_default=func.now())
 
-    member_number = Column(
-        String(50),
-        nullable=False,
-        index=True
-    )
+    admin = relationship("Admin")
 
-    member_name = Column(
-        String(150),
-        nullable=False
-    )
 
-    phone_number = Column(
-        String(20),
-        nullable=False
-    )
+# ==========================================================
+# MEMBER NOTIFICATION
+# One row per member per internal message - powers
+# "Notify on Login" and unread badges on the member side
+# ==========================================================
 
-    # =================================================
-    # GIVING DETAILS
-    # =================================================
+class MemberNotification(Base):
+    __tablename__ = "member_notifications"
 
-    category = Column(
-        String(50),
-        nullable=False,
-        index=True
-    )
+    id = Column(Integer, primary_key=True, index=True)
 
-    amount = Column(
-        Float,
-        nullable=False
-    )
+    member_id = Column(Integer, ForeignKey("members.id"), nullable=False)
+    communication_log_id = Column(Integer, ForeignKey("communication_logs.id"), nullable=True)
 
-    reference = Column(
-        Text,
-        nullable=True
-    )
+    subject = Column(String(150), nullable=True)
+    message = Column(Text, nullable=False)
+    priority = Column(String(20), default="normal")
 
-    status = Column(
-        String(20),
-        default="Pending",
-        nullable=False,
-        index=True
-    )
+    is_read = Column(Boolean, default=False)
 
-    # =================================================
-    # M-PESA INFORMATION
-    # =================================================
+    created_at = Column(DateTimeTZ(), server_default=func.now())
 
-    checkout_request_id = Column(
-        String(100),
-        unique=True,
-        nullable=True,
-        index=True
-    )
+    member = relationship("Member")
 
-    merchant_request_id = Column(
-        String(100),
-        nullable=True
-    )
 
-    transaction_id = Column(
-        String(100),
-        unique=True,
-        nullable=True,
-        index=True
-    )
+# ==========================================================
+# CHURCH CONTACTS
+# Single-row settings table for the Church Contacts panel
+# ==========================================================
 
-    mpesa_receipt = Column(
-        String(50),
-        unique=True,
-        nullable=True,
-        index=True
-    )
+class ChurchContact(Base):
+    __tablename__ = "church_contacts"
 
-    safaricom_name = Column(
-        String(150),
-        nullable=True
-    )
+    id = Column(Integer, primary_key=True, index=True)
 
-    result_code = Column(
-        Integer,
-        nullable=True
-    )
+    phone = Column(String(30), nullable=True)
+    whatsapp = Column(String(255), nullable=True)
+    facebook = Column(String(255), nullable=True)
+    instagram = Column(String(255), nullable=True)
+    youtube = Column(String(255), nullable=True)
+    website = Column(String(255), nullable=True)
+    email = Column(String(120), nullable=True)
+    maps_link = Column(String(255), nullable=True)
+    office_hours = Column(String(150), nullable=True)
 
-    result_description = Column(
-        Text,
-        nullable=True
-    )
+    updated_by = Column(Integer, ForeignKey("admins.id"), nullable=True)
+    updated_at = Column(DateTimeTZ(), server_default=func.now(), onupdate=func.now())
 
-    # =================================================
-    # TIMESTAMPS
-    # =================================================
 
-    created_at = Column(
-        DateTime,
-        default=datetime.utcnow,
-        nullable=False
-    )
+# ==========================================================
+# FINANCE TRANSACTIONS
+# General ledger for the admin finance dashboard
+# ==========================================================
 
-    confirmed_at = Column(
-        DateTime,
-        nullable=True
-    )
+class Transaction(Base):
+    __tablename__ = "transactions"
 
-    updated_at = Column(
-        DateTime,
-        default=datetime.utcnow,
-        onupdate=datetime.utcnow
-    )
+    id = Column(Integer, primary_key=True, index=True)
 
-    # =================================================
-    # RELATIONSHIP
-    # =================================================
+    tx_type = Column(String(20), nullable=False)  # income / expense
+    category = Column(String(100), nullable=True)
+    description = Column(String(255), nullable=True)
+    account_key = Column(String(50), nullable=True)  # main / bank / cash / mpesa / petty
+    amount = Column(Float, nullable=False)
+    status = Column(String(20), default="confirmed")
 
-    member = relationship(
-        "Member",
-        back_populates="givings"
-    )
+    created_by = Column(Integer, ForeignKey("admins.id"), nullable=True)
+    created_at = Column(DateTimeTZ(), server_default=func.now())
+
+
+# ==========================================================
+# SCANNED CONTACT (BOOK OCR REVIEW QUEUE)
+# One row per name/phone the OCR pass found on a scanned page.
+# Nothing here touches the real members table until an admin
+# approves it - protects you from OCR misreads becoming real
+# member records.
+# ==========================================================
+
+class ScannedContact(Base):
+    __tablename__ = "scanned_contacts"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    full_name = Column(String(150), nullable=True)
+    phone = Column(String(20), nullable=True)
+    ministry = Column(String(100), nullable=True)
+
+    raw_line = Column(Text, nullable=True)        # exact OCR line, for reference when correcting
+    source_file = Column(String(255), nullable=True)  # saved scan filename this came from
+    confidence = Column(String(10), nullable=True)     # "high" / "low" - phone regex matched cleanly or not
+
+    status = Column(String(20), default="Pending")     # Pending / Approved / Rejected / Duplicate
+
+    reviewed_by = Column(Integer, ForeignKey("admins.id"), nullable=True)
+    reviewed_at = Column(DateTimeTZ(), nullable=True)
+
+    created_by = Column(Integer, ForeignKey("admins.id"), nullable=True)  # who uploaded the scan
+    created_at = Column(DateTimeTZ(), server_default=func.now())
+
+
+# ==========================================================
+# CARD BACKGROUNDS
+# Stores per-card background images for clientMode
+# Each card has its own independently changeable photo
+# ==========================================================
+
+class CardBackground(Base):
+    __tablename__ = "card_backgrounds"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    card_key = Column(String(50), unique=True, nullable=False, index=True)
+    image_url = Column(String(500), nullable=True)
+
+    updated_by = Column(Integer, ForeignKey("admins.id"), nullable=True)
+    updated_at = Column(DateTimeTZ(), server_default=func.now(), onupdate=func.now())
+
+
+# ==========================================================
+# AI ATTENDANCE SESSIONS
+# Camera-based attendance (browser TensorFlow.js detection)
+# Each session = one camera run; stores the unique-person
+# counts as reported by the on-device person tracker.
+# Face-recognition (member identity) can be layered on later.
+# ==========================================================
+
+class AIAttendanceSession(Base):
+    __tablename__ = "ai_attendance_sessions"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    admin_id = Column(Integer, ForeignKey("admins.id"), nullable=True)
+
+    session_date = Column(Date, nullable=False)
+
+    entered_count = Column(Integer, default=0)
+    exited_count = Column(Integer, default=0)
+    unique_count = Column(Integer, default=0)
+
+    notes = Column(String(255), nullable=True)
+
+    started_at = Column(DateTimeTZ(), nullable=True)
+    ended_at = Column(DateTimeTZ(), nullable=True)
+
+    created_at = Column(DateTimeTZ(), server_default=func.now())

@@ -9,7 +9,7 @@
 content="width=device-width, initial-scale=1.0">
 
 <title>
-Kingdom Ways Church | Giving Portal
+KingdomWays Church | Giving Portal
 </title>
 
 <link rel="stylesheet" href="offering.css">
@@ -36,7 +36,7 @@ HEADER
 <div>
 
 <h1>
-Kingdom Ways Church
+KingdomWays Church
 </h1>
 
 <p>
@@ -174,7 +174,7 @@ Use another M-Pesa number
 
 <div id="anotherPhoneBox">
 
-<label>
+<label for="optionalPhone">
 
 Alternative Number
 
@@ -295,10 +295,37 @@ id="category">
 </div>
 
 
+<div class="input-group">
+
+<label for="givingAccount">
+
+Giving Account
+
+</label>
+
+<select
+id="givingAccount"
+required>
+
+<option value="">
+-- Select receiving account --
+</option>
+
+</select>
+
+<p
+id="accountHint"
+style="font-size:12px;color:#64748b;margin-top:6px;min-height:15px;">
+
+</p>
+
+</div>
+
+
 
 <div class="input-group">
 
-<label>
+<label for="amount">
 
 Amount (KES)
 
@@ -317,7 +344,7 @@ placeholder="1000">
 
 <div class="input-group">
 
-<label>
+<label for="notes">
 
 Reference / Note (Optional)
 
@@ -562,6 +589,21 @@ Please enter your M-Pesa PIN to complete payment.
 
 <div class="loading-spinner"></div>
 
+<div class="status-actions waiting-cancel">
+
+<button
+type="button"
+id="cancelPaymentBtn"
+class="cancelBtn">
+
+<i class="fa-solid fa-ban"></i>
+
+Cancel Payment
+
+</button>
+
+</div>
+
 </div>
 
 
@@ -653,6 +695,160 @@ Try Again
 </div>
 
 </div>
+</div>
 
 </div>
 
+
+<!-- ==========================================
+RECEIPT CARD
+========================================== -->
+
+<div
+id="receiptCard"
+class="status-card">
+
+<div class="status-icon success">
+
+<i class="fa-solid fa-receipt"></i>
+
+</div>
+
+<h2>
+
+Giving Receipt
+
+</h2>
+
+<div class="receipt-details" style="width:100%;text-align:left;margin:15px 0;">
+
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);">
+<span style="color:#94a3b8;">Member:</span>
+<span id="receiptMember">--</span>
+</div>
+
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);">
+<span style="color:#94a3b8;">Member No:</span>
+<span id="receiptMemberNumber">--</span>
+</div>
+
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);">
+<span style="color:#94a3b8;">Paid As:</span>
+<span id="receiptSafaricomName">--</span>
+</div>
+
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);">
+<span style="color:#94a3b8;">Phone:</span>
+<span id="receiptPhone">--</span>
+</div>
+
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);">
+<span style="color:#94a3b8;">Category:</span>
+<span id="receiptCategory">--</span>
+</div>
+
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);font-weight:bold;">
+<span style="color:#94a3b8;">Amount:</span>
+<span id="receiptAmount">--</span>
+</div>
+
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);">
+<span style="color:#94a3b8;">M-Pesa Receipt:</span>
+<span id="receiptReference">--</span>
+</div>
+
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);">
+<span style="color:#94a3b8;">Date:</span>
+<span id="receiptDate">--</span>
+</div>
+
+<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);">
+<span style="color:#94a3b8;">Checkout ID:</span>
+<span id="receiptCheckout">--</span>
+</div>
+
+<div style="display:flex;justify-content:space-between;padding:8px 0;">
+<span style="color:#94a3b8;">Transaction ID:</span>
+<span id="receiptTransaction">--</span>
+</div>
+
+</div>
+
+<div class="status-actions">
+
+<button
+type="button"
+id="printBtn"
+class="primary-btn">
+
+<i class="fa-solid fa-print"></i>
+
+Print Receipt
+
+</button>
+
+<button
+type="button"
+id="downloadReceiptBtn"
+class="primary-btn">
+
+<i class="fa-solid fa-download"></i>
+
+Download
+
+</button>
+
+<button
+type="button"
+id="newPaymentBtnReceipt"
+class="primary-btn">
+
+<i class="fa-solid fa-plus"></i>
+
+New Giving
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ==========================================
+TRANSACTION HISTORY
+========================================== -->
+
+<div
+id="historySection"
+class="status-card"
+style="max-width:900px;">
+
+<h2>
+
+Giving History
+
+</h2>
+
+<div
+id="historyContainer"
+style="width:100%;margin-top:15px;">
+
+<p>Loading...</p>
+
+</div>
+
+</div>
+
+
+<!-- ==========================================
+TOAST
+========================================== -->
+
+<div id="toast"></div>
+
+
+<script src="offering.js?v=3"></script>
+
+</body>
+
+</html>

@@ -398,7 +398,7 @@ if (loginForm) {
 
                 loginMessage,
 
-                "Please enter your username and phone number."
+                "Please enter your full name and phone number."
 
             );
 
@@ -492,9 +492,15 @@ if (loginForm) {
 
                 full_name:data.full_name,
 
+                phone:data.phone,
+
+                gender:data.gender,
+
                 is_active:data.is_active,
 
-                profile_completed:data.profile_completed
+                profile_completed:data.profile_completed,
+
+                access_token:data.access_token
 
             });
 

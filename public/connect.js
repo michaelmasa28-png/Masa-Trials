@@ -100,7 +100,7 @@ async function loadChurchContacts(){
 
         const response = await fetch(
 
-            API_URL + "/church/contact"
+            API_URL + "/api/church/contact"
 
         );
 

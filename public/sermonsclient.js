@@ -1308,7 +1308,7 @@ function checkMemberSession(){
     const member =
 
     localStorage.getItem(
-        "member"
+        "memberSession"
     );
 
 

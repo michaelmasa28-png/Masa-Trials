@@ -13,13 +13,17 @@ const imageInput = document.getElementById("image");
 
 const preview = document.getElementById("previewImage");
 
-// FIXED CASE SENSITIVITY TO MATCH THE HTML DIV ID EXACTLY
 const gallery = document.getElementById("admingallery");
 
-const dropArea = imageInput.parentElement;
+const dropArea = imageInput ? imageInput.parentElement : null;
 
 let galleryImages = [];
 let selectedFiles = [];
+
+function getToken() {
+    const session = JSON.parse(localStorage.getItem("adminSession") || "{}");
+    return session.token || "";
+}
 
 // =====================================
 // SHOW SAVED IMAGES
@@ -29,32 +33,41 @@ async function displayGallery() {
 
     try {
 
-        const response = await fetch("/api/gallery/");
+        const response = await fetch("/api/gallery/", {
+            headers: { "Authorization": `Bearer ${getToken()}` }
+        });
         galleryImages = await response.json();
 
-        gallery.innerHTML = "";
+        if (gallery) {
+            gallery.innerHTML = "";
 
-        galleryImages.forEach((item) => {
+            if (!Array.isArray(galleryImages) || galleryImages.length === 0) {
+                gallery.innerHTML = '<p style="color:#999; padding:20px;">No gallery images yet.</p>';
+                return;
+            }
 
-            const card = document.createElement("div");
+            galleryImages.forEach((item) => {
 
-            card.className = "gallery-card";
+                const card = document.createElement("div");
 
-            card.innerHTML = `
-                <img src="${item.image}" style="width:100%; max-width:200px; display:block; margin-bottom:10px;">
+                card.className = "gallery-card";
 
-                <h3>${item.title}</h3>
+                card.innerHTML = `
+                    <img src="${item.image}" style="width:100%; max-width:200px; display:block; margin-bottom:10px;">
 
-                <p>${item.category || "General"}</p>
+                    <h3>${item.title || "Untitled"}</h3>
 
-                <button type="button" onclick="deleteImage(${item.id})">
-                    Delete
-                </button>
-            `;
+                    <p>${item.category || "General"}</p>
 
-            gallery.appendChild(card);
+                    <button type="button" onclick="deleteImage(${item.id})">
+                        Delete
+                    </button>
+                `;
 
-        });
+                gallery.appendChild(card);
+
+            });
+        }
 
     } catch (err) {
 
@@ -68,53 +81,59 @@ async function displayGallery() {
 // FILE SELECT
 // =====================================
 
-imageInput.addEventListener("change", (e) => {
+if (imageInput) {
+    imageInput.addEventListener("change", (e) => {
 
-    selectedFiles = [...e.target.files];
+        selectedFiles = [...e.target.files];
 
-    if (selectedFiles.length) {
-        showPreview(selectedFiles[0]);
-    }
+        if (selectedFiles.length) {
+            showPreview(selectedFiles[0]);
+        }
 
-});
+    });
+}
 
 // =====================================
 // DRAG EVENTS
 // =====================================
 
-dropArea.addEventListener("dragover", (e) => {
+if (dropArea) {
+    dropArea.addEventListener("dragover", (e) => {
 
-    e.preventDefault();
-    dropArea.style.background = "#e8eaff";
+        e.preventDefault();
+        dropArea.style.background = "#e8eaff";
 
-});
+    });
 
-dropArea.addEventListener("dragleave", () => {
+    dropArea.addEventListener("dragleave", () => {
 
-    dropArea.style.background = "";
+        dropArea.style.background = "";
 
-});
+    });
 
-dropArea.addEventListener("drop", (e) => {
+    dropArea.addEventListener("drop", (e) => {
 
-    e.preventDefault();
+        e.preventDefault();
 
-    dropArea.style.background = "";
+        dropArea.style.background = "";
 
-    selectedFiles = [...e.dataTransfer.files]
-        .filter(file => file.type.startsWith("image/"));
+        selectedFiles = [...e.dataTransfer.files]
+            .filter(file => file.type.startsWith("image/"));
 
-    if (selectedFiles.length) {
-        showPreview(selectedFiles[0]);
-    }
+        if (selectedFiles.length) {
+            showPreview(selectedFiles[0]);
+        }
 
-});
+    });
+}
 
 // =====================================
 // IMAGE PREVIEW
 // =====================================
 
 function showPreview(file) {
+
+    if (!preview) return;
 
     const reader = new FileReader();
 
@@ -133,46 +152,50 @@ function showPreview(file) {
 // SAVE IMAGES
 // =====================================
 
-form.addEventListener("submit", async (e) => {
+if (form) {
+    form.addEventListener("submit", async (e) => {
 
-    e.preventDefault();
+        e.preventDefault();
 
-    if (selectedFiles.length === 0) {
-        alert("Please select an image.");
-        return;
-    }
+        if (selectedFiles.length === 0) {
+            alert("Please select an image.");
+            return;
+        }
 
-    for (const file of selectedFiles) {
+        for (const file of selectedFiles) {
 
-        const formData = new FormData();
+            const formData = new FormData();
 
-        formData.append("title", titleInput.value);
-        formData.append("category", categoryInput.value);
-        formData.append("image", file);
+            formData.append("title", titleInput ? titleInput.value : "");
+            formData.append("category", categoryInput ? categoryInput.value : "");
+            formData.append("image", file);
 
-        const response = await fetch("/api/gallery/", {
-            method: "POST",
-            body: formData
-        });
+            const response = await fetch("/api/gallery/", {
+                method: "POST",
+                headers: { "Authorization": `Bearer ${getToken()}` },
+                body: formData
+            });
 
-        const result = await response.json();
+            const result = await response.json();
+            console.log(result);
 
-        console.log(result);
+        }
 
-    }
+        form.reset();
 
-    form.reset();
+        if (preview) {
+            preview.style.display = "none";
+            preview.src = "";
+        }
 
-    preview.style.display = "none";
-    preview.src = "";
+        selectedFiles = [];
 
-    selectedFiles = [];
+        await displayGallery();
 
-    await displayGallery();
+        alert("Gallery image uploaded successfully.");
 
-    alert("Gallery image uploaded successfully.");
-
-});
+    });
+}
 
 // =====================================
 // DELETE IMAGE
@@ -185,7 +208,8 @@ async function deleteImage(id) {
     try {
 
         const response = await fetch(`/api/gallery/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: { "Authorization": `Bearer ${getToken()}` }
         });
 
         const result = await response.json();
@@ -211,7 +235,6 @@ async function deleteImage(id) {
 
 }
 
-// Make deleteImage available to the HTML onclick
 window.deleteImage = deleteImage;
 
 // =====================================
@@ -219,5 +242,3 @@ window.deleteImage = deleteImage;
 // =====================================
 
 displayGallery();
-
-

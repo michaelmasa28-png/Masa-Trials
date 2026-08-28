@@ -1,3 +1,9 @@
+import logging
+import os
+import shutil
+import uuid
+from datetime import date
+
 from fastapi import (
     APIRouter,
     Depends,
@@ -10,13 +16,12 @@ from fastapi import (
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.models import Gallery
+from app.dependencies import get_current_admin
+from app.models import Gallery, Admin
+from app.utils import validate_upload, MAX_IMAGE_SIZE, ALLOWED_IMAGE_TYPES
 from app.schema import GalleryResponse
 
-import os
-import shutil
-import uuid
-from datetime import date
+logger = logging.getLogger(__name__)
 
 
 router = APIRouter(
@@ -60,7 +65,7 @@ def get_gallery(
     "/",
     response_model=GalleryResponse
 )
-def upload_gallery_image(
+async def upload_gallery_image(
 
     title: str = Form(...),
 
@@ -72,17 +77,14 @@ def upload_gallery_image(
 
     image: UploadFile = File(...),
 
+    current_admin: Admin = Depends(get_current_admin),
     db: Session = Depends(get_db)
 
 ):
 
-    # ======================================
-    # DEBUG
-    # ======================================
+    logger.info("Gallery upload: title=%s, image=%s", title, image.filename)
 
-    print("===== GALLERY UPLOAD =====")
-    print("TITLE:", title)
-    print("IMAGE:", image.filename)
+    await validate_upload(image, MAX_IMAGE_SIZE, ALLOWED_IMAGE_TYPES, "Image")
 
     extension = os.path.splitext(
         image.filename
@@ -125,17 +127,14 @@ def upload_gallery_image(
 
     db.refresh(gallery)
 
-    print("IMAGE SAVED:", gallery.image)
-    print("DATABASE ID:", gallery.id)
-    print("==========================")
+    logger.info("Gallery saved: id=%s, path=%s", gallery.id, gallery.image)
 
     return gallery
 
-from fastapi import HTTPException
-import os
+
 
 @router.delete("/{id}")
-def delete_gallery(id: int, db: Session = Depends(get_db)):
+def delete_gallery(id: int, current_admin: Admin = Depends(get_current_admin), db: Session = Depends(get_db)):
     image = db.query(Gallery).filter(Gallery.id == id).first()
 
     if not image:
@@ -143,7 +142,7 @@ def delete_gallery(id: int, db: Session = Depends(get_db)):
 
     # Delete image file from disk
     if image.image:
-        file_path = image.image.replace("/uploads/", "app/uploads/")
+        file_path = image.image.replace("/uploads/", "public/uploads/")
         if os.path.exists(file_path):
             os.remove(file_path)
 

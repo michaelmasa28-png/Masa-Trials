@@ -11,6 +11,8 @@
 
 const API = "";
 
+const API_BASE = "/api/finance";
+
 
 // ======================================================
 // ELEMENTS
@@ -39,6 +41,12 @@ document.getElementById("amount");
 
 const category =
 document.getElementById("category");
+
+const givingAccount =
+document.getElementById("givingAccount");
+
+const accountHint =
+document.getElementById("accountHint");
 
 const notes =
 document.getElementById("notes");
@@ -88,7 +96,7 @@ let currentMember = null;
 // PAYMENT OBJECT
 // ======================================================
 
-let paymentData = {
+let payment = {
 
     member_id:null,
 
@@ -103,6 +111,10 @@ let paymentData = {
     amount:0,
 
     category:"",
+
+    account_type:"",
+
+    account_number:"",
 
     notes:"",
 
@@ -127,7 +139,7 @@ function loadMemberSession(){
 
     const saved =
 
-        localStorage.getItem("member");
+        localStorage.getItem("memberSession");
 
     if(!saved){
 
@@ -141,7 +153,7 @@ function loadMemberSession(){
 
         setTimeout(()=>{
 
-            location.href="memberlogin.html";
+            location.href="btn.html";
 
         },1500);
 
@@ -149,7 +161,55 @@ function loadMemberSession(){
 
     }
 
-    currentMember = JSON.parse(saved);
+    try{
+
+        currentMember = JSON.parse(saved);
+
+    }
+
+    catch(e){
+
+        localStorage.removeItem("memberSession");
+
+        showToast(
+
+            "Session error. Please login again.",
+
+            "error"
+
+        );
+
+        setTimeout(()=>{
+
+            location.href="btn.html";
+
+        },1500);
+
+        return;
+
+    }
+
+    if(currentMember.expiresAt && Date.now() > currentMember.expiresAt){
+
+        localStorage.removeItem("memberSession");
+
+        showToast(
+
+            "Session expired. Please login again.",
+
+            "error"
+
+        );
+
+        setTimeout(()=>{
+
+            location.href="btn.html";
+
+        },1500);
+
+        return;
+
+    }
 
     console.log(currentMember);
 
@@ -219,19 +279,23 @@ function populateMember(){
     }
 
 
-    paymentData.member_id =
+    payment.member_id =
 
-        currentMember.id;
+        currentMember.member_id ||
 
-    paymentData.member_number =
+        currentMember.id ||
+
+        null;
+
+    payment.member_number =
 
         currentMember.member_number;
 
-    paymentData.member_name =
+    payment.member_name =
 
         currentMember.full_name;
 
-    paymentData.registered_phone =
+    payment.registered_phone =
 
         currentMember.phone;
 
@@ -260,6 +324,8 @@ if(useDifferentPhone){
                 optionalPhone.value="";
 
             }
+
+            refreshSummary();
 
         }
 
@@ -366,66 +432,14 @@ function getPaymentPhone(){
 
 
 // ======================================================
-// START
+// START (REMOVED - Part 6 has initializeGivingPortal)
 // ======================================================
 
-window.addEventListener(
-
-    "DOMContentLoaded",
-
-    ()=>{
-
-        loadMemberSession();
-
-    }
-
-);
-
 // ======================================================
-// KINGDOM WAYS CHURCH
-// GIVING PORTAL
-// PART 2
+// RESTORED UTILITIES (phone validation, summary, thank-you)
+// These are used by later parts but were only defined in
+// the removed duplicate draft, so they're kept here.
 // ======================================================
-
-
-// ======================================================
-// CATEGORY SELECTION
-// ======================================================
-
-const categoryCards =
-document.querySelectorAll(".category-card");
-
-categoryCards.forEach(card=>{
-
-    card.addEventListener("click",()=>{
-
-        categoryCards.forEach(c=>{
-
-            c.classList.remove("active");
-
-        });
-
-        card.classList.add("active");
-
-        const radio =
-
-        card.querySelector("input");
-
-        if(radio){
-
-            radio.checked = true;
-
-            paymentData.category =
-
-            radio.value;
-
-        }
-
-    });
-
-});
-
-
 
 // ======================================================
 // VALIDATE PHONE
@@ -505,1580 +519,6 @@ function normalizePhone(phone){
 
 }
 
-
-
-// ======================================================
-// VALIDATE FORM
-// ======================================================
-
-function validatePayment(){
-
-    const phone =
-
-    getPaymentPhone();
-
-    if(paymentData.category===""){
-
-        showToast(
-
-        "Select giving category.",
-
-        "error"
-
-        );
-
-        return false;
-
-    }
-
-    if(amount.value===""){
-
-        showToast(
-
-        "Enter amount.",
-
-        "error"
-
-        );
-
-        amount.focus();
-
-        return false;
-
-    }
-
-    if(Number(amount.value)<=0){
-
-        showToast(
-
-        "Amount must be greater than zero.",
-
-        "error"
-
-        );
-
-        return false;
-
-    }
-
-    if(!validPhone(phone)){
-
-        showToast(
-
-        "Invalid phone number.",
-
-        "error"
-
-        );
-
-        return false;
-
-    }
-
-    paymentData.amount =
-
-    Number(amount.value);
-
-    paymentData.phone_used =
-
-    normalizePhone(phone);
-
-    paymentData.notes =
-
-    notes.value.trim();
-
-    return true;
-
-}
-
-
-
-// ======================================================
-// OPEN CONFIRMATION MODAL
-// ======================================================
-
-function openConfirmation(){
-
-    if(!validatePayment()){
-
-        return;
-
-    }
-
-    document.getElementById("confirmMember").textContent =
-
-    paymentData.member_name;
-
-    document.getElementById("confirmNumber").textContent =
-
-    paymentData.member_number;
-
-    document.getElementById("confirmPhone").textContent =
-
-    paymentData.phone_used;
-
-    document.getElementById("confirmCategory").textContent =
-
-    paymentData.category;
-
-    document.getElementById("confirmAmount").textContent =
-
-    "KES "+paymentData.amount.toLocaleString();
-
-    paymentModal.classList.add("active");
-
-}
-
-
-
-// ======================================================
-// CLOSE MODAL
-// ======================================================
-
-function closeConfirmation(){
-
-    paymentModal.classList.remove("active");
-
-}
-
-
-
-// ======================================================
-// FORM SUBMIT
-// ======================================================
-
-paymentForm.addEventListener(
-
-"submit",
-
-function(e){
-
-    e.preventDefault();
-
-    openConfirmation();
-
-});
-
-
-
-// ======================================================
-// CANCEL
-// ======================================================
-
-cancelBtn.addEventListener(
-
-"click",
-
-function(){
-
-    closeConfirmation();
-
-});
-
-
-
-// ======================================================
-// CONFIRM PAYMENT
-// ======================================================
-
-confirmBtn.addEventListener(
-
-"click",
-
-async function(){
-
-    closeConfirmation();
-
-    await requestSTKPush();
-
-});
-
-
-
-// ======================================================
-// REQUEST STK PUSH
-// ======================================================
-
-async function requestSTKPush(){
-
-    payBtn.disabled=true;
-
-    payBtn.classList
-
-// ======================================================
-// KINGDOM WAYS CHURCH
-// GIVING PORTAL
-// PART 3
-// ======================================================
-
-
-// ======================================================
-// PAYMENT POLLING
-// ======================================================
-
-let pollingTimer = null;
-
-let pollingAttempts = 0;
-
-const MAX_ATTEMPTS = 60;      // 5 minutes (5 sec interval)
-
-const POLL_INTERVAL = 5000;
-
-
-// ======================================================
-// START POLLING
-// ======================================================
-
-function startPaymentPolling(){
-
-    pollingAttempts = 0;
-
-    if(pollingTimer){
-
-        clearInterval(pollingTimer);
-
-    }
-
-    pollPaymentStatus();
-
-    pollingTimer = setInterval(
-
-        pollPaymentStatus,
-
-        POLL_INTERVAL
-
-    );
-
-}
-
-
-
-// ======================================================
-// STOP POLLING
-// ======================================================
-
-function stopPolling(){
-
-    if(pollingTimer){
-
-        clearInterval(pollingTimer);
-
-        pollingTimer = null;
-
-    }
-
-}
-
-
-
-// ======================================================
-// CHECK PAYMENT STATUS
-// ======================================================
-
-async function pollPaymentStatus(){
-
-    pollingAttempts++;
-
-    try{
-
-        const response = await fetch(
-
-            API +
-
-            "/finance/mpesa/status/" +
-
-            paymentData.checkout_request_id
-
-        );
-
-        const result = await response.json();
-
-        if(!response.ok){
-
-            throw new Error(
-
-                result.detail ||
-
-                "Unable to verify payment."
-
-            );
-
-        }
-
-        switch(result.status){
-
-            case "Pending":
-
-                updateWaitingMessage(
-
-                    "Waiting for PIN confirmation..."
-
-                );
-
-                break;
-
-
-            case "Processing":
-
-                updateWaitingMessage(
-
-                    "Payment is being processed..."
-
-                );
-
-                break;
-
-
-            case "Success":
-
-                stopPolling();
-
-              afterSuccessfulPayment(result);
-
-                break;
-
-
-            case "Cancelled":
-
-                stopPolling();
-
-                paymentCancelled();
-
-                break;
-
-
-            case "Failed":
-
-                stopPolling();
-
-                paymentFailed(
-
-                    result.message ||
-
-                    "Payment failed."
-
-                );
-
-                break;
-
-        }
-
-        if(pollingAttempts >= MAX_ATTEMPTS){
-
-            stopPolling();
-
-            paymentFailed(
-
-                "Hey relax try again later ,Thanks for interacting withous..|@masa7 DeV|."
-
-            );
-
-        }
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-    }
-
-}
-
-
-
-// ======================================================
-// UPDATE WAITING TEXT
-// ======================================================
-
-function updateWaitingMessage(message){
-
-    const waitingText =
-
-    document.getElementById("waitingText");
-
-    if(waitingText){
-
-        waitingText.textContent = message;
-
-    }
-
-}
-
-
-
-// ======================================================
-// SUCCESS
-// ======================================================
-
-function paymentSuccessful(result){
-
-    waitingCard.classList.remove("active");
-
-    failedCard.classList.remove("active");
-
-    successCard.classList.add("active");
-
-    payBtn.disabled = false;
-
-    payBtn.classList.remove("loading");
-
-
-    paymentData.status = "Success";
-
-    paymentData.transaction_id =
-
-        result.transaction_id;
-
-    paymentData.checkout_request_id =
-
-        result.checkout_request_id;
-
-    paymentData.mpesa_receipt =
-
-        result.mpesa_receipt;
-
-    paymentData.safaricom_name =
-
-        result.safaricom_name;
-
-    paymentData.phone_used =
-
-        result.phone;
-
-    paymentData.amount =
-
-        result.amount;
-
-    paymentData.category =
-
-        result.category;
-
-    paymentData.transaction_date =
-
-        result.transaction_date;
-
-
-    showToast(
-
-        "Payment received successfully."
-
-    );
-
-
-    generateReceipt(result);
-
-}
-
-
-
-// ======================================================
-// FAILED
-// ======================================================
-
-function paymentFailed(message){
-
-    waitingCard.classList.remove("active");
-
-    successCard.classList.remove("active");
-
-    failedCard.classList.add("active");
-
-    payBtn.disabled = false;
-
-    payBtn.classList.remove("loading");
-
-    document.getElementById(
-
-        "failedMessage"
-
-    ).textContent = message;
-
-    showToast(
-
-        message,
-
-        "error"
-
-    );
-
-}
-
-
-
-// ======================================================
-// CANCELLED
-// ======================================================
-
-function paymentCancelled(){
-
-    paymentFailed(
-
-        "Payment cancelled from phone."
-
-    );
-
-}
-
-
-
-// ======================================================
-// RESET UI
-// ======================================================
-
-function resetPaymentUI(){
-
-    waitingCard.classList.remove("active");
-
-    successCard.classList.remove("active");
-
-    failedCard.classList.remove("active");
-
-    receiptCard.classList.remove("active");
-
-    payBtn.disabled = false;
-
-    payBtn.classList.remove("loading");
-
-}
-
-
-
-// ======================================================
-// RETRY BUTTON
-// ======================================================
-
-const retryBtn =
-
-document.getElementById("retryBtn");
-
-if(retryBtn){
-
-    retryBtn.addEventListener(
-
-        "click",
-
-        ()=>{
-
-            resetPaymentUI();
-
-        }
-
-    );
-
-}
-
-
-// ======================================================
-// KINGDOM WAYS CHURCH
-// GIVING PORTAL
-// PART 4
-// ======================================================
-
-
-// ======================================================
-// GENERATE RECEIPT
-// ======================================================
-
-function generateReceipt(result){
-
-    receiptCard.classList.add("active");
-
-    setReceiptValue(
-
-        "receiptMember",
-
-        paymentData.member_name
-
-    );
-
-    setReceiptValue(
-
-        "receiptMemberNumber",
-
-        paymentData.member_number
-
-    );
-
-    setReceiptValue(
-
-        "receiptSafaricomName",
-
-        result.safaricom_name ||
-
-        "Not Available"
-
-    );
-
-    setReceiptValue(
-
-        "receiptPhone",
-
-        result.phone
-
-    );
-
-    setReceiptValue(
-
-        "receiptCategory",
-
-        result.category
-
-    );
-
-    setReceiptValue(
-
-        "receiptAmount",
-
-        "KES " +
-
-        Number(result.amount)
-
-        .toLocaleString()
-
-    );
-
-    setReceiptValue(
-
-        "receiptReference",
-
-        result.mpesa_receipt
-
-    );
-
-    setReceiptValue(
-
-        "receiptDate",
-
-        result.transaction_date
-
-    );
-
-    setReceiptValue(
-
-        "receiptCheckout",
-
-        result.checkout_request_id
-
-    );
-
-    setReceiptValue(
-
-        "receiptTransaction",
-
-        result.transaction_id
-
-    );
-
-    saveReceiptHistory(result);
-
-}
-
-
-
-// ======================================================
-// SET RECEIPT FIELD
-// ======================================================
-
-function setReceiptValue(id,value){
-
-    const element =
-
-    document.getElementById(id);
-
-    if(element){
-
-        element.textContent = value;
-
-    }
-
-}
-
-
-
-// ======================================================
-// SAVE LOCAL HISTORY
-// (Quick Member Reference)
-// ======================================================
-
-function saveReceiptHistory(result){
-
-    let history =
-
-    JSON.parse(
-
-        localStorage.getItem(
-
-            "givingHistory"
-
-        ) || "[]"
-
-    );
-
-    history.unshift({
-
-        member_number:
-
-        paymentData.member_number,
-
-        member_name:
-
-        paymentData.member_name,
-
-        safaricom_name:
-
-        result.safaricom_name,
-
-        receipt:
-
-        result.mpesa_receipt,
-
-        amount:
-
-        result.amount,
-
-        category:
-
-        result.category,
-
-        phone:
-
-        result.phone,
-
-        transaction_date:
-
-        result.transaction_date
-
-    });
-
-    if(history.length>30){
-
-        history =
-
-        history.slice(0,30);
-
-    }
-
-    localStorage.setItem(
-
-        "givingHistory",
-
-        JSON.stringify(history)
-
-    );
-
-}
-
-
-
-// ======================================================
-// PRINT RECEIPT
-// ======================================================
-
-const printBtn =
-
-document.getElementById(
-
-    "printBtn"
-
-);
-
-if(printBtn){
-
-    printBtn.addEventListener(
-
-        "click",
-
-        ()=>{
-
-            window.print();
-
-        }
-
-    );
-
-}
-
-
-
-// ======================================================
-// NEW PAYMENT
-// ======================================================
-
-const newPaymentBtn =
-
-document.getElementById(
-
-    "newPaymentBtn"
-
-);
-
-if(newPaymentBtn){
-
-    newPaymentBtn.addEventListener(
-
-        "click",
-
-        ()=>{
-
-            paymentForm.reset();
-
-            receiptCard.classList.remove(
-
-                "active"
-
-            );
-
-            successCard.classList.remove(
-
-                "active"
-
-            );
-
-            failedCard.classList.remove(
-
-                "active"
-
-            );
-
-            waitingCard.classList.remove(
-
-                "active"
-
-            );
-
-            paymentData.category = "";
-
-            paymentData.amount = 0;
-
-            paymentData.notes = "";
-
-            paymentData.phone_used =
-
-            paymentData.registered_phone;
-
-            categoryCards.forEach(card=>{
-
-                card.classList.remove(
-
-                    "active"
-
-                );
-
-            });
-
-            payBtn.disabled=false;
-
-            payBtn.classList.remove(
-
-                "loading"
-
-            );
-
-            amount.focus();
-
-        }
-
-    );
-
-}
-
-
-
-// ======================================================
-// VIEW HISTORY
-// ======================================================
-
-function loadGivingHistory(){
-
-    const history =
-
-    JSON.parse(
-
-        localStorage.getItem(
-
-            "givingHistory"
-
-        ) || "[]"
-
-    );
-
-    console.log(
-
-        "Recent Giving:",
-
-        history
-
-    );
-
-}
-
-
-
-// ======================================================
-// STARTUP
-// ======================================================
-
-loadGivingHistory();
-
-// ======================================================
-// KINGDOM WAYS CHURCH
-// GIVING PORTAL
-// PART 5
-// ======================================================
-
-
-// ======================================================
-// ACTIVE PAYMENT SESSION
-// ======================================================
-
-const ACTIVE_PAYMENT_KEY =
-
-"kw_active_payment";
-
-
-
-// ======================================================
-// SAVE ACTIVE PAYMENT
-// ======================================================
-
-function saveActivePayment(){
-
-    localStorage.setItem(
-
-        ACTIVE_PAYMENT_KEY,
-
-        JSON.stringify({
-
-            checkout_request_id:
-
-            paymentData.checkout_request_id,
-
-            transaction_id:
-
-            paymentData.transaction_id,
-
-            amount:
-
-            paymentData.amount,
-
-            category:
-
-            paymentData.category,
-
-            phone:
-
-            paymentData.phone_used,
-
-            started:
-
-            Date.now()
-
-        })
-
-    );
-
-}
-
-
-
-// ======================================================
-// CLEAR ACTIVE PAYMENT
-// ======================================================
-
-function clearActivePayment(){
-
-    localStorage.removeItem(
-
-        ACTIVE_PAYMENT_KEY
-
-    );
-
-}
-
-
-
-// ======================================================
-// RESUME PAYMENT
-// ======================================================
-
-function resumePendingPayment(){
-
-    const saved =
-
-    localStorage.getItem(
-
-        ACTIVE_PAYMENT_KEY
-
-    );
-
-    if(!saved){
-
-        return;
-
-    }
-
-    const payment =
-
-    JSON.parse(saved);
-
-    paymentData.checkout_request_id =
-
-    payment.checkout_request_id;
-
-    paymentData.transaction_id =
-
-    payment.transaction_id;
-
-    paymentData.amount =
-
-    payment.amount;
-
-    paymentData.category =
-
-    payment.category;
-
-    paymentData.phone_used =
-
-    payment.phone;
-
-    waitingCard.classList.add(
-
-        "active"
-
-    );
-
-    showToast(
-
-        "Resuming pending payment..."
-
-    );
-
-    startPaymentPolling();
-
-}
-
-
-
-// ======================================================
-// DUPLICATE PROTECTION
-// ======================================================
-
-let paymentBusy = false;
-
-function beginPayment(){
-
-    if(paymentBusy){
-
-        showToast(
-
-        "Another payment is already running.",
-
-        "error"
-
-        );
-
-        return false;
-
-    }
-
-    paymentBusy = true;
-
-    return true;
-
-}
-
-
-
-function finishPayment(){
-
-    paymentBusy = false;
-
-}
-
-
-
-// ======================================================
-// HISTORY TABLE
-// ======================================================
-
-const historyContainer =
-
-document.getElementById(
-
-"historyContainer"
-
-);
-
-
-
-// ======================================================
-// LOAD HISTORY
-// ======================================================
-
-async function loadTransactionHistory(){
-
-    if(!historyContainer){
-
-        return;
-
-    }
-
-    historyContainer.innerHTML =
-
-    "Loading history...";
-
-    try{
-
-        const response = await fetch(
-
-        API+
-
-        "/finance/member-history/"+
-
-        paymentData.member_number
-
-        );
-
-        const history =
-
-        await response.json();
-
-        if(!response.ok){
-
-            throw new Error(
-
-            history.detail||
-
-            "Unable to load history."
-
-            );
-
-        }
-
-        renderHistory(history);
-
-    }
-
-    catch(error){
-
-        historyContainer.innerHTML=
-
-        "<p>No history available.</p>";
-
-    }
-
-}
-
-
-
-// ======================================================
-// RENDER HISTORY
-// ======================================================
-
-function renderHistory(history){
-
-    if(history.length===0){
-
-        historyContainer.innerHTML=`
-
-            <p>
-
-            No previous giving records.
-
-            </p>
-
-        `;
-
-        return;
-
-    }
-
-    historyContainer.innerHTML="";
-
-    history.forEach(item=>{
-
-        const row=
-
-        document.createElement("div");
-
-        row.className="history-row";
-
-        row.innerHTML=`
-
-        <div>
-
-            <strong>
-
-            ${item.category}
-
-            </strong>
-
-        </div>
-
-        <div>
-
-            KES
-
-            ${Number(item.amount)
-
-            .toLocaleString()}
-
-        </div>
-
-        <div>
-
-            ${item.mpesa_receipt}
-
-        </div>
-
-        <div>
-
-            ${item.transaction_date}
-
-        </div>
-
-        `;
-
-        historyContainer.appendChild(row);
-
-    });
-
-}
-
-
-
-// ======================================================
-// DOWNLOAD RECEIPT
-// ======================================================
-
-const downloadBtn =
-
-document.getElementById(
-
-"downloadReceiptBtn"
-
-);
-
-if(downloadBtn){
-
-downloadBtn.addEventListener(
-
-"click",
-
-()=>{
-
-window.print();
-
-}
-
-);
-
-}
-
-
-
-// ======================================================
-// SUCCESS CLEANUP
-// ======================================================
-
-function paymentFinishedSuccessfully(result){
-
-    clearActivePayment();
-
-    finishPayment();
-
-    paymentSuccessful(result);
-
-    loadTransactionHistory();
-
-}
-
-
-
-// ======================================================
-// FAILURE CLEANUP
-// ======================================================
-
-function paymentFinishedFailed(message){
-
-    clearActivePayment();
-
-    finishPayment();
-
-    paymentFailed(message);
-
-}
-
-
-
-// ======================================================
-// STARTUP RECOVERY
-// ======================================================
-
-window.addEventListener(
-
-"load",
-
-()=>{
-
-    resumePendingPayment();
-
-});
-
-// ======================================================
-// KINGDOM WAYS CHURCH
-// GIVING PORTAL
-// PART 6 (FINAL)
-// ======================================================
-
-
-// ======================================================
-// FORMAT MONEY
-// ======================================================
-
-function formatMoney(value){
-
-    return "KES " +
-
-    Number(value).toLocaleString(
-
-        "en-KE",
-
-        {
-
-            minimumFractionDigits:2,
-
-            maximumFractionDigits:2
-
-        }
-
-    );
-
-}
-
-
-
-// ======================================================
-// FORMAT DATE
-// ======================================================
-
-function formatDate(date){
-
-    if(!date){
-
-        return "--";
-
-    }
-
-    return new Date(date)
-
-    .toLocaleString(
-
-        "en-KE",
-
-        {
-
-            year:"numeric",
-
-            month:"long",
-
-            day:"numeric",
-
-            hour:"2-digit",
-
-            minute:"2-digit"
-
-        }
-
-    );
-
-}
-
-
-
-// ======================================================
-// AUTO FORMAT AMOUNT
-// ======================================================
-
-if(amount){
-
-    amount.addEventListener(
-
-        "input",
-
-        ()=>{
-
-            let value =
-
-            amount.value.replace(
-
-                /[^0-9]/g,
-
-                ""
-
-            );
-
-            amount.value = value;
-
-        }
-
-    );
-
-}
-
-
-
-// ======================================================
-// OPTIONAL PHONE
-// ======================================================
-
-if(optionalPhone){
-
-    optionalPhone.addEventListener(
-
-        "blur",
-
-        ()=>{
-
-            if(
-
-                optionalPhone.value.trim()!=="" &&
-
-                !validPhone(
-
-                    optionalPhone.value
-
-                )
-
-            ){
-
-                showToast(
-
-                "Invalid M-Pesa phone number.",
-
-                "error"
-
-                );
-
-                optionalPhone.focus();
-
-            }
-
-        }
-
-    );
-
-}
-
-
-
-// ======================================================
-// SESSION CHECK
-// ======================================================
-
-function verifySession(){
-
-    const member =
-
-    localStorage.getItem("member");
-
-    if(!member){
-
-        showToast(
-
-        "Login session expired.",
-
-        "error"
-
-        );
-
-        setTimeout(()=>{
-
-            location.href=
-
-            "memberlogin.html";
-
-        },1500);
-
-        return false;
-
-    }
-
-    return true;
-
-}
-
-
-
-// ======================================================
-// BEFORE PAYMENT
-// ======================================================
-
-function preparePayment(){
-
-    if(!verifySession()){
-
-        return false;
-
-    }
-
-    if(!validatePayment()){
-
-        return false;
-
-    }
-
-    if(!beginPayment()){
-
-        return false;
-
-    }
-
-    return true;
-
-}
-
-
-
-// ======================================================
-// CONNECTION CHECK
-// ======================================================
-
-window.addEventListener(
-
-"offline",
-
-()=>{
-
-showToast(
-
-"No internet connection.",
-
-"error"
-
-);
-
-});
-
-
-
-window.addEventListener(
-
-"online",
-
-()=>{
-
-showToast(
-
-"Connection restored."
-
-);
-
-});
-
-
-
 // ======================================================
 // REFRESH MEMBER SUMMARY
 // ======================================================
@@ -2093,7 +533,7 @@ function refreshSummary(){
 
     formatMoney(
 
-    paymentData.amount || 0
+    payment.amount || 0
 
     );
 
@@ -2105,9 +545,15 @@ function refreshSummary(){
 
     ).textContent =
 
-    paymentData.category ||
+    payment.category ||
 
     "--";
+
+
+
+    const shownPhone =
+
+    getLiveSummaryPhone();
 
 
 
@@ -2117,222 +563,45 @@ function refreshSummary(){
 
     ).textContent =
 
-    paymentData.phone_used ||
-
-    paymentData.registered_phone ||
+    shownPhone ||
 
     "--";
 
 }
 
-
-
 // ======================================================
-// LIVE SUMMARY
+// LIVE SUMMARY PHONE
+// Shows the actual number that will be charged, updating
+// as the user types or checks "Use another M-Pesa number".
 // ======================================================
 
-if(amount){
+function getLiveSummaryPhone(){
 
-amount.addEventListener(
+    if(!useDifferentPhone){
 
-"keyup",
+        return payment.registered_phone || "";
 
-refreshSummary
+    }
 
-);
+    if(useDifferentPhone.checked){
+
+        const alt =
+
+        optionalPhone.value.trim();
+
+        if(alt){
+
+            return alt;
+
+        }
+
+        return "Another number...";
+
+    }
+
+    return payment.registered_phone || "";
 
 }
-
-
-
-if(category){
-
-category.addEventListener(
-
-"change",
-
-refreshSummary
-
-);
-
-}
-
-
-
-// ======================================================
-// RESET FORM
-// ======================================================
-
-function clearForm(){
-
-    paymentForm.reset();
-
-    paymentData.amount = 0;
-
-    paymentData.category = "";
-
-    paymentData.notes = "";
-
-    paymentData.phone_used =
-
-    paymentData.registered_phone;
-
-    paymentData.checkout_request_id = "";
-
-    paymentData.transaction_id = "";
-
-    paymentData.mpesa_receipt = "";
-
-    paymentData.safaricom_name = "";
-
-    paymentData.status = "Pending";
-
-    categoryCards.forEach(card=>{
-
-        card.classList.remove(
-
-        "active"
-
-        );
-
-    });
-
-    refreshSummary();
-
-}
-
-
-
-// ======================================================
-// PAGE START
-// ======================================================
-
-document.addEventListener(
-
-"DOMContentLoaded",
-
-()=>{
-
-    verifySession();
-
-    loadMemberSession();
-
-    refreshSummary();
-
-    loadTransactionHistory();
-
-    resumePendingPayment();
-
-});
-
-
-
-// ======================================================
-// PAGE EXIT
-// ======================================================
-
-window.addEventListener(
-
-"beforeunload",
-
-()=>{
-
-    stopPolling();
-
-});
-
-
-
-// ======================================================
-// DEBUG (Development Only)
-// ======================================================
-
-console.log(
-
-"%cKINGDOM WAYS GIVING PORTAL",
-
-"color:#2563eb;font-size:18px;font-weight:bold;"
-
-);
-
-console.log(
-
-"Frontend Ready."
-
-);
-
-
-
-// ======================================================
-// BACKEND ROUTES REQUIRED
-// ======================================================
-//
-// POST   /finance/mpesa/stkpush
-//
-// GET    /finance/mpesa/status/{checkout_request_id}
-//
-// GET    /finance/member-history/{member_number}
-//
-// POST   /finance/mpesa/callback
-//
-// GET    /finance/receipt/{transaction_id}
-//
-// ======================================================
-
-
-
-// ======================================================
-// FINAL NOTES
-// ======================================================
-//
-// ✔ Member logs in once.
-//
-// ✔ Phone auto-filled.
-//
-// ✔ Optional alternate M-Pesa number.
-//
-// ✔ Member selects:
-//
-//      • Tithe
-//      • Offering
-//      • Donation
-//      • Pledge
-//
-// ✔ Browser requests STK Push.
-//
-// ✔ Backend sends STK Push.
-//
-// ✔ Member enters PIN.
-//
-// ✔ Safaricom calls FastAPI callback.
-//
-// ✔ Backend verifies payment.
-//
-// ✔ Backend stores:
-//
-//      Member Number
-//      Member Name
-//      Registered Phone
-//      Phone Used
-//      Safaricom Name
-//      Receipt Number
-//      Amount
-//      Category
-//      Transaction Date
-//      Status
-//
-// ✔ Frontend displays receipt.
-//
-// ✔ Finance dashboard immediately sees transaction.
-//
-// ======================================================
-
-
-// ======================================================
-// KINGDOM WAYS CHURCH
-// VERIFIED PAYMENT THANK YOU ANIMATION
-// Show ONLY after backend confirms SUCCESS
-// ======================================================
 
 function showVerifiedThankYou(memberName, category){
 
@@ -2702,6 +971,126 @@ if (optionalPhone) {
 }
 
 // ======================================================
+// LOAD GIVING ACCOUNTS
+// ======================================================
+
+async function loadGivingAccounts() {
+
+    if (!givingAccount) return;
+
+    try {
+
+        const response = await fetch("/api/giving-accounts");
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+
+            throw new Error("Unable to load giving accounts.");
+
+        }
+
+        const accounts = data.accounts || [];
+
+        givingAccount.innerHTML = "";
+
+        const placeholder = document.createElement("option");
+
+        placeholder.value = "";
+
+        placeholder.textContent = "-- Select receiving account --";
+
+        givingAccount.appendChild(placeholder);
+
+        accounts.forEach(account => {
+
+            const option = document.createElement("option");
+
+            option.value = account.id;
+
+            option.dataset.type = account.account_type;
+
+            option.dataset.number = account.number;
+
+            option.dataset.name = account.account_name || account.name;
+
+            option.textContent = account.name +
+                (account.account_name ? " (" + account.account_name + ")" : "");
+
+            givingAccount.appendChild(option);
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        if (accountHint) {
+
+            accountHint.textContent =
+                "No giving accounts configured yet.";
+
+        }
+
+    }
+
+}
+
+function onGivingAccountChange() {
+
+    if (!givingAccount) {
+
+        payment.account_type = "paybill";
+
+        payment.account_number = "";
+
+        return;
+
+    }
+
+    const option = givingAccount.selectedOptions[0];
+
+    payment.account_type = option ? option.dataset.type : "";
+
+    payment.account_number = option ? option.dataset.number : "";
+
+    if (accountHint) {
+
+        if (option && option.dataset.type === "paybill") {
+
+            accountHint.textContent =
+                "M-Pesa prompt will be sent to PayBill " +
+                option.dataset.number + ".";
+
+        }
+
+        else if (option && option.dataset.type === "phone") {
+
+            accountHint.textContent =
+                "Pay directly to M-Pesa " + option.dataset.number +
+                " and confirm on your phone.";
+
+        }
+
+        else {
+
+            accountHint.textContent = "";
+
+        }
+
+    }
+
+}
+
+if (givingAccount) {
+
+    givingAccount.addEventListener("change", onGivingAccountChange);
+
+}
+
+// ======================================================
 // VALIDATE PAYMENT
 // ======================================================
 
@@ -2730,6 +1119,24 @@ function validatePayment() {
         return false;
 
     }
+
+    if (givingAccount && !givingAccount.value) {
+
+        showToast(
+
+            "Please select a giving account.",
+
+            "error"
+
+        );
+
+        givingAccount.focus();
+
+        return false;
+
+    }
+
+    onGivingAccountChange();
 
     if (!payment.amount || payment.amount <= 0) {
 
@@ -2977,7 +1384,7 @@ async function requestSTKPush() {
 
         const response = await fetch(
 
-            `${API_BASE}/finance/mpesa/stkpush`,
+            `${API_BASE}/stk-push`,
 
             {
 
@@ -2993,17 +1400,17 @@ async function requestSTKPush() {
 
                     member_id: payment.member_id,
 
-                    member_number: payment.member_number,
-
-                    member_name: payment.member_name,
-
-                    phone: payment.phone_used,
+                    phone_number: payment.phone_used,
 
                     amount: payment.amount,
 
                     category: payment.category,
 
-                    notes: payment.notes
+                    reference: payment.notes,
+
+                    account_type: payment.account_type,
+
+                    account_number: payment.account_number
 
                 })
 
@@ -3015,13 +1422,33 @@ async function requestSTKPush() {
 
         if (!response.ok) {
 
-            throw new Error(
+            let message =
+                (result && result.detail) ||
+                result.message ||
+                "Unable to initiate payment.";
 
-                result.detail ||
+            if (Array.isArray(message)) {
+
+                const parts = message.map(m => m && m.msg);
+
+                message = parts.filter(Boolean).join("; ") ||
+                    "The payment request is invalid.";
+
+            }
+
+            throw new Error(message);
+
+        }
+
+        if (result && result.success === false) {
+
+            throw new Error(
 
                 result.message ||
 
-                "Unable to initiate payment."
+                result.customer_message ||
+
+                "The payment could not be initiated."
 
             );
 
@@ -3029,15 +1456,39 @@ async function requestSTKPush() {
 
         payment.checkout_request_id =
 
-            result.checkout_request_id;
+            result.checkout_request_id || "";
 
-        payment.transaction_id =
-
-            result.transaction_id || "";
+        // transaction_id isn't known yet at this point —
+        // it's assigned by the backend once the M-Pesa
+        // callback confirms the payment. It gets filled in
+        // during status polling below.
+        payment.transaction_id = "";
 
         payment.status = "Pending";
 
         saveActivePayment();
+
+        // ---- PHONE account: no STK push / no polling ----
+        if (payment.account_type === "phone") {
+
+            updateWaitingMessage(
+                result.customer_message ||
+                result.message ||
+                "Pay to the M-Pesa number shown to complete your giving."
+            );
+
+            showToast(
+                result.customer_message || result.message ||
+                "Pay to the M-Pesa number shown."
+            );
+
+            payBtn.disabled = false;
+
+            payBtn.classList.remove("loading");
+
+            return;
+
+        }
 
         showToast(
 
@@ -3121,7 +1572,7 @@ async function pollPaymentStatus() {
 
         const response = await fetch(
 
-            `${API_BASE}/finance/mpesa/status/${payment.checkout_request_id}`
+            `${API_BASE}/mpesa/status/${payment.checkout_request_id}`
 
         );
 
@@ -3162,6 +1613,10 @@ async function pollPaymentStatus() {
                 break;
 
             case "Success":
+
+                payment.transaction_id =
+
+                    result.transaction_id || "";
 
                 stopPaymentPolling();
 
@@ -3299,6 +1754,48 @@ function paymentFailed(message) {
         "error"
 
     );
+
+}
+
+// ======================================================
+// CANCEL PAYMENT
+// ======================================================
+
+function cancelPayment() {
+
+    stopPaymentPolling();
+
+    clearActivePayment();
+
+    payment.status = "Cancelled";
+
+    finishPayment();
+
+    showFailedCard(
+
+        "Payment cancelled."
+
+    );
+
+    showToast(
+
+        "Payment cancelled.",
+
+        "error"
+
+    );
+
+    setTimeout(() => {
+
+        resetStatusCards();
+
+        payBtn.disabled = false;
+
+        payBtn.classList.remove("loading");
+
+        refreshSummary();
+
+    }, 3000);
 
 }
 
@@ -3494,7 +1991,7 @@ if(downloadReceiptBtn){
 
                 const response = await fetch(
 
-                    `${API_BASE}/finance/receipt/${payment.transaction_id}`
+                    `${API_BASE}/receipt/${payment.transaction_id}`
 
                 );
 
@@ -3528,7 +2025,7 @@ if(downloadReceiptBtn){
 
                 a.click();
 
-                window.URL.revokeObjectURL(url);
+                setTimeout(() => window.URL.revokeObjectURL(url), 100);
 
             }
 
@@ -3560,6 +2057,8 @@ async function loadTransactionHistory(){
 
     if(!historyContainer) return;
 
+    if(!payment || !payment.member_number) return;
+
     historyContainer.innerHTML =
     "<p>Loading...</p>";
 
@@ -3567,7 +2066,7 @@ async function loadTransactionHistory(){
 
         const response = await fetch(
 
-            `${API_BASE}/finance/member-history/${payment.member_number}`
+            `${API_BASE}/member-history/${payment.member_number}`
 
         );
 
@@ -3657,6 +2156,10 @@ function resetPayment(){
 
     payment.category = "";
 
+    payment.account_type = "";
+
+    payment.account_number = "";
+
     payment.notes = "";
 
     payment.checkout_request_id = "";
@@ -3686,17 +2189,49 @@ function resetPayment(){
 
     }
 
-    receiptCard.classList.remove("active");
+    if(givingAccount){
 
-    successCard.classList.remove("active");
+        givingAccount.value = "";
 
-    failedCard.classList.remove("active");
+    }
 
-    waitingCard.classList.remove("active");
+    if(accountHint){
 
-    payBtn.disabled = false;
+        accountHint.textContent = "";
 
-    payBtn.classList.remove("loading");
+    }
+
+    if(receiptCard){
+
+        receiptCard.classList.remove("active");
+
+    }
+
+    if(successCard){
+
+        successCard.classList.remove("active");
+
+    }
+
+    if(failedCard){
+
+        failedCard.classList.remove("active");
+
+    }
+
+    if(waitingCard){
+
+        waitingCard.classList.remove("active");
+
+    }
+
+    if(payBtn){
+
+        payBtn.disabled = false;
+
+        payBtn.classList.remove("loading");
+
+    }
 
     refreshSummary();
 
@@ -3725,6 +2260,22 @@ if(retryBtn){
         "click",
 
         resetPayment
+
+    );
+
+}
+
+const cancelPaymentBtn =
+
+document.getElementById("cancelPaymentBtn");
+
+if(cancelPaymentBtn){
+
+    cancelPaymentBtn.addEventListener(
+
+        "click",
+
+        cancelPayment
 
     );
 
@@ -3844,9 +2395,35 @@ function resumePendingPayment() {
 
 function verifySession() {
 
-    const saved = localStorage.getItem("member");
+    console.log("[OFFERING] verifySession checking...");
+
+    const saved = localStorage.getItem("memberSession");
+
+    console.log("[OFFERING] memberSession value:", saved ? saved.substring(0, 100) + "..." : "NULL");
 
     if (!saved) {
+
+        // Fallback: check old keys that other pages might have used
+        const oldKeys = ["member", "currentMember"];
+        for (const key of oldKeys) {
+            const oldVal = localStorage.getItem(key);
+            if (oldVal) {
+                console.log("[OFFERING] Found old session key:", key);
+                try {
+                    const oldData = JSON.parse(oldVal);
+                    const migrated = {
+                        ...oldData,
+                        loginTime: Date.now(),
+                        expiresAt: Date.now() + (6 * 60 * 60 * 1000)
+                    };
+                    localStorage.setItem("memberSession", JSON.stringify(migrated));
+                    console.log("[OFFERING] Migrated old session to memberSession");
+                    return true;
+                } catch(e) {
+                    console.log("[OFFERING] Failed to migrate old session:", e);
+                }
+            }
+        }
 
         showToast(
             "Your login session has expired.",
@@ -3855,9 +2432,44 @@ function verifySession() {
 
         setTimeout(() => {
 
-            location.href = "memberlogin.html";
+            location.href = "btn.html";
 
         }, 1500);
+
+        return false;
+
+    }
+
+    try {
+
+        const session = JSON.parse(saved);
+
+        console.log("[OFFERING] Session parsed, expiresAt:", session.expiresAt, "now:", Date.now());
+
+        if (session.expiresAt && Date.now() > session.expiresAt) {
+
+            localStorage.removeItem("memberSession");
+
+            showToast(
+                "Your login session has expired.",
+                "error"
+            );
+
+            setTimeout(() => {
+
+                location.href = "btn.html";
+
+            }, 1500);
+
+            return false;
+
+        }
+
+    } catch(e) {
+
+        console.log("[OFFERING] Session parse error:", e);
+
+        localStorage.removeItem("memberSession");
 
         return false;
 
@@ -3979,50 +2591,8 @@ window.addEventListener(
 );
 
 // ======================================================
-// PAGE STARTUP
+// PAGE STARTUP (REMOVED - Part 6 has initializeGivingPortal)
 // ======================================================
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    () => {
-
-        if (!verifySession()) {
-
-            return;
-
-        }
-
-        loadMemberSession();
-
-        refreshSummary();
-
-        loadTransactionHistory();
-
-        resumePendingPayment();
-
-    }
-
-);
-
-// ======================================================
-// DEBUG
-// ======================================================
-
-console.log(
-
-    "%cKINGDOM WAYS CHURCH CMS",
-
-    "color:#2563eb;font-size:18px;font-weight:bold;"
-
-);
-
-console.log(
-
-    "Offering Module Loaded Successfully."
-
-);
 
 // ======================================================
 // KINGDOM WAYS CHURCH CMS
@@ -4039,6 +2609,8 @@ function clearPaymentForm() {
 
     payment.amount = 0;
     payment.category = "";
+    payment.account_type = "";
+    payment.account_number = "";
     payment.notes = "";
     payment.phone_used = payment.registered_phone;
 
@@ -4053,6 +2625,18 @@ function clearPaymentForm() {
     if (category) {
 
         category.value = "";
+
+    }
+
+    if (givingAccount) {
+
+        givingAccount.value = "";
+
+    }
+
+    if (accountHint) {
+
+        accountHint.textContent = "";
 
     }
 
@@ -4207,6 +2791,8 @@ function initializeGivingPortal() {
 
     loadMemberSession();
 
+    loadGivingAccounts();
+
     refreshSummary();
 
     loadTransactionHistory();
@@ -4224,22 +2810,6 @@ document.addEventListener(
     "DOMContentLoaded",
 
     initializeGivingPortal
-
-);
-
-// ======================================================
-// APPLICATION SHUTDOWN
-// ======================================================
-
-window.addEventListener(
-
-    "beforeunload",
-
-    () => {
-
-        stopPaymentPolling();
-
-    }
 
 );
 

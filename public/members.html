@@ -20,7 +20,7 @@
         </div>
 
         <ul class="menu">
-           <li><a href="dashboard.html"><|<|</a></li>
+           <li><a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back</a></li>
 
             <li><a href="members.html">👥 Members</a></li>
             <li><a href="ministries.html">🙏 Ministries</a></li>
@@ -28,16 +28,21 @@
             <li><a href="sermons-admin.html">📖 Sermons</a></li>
             <li><a href="galleryadmin.html">🖼 Gallery</a></li>
             <li><a href="settings.html">⚙ Settings</a></li>
-            <li><a href="../login.html">🚪 Logout</a></li>
+            <li><a href="login.html">🚪 Logout</a></li>
         </ul>
 
     </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Main Content -->
     <main class="main-content">
  
         <!-- Header -->
         <header class="topbar">
+            <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
             <h1>Members Management</h1>
 
             <div class="admin">
@@ -81,6 +86,19 @@
 
 </div>
 <script src="members.js"></script>
+
+<script>
+(function(){
+    var toggle=document.getElementById("sidebarToggle");
+    var sidebar=document.querySelector(".sidebar");
+    var overlay=document.getElementById("sidebarOverlay");
+    if(!toggle||!sidebar)return;
+    function openSidebar(){sidebar.classList.add("open");toggle.classList.add("open");overlay.classList.add("active");}
+    function closeSidebar(){sidebar.classList.remove("open");toggle.classList.remove("open");overlay.classList.remove("active");}
+    toggle.addEventListener("click",function(){sidebar.classList.contains("open")?closeSidebar():openSidebar();});
+    overlay.addEventListener("click",closeSidebar);
+})();
+</script>
 
 </body>
 </html>

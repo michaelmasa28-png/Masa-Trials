@@ -20,25 +20,31 @@
         </div>
 
         <ul class="menu">
-            <li><a href="dashboard.html"><|.</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back</a></li>
             <li><a href="members.html">👥 Members</a></li>
             <li><a href="ministries.html">🙏 Ministries</a></li>
             <li><a href="events.html">📅 Events</a></li>
             <li><a href="sermons-admin.html">📖 Sermons</a></li>
             <li><a href="attendance.html">✅ Attendance</a></li>
-            <li><a href="settings.html">💰 Finance</a></li>
-            <li><a href="gallery.html">🖼 Gallery</a></li>
+            <li><a href="rolelogin.html">💰 Finance</a></li>
+            <li><a href="galleryadmin.html">🖼 Gallery</a></li>
             <li><a href="settings.html">⚙ Settings</a></li>
-            <li><a href="../login.html">🚪 Logout</a></li>
+            <li><a href="login.html">🚪 Logout</a></li>
         </ul>
 
     </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Main Content -->
     <main class="main-content">
 
         <!-- Top Bar -->
         <header class="topbar">
+
+            <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
 
             <h1>Ministries Management</h1>
 
@@ -141,7 +147,7 @@
 
 </div>
 
-<script src="js/dashboard.js"></script>
+<script src="dashboard.js"></script>
 
 </body>
 </html>

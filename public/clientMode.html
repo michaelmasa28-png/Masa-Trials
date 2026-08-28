@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Kingdom Ways Church</title>
+    <title>KingdomWays Church</title>
 
     <link rel="stylesheet" href="clientMode.css">
 
@@ -32,11 +32,11 @@
 
     <div id="welcomePopup" class="welcome-popup">
 
-        Welcome
+        <span class="welcome-hello">Welcome</span>
 
-        <span id="memberName"></span>
+        <span id="memberName" class="welcome-name"></span>
 
-        👋
+        <span class="welcome-emoji">👋</span>
 
     </div>
 
@@ -64,11 +64,23 @@
 
             </div>
 
+            <div class="center-title">
+
+                <span class="brand-name">
+
+                    KINGDOMWAYS
+
+                </span>
+
+            </div>
+
             <button
                 id="logoutBtn"
-                class="logout-btn">
+                class="logout-btn"
+                title="Logout"
+                aria-label="Logout">
 
-                Logout
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
 
             </button>
 
@@ -78,52 +90,36 @@
               HERO CONTENT
         ========================== -->
 
-        <div class="hero-content">
+       
+<div class="hero-content">
 
-            <h1>
+<div class="theme-vision">
 
-                KINGDOM WAYS
+    <div class="info-box" id="infoBox">
 
-            </h1>
-
-            <!-- Church Theme -->
-
-            <div class="theme-box">
-
-                <h2>
-
-                    Church Theme
-
-                </h2>
-
-                <p id="churchTheme">
-
-                    Theme will be updated by the Church Secretary.
-
-                </p>
-
-            </div>
-
-            <!-- Church Vision -->
-
-            <div class="vision-box">
-
-                <h2>
-
-                    Church Vision
-
-                </h2>
-
-                <p id="churchVision">
-
-                    Vision statement will appear here.
-
-                </p>
-
-            </div>
-
+        <div class="info-item">
+            <h2>
+                Church Theme
+            </h2>
+            <p id="churchTheme" class="info-message">
+                Theme will be updated by the Church Secretary.
+            </p>
         </div>
 
+        <div class="info-item">
+            <h2>
+                Church Vision
+            </h2>
+            <p id="churchVision" class="info-message">
+                Vision statement will appear here.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
     </header>
 
     <!-- ==========================
@@ -138,7 +134,9 @@
                     SERMONS
             ========================== -->
 
-            <div class="card">
+            <div class="card" data-card="sermons">
+
+                <div class="card-bg"></div>
 
                 <span class="icon">
 
@@ -171,7 +169,9 @@
                 NOTICE BOARD
             ========================== -->
 
-            <div class="card">
+            <div class="card" data-card="notice">
+
+                <div class="card-bg"></div>
 
                 <span class="icon">
 
@@ -204,7 +204,9 @@
                 CONNECT HUB
             ========================== -->
 
-            <div class="card">
+            <div class="card" data-card="connect">
+
+                <div class="card-bg"></div>
 
                 <span class="icon">
 
@@ -237,7 +239,9 @@
                   SUNDAY LIVE
             ========================== -->
 
-            <div class="card">
+            <div class="card" data-card="sunday-live">
+
+                <div class="card-bg"></div>
 
                 <span class="icon">
 
@@ -270,7 +274,9 @@
                   OFFERINGS
             ========================== -->
 
-            <div class="card">
+            <div class="card" data-card="offerings">
+
+                <div class="card-bg"></div>
 
                 <span class="icon">
 
@@ -303,7 +309,9 @@
                     CONTACT
             ========================== -->
 
-            <div class="card">
+            <div class="card" data-card="contact">
+
+                <div class="card-bg"></div>
 
                 <span class="icon">
 

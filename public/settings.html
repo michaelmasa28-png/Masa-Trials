@@ -5,34 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Church Management Dashboard - Settings</title>
     <link rel="stylesheet" href="dashboard.css">
+    <style>
+        .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .settings-grid .card { width: 100%; }
+        .field-group { margin-bottom: 14px; text-align: left; }
+        .field-group label { display: block; margin-bottom: 4px; font-weight: 600; font-size: 13px; }
+        .field-group input, .field-group textarea { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 13px; }
+        .field-group textarea { resize: vertical; min-height: 70px; }
+        .btn-save { padding: 8px 16px; background: #2563eb; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+        .btn-save:hover { background: #1d4ed8; }
+        .btn-danger { padding: 4px 10px; background: #ef4444; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; }
+        .btn-danger:hover { background: #dc2626; }
+        .btn-role { padding: 4px 10px; background: #f59e0b; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; }
+        .btn-role:hover { background: #d97706; }
+        .toast { position: fixed; top: 20px; right: 20px; padding: 12px 20px; border-radius: 6px; color: #fff; font-size: 14px; z-index: 9999; transition: opacity 0.3s; }
+        .toast-success { background: #16a34a; }
+        .toast-error { background: #dc2626; }
+        @media (max-width: 768px) { .settings-grid { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
 
 <div class="dashboard">
 
-    <!-- Sidebar Navigation -->
+    <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="logo">
-            <h2>@Masa7DeV</h2>
-        </div>
+        <div class="logo"><h2>@Masa7DeV</h2></div>
         <ul class="menu">
-            <li><a href="dashboard.html">👥 Members</a></li>
+            <li><a href="members.html">👥 Members</a></li>
+            <li><a href="ministries.html">🙏 Ministries</a></li>
             <li><a href="events.html">📅 Events</a></li>
             <li><a href="sermons-admin.html">📖 Sermons</a></li>
+            <li><a href="communication.html">👥 Communication</a></li>
             <li><a href="attendance.html">✅ Attendance</a></li>
+            <li><a href="rolelogin.html">💰 Finance</a></li>
             <li><a href="galleryadmin.html">🖼 Gallery</a></li>
+            <li><a href="settings.html">⚙ Settings</a></li>
             <li><a href="login.html">🚪 Logout</a></li>
         </ul>
     </aside>
 
-    <!-- Main Workspace Container -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <main class="main-content">
 
-        <!-- Header Branding & Status Info Bars -->
         <header class="topbar">
+            <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
             <div>
-                <h1>KINGDOMWAYS MANAGEMENT DASHBOARD</h1>
-                <p id="settings-role-badge">Verifying profile access parameters...</p>
+                <h1>SETTINGS</h1>
+                <p id="settings-role-badge">Loading...</p>
             </div>
             <div class="admin">
                 <h3>Welcome</h3>
@@ -40,58 +63,167 @@
             </div>
         </header>
 
-        <!-- Dynamic Settings Controls Layout Grid -->
-        <section class="cards">
+        <!-- Settings Grid -->
+        <section class="settings-grid">
 
-            
-            <div class="card" id="profileCard" style="display: none;">
-                <h3>Church / Organization Profile</h3>
-                <form id="profileForm" style="margin-top: 15px; width: 100%;">
-                    <div style="margin-bottom: 15px; text-align: left;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Organization Name</label>
-                        <input type="text" id="orgNameInput" name="organization_name" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+            <!-- Theme -->
+            <div class="card" id="themeCard" style="display:none;">
+                <h3>Church Theme</h3>
+                <form id="themeForm" style="margin-top:12px;width:100%;">
+                    <div class="field-group">
+                        <label>Theme Text</label>
+                        <textarea id="themeInput" rows="3"></textarea>
                     </div>
-                    <div style="margin-bottom: 15px; text-align: left;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Currency Symbol</label>
-                        <input type="text" id="currencyInput" name="currency_symbol" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
-                    </div>
-                    <button type="submit" class="btn-submit" style="padding: 8px 15px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer;">Save Profile</button>
+                    <button type="submit" class="btn-save">Save Theme</button>
                 </form>
             </div>
 
-            <!-- Panel 2: Messaging Alert Routing Preference Adjustments Layout Block -->
-            <div class="card" id="notifyCard" style="display: none;">
-                <h3>Notification Preferences</h3>
-                <form id="notifyForm" style="margin-top: 15px; width: 100%; text-align: left;">
-                    <div style="margin-bottom: 12px;">
-                        <label style="cursor: pointer;"><input type="checkbox" id="emailRegInput" name="email_registrations"> Email for new member registrations</label>
+            <!-- Vision -->
+            <div class="card" id="visionCard" style="display:none;">
+                <h3>Church Vision</h3>
+                <form id="visionForm" style="margin-top:12px;width:100%;">
+                    <div class="field-group">
+                        <label>Vision Statement</label>
+                        <textarea id="visionInput" rows="3"></textarea>
                     </div>
-                    <div style="margin-bottom: 12px;">
-                        <label style="cursor: pointer;"><input type="checkbox" id="emailOfferInput" name="email_offerings"> Email weekly offering summaries</label>
-                    </div>
-                    <div style="margin-bottom: 15px;">
-                        <label style="cursor: pointer;"><input type="checkbox" id="smsUrgentInput" name="sms_urgent"> SMS alerts for urgent church events</label>
-                    </div>
-                    <button type="submit" class="btn-submit" style="padding: 8px 15px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer;">Update System Preferences</button>
+                    <button type="submit" class="btn-save">Save Vision</button>
                 </form>
+            </div>
+
+            <!-- Contact Details -->
+            <div class="card" id="contactCard" style="display:none;">
+                <h3>Contact Details</h3>
+                <form id="contactForm" style="margin-top:12px;width:100%;">
+                    <div class="field-group">
+                        <label>Phone</label>
+                        <input type="text" id="contactPhone">
+                    </div>
+                    <div class="field-group">
+                        <label>WhatsApp</label>
+                        <input type="text" id="contactWhatsapp">
+                    </div>
+                    <div class="field-group">
+                        <label>Email</label>
+                        <input type="email" id="contactEmail">
+                    </div>
+                    <div class="field-group">
+                        <label>Facebook URL</label>
+                        <input type="url" id="contactFacebook">
+                    </div>
+                    <div class="field-group">
+                        <label>Instagram URL</label>
+                        <input type="url" id="contactInstagram">
+                    </div>
+                    <div class="field-group">
+                        <label>YouTube URL</label>
+                        <input type="url" id="contactYoutube">
+                    </div>
+                    <div class="field-group">
+                        <label>Website</label>
+                        <input type="url" id="contactWebsite">
+                    </div>
+                    <div class="field-group">
+                        <label>Google Maps Link</label>
+                        <input type="url" id="contactMaps">
+                    </div>
+                    <div class="field-group">
+                        <label>Office Hours</label>
+                        <input type="text" id="contactHours" placeholder="e.g. Mon-Fri 8AM-5PM">
+                    </div>
+                    <button type="submit" class="btn-save">Save Contact</button>
+                </form>
+            </div>
+
+            <!-- Card Backgrounds -->
+            <div class="card" id="cardBgCard" style="display:none;">
+                <h3>Client Card Backgrounds</h3>
+                <p style="font-size:13px;color:#666;margin:8px 0 15px;">Set a background photo for each clientMode card.</p>
+                <div id="cardBgList" style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:12px;"></div>
+            </div>
+
+            <!-- Profile -->
+            <div class="card" id="profileCard" style="display:none;">
+                <h3>Church Profile</h3>
+                <form id="profileForm" style="margin-top:12px;width:100%;">
+                    <div class="field-group">
+                        <label>Organization Name</label>
+                        <input type="text" id="orgNameInput">
+                    </div>
+                    <div class="field-group">
+                        <label>Currency Symbol</label>
+                        <input type="text" id="currencyInput">
+                    </div>
+                    <button type="submit" class="btn-save">Save Profile</button>
+                </form>
+            </div>
+
+            <!-- Notifications -->
+            <div class="card" id="notifyCard" style="display:none;">
+                <h3>Notification Preferences</h3>
+                <form id="notifyForm" style="margin-top:12px;width:100%;text-align:left;">
+                    <div style="margin-bottom:10px;">
+                        <label style="cursor:pointer;"><input type="checkbox" id="emailRegInput"> Email for new member registrations</label>
+                    </div>
+                    <div style="margin-bottom:10px;">
+                        <label style="cursor:pointer;"><input type="checkbox" id="emailOfferInput"> Email weekly offering summaries</label>
+                    </div>
+                    <div style="margin-bottom:14px;">
+                        <label style="cursor:pointer;"><input type="checkbox" id="smsUrgentInput"> SMS alerts for urgent events</label>
+                    </div>
+                    <button type="submit" class="btn-save">Save Preferences</button>
+                </form>
+            </div>
+
+            <!-- Giving Accounts -->
+            <div class="card" id="givingAccountsCard" style="display:none;">
+                <h3>Giving Accounts</h3>
+                <p style="font-size:13px;color:#666;margin:8px 0 15px;">Accounts that receive giving. Add a PayBill for automatic M-Pesa prompts, or an M-Pesa phone number for manual payments.</p>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+                    <div class="field-group">
+                        <label>Account Name</label>
+                        <input type="text" id="gaName" placeholder="e.g. Tithe PayBill">
+                    </div>
+                    <div class="field-group">
+                        <label>Type</label>
+                        <select id="gaType" style="width:100%;padding:8px 10px;border:1px solid #ccc;border-radius:4px;font-size:13px;">
+                            <option value="paybill">PayBill</option>
+                            <option value="phone">Phone Number (M-Pesa)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>Number</label>
+                    <input type="text" id="gaNumber" placeholder="e.g. 522533 (PayBill) or 0712345678 (Phone)">
+                </div>
+
+                <div class="field-group">
+                    <label>Account Name on M-Pesa (optional)</label>
+                    <input type="text" id="gaAccountName" placeholder="e.g. Kingdom Ways Church">
+                </div>
+
+                <button type="button" class="btn-save" onclick="addGivingAccount()">Add Account</button>
+
+                <div id="givingAccountsList" style="margin-top:16px;width:100%;"></div>
             </div>
 
         </section>
 
-        <!-- Panel 3: Authorization Metrics & Internal Roles Tracking Layout Grid Block -->
-        <section class="recent" id="userManagementSection" style="display: none;">
-            <h2>Authorized Users & System Roles</h2>
+        <!-- Admin Users Table -->
+        <section class="recent" id="userManagementSection" style="display:none;">
+            <h2>Admin Users</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>User Name</th>
+                        <th>Name</th>
+                        <th>Username</th>
                         <th>Role</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="usersTableBody">
-                    <!-- Dynamic rendering engine inputs row metrics down here dynamically -->
-                </tbody>
+                <tbody id="usersTableBody"></tbody>
             </table>
         </section>
 
@@ -99,8 +231,20 @@
 
 </div>
 
-<!-- Process script assets locally side by side out of the exact same repository base directory path link -->
 <script src="settings.js"></script>
+
+<script>
+(function(){
+    var toggle=document.getElementById("sidebarToggle");
+    var sidebar=document.querySelector(".sidebar");
+    var overlay=document.getElementById("sidebarOverlay");
+    if(!toggle||!sidebar)return;
+    function openSidebar(){sidebar.classList.add("open");toggle.classList.add("open");overlay.classList.add("active");}
+    function closeSidebar(){sidebar.classList.remove("open");toggle.classList.remove("open");overlay.classList.remove("active");}
+    toggle.addEventListener("click",function(){sidebar.classList.contains("open")?closeSidebar():openSidebar();});
+    overlay.addEventListener("click",closeSidebar);
+})();
+</script>
 
 </body>
 </html>

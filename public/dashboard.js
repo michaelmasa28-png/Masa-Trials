@@ -16,34 +16,74 @@ function updateDateTime() {
     const date = now.toLocaleDateString("en-GB", options);
     const time = now.toLocaleTimeString();
 
-    // Safeguard: Only update the element if it exists in the HTML view
     const dateElement = document.getElementById("date");
     if (dateElement) {
         dateElement.innerHTML = date + "<br>" + time;
     }
 }
 
-// Initialize on execution load
 updateDateTime();
-
-// Keep running every single second
 setInterval(updateDateTime, 1000);
 
-async function loadDashboardStats(){
+async function loadDashboardStats() {
 
-  const token = localStorage.getItem("token");
+    try {
+        const session = JSON.parse(localStorage.getItem("adminSession") || "{}");
+        const token = session.token || "";
 
-const response = await fetch("/dashboard/stats", {
-    headers: {
-        "Authorization": `Bearer ${token}`
+        if (!token) {
+            console.warn("No admin token found");
+            return;
+        }
+
+        const response = await fetch("/dashboard/stats", {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            console.warn("Dashboard stats unavailable:", response.status);
+            return;
+        }
+
+        const stats = await response.json();
+
+        const totalMembersEl = document.getElementById("totalMembers");
+        if (totalMembersEl) {
+            totalMembersEl.textContent = stats.total_members ?? "0";
+        }
+
+    } catch (err) {
+        console.error("Failed to load dashboard stats:", err);
     }
-});
-
-    const stats = await response.json();
-
-document.getElementById("totalMembers").textContent =
-    stats.total_members;
 
 }
 
 window.addEventListener("DOMContentLoaded", loadDashboardStats);
+
+// Sidebar toggle
+(function(){
+    const toggle = document.getElementById("sidebarToggle");
+    const sidebar = document.querySelector(".sidebar");
+    const overlay = document.getElementById("sidebarOverlay");
+    if(!toggle || !sidebar) return;
+
+    function openSidebar(){
+        sidebar.classList.add("open");
+        toggle.classList.add("open");
+        overlay.classList.add("active");
+    }
+
+    function closeSidebar(){
+        sidebar.classList.remove("open");
+        toggle.classList.remove("open");
+        overlay.classList.remove("active");
+    }
+
+    toggle.addEventListener("click", function(){
+        sidebar.classList.contains("open") ? closeSidebar() : openSidebar();
+    });
+
+    overlay.addEventListener("click", closeSidebar);
+})();

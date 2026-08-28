@@ -43,6 +43,63 @@ let lastMessagesSignature = null;
 
 
 // ===============================
+// VIEW TABS (Members first, Messages behind icon)
+// ===============================
+
+const membersPanel = document.getElementById("membersPanel");
+const messagesPanel = document.getElementById("messagesPanel");
+const navUnread = document.getElementById("navUnread");
+
+function switchView(view){
+
+    const showMembers = view === "members";
+
+    if(membersPanel){
+        membersPanel.classList.toggle("hidden", !showMembers);
+    }
+
+    if(messagesPanel){
+        messagesPanel.classList.toggle("hidden", showMembers);
+    }
+
+    document.querySelectorAll(".nav-tab").forEach(tab => {
+
+        const isActive =
+            tab.getAttribute("data-view") === view;
+
+        tab.classList.toggle("active", isActive);
+
+    });
+
+}
+
+document.querySelectorAll(".nav-tab").forEach(tab => {
+
+    tab.addEventListener("click", () => {
+        switchView(tab.getAttribute("data-view"));
+        closeMobileChat();
+    });
+
+});
+
+// Mobile: back button returns from chat to the list
+const chatBackBtn = document.getElementById("chatBackBtn");
+
+function closeMobileChat(){
+    const wrapper = document.querySelector(".connect-wrapper");
+    if(wrapper){
+        wrapper.classList.remove("chat-open");
+    }
+}
+
+if(chatBackBtn){
+    chatBackBtn.addEventListener("click", closeMobileChat);
+}
+
+// Members are shown first by default (messages stay hidden)
+
+
+// ===============================
 // SESSION
 // ===============================
 
@@ -184,7 +241,13 @@ function renderConversationList(){
 
     conversationList.innerHTML = "";
 
+    let totalUnread = 0;
+
     conversations.forEach(chat => {
+
+        if(chat.unread_count > 0){
+            totalUnread += chat.unread_count;
+        }
 
         const item = document.createElement("div");
 
@@ -214,6 +277,17 @@ function renderConversationList(){
         conversationList.appendChild(item);
 
     });
+
+    // Update unread badge on the Messages tab
+    if(navUnread){
+        if(totalUnread > 0){
+            navUnread.textContent = totalUnread > 99 ? "99+" : totalUnread;
+            navUnread.style.display = "flex";
+        }
+        else{
+            navUnread.style.display = "none";
+        }
+    }
 
 }
 
@@ -394,6 +468,14 @@ function openConversation(chat){
 
     activeChatName.textContent = chat.name;
     activeChatInfo.textContent = "Kingdom Ways Connect";
+
+    switchView("messages");
+
+    // Mobile: bring the chat pane to the front (full-screen)
+    const wrapper = document.querySelector(".connect-wrapper");
+    if(wrapper){
+        wrapper.classList.add("chat-open");
+    }
 
     loadMessages(chat.id);
 

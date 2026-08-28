@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta, timezone
-
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
@@ -23,7 +22,7 @@ pwd_context = CryptContext(
 
 
 oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl="/api/admin-login"
+    tokenUrl="/admin/login"
 )
 
 
@@ -88,6 +87,7 @@ def create_access_token(
 
     payload = {
         "sub": str(admin_id),
+        "role": "admin",
         "exp": expire
     }
 
@@ -99,70 +99,34 @@ def create_access_token(
     )
 
 
+# ==========================================
+# MEMBER TOKEN
+# ==========================================
 
-def get_current_admin(
-    token: str = Depends(oauth2_scheme),
-    db: Session = Depends(get_db)
+def create_member_token(
+    member_id: int
 ):
 
-    print("TOKEN RECEIVED:", token)
-
-
-    try:
-
-        payload = jwt.decode(
-            token,
-            SECRET_KEY,
-            algorithms=[ALGORITHM]
+    expire = (
+        datetime.now(timezone.utc)
+        +
+        timedelta(
+            minutes=ACCESS_TOKEN_EXPIRE_MINUTES
         )
+    )
 
+    payload = {
+        "sub": str(member_id),
+        "role": "member",
+        "exp": expire
+    }
 
-        print(
-            "JWT PAYLOAD:",
-            payload
-        )
-
-
-        admin_id = payload.get("sub")
-
-
-        if not admin_id:
-
-            raise HTTPException(
-                status_code=401,
-                detail="Invalid token"
-            )
-
-
-    except Exception as e:
-
-        print(
-            "JWT ERROR:",
-            e
-        )
-
-
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid token"
-        )
-
-
-
-    admin = (
-        db.query(Admin)
-        .filter(Admin.id == int(admin_id))
-        .first()
+    return jwt.encode(
+        payload,
+        SECRET_KEY,
+        algorithm=ALGORITHM
     )
 
 
-
-    if not admin:
-
-        raise HTTPException(
-            status_code=401,
-            detail="Admin not found"
-        )
-
-
-    return admin
+# Re-export the canonical get_current_admin from dependencies
+from app.dependencies import get_current_admin

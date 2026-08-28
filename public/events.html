@@ -88,14 +88,14 @@ Events
 </li>
 
 <li>
-<a href="sermons.html">
+<a href="sermons-admin.html">
 <i class="fas fa-microphone"></i>
 Sermons
 </a>
 </li>
 
 <li>
-<a href="gallery.html">
+<a href="galleryadmin.html">
 <i class="fas fa-images"></i>
 Gallery
 </a>
@@ -272,10 +272,12 @@ type="text"
 
 id="searchEvent"
 
-placeholder="Search event...">
+placeholder="Search event..."
+
+aria-label="Search events">
 
 
-<select id="categoryFilter">
+<select id="categoryFilter" aria-label="Filter by category">
 
 <option value="">
 
@@ -323,7 +325,7 @@ Sunday Service
 
 
 
-<select id="statusFilter">
+<select id="statusFilter" aria-label="Filter by status">
 
 <option value="">
 
@@ -353,7 +355,7 @@ Completed
 
 
 
-<select id="monthFilter">
+<select id="monthFilter" aria-label="Filter by month">
 
 <option value="">
 
@@ -378,7 +380,7 @@ Month
 
 
 
-<select id="yearFilter">
+<select id="yearFilter" aria-label="Filter by year">
 
 <option value="">
 
@@ -400,7 +402,7 @@ Year
 
 
 
-<select id="sortEvents">
+<select id="sortEvents" aria-label="Sort events">
 
 <option value="latest">
 
@@ -607,7 +609,7 @@ id="eventId">
 
 <div class="form-group">
 
-<label>Title</label>
+<label for="title">Title</label>
 
 <input
 type="text"
@@ -619,7 +621,7 @@ required>
 
 <div class="form-group">
 
-<label>Subtitle</label>
+<label for="subtitle">Subtitle</label>
 
 <input
 type="text"
@@ -630,7 +632,7 @@ id="subtitle">
 
 <div class="form-group full-width">
 
-<label>Description</label>
+<label for="description">Description</label>
 
 <textarea
 id="description"
@@ -642,7 +644,7 @@ required></textarea>
 
 <div class="form-group">
 
-<label>Category</label>
+<label for="category">Category</label>
 
 <select id="category">
 
@@ -667,7 +669,7 @@ required></textarea>
 
 <div class="form-group">
 
-<label>Speaker</label>
+<label for="speaker">Speaker</label>
 
 <input
 type="text"
@@ -678,7 +680,7 @@ id="speaker">
 
 <div class="form-group">
 
-<label>Host</label>
+<label for="host">Host</label>
 
 <input
 type="text"
@@ -689,7 +691,7 @@ id="host">
 
 <div class="form-group">
 
-<label>Bible Reading</label>
+<label for="bibleVerse">Bible Reading</label>
 
 <input
 type="text"
@@ -700,7 +702,7 @@ id="bibleVerse">
 
 <div class="form-group">
 
-<label>Start Date</label>
+<label for="startDate">Start Date</label>
 
 <input
 type="date"
@@ -712,7 +714,7 @@ required>
 
 <div class="form-group">
 
-<label>End Date</label>
+<label for="endDate">End Date</label>
 
 <input
 type="date"
@@ -723,7 +725,7 @@ id="endDate">
 
 <div class="form-group">
 
-<label>Start Time</label>
+<label for="startTime">Start Time</label>
 
 <input
 type="time"
@@ -734,7 +736,7 @@ id="startTime">
 
 <div class="form-group">
 
-<label>End Time</label>
+<label for="endTime">End Time</label>
 
 <input
 type="time"
@@ -745,7 +747,7 @@ id="endTime">
 
 <div class="form-group full-width">
 
-<label>Venue</label>
+<label for="venue">Venue</label>
 
 <input
 type="text"
@@ -757,7 +759,7 @@ required>
 
 <div class="form-group full-width">
 
-<label>Google Maps Link</label>
+<label for="mapsLink">Google Maps Link</label>
 
 <input
 type="url"
@@ -768,7 +770,7 @@ id="mapsLink">
 
 <div class="form-group">
 
-<label>Capacity</label>
+<label for="capacity">Capacity</label>
 
 <input
 type="number"
@@ -780,7 +782,7 @@ min="1">
 
 <div class="form-group">
 
-<label>Registration Deadline</label>
+<label for="deadline">Registration Deadline</label>
 
 <input
 type="datetime-local"
@@ -1067,65 +1069,11 @@ Save Event
 
 
 
-
-<!-- =========================
-LOADING OVERLAY
-========================= -->
-
-
-<div
-id="loadingOverlay"
-class="loading-overlay">
-
-
-<div class="loader">
-
-<i class="fas fa-spinner fa-spin"></i>
-
-<p>
-Loading...
-</p>
-
-
 </div>
-
-
-</div>
-
-
-
-
-
-<!-- =========================
-TOAST NOTIFICATIONS
-========================= -->
-
-
-<div
-id="toastContainer"
-class="toast-container">
-
-
-</div>
-<!-- =========================
-MODAL END
-========================= -->
-
-
-</div>
-<!-- end modal-content -->
-
-
-</div>
-<!-- end eventModal -->
-
-
-
 
 <!-- =========================
 PAGE SCRIPTS
 ========================= -->
-
 
 <script src="events.js"></script>
 

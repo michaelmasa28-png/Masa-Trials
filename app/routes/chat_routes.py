@@ -309,7 +309,7 @@ def send_message(data: MessageCreate, db: Session = Depends(get_db)):
 
     if conv:
         conv.last_message = data.text
-        conv.last_message_at = datetime.utcnow()
+        conv.last_message_at = datetime.now(timezone.utc)
 
     db.commit()
     return {"success": True, "message_id": msg.id}

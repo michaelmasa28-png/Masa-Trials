@@ -2145,6 +2145,22 @@ function viewEvent(event){
 // EXPORT CSV
 //=========================================
 
+function csvEscape(value) {
+
+    if (value === null || value === undefined) return '';
+
+    const str = String(value);
+
+    if (/[",\n]/.test(str)) {
+
+        return '"' + str.replace(/"/g, '""') + '"';
+
+    }
+
+    return str;
+
+}
+
 function exportEventsCSV(){
 
     if(events.length === 0){
@@ -2163,11 +2179,11 @@ function exportEventsCSV(){
     events.forEach(event=>{
 
         csv +=
-            `"${event.title || ""}",` +
-            `"${event.category || ""}",` +
-            `"${event.start_date || ""}",` +
-            `"${event.venue || ""}",` +
-            `"${event.status || ""}"\n`;
+            `${csvEscape(event.title)},` +
+            `${csvEscape(event.category)},` +
+            `${csvEscape(event.start_date)},` +
+            `${csvEscape(event.venue)},` +
+            `${csvEscape(event.status)}\n`;
 
     });
 

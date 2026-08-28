@@ -1,7 +1,6 @@
 /*==========================================================
         KINGDOM WAYS CHURCH
         GIVING PORTAL
-        PART 1
 ==========================================================*/
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -10,2640 +9,1078 @@
 /*==========================================================
 ROOT VARIABLES
 ==========================================================*/
-
-:root{
-
-    --primary:#2563eb;
-    --primary-dark:#1d4ed8;
-
-    --secondary:#10b981;
-
-    --gold:#f59e0b;
-
-    --purple:#7c3aed;
-
-    --danger:#ef4444;
-
-    --success:#16a34a;
-
-    --white:#ffffff;
-
-    --background:#eef5ff;
-
-    --text:#1f2937;
-
-    --text-light:#64748b;
-
-    --border:#dbeafe;
-
-    --shadow:
-    0 15px 45px rgba(0,0,0,.08);
-
-    --shadow-hover:
-    0 20px 60px rgba(37,99,235,.18);
-
-    --radius:24px;
-
-    --transition:.35s ease;
-
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary: #10b981;
+    --gold: #f59e0b;
+    --purple: #7c3aed;
+    --danger: #ef4444;
+    --success: #16a34a;
+    --white: #ffffff;
+    --background: #eef5ff;
+    --text: #1f2937;
+    --text-light: #64748b;
+    --border: #dbeafe;
+    --shadow: 0 15px 45px rgba(0,0,0,.08);
+    --shadow-hover: 0 20px 60px rgba(37,99,235,.18);
+    --radius: 24px;
+    --transition: .35s ease;
 }
-
 
 
 /*==========================================================
 RESET
 ==========================================================*/
-
-*{
-
-    margin:0;
-
-    padding:0;
-
-    box-sizing:border-box;
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-
-html{
-
-    scroll-behavior:smooth;
-
+html {
+    scroll-behavior: smooth;
 }
 
-
-body{
-
-    font-family:'Poppins',sans-serif;
-
-    color:var(--text);
-
-    min-height:100vh;
-
-    overflow-x:hidden;
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #edf5ff,
-    #ffffff,
-    #f7fbff
-    );
-
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #edf5ff, #ffffff, #f7fbff);
 }
-
 
 
 /*==========================================================
 BACKGROUND EFFECTS
 ==========================================================*/
-
-body::before{
-
-    content:"";
-
-    position:fixed;
-
-    width:450px;
-
-    height:450px;
-
-    left:-180px;
-
-    top:-180px;
-
-    border-radius:50%;
-
-    background:
-
-    radial-gradient(
-
-    circle,
-
-    rgba(37,99,235,.18),
-
-    transparent 70%
-
-    );
-
-    animation:blobOne 18s infinite alternate;
-
-    z-index:-5;
-
+body::before {
+    content: "";
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    left: -180px;
+    top: -180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37,99,235,.18), transparent 70%);
+    animation: blobOne 18s infinite alternate;
+    z-index: -5;
 }
 
-
-body::after{
-
-    content:"";
-
-    position:fixed;
-
-    width:520px;
-
-    height:520px;
-
-    right:-180px;
-
-    bottom:-180px;
-
-    border-radius:50%;
-
-    background:
-
-    radial-gradient(
-
-    circle,
-
-    rgba(16,185,129,.14),
-
-    transparent 70%
-
-    );
-
-    animation:blobTwo 20s infinite alternate;
-
-    z-index:-5;
-
+body::after {
+    content: "";
+    position: fixed;
+    width: 520px;
+    height: 520px;
+    right: -180px;
+    bottom: -180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,185,129,.14), transparent 70%);
+    animation: blobTwo 20s infinite alternate;
+    z-index: -5;
 }
-
-
 
 
 /*==========================================================
 MAIN WRAPPER
 ==========================================================*/
-
-.portal{
-
-    width:min(95%,1450px);
-
-    margin:auto;
-
-    padding-bottom:60px;
-
+.portal {
+    width: min(95%, 1450px);
+    margin: auto;
+    padding-bottom: 60px;
 }
-
-
-
 
 
 /*==========================================================
 HEADER
 ==========================================================*/
-
-.topbar{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:25px;
-
-    padding:28px 10px;
-
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    padding: 28px 10px;
 }
 
-
-.brand{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
 
-
-.brand i{
-
-    width:72px;
-
-    height:72px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    border-radius:22px;
-
-    color:#fff;
-
-    font-size:30px;
-
-    background:
-
-    linear-gradient(
-    135deg,
-    var(--primary),
-    var(--purple)
-    );
-
-    box-shadow:
-
-    0 18px 35px rgba(37,99,235,.25);
-
+.brand i {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 22px;
+    color: #fff;
+    font-size: 30px;
+    background: linear-gradient(135deg, var(--primary), var(--purple));
+    box-shadow: 0 18px 35px rgba(37,99,235,.25);
 }
 
-
-.brand h1{
-
-    color:var(--primary);
-
-    font-size:clamp(1.8rem,3vw,2.5rem);
-
-    font-weight:800;
-
+.brand h1 {
+    color: var(--primary);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
 }
 
-
-.brand p{
-
-    color:var(--text-light);
-
-    margin-top:4px;
-
+.brand p {
+    color: var(--text-light);
+    margin-top: 4px;
 }
-
-
-
 
 
 /*==========================================================
 SECURE BADGE
 ==========================================================*/
-
-.secure-badge{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:14px 24px;
-
-    border-radius:50px;
-
-    background:#ffffff;
-
-    color:var(--success);
-
-    font-weight:700;
-
-    box-shadow:var(--shadow);
-
+.secure-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: 50px;
+    background: #ffffff;
+    color: var(--success);
+    font-weight: 700;
+    box-shadow: var(--shadow);
 }
 
-
-.secure-badge i{
-
-    font-size:20px;
-
+.secure-badge i {
+    font-size: 20px;
 }
-
-
-
 
 
 /*==========================================================
 HERO CARD
 ==========================================================*/
-
-.hero-card{
-
-    margin:15px 0 45px;
-
-    padding:55px;
-
-    text-align:center;
-
-    border-radius:32px;
-
-    color:#fff;
-
-    overflow:hidden;
-
-    position:relative;
-
+.hero-card {
+    margin: 15px 0 45px;
+    padding: 55px;
+    text-align: center;
+    border-radius: 32px;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
     background:
-
-    linear-gradient(
-
-    rgba(37,99,235,.88),
-
-    rgba(16,185,129,.78)
-
-    ),
-
-    url("images/church.jpg")
-
-    center/cover;
-
-    box-shadow:
-
-    0 25px 60px rgba(0,0,0,.18);
-
+        linear-gradient(
+            rgba(37,99,235,.88),
+            rgba(16,185,129,.78)
+        ),
+        url("images/church.jpg")
+        center/cover;
+    box-shadow: 0 25px 60px rgba(0,0,0,.18);
 }
 
-
-.hero-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:600px;
-
-    height:600px;
-
-    border-radius:50%;
-
-    top:-250px;
-
-    right:-150px;
-
-    background:
-
-    rgba(255,255,255,.08);
-
-    animation:rotateGlow 30s linear infinite;
-
+.hero-card::before {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    top: -250px;
+    right: -150px;
+    background: rgba(255,255,255,.08);
+    animation: rotateGlow 30s linear infinite;
 }
 
-
-.hero-card h2{
-
-    position:relative;
-
-    font-size:clamp(2rem,5vw,3.5rem);
-
-    font-weight:800;
-
-    margin-bottom:18px;
-
-    z-index:2;
-
+.hero-card h2 {
+    position: relative;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 18px;
+    z-index: 2;
 }
 
-
-.hero-card p{
-
-    position:relative;
-
-    max-width:750px;
-
-    margin:auto;
-
-    line-height:1.9;
-
-    font-size:1.1rem;
-
-    z-index:2;
-
+.hero-card p {
+    position: relative;
+    max-width: 750px;
+    margin: auto;
+    line-height: 1.9;
+    font-size: 1.1rem;
+    z-index: 2;
 }
 
-
-.hero-card span{
-
-    position:relative;
-
-    display:inline-block;
-
-    margin-top:22px;
-
-    padding:10px 22px;
-
-    border-radius:50px;
-
-    background:rgba(255,255,255,.16);
-
-    backdrop-filter:blur(12px);
-
-    font-weight:600;
-
-    letter-spacing:.5px;
-
-    z-index:2;
-
+.hero-card span {
+    position: relative;
+    display: inline-block;
+    margin-top: 22px;
+    padding: 10px 22px;
+    border-radius: 50px;
+    background: rgba(255,255,255,.16);
+    backdrop-filter: blur(12px);
+    font-weight: 600;
+    letter-spacing: .5px;
+    z-index: 2;
 }
-
-
-
 
 
 /*==========================================================
 GIVING GRID
 ==========================================================*/
-
-.giving-grid{
-
-    display:grid;
-
-    grid-template-columns:
-
-    380px
-
-    minmax(0,1fr);
-
-    gap:35px;
-
-    align-items:start;
-
+.giving-grid {
+    display: grid;
+    grid-template-columns: 380px minmax(0, 1fr);
+    gap: 35px;
+    align-items: start;
 }
-
-
-/*==========================================================
-        KINGDOM WAYS CHURCH
-        GIVING PORTAL
-        PART 2
-==========================================================*/
 
 
 /*==========================================================
 COMMON CARD
 ==========================================================*/
-
-.card{
-
-    background:#ffffff;
-
-    border-radius:28px;
-
-    padding:30px;
-
-    box-shadow:var(--shadow);
-
-    border:1px solid rgba(37,99,235,.08);
-
-    transition:var(--transition);
-
+.card {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(37,99,235,.08);
+    transition: var(--transition);
 }
 
-.card:hover{
-
-    transform:translateY(-6px);
-
-    box-shadow:var(--shadow-hover);
-
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
 }
 
-
-.card h2{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    color:var(--primary);
-
-    font-size:1.35rem;
-
-    margin-bottom:24px;
-
-    font-weight:700;
-
+.card h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--primary);
+    font-size: 1.35rem;
+    margin-bottom: 24px;
+    font-weight: 700;
 }
 
-.card h2 i{
-
-    color:var(--secondary);
-
+.card h2 i {
+    color: var(--secondary);
 }
-
 
 
 /*==========================================================
 LEFT COLUMN
+MEMBER PROFILE / INFO
 ==========================================================*/
-
-.member-panel{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:25px;
-
+.member-profile {
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-
-
-/*==========================================================
-MEMBER PROFILE CARD
-==========================================================*/
-
-.member-profile{
-
-    text-align:center;
-
+.member-profile img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #dbeafe;
+    background: #eef5ff;
+    box-shadow: 0 15px 35px rgba(37,99,235,.18);
 }
 
-
-.member-avatar{
-
-    width:120px;
-
-    height:120px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    overflow:hidden;
-
-    border:5px solid #dbeafe;
-
-    background:#eef5ff;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    box-shadow:
-
-    0 15px 35px rgba(37,99,235,.18);
-
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    border-radius: 16px;
+    background: #f8fbff;
+    margin-bottom: 14px;
 }
 
-
-.member-avatar img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
+.info-row label {
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: .9rem;
 }
 
-
-.member-avatar i{
-
-    font-size:55px;
-
-    color:#94a3b8;
-
+.info-row p {
+    font-weight: 700;
+    color: var(--text);
+    text-align: right;
 }
 
-
-.member-profile h3{
-
-    margin-top:18px;
-
-    color:var(--primary);
-
-    font-size:1.45rem;
-
-    font-weight:700;
-
+.info-row .info-input {
+    width: 100%;
 }
 
-
-.member-number{
-
-    margin-top:8px;
-
-    display:inline-block;
-
-    padding:10px 18px;
-
-    border-radius:40px;
-
-    background:#eef5ff;
-
-    color:var(--primary);
-
-    font-size:.95rem;
-
-    font-weight:600;
-
+.alternate-phone {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 6px 0 20px;
+    cursor: pointer;
 }
 
-
-.member-status{
-
-    margin-top:18px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:8px;
-
-    color:var(--success);
-
-    font-weight:600;
-
+.alternate-phone label {
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-
-.member-status i{
-
-    color:var(--success);
-
+.alternate-phone input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary);
+    cursor: pointer;
 }
 
-
-
-
-/*==========================================================
-ACCOUNT INFORMATION
-==========================================================*/
-
-.account-info{
-
-    margin-top:25px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:16px;
-
+#anotherPhoneBox {
+    display: flex;
+    flex-direction: column;
 }
 
-
-.info-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:14px 18px;
-
-    border-radius:16px;
-
-    background:#f8fbff;
-
+#anotherPhoneBox label {
+    margin-bottom: 9px;
+    font-size: .95rem;
+    font-weight: 600;
+    color: #334155;
 }
 
-
-.info-row span:first-child{
-
-    color:var(--text-light);
-
-    font-weight:500;
-
+#anotherPhoneBox input {
+    width: 100%;
+    padding: 15px 18px;
+    border-radius: 16px;
+    border: 2px solid var(--border);
+    background: #ffffff;
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+    transition: var(--transition);
+    font-family: inherit;
 }
 
-
-.info-row span:last-child{
-
-    font-weight:700;
-
-    color:var(--text);
-
+#anotherPhoneBox input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(37,99,235,.10);
 }
 
-
+#anotherPhoneBox input:disabled {
+    background: #f8fbff;
+    color: #475569;
+    cursor: not-allowed;
+}
 
 
 /*==========================================================
 RIGHT COLUMN
+FORM
 ==========================================================*/
-
-.giving-form{
-
-    display:flex;
-
-    flex-direction:column;
-
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 22px;
 }
 
-
-
-
-/*==========================================================
-FORM GRID
-==========================================================*/
-
-.form-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:22px;
-
+.input-group>label {
+    margin-bottom: 9px;
+    font-size: .95rem;
+    font-weight: 600;
+    color: #334155;
 }
-
-
-.full-width{
-
-    grid-column:1/-1;
-
-}
-
-
-
-
-/*==========================================================
-INPUT GROUP
-==========================================================*/
-
-.input-group{
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-
-.input-group label{
-
-    margin-bottom:9px;
-
-    font-size:.95rem;
-
-    font-weight:600;
-
-    color:#334155;
-
-}
-
-
-.input-group label i{
-
-    color:var(--primary);
-
-    margin-right:6px;
-
-}
-
-
-
-
-/*==========================================================
-INPUTS
-==========================================================*/
 
 .input-group input,
-
 .input-group select,
-
-.input-group textarea{
-
-    width:100%;
-
-    padding:15px 18px;
-
-    border-radius:16px;
-
-    border:2px solid var(--border);
-
-    background:#ffffff;
-
-    font-size:15px;
-
-    color:var(--text);
-
-    outline:none;
-
-    transition:var(--transition);
-
+.input-group textarea {
+    width: 100%;
+    padding: 15px 18px;
+    border-radius: 16px;
+    border: 2px solid var(--border);
+    background: #ffffff;
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+    transition: var(--transition);
+    font-family: inherit;
 }
 
-
-.input-group textarea{
-
-    resize:vertical;
-
-    min-height:120px;
-
+.input-group textarea {
+    resize: vertical;
+    min-height: 120px;
 }
-
 
 .input-group input:focus,
-
 .input-group select:focus,
-
-.input-group textarea:focus{
-
-    border-color:var(--primary);
-
-    box-shadow:
-
-    0 0 0 4px rgba(37,99,235,.10);
-
+.input-group textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(37,99,235,.10);
 }
-
-
 
 
 /*==========================================================
 READ ONLY MEMBER DETAILS
 ==========================================================*/
-
-input[readonly]{
-
-    background:#f8fbff;
-
-    color:#475569;
-
-    cursor:not-allowed;
-
+input[readonly] {
+    background: #f8fbff;
+    color: #475569;
+    cursor: not-allowed;
 }
-
-
-
-
-/*==========================================================
-OPTIONAL PHONE
-==========================================================*/
-
-.optional-note{
-
-    margin-top:8px;
-
-    font-size:.82rem;
-
-    color:var(--text-light);
-
-    line-height:1.6;
-
-}
-
-
-.optional-note i{
-
-    color:var(--gold);
-
-}
-
-/*==========================================================
-        KINGDOM WAYS CHURCH
-        GIVING PORTAL
-        PART 3
-==========================================================*/
 
 
 /*==========================================================
 CATEGORY CARDS
 ==========================================================*/
-
-.category-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:18px;
-
-    margin-top:8px;
-
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-bottom: 8px;
 }
 
-
-.category-card{
-
-    position:relative;
-
-    padding:22px;
-
-    border-radius:20px;
-
-    border:2px solid #dbeafe;
-
-    background:#ffffff;
-
-    cursor:pointer;
-
-    transition:var(--transition);
-
-    overflow:hidden;
-
+.category-card {
+    position: relative;
+    padding: 22px;
+    border-radius: 20px;
+    border: 2px solid #dbeafe;
+    background: #ffffff;
+    cursor: pointer;
+    transition: var(--transition);
+    overflow: hidden;
+    text-align: center;
 }
 
-
-.category-card input{
-
-    display:none;
-
+.category-card input {
+    display: none;
 }
 
-
-.category-card:hover{
-
-    transform:translateY(-5px);
-
-    border-color:var(--primary);
-
-    box-shadow:
-
-    0 15px 35px rgba(37,99,235,.12);
-
+.category-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 35px rgba(37,99,235,.12);
 }
 
-
-.category-card.active{
-
-    border-color:var(--primary);
-
-    background:
-
-    linear-gradient(
-
-    135deg,
-
-    rgba(37,99,235,.08),
-
-    rgba(16,185,129,.08)
-
+.category-card.active {
+    border-color: var(--primary);
+    background: linear-gradient(
+        135deg,
+        rgba(37,99,235,.08),
+        rgba(16,185,129,.08)
     );
-
 }
 
-
-.category-card i{
-
-    font-size:34px;
-
-    color:var(--primary);
-
-    margin-bottom:12px;
-
+.category-card i {
+    font-size: 34px;
+    color: var(--primary);
+    margin-bottom: 12px;
 }
 
-
-.category-card h3{
-
-    font-size:1rem;
-
-    color:var(--text);
-
-    margin-bottom:6px;
-
+.category-card h4 {
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 700;
 }
-
-
-.category-card p{
-
-    color:var(--text-light);
-
-    font-size:.85rem;
-
-    line-height:1.6;
-
-}
-
-
 
 
 /*==========================================================
-AMOUNT BOX
+ACCOUNT HINT
 ==========================================================*/
-
-.amount-box{
-
-    position:relative;
-
+#accountHint {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 6px;
+    min-height: 15px;
 }
-
-
-.amount-box span{
-
-    position:absolute;
-
-    left:18px;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    font-weight:700;
-
-    color:var(--primary);
-
-    font-size:17px;
-
-}
-
-
-.amount-box input{
-
-    padding-left:70px !important;
-
-    font-size:24px;
-
-    font-weight:700;
-
-    letter-spacing:1px;
-
-}
-
-
 
 
 /*==========================================================
-MPESA PANEL
+LIVE PAYMENT SUMMARY
 ==========================================================*/
-
-.mpesa-box{
-
-    margin-top:25px;
-
-    padding:22px;
-
-    border-radius:22px;
-
-    background:
-
-    linear-gradient(
-
-    135deg,
-
-    #16a34a,
-
-    #15803d
-
-    );
-
-    color:#ffffff;
-
-    box-shadow:
-
-    0 18px 40px rgba(22,163,74,.20);
-
+.summary-card {
+    background: #ffffff;
+    border-radius: 26px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    border: 1px solid #e5eefc;
+    margin-bottom: 0;
 }
 
-
-.mpesa-box h3{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin-bottom:15px;
-
+.summary-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    color: var(--primary);
+    font-size: 1.25rem;
+    font-weight: 700;
 }
 
-
-.mpesa-box p{
-
-    line-height:1.8;
-
-    opacity:.95;
-
-    font-size:.95rem;
-
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #edf3fb;
 }
 
-
-
-
-/*==========================================================
-ALTERNATIVE PHONE
-==========================================================*/
-
-.checkbox-row{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    margin-top:15px;
-
-    margin-bottom:20px;
-
+.summary-row:last-child {
+    border-bottom: none;
 }
 
-
-.checkbox-row input{
-
-    width:20px;
-
-    height:20px;
-
-    accent-color:var(--primary);
-
-    cursor:pointer;
-
+.summary-row span {
+    color: var(--text-light);
+    font-size: .95rem;
 }
 
-
-.checkbox-row label{
-
-    cursor:pointer;
-
-    font-weight:600;
-
+.summary-row strong {
+    font-weight: 700;
+    color: var(--text);
+    text-align: right;
 }
-
-
 
 
 /*==========================================================
 PRIMARY BUTTON
 ==========================================================*/
-
-.payBtn{
-
-    width:100%;
-
-    margin-top:25px;
-
-    padding:18px;
-
-    border:none;
-
-    border-radius:18px;
-
-    cursor:pointer;
-
-    color:#ffffff;
-
-    font-size:17px;
-
-    font-weight:700;
-
-    letter-spacing:.5px;
-
-    background:
-
-    linear-gradient(
-
-    135deg,
-
-    var(--primary),
-
-    var(--purple)
-
-    );
-
-    transition:var(--transition);
-
-    box-shadow:
-
-    0 18px 35px rgba(37,99,235,.22);
-
+.payBtn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 18px;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    background: linear-gradient(135deg, var(--primary), var(--purple));
+    transition: var(--transition);
+    box-shadow: 0 18px 35px rgba(37,99,235,.22);
+    font-family: inherit;
 }
 
-
-.payBtn:hover{
-
-    transform:
-
-    translateY(-4px);
-
-    box-shadow:
-
-    0 25px 45px rgba(37,99,235,.28);
-
+.payBtn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 45px rgba(37,99,235,.28);
 }
 
-
-.payBtn:active{
-
-    transform:scale(.98);
-
+.payBtn:active {
+    transform: scale(.98);
 }
 
-
-.payBtn i{
-
-    margin-right:10px;
-
+.payBtn i {
+    margin-right: 10px;
 }
-
-
 
 
 /*==========================================================
 LOADING BUTTON
 ==========================================================*/
-
-.payBtn.loading{
-
-    pointer-events:none;
-
-    opacity:.8;
-
+.payBtn.loading {
+    pointer-events: none;
+    opacity: .8;
 }
 
-
-.payBtn.loading::after{
-
-    content:"";
-
-    width:18px;
-
-    height:18px;
-
-    margin-left:12px;
-
-    display:inline-block;
-
-    border-radius:50%;
-
-    border:3px solid rgba(255,255,255,.35);
-
-    border-top-color:#fff;
-
-    animation:spin .7s linear infinite;
-
+.payBtn.loading::after {
+    content: "";
+    width: 18px;
+    height: 18px;
+    margin-left: 12px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.35);
+    border-top-color: #fff;
+    animation: spin .7s linear infinite;
+    vertical-align: middle;
 }
-
-
-
-
-/*==========================================================
-HELP BOX
-==========================================================*/
-
-.help-box{
-
-    margin-top:30px;
-
-    padding:22px;
-
-    border-radius:20px;
-
-    background:#f8fbff;
-
-    border-left:5px solid var(--secondary);
-
-}
-
-
-.help-box h4{
-
-    color:var(--primary);
-
-    margin-bottom:12px;
-
-}
-
-
-.help-box p{
-
-    color:var(--text-light);
-
-    line-height:1.8;
-
-}
-
-
 
 
 /*==========================================================
 ANIMATIONS
 ==========================================================*/
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
 
-@keyframes spin{
+@keyframes blobOne {
+    to { transform: translate(80px, 70px); }
+}
 
-    to{
+@keyframes blobTwo {
+    to { transform: translate(-80px, -60px); }
+}
 
-        transform:rotate(360deg);
+@keyframes rotateGlow {
+    to { transform: rotate(360deg); }
+}
 
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
     }
-
-}
-
-
-@keyframes blobOne{
-
-    to{
-
-        transform:
-
-        translate(80px,70px);
-
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
-
 }
 
-
-@keyframes blobTwo{
-
-    to{
-
-        transform:
-
-        translate(-80px,-60px);
-
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(.85);
     }
-
-}
-
-
-@keyframes rotateGlow{
-
-    to{
-
-        transform:rotate(360deg);
-
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
-
-}
-
-/*==========================================================
-        KINGDOM WAYS CHURCH
-        GIVING PORTAL
-        PART 4
-==========================================================*/
-
-
-/*==========================================================
-PAYMENT STATUS PANEL
-==========================================================*/
-
-.payment-status{
-
-    display:none;
-
-    margin-top:30px;
-
-    padding:28px;
-
-    border-radius:24px;
-
-    background:#ffffff;
-
-    border:2px solid #dbeafe;
-
-    box-shadow:var(--shadow);
-
-    animation:fadeUp .5s ease;
-
-}
-
-.payment-status.active{
-
-    display:block;
-
-}
-
-.payment-status h3{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    color:var(--primary);
-
-    margin-bottom:18px;
-
-}
-
-.payment-status p{
-
-    line-height:1.8;
-
-    color:var(--text-light);
-
-}
-
-.status-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-top:16px;
-
-    padding:14px 0;
-
-    border-bottom:1px dashed #dbeafe;
-
-}
-
-.status-row:last-child{
-
-    border-bottom:none;
-
-}
-
-.status-label{
-
-    font-weight:600;
-
-    color:#475569;
-
-}
-
-.status-value{
-
-    font-weight:700;
-
-    color:var(--primary);
-
-}
-
-
-
-/*==========================================================
-WAITING ANIMATION
-==========================================================*/
-
-.waiting-circle{
-
-    width:90px;
-
-    height:90px;
-
-    margin:20px auto;
-
-    border-radius:50%;
-
-    border:8px solid rgba(37,99,235,.15);
-
-    border-top:8px solid var(--primary);
-
-    animation:spin 1s linear infinite;
-
-}
-
-.waiting-text{
-
-    text-align:center;
-
-    font-weight:600;
-
-    color:var(--text-light);
-
-    margin-top:15px;
-
-}
-
-
-
-/*==========================================================
-SUCCESS CARD
-==========================================================*/
-
-.success-card{
-
-    display:none;
-
-    margin-top:30px;
-
-    padding:35px;
-
-    border-radius:24px;
-
-    background:linear-gradient(
-    135deg,
-    #ecfdf5,
-    #f0fdf4);
-
-    border:2px solid #10b981;
-
-    text-align:center;
-
-    animation:fadeUp .5s ease;
-
-}
-
-.success-card.active{
-
-    display:block;
-
-}
-
-.success-card i{
-
-    font-size:70px;
-
-    color:#10b981;
-
-    margin-bottom:20px;
-
-}
-
-.success-card h2{
-
-    color:#047857;
-
-    margin-bottom:15px;
-
-}
-
-.success-card p{
-
-    color:#065f46;
-
-    line-height:1.8;
-
-}
-
-
-
-/*==========================================================
-FAILED CARD
-==========================================================*/
-
-.failed-card{
-
-    display:none;
-
-    margin-top:30px;
-
-    padding:35px;
-
-    border-radius:24px;
-
-    background:#fff7f7;
-
-    border:2px solid #ef4444;
-
-    text-align:center;
-
-}
-
-.failed-card.active{
-
-    display:block;
-
-}
-
-.failed-card i{
-
-    font-size:68px;
-
-    color:#ef4444;
-
-    margin-bottom:18px;
-
-}
-
-.failed-card h2{
-
-    color:#dc2626;
-
-    margin-bottom:12px;
-
-}
-
-.failed-card p{
-
-    color:#7f1d1d;
-
-    line-height:1.8;
-
-}
-
-
-
-/*==========================================================
-PAYMENT RECEIPT
-==========================================================*/
-
-.receipt-card{
-
-    display:none;
-
-    margin-top:35px;
-
-    background:#ffffff;
-
-    border-radius:22px;
-
-    padding:28px;
-
-    box-shadow:var(--shadow);
-
-    border-top:6px solid var(--secondary);
-
-}
-
-.receipt-card.active{
-
-    display:block;
-
-}
-
-.receipt-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:25px;
-
-}
-
-.receipt-header h3{
-
-    color:var(--primary);
-
-}
-
-.receipt-logo{
-
-    font-size:30px;
-
-    color:var(--secondary);
-
-}
-
-.receipt-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    padding:12px 0;
-
-    border-bottom:1px dashed #dbeafe;
-
-}
-
-.receipt-row:last-child{
-
-    border-bottom:none;
-
-}
-
-.receipt-row span:first-child{
-
-    color:#64748b;
-
-}
-
-.receipt-row span:last-child{
-
-    font-weight:700;
-
-    color:#1e3a8a;
-
-}
-
-
-
-/*==========================================================
-PRINT BUTTON
-==========================================================*/
-
-.printBtn{
-
-    margin-top:25px;
-
-    width:100%;
-
-    padding:16px;
-
-    border:none;
-
-    border-radius:16px;
-
-    cursor:pointer;
-
-    font-size:16px;
-
-    font-weight:700;
-
-    color:#ffffff;
-
-    background:linear-gradient(
-    135deg,
-    var(--secondary),
-    var(--primary));
-
-    transition:var(--transition);
-
-}
-
-.printBtn:hover{
-
-    transform:translateY(-3px);
-
-}
-
-
-
-/*==========================================================
-FADE
-==========================================================*/
-
-@keyframes fadeUp{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(35px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/*==========================================================
-        KINGDOM WAYS CHURCH
-        GIVING PORTAL
-        PART 5
-==========================================================*/
-
-
-/*==========================================================
-RIGHT PANEL
-(Member Summary)
-==========================================================*/
-
-.summary-card{
-
-    position:sticky;
-
-    top:100px;
-
-    background:#ffffff;
-
-    border-radius:26px;
-
-    padding:28px;
-
-    box-shadow:var(--shadow);
-
-    border:1px solid #e5eefc;
-
-}
-
-
-.summary-title{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    margin-bottom:25px;
-
-    color:var(--primary);
-
-    font-size:1.25rem;
-
-    font-weight:700;
-
 }
 
-
-.summary-item{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:14px 0;
-
-    border-bottom:1px solid #edf3fb;
-
-}
-
-
-.summary-item:last-child{
-
-    border-bottom:none;
-
-}
-
-
-.summary-label{
-
-    color:var(--text-light);
-
-    font-size:.95rem;
-
-}
-
-
-.summary-value{
-
-    font-weight:700;
-
-    color:var(--text);
-
-    text-align:right;
-
-}
-
-
-/*==========================================================
-MEMBER PROFILE
-==========================================================*/
-
-.member-profile{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:16px;
-
-    margin-bottom:30px;
-
-}
-
-
-.member-avatar{
-
-    width:72px;
-
-    height:72px;
-
-    border-radius:50%;
-
-    overflow:hidden;
-
-    background:#eef4ff;
-
-    border:4px solid #dbeafe;
-
-    flex-shrink:0;
-
-}
-
-
-.member-avatar img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-}
-
-
-.member-avatar i{
-
-    width:100%;
-
-    height:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:36px;
-
-    color:var(--primary);
-
-}
-
-
-.member-details h3{
-
-    color:var(--primary);
-
-    margin-bottom:6px;
-
-    font-size:1.15rem;
-
-}
-
-
-.member-details p{
-
-    color:var(--text-light);
-
-    font-size:.9rem;
-
-}
-
-
-
-/*==========================================================
-PAYMENT INFORMATION
-==========================================================*/
-
-.info-box{
-
-    margin-top:25px;
-
-    padding:20px;
-
-    border-radius:18px;
-
-    background:#f8fbff;
-
-    border-left:5px solid var(--primary);
-
-}
-
-
-.info-box h4{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    color:var(--primary);
-
-    margin-bottom:12px;
-
-}
-
-
-.info-box ul{
-
-    padding-left:18px;
-
-}
-
-
-.info-box li{
-
-    margin-bottom:10px;
-
-    line-height:1.7;
-
-    color:var(--text-light);
-
-}
-
-
-
-/*==========================================================
-SECURITY NOTICE
-==========================================================*/
-
-.security-box{
-
-    margin-top:22px;
-
-    padding:18px;
-
-    border-radius:18px;
-
-    background:linear-gradient(
-    135deg,
-    #effdf5,
-    #f7fffb);
-
-    border:1px solid #bbf7d0;
-
-}
-
-
-.security-box h4{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    color:#15803d;
-
-    margin-bottom:10px;
-
-}
-
-
-.security-box p{
-
-    line-height:1.8;
-
-    color:#166534;
-
-    font-size:.92rem;
-
-}
-
-
-
-/*==========================================================
-SUPPORTED METHODS
-==========================================================*/
-
-.payment-methods{
-
-    margin-top:30px;
-
-}
-
-
-.payment-methods h4{
-
-    margin-bottom:15px;
-
-    color:var(--primary);
-
-}
-
-
-.methods-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:15px;
-
-}
-
-
-.method{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:10px;
-
-    padding:15px;
-
-    border-radius:16px;
-
-    background:#f8fbff;
-
-    border:1px solid #dbeafe;
-
-    font-weight:600;
-
-    color:#2563eb;
-
-}
-
-
-.method i{
-
-    font-size:20px;
-
-}
-
-
-
-/*==========================================================
-NOTICE BAR
-==========================================================*/
-
-.notice-bar{
-
-    margin-top:28px;
-
-    padding:18px;
-
-    border-radius:18px;
-
-    background:linear-gradient(
-    135deg,
-    rgba(37,99,235,.08),
-    rgba(16,185,129,.08));
-
-    border:1px solid #bfdbfe;
-
-}
-
-
-.notice-bar p{
-
-    color:#334155;
-
-    line-height:1.8;
-
+@keyframes successPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
 }
-
-
-
-/*==========================================================
-RESPONSIVE
-==========================================================*/
-
-@media(max-width:1100px){
-
-    .main-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .summary-card{
-
-        position:relative;
-
-        top:0;
-
-    }
-
-}
-
-
-@media(max-width:768px){
-
-    .member-profile{
-
-        flex-direction:column;
-
-        text-align:center;
-
-    }
-
-    .methods-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-
-@media(max-width:600px){
-
-    .category-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-/*==========================================================
-        KINGDOM WAYS CHURCH
-        GIVING PORTAL
-        PART 6 (FINAL)
-==========================================================*/
-
-
-/*==========================================================
-TOAST NOTIFICATION
-==========================================================*/
-
-.toast{
-
-    position:fixed;
-
-    top:25px;
-
-    right:25px;
-
-    min-width:320px;
-
-    padding:18px 22px;
-
-    border-radius:18px;
-
-    background:linear-gradient(
-    135deg,
-    var(--primary),
-    var(--secondary));
-
-    color:#ffffff;
-
-    font-weight:600;
-
-    box-shadow:0 20px 45px rgba(0,0,0,.22);
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-    z-index:99999;
-
-    opacity:0;
-
-    transform:translateX(120px);
-
-    transition:.35s ease;
-
-}
-
-.toast.show{
-
-    opacity:1;
-
-    transform:translateX(0);
-
-}
-
-.toast i{
-
-    font-size:24px;
-
-}
-
 
 
 /*==========================================================
 CONFIRMATION MODAL
 ==========================================================*/
-
-.modal{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(15,23,42,.65);
-
-    display:none;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:20px;
-
-    z-index:9999;
-
-    backdrop-filter:blur(6px);
-
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,.65);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 9999;
+    backdrop-filter: blur(6px);
 }
 
-.modal.active{
-
-    display:flex;
-
+.modal.active {
+    display: flex;
 }
 
-.modal-content{
-
-    width:100%;
-
-    max-width:520px;
-
-    background:#ffffff;
-
-    border-radius:24px;
-
-    padding:35px;
-
-    box-shadow:0 25px 60px rgba(0,0,0,.25);
-
-    animation:modalPop .35s ease;
-
+.modal-content {
+    width: 100%;
+    max-width: 520px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 25px 60px rgba(0,0,0,.25);
+    animation: modalPop .35s ease;
 }
 
-.modal-content h2{
-
-    color:var(--primary);
-
-    margin-bottom:18px;
-
+.modal-content h2 {
+    color: var(--primary);
+    margin-bottom: 12px;
 }
 
-.modal-content p{
-
-    color:var(--text-light);
-
-    line-height:1.8;
-
-    margin-bottom:28px;
-
+.modal-content hr {
+    border: none;
+    border-top: 1px dashed #dbeafe;
+    margin: 0 0 10px;
 }
 
-.modal-buttons{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:15px;
-
+.confirm-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding: 14px 0;
+    border-bottom: 1px dashed #dbeafe;
 }
 
-.modal-buttons button{
-
-    padding:14px 26px;
-
-    border:none;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    font-weight:700;
-
-    transition:.3s;
-
+.confirm-row:last-child {
+    border-bottom: none;
 }
 
-.confirmBtn{
-
-    background:linear-gradient(
-    135deg,
-    var(--secondary),
-    var(--primary));
-
-    color:#ffffff;
-
+.confirm-row strong {
+    font-weight: 600;
+    color: #475569;
 }
 
-.cancelModalBtn{
-
-    background:#e2e8f0;
-
-    color:#334155;
-
+.confirm-row span {
+    font-weight: 700;
+    color: var(--primary);
+    text-align: right;
 }
 
-.modal-buttons button:hover{
-
-    transform:translateY(-2px);
-
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 28px;
 }
 
+.modal-buttons button {
+    padding: 14px 26px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: .3s;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.modal-buttons button:hover {
+    transform: translateY(-2px);
+}
+
+.cancelBtn {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.confirmBtn {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    color: #ffffff;
+}
 
 
 /*==========================================================
-SUCCESS PULSE
+PAYMENT STATUS PANEL
 ==========================================================*/
-
-.success-card i{
-
-    animation:successPulse 1.6s infinite;
-
+.status-card {
+    display: none;
+    margin-top: 30px;
+    padding: 35px;
+    border-radius: 24px;
+    background: #ffffff;
+    border: 2px solid #dbeafe;
+    box-shadow: var(--shadow);
+    text-align: center;
+    animation: fadeUp .5s ease;
 }
 
-@keyframes successPulse{
-
-    0%{
-
-        transform:scale(1);
-
-    }
-
-    50%{
-
-        transform:scale(1.15);
-
-    }
-
-    100%{
-
-        transform:scale(1);
-
-    }
-
+.status-card.active {
+    display: block;
 }
 
+.status-card h2 {
+    color: var(--primary);
+    margin-bottom: 18px;
+}
+
+.status-card p {
+    line-height: 1.8;
+    color: var(--text-light);
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.status-icon {
+    width: 90px;
+    height: 90px;
+    margin: 10px auto 25px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--purple));
+    color: #ffffff;
+    font-size: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 15px 35px rgba(37,99,235,.25);
+}
+
+.status-icon.success {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    box-shadow: 0 15px 35px rgba(22,163,74,.25);
+    animation: successPulse 1.6s infinite;
+}
+
+.status-icon.failed {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    box-shadow: 0 15px 35px rgba(239,68,68,.25);
+}
 
 
 /*==========================================================
-SPINNER
+LOADING SPINNER
 ==========================================================*/
-
-@keyframes spin{
-
-    from{
-
-        transform:rotate(0deg);
-
-    }
-
-    to{
-
-        transform:rotate(360deg);
-
-    }
-
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    margin: 25px auto 0;
+    border-radius: 50%;
+    border: 7px solid rgba(37,99,235,.15);
+    border-top: 7px solid var(--primary);
+    animation: spin 1s linear infinite;
 }
-
 
 
 /*==========================================================
-MODAL ANIMATION
+RECEIPT
 ==========================================================*/
-
-@keyframes modalPop{
-
-    from{
-
-        opacity:0;
-
-        transform:scale(.85);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:scale(1);
-
-    }
-
+.receipt-details div {
+    font-size: 15px;
 }
 
+#receiptCard.status-card {
+    text-align: left;
+}
+
+#receiptCard.status-card h2 {
+    text-align: center;
+}
+
+#receiptCard .receipt-details span {
+    color: #94a3b8;
+}
 
 
 /*==========================================================
-BUTTON STATES
+STATUS ACTIONS
 ==========================================================*/
-
-button:disabled{
-
-    opacity:.6;
-
-    cursor:not-allowed;
-
-    transform:none !important;
-
+.status-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
 }
 
-button:active{
-
-    transform:scale(.98);
-
+.primary-btn {
+    padding: 14px 26px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--purple));
+    transition: var(--transition);
+    box-shadow: 0 12px 25px rgba(37,99,235,.2);
+    font-family: inherit;
 }
 
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 35px rgba(37,99,235,.28);
+}
+
+.primary-btn:active {
+    transform: scale(.98);
+}
+
+.primary-btn i {
+    margin-right: 8px;
+}
+
+/*==================================================================
+WAITING CANCEL BUTTON
+==================================================================*/
+.waiting-cancel {
+    margin-top: 20px;
+}
+
+.waiting-cancel .cancelBtn {
+    padding: 13px 28px;
+    border: 2px solid #cbd5e1;
+    border-radius: 14px;
+    cursor: pointer;
+    background: #ffffff;
+    color: #475569;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.waiting-cancel .cancelBtn:hover {
+    background: #f1f5f9;
+    border-color: var(--danger);
+    color: var(--danger);
+    transform: translateY(-2px);
+}
+
+.waiting-cancel .cancelBtn i {
+    margin-right: 8px;
+}
 
 
 /*==========================================================
-INPUT VALIDATION
+HISTORY
 ==========================================================*/
+#historySection.status-card {
+    max-width: 900px;
+    text-align: left;
+}
+
+#historySection.status-card h2 {
+    text-align: center;
+}
+
+#historyContainer {
+    width: 100%;
+    margin-top: 15px;
+}
+
+#historyContainer>p {
+    color: var(--text-light);
+    text-align: center;
+}
+
+.history-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 12px 16px;
+}
+
+#historyContainer .history-row {
+    border-bottom: 1px solid #eef2f7;
+    font-size: 14px;
+    color: var(--text);
+}
+
+#historyContainer .history-row:hover {
+    background: #f8fbff;
+}
+
+.history-row div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/*==========================================================
+TOAST
+(top-right)
+==========================================================*/
+#toast {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    min-width: 320px;
+    max-width: 90vw;
+    padding: 18px 22px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: 0 20px 45px rgba(0,0,0,.22);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 99999;
+    opacity: 0;
+    transform: translateX(120px);
+    transition: .35s ease;
+    pointer-events: none;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+#toast i {
+    font-size: 24px;
+}
+
+
+/*==========================================================
+BUTTON / INPUT STATES
+==========================================================*/
+button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+button:active {
+    transform: scale(.98);
+}
 
 input:invalid:focus,
-
-select:invalid:focus{
-
-    border-color:#ef4444;
-
+select:invalid:focus {
+    border-color: #ef4444;
 }
 
 input:valid,
-
-select:valid{
-
-    border-color:#22c55e;
-
+select:valid {
+    border-color: #22c55e;
 }
-
-
-
-/*==========================================================
-PRINT RECEIPT
-==========================================================*/
-
-@media print{
-
-    body{
-
-        background:#ffffff;
-
-    }
-
-    header,
-
-    .sidebar,
-
-    .topbar,
-
-    .payment-card,
-
-    .summary-card,
-
-    .toast,
-
-    .modal,
-
-    .submitBtn,
-
-    .printBtn{
-
-        display:none !important;
-
-    }
-
-    .receipt-card{
-
-        display:block !important;
-
-        width:100%;
-
-        box-shadow:none;
-
-        border:none;
-
-        margin:0;
-
-    }
-
-}
-
-
-
-/*==========================================================
-RESPONSIVE
-==========================================================*/
-
-@media(max-width:768px){
-
-    .topbar{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-        gap:15px;
-
-    }
-
-    .receipt-row{
-
-        flex-direction:column;
-
-        gap:5px;
-
-    }
-
-    .toast{
-
-        left:15px;
-
-        right:15px;
-
-        min-width:auto;
-
-    }
-
-}
-
-
-@media(max-width:480px){
-
-    .card,
-
-    .summary-card{
-
-        padding:20px;
-
-    }
-
-    .submitBtn,
-
-    .printBtn{
-
-        width:100%;
-
-    }
-
-}
-
 
 
 /*==========================================================
 ACCESSIBILITY
 ==========================================================*/
-
-:focus-visible{
-
-    outline:3px solid rgba(37,99,235,.35);
-
-    outline-offset:2px;
-
+:focus-visible {
+    outline: 3px solid rgba(37,99,235,.35);
+    outline-offset: 2px;
 }
 
 
-
 /*==========================================================
-FUTURE DARK MODE READY
+PRINT RECEIPT
 ==========================================================*/
+@media print {
+    body {
+        background: #ffffff;
+    }
 
-body.dark-mode{
+    .topbar,
+    .hero-card,
+    .giving-grid,
+    .modal,
+    #paymentStatus,
+    #historySection,
+    #toast {
+        display: none !important;
+    }
 
-    transition:.35s ease;
+    #receiptCard {
+        display: block !important;
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
 
+    #receiptCard .status-actions {
+        display: none !important;
+    }
 }
 
 
-
 /*==========================================================
-END OF FILE
-KINGDOM WAYS GIVING PORTAL
-Production Ready
+RESPONSIVE
 ==========================================================*/
+@media (max-width: 1100px) {
+    .giving-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .summary-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    #toast {
+        left: 15px;
+        right: 15px;
+        min-width: auto;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .hero-card {
+        padding: 35px 20px;
+    }
+}

@@ -14,13 +14,14 @@ from fastapi import (
     Depends,
     Form,
     File,
-    UploadFile
+    UploadFile,
+    HTTPException
 )
 
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.auth import get_current_admin
+from app.dependencies import get_current_admin
 from app.models import Event, Admin
 from app.schema import (
     EventResponse,
@@ -296,13 +297,23 @@ def update_event(
 
 
     if banner:
-
-        event.banner = banner.filename
+        upload_folder = "public/uploads/events"
+        os.makedirs(upload_folder, exist_ok=True)
+        banner_name = f"{uuid4()}_{banner.filename}"
+        banner_path = f"uploads/events/{banner_name}"
+        with open(os.path.join(upload_folder, banner_name), "wb") as buffer:
+            shutil.copyfileobj(banner.file, buffer)
+        event.banner = banner_path
 
 
     if attachment:
-
-        event.attachment = attachment.filename
+        upload_folder = "public/uploads/events"
+        os.makedirs(upload_folder, exist_ok=True)
+        attachment_name = f"{uuid4()}_{attachment.filename}"
+        attachment_path = f"uploads/events/{attachment_name}"
+        with open(os.path.join(upload_folder, attachment_name), "wb") as buffer:
+            shutil.copyfileobj(attachment.file, buffer)
+        event.attachment = attachment_path
 
 
 

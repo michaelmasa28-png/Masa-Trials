@@ -5,7 +5,14 @@
 // =====================================================
 
 
-const API_URL = "http://127.0.0.1:8000/api/sermons";
+const API_URL = "/api/sermons";
+
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
 
 
 // ===============================
@@ -114,6 +121,12 @@ if(videoInput){
 // SAVE SERMON
 // ===============================
 
+function getToken() {
+    const session = JSON.parse(localStorage.getItem("adminSession") || "{}");
+    return session.token || "";
+}
+
+if(sermonForm){
 sermonForm.addEventListener(
 "submit",
 async function(e){
@@ -145,6 +158,7 @@ await fetch(
 API_URL + "/",
 {
 method:"POST",
+headers:{ "Authorization": `Bearer ${getToken()}` },
 body:formData
 }
 );
@@ -164,6 +178,7 @@ await fetch(
 `${API_URL}/${currentEditId}`,
 {
 method:"PUT",
+headers:{ "Authorization": `Bearer ${getToken()}` },
 body:formData
 }
 );
@@ -227,8 +242,7 @@ alert(
 
 
 });
-
-
+}
 
 // ===============================
 // RESET FORM
@@ -236,8 +250,7 @@ alert(
 
 function resetForm(){
 
-
-sermonForm.reset();
+if(sermonForm) sermonForm.reset();
 
 
 
@@ -283,7 +296,8 @@ async function loadSermons(){
 
         const response =
         await fetch(
-            API_URL + "/"
+            API_URL + "/",
+            { headers: { "Authorization": `Bearer ${getToken()}` } }
         );
 
 
@@ -291,7 +305,7 @@ async function loadSermons(){
         const sermons =
         await response.json();
 
-
+        if(!sermonTable) return;
 
         sermonTable.innerHTML = "";
 
@@ -426,7 +440,7 @@ function addSermonRow(sermon){
 
         <td>
 
-            ${sermon.title}
+            ${escapeHtml(sermon.title)}
 
         </td>
 
@@ -436,7 +450,7 @@ function addSermonRow(sermon){
 
         <td>
 
-            ${sermon.preacher}
+            ${escapeHtml(sermon.preacher)}
 
         </td>
 
@@ -446,7 +460,7 @@ function addSermonRow(sermon){
 
         <td>
 
-            ${sermon.sermon_date || "-"}
+            ${escapeHtml(sermon.sermon_date) || "-"}
 
         </td>
 
@@ -599,7 +613,8 @@ async function deleteSermon(id){
 
             {
 
-                method:"DELETE"
+                method:"DELETE",
+                headers:{ "Authorization": `Bearer ${getToken()}` }
 
             }
 
@@ -670,7 +685,8 @@ async function editSermon(id){
 
         const response =
         await fetch(
-            API_URL + "/"
+            API_URL + "/",
+            { headers: { "Authorization": `Bearer ${getToken()}` } }
         );
 
 

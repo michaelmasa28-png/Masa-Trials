@@ -76,3 +76,11 @@ table tbody tr:hover{
 .delete-btn:hover{
     background:#bb2d3b;
 }
+
+@media(max-width:768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}

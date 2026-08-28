@@ -2114,13 +2114,21 @@ window.addEventListener(
 
         smsMessage.value=smsDraft;
 
-        characterCount.textContent=smsDraft.length;
+        if(characterCount){
 
-        smsPages.textContent=
+            characterCount.textContent=smsDraft.length;
 
-        Math.max(1,
+        }
 
-        Math.ceil(smsDraft.length/160));
+        if(smsPages){
+
+            smsPages.textContent=
+
+            Math.max(1,
+
+            Math.ceil(smsDraft.length/160));
+
+        }
 
     }
 
@@ -2140,9 +2148,13 @@ window.addEventListener(
 
         internalMessage.value=internalDraft;
 
-        internalCharacters.textContent=
+        if(internalCharacters){
 
-        internalDraft.length;
+            internalCharacters.textContent=
+
+            internalDraft.length;
+
+        }
 
     }
 
@@ -2182,11 +2194,15 @@ async function initializeCommunicationCenter(){
 
 
 
-    await loadMembers();
+    await Promise.all([
 
-    await loadStatistics();
+        loadMembers(),
 
-    await loadHistory();
+        loadStatistics(),
+
+        loadHistory()
+
+    ]);
 
     await loadContacts();
 

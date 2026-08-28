@@ -1,13 +1,18 @@
+import logging
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 
 from app.dependencies import get_current_admin
+
+logger = logging.getLogger(__name__)
 from app.auth import hash_password
 from app.models import Admin
-from app.database import SessionLocal
+from app.database import get_db
 from app.models import Member, Attendance
 from app.utils import generate_username
+from app.auth import create_member_token
 from app.schema import (
     MemberRegister,
     MemberActivate,
@@ -17,15 +22,6 @@ from app.schema import (
 )
 
 router = APIRouter(tags=["Members"])
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
 
 # ==========================================
 # SERIALIZE MEMBER
@@ -122,19 +118,37 @@ def register_member(
 
 
 # ==========================================
-# GET ALL MEMBERS
+# GET ALL MEMBERS (paginated for speed)
 # ==========================================
 
 @router.get("/members")
 def get_members(
-    db: Session = Depends(get_db)
+    current_admin: Admin = Depends(get_current_admin),
+    db: Session = Depends(get_db),
+    skip: int = 0,
+    limit: int = 100,
+    search: str = "",
+    status: str = "",
 ):
 
-    members = db.query(Member).all()
+    query = db.query(Member)
+
+    if search:
+        query = query.filter(
+            Member.full_name.ilike(f"%{search}%") |
+            Member.phone.ilike(f"%{search}%") |
+            Member.member_number.ilike(f"%{search}%")
+        )
+
+    if status:
+        query = query.filter(Member.status == status)
+
+    total = query.count()
+    members = query.order_by(Member.id.desc()).offset(skip).limit(limit).all()
 
     return {
         "success": True,
-        "total": len(members),
+        "total": total,
         "members": [serialize_member(m) for m in members]
     }
 # ==========================================
@@ -143,8 +157,7 @@ def member_login(
     data: MemberLogin,
     db: Session = Depends(get_db)
 ):
-    print("LOGIN REQUEST")
-    print(data.model_dump())
+    logger.debug("Login attempt for: %s", data.full_name)
 
     member = (
         db.query(Member)
@@ -187,19 +200,25 @@ def member_login(
             member_id=member.id,
             attendance_date=today,
             attendance_type="Client Login",
-            time_in=datetime.utcnow()
+            time_in=datetime.now(timezone.utc)
         )
 
         db.add(attendance)
         db.commit()
 
+    token = create_member_token(member.id)
+
     return {
         "success": True,
         "message": "Login successful.",
+        "access_token": token,
+        "token_type": "bearer",
         "member_id": member.id,
         "member_number": member.member_number,
         "username": member.username,
         "full_name": member.full_name,
+        "phone": member.phone,
+        "gender": member.gender,
         "is_active": member.is_active,
         "profile_completed": member.profile_completed
     }
@@ -207,6 +226,7 @@ def member_login(
 @router.get("/member/{member_id}")
 def get_member(
     member_id: int,
+    current_admin: Admin = Depends(get_current_admin),
     db: Session = Depends(get_db)
 ):
 
@@ -234,6 +254,7 @@ def get_member(
 
 @router.get("/members/pending")
 def pending_members(
+    current_admin: Admin = Depends(get_current_admin),
     db: Session = Depends(get_db)
 ):
 
@@ -256,6 +277,7 @@ def pending_members(
 
 @router.get("/members/approved")
 def approved_members(
+    current_admin: Admin = Depends(get_current_admin),
     db: Session = Depends(get_db)
 ):
 
@@ -270,6 +292,14 @@ def approved_members(
         "total": len(members),
         "members": [serialize_member(m) for m in members]
     }
+
+
+@router.get("/members/approved/count")
+def approved_members_count(
+    db: Session = Depends(get_db)
+):
+    count = db.query(Member).filter(Member.status == "Approved").count()
+    return {"count": count}
 
 @router.post("/member/activate")
 def activate_member(
@@ -323,6 +353,7 @@ def activate_member(
 
 @router.get("/members/active")
 def active_members(
+    current_admin: Admin = Depends(get_current_admin),
     db: Session = Depends(get_db)
 ):
 
@@ -373,7 +404,7 @@ def approve_member(
     # Approve member
     member.status = "Approved"
     member.approved_by = current_admin.id
-    member.approved_at = datetime.utcnow()
+    member.approved_at = datetime.now(timezone.utc)
 
     db.commit()
     db.refresh(member)
@@ -509,7 +540,6 @@ def member_logout(
     data: MemberLogout,
     db: Session = Depends(get_db)
 ):
-    from datetime import datetime, date
     from app.models import Attendance
 
     attendance = (
@@ -523,7 +553,7 @@ def member_logout(
     )
 
     if attendance:
-        attendance.time_out = datetime.utcnow()
+        attendance.time_out = datetime.now(timezone.utc)
 
     member = (
         db.query(Member)
@@ -532,7 +562,7 @@ def member_logout(
     )
 
     if member:
-        member.last_seen = datetime.utcnow()
+        member.last_seen = datetime.now(timezone.utc)
 
     db.commit()
 

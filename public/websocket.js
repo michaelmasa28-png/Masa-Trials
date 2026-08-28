@@ -326,6 +326,12 @@ window.addEventListener(
 
 );
 
+window.addEventListener("beforeunload", () => {
+    if (typeof disconnectChat === "function") {
+        disconnectChat();
+    }
+});
+
 // =====================================================
 // PART 2 - PRODUCTION WEBSOCKET ENGINE
 // =====================================================
