@@ -26,6 +26,9 @@ from app.schema import (
     EventListResponse
 )
 from app.services import storage
+from app.cache import make_ttl_cache
+
+_cache = make_ttl_cache(ttl=30)
 
 router = APIRouter(
     prefix="/api/events",
@@ -53,17 +56,25 @@ def events_test():
 def get_events(
     db: Session = Depends(get_db)
 ):
+
+    cached = _cache.get("events:list")
+    if cached is not None:
+        return cached
+
     events = (
         db.query(Event)
         .order_by(Event.created_at.desc())
         .all()
     )
 
-    return {
+    result = {
         "success": True,
         "message": "Events retrieved successfully",
         "events": events
     }
+
+    _cache.set("events:list", result)
+    return result
 
 
 # ============================================
@@ -182,6 +193,8 @@ def create_event(
     db.add(new_event)
     db.commit()
     db.refresh(new_event)
+
+    _cache.invalidate("events:list")
 
     return new_event
 
@@ -303,6 +316,7 @@ def update_event(
     db.commit()
     db.refresh(event)
 
+    _cache.invalidate("events:list")
 
     return event
 
@@ -341,6 +355,7 @@ def delete_event(
 
     db.commit()
 
+    _cache.invalidate("events:list")
 
     return {
         "success": True,

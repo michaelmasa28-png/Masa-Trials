@@ -19,8 +19,11 @@ from app.models import Gallery, Admin
 from app.utils import validate_upload, MAX_IMAGE_SIZE, ALLOWED_IMAGE_TYPES
 from app.schema import GalleryResponse
 from app.services import storage
+from app.cache import make_ttl_cache
 
 logger = logging.getLogger(__name__)
+
+_cache = make_ttl_cache(ttl=30)
 
 
 router = APIRouter(
@@ -49,11 +52,18 @@ def get_gallery(
     db: Session = Depends(get_db)
 ):
 
-    return (
+    cached = _cache.get("gallery:list")
+    if cached is not None:
+        return cached
+
+    rows = (
         db.query(Gallery)
         .order_by(Gallery.created_at.desc())
         .all()
     )
+
+    _cache.set("gallery:list", rows)
+    return rows
 
 
 # ==========================================
@@ -111,6 +121,8 @@ async def upload_gallery_image(
 
     db.refresh(gallery)
 
+    _cache.invalidate("gallery:list")
+
     logger.info("Gallery saved: id=%s, path=%s", gallery.id, gallery.image)
 
     return gallery
@@ -131,6 +143,8 @@ def delete_gallery(id: int, current_admin: Admin = Depends(get_current_admin), d
     # Delete database record
     db.delete(image)
     db.commit()
+
+    _cache.invalidate("gallery:list")
 
     return {
         "success": True,

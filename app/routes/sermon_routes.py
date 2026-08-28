@@ -19,6 +19,9 @@ from app.utils import (
 )
 from app.schema import SermonCreate, SermonResponse
 from app.services import storage
+from app.cache import make_ttl_cache
+
+_cache = make_ttl_cache(ttl=30)
 
 
 router = APIRouter(
@@ -37,11 +40,17 @@ def get_sermons(
     db: Session = Depends(get_db)
 ):
 
+    cached = _cache.get("sermons:list")
+    if cached is not None:
+        return cached
+
     sermons = db.query(Sermon)\
         .order_by(
             Sermon.created_at.desc()
         )\
         .all()
+
+    _cache.set("sermons:list", sermons)
 
     return sermons
 
@@ -173,6 +182,7 @@ async def create_sermon(
 
     db.refresh(new_sermon)
 
+    _cache.invalidate("sermons:list")
 
     return new_sermon
 # ==========================================
@@ -254,6 +264,7 @@ async def update_sermon(
 
     db.refresh(sermon)
 
+    _cache.invalidate("sermons:list")
 
     return sermon
 
@@ -287,6 +298,7 @@ def delete_sermon(
 
     db.commit()
 
+    _cache.invalidate("sermons:list")
 
     return {
         "success": True,

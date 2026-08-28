@@ -11,9 +11,11 @@ if DATABASE_TYPE == "postgresql":
     engine = create_engine(
         DATABASE_URL,
         pool_pre_ping=True,
-        pool_recycle=300,
-        pool_size=3,
-        max_overflow=10,
+        pool_recycle=250,
+        pool_size=5,
+        max_overflow=3,
+        pool_timeout=30,
+        connect_args={"connect_timeout": 10, "keepalives": 1},
     )
 else:
     # SQLite: no connection pooling, WAL mode for concurrency
