@@ -8,6 +8,16 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
+
+# Silence per-request noise from third-party libraries (httpx, httpcore,
+# uvicorn.access, sqlalchemy) so a single operation doesn't produce
+# many lines.  Individual app loggers inherit from root (INFO).
+for _noisy in (
+    "httpx", "httpcore", "uvicorn.access",
+    "sqlalchemy.engine", "multipart",
+):
+    logging.getLogger(_noisy).setLevel(logging.WARNING)
+
 logger = logging.getLogger("churchweb")
 
 from app.routes.giving_routes import router as giving_router

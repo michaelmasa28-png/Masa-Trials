@@ -1057,11 +1057,20 @@ function renderEventsTable(){
 function createEventRow(event){
 
 
-    const image =
+    const rawImage =
     event.banner
     ||
     event.image
     ||
+    "";
+
+    const image =
+    rawImage
+    ?
+    (rawImage.startsWith("http") || rawImage.startsWith("/")
+        ? rawImage
+        : "/" + rawImage)
+    :
     "";
 
 
