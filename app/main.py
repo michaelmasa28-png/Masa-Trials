@@ -43,7 +43,7 @@ from app.routes.admin_routes import router as admin_routes_router
 from app.routes.card_background_routes import router as card_bg_router
 from app.routes.communication_routes import router as communication_router
 from app.routes.settings_routes import router as settings_router
-from app.config import CORS_ORIGINS, SECRET_KEY
+from app.config import CORS_ORIGINS, SECRET_KEY, DATABASE_TYPE
 
 
 # Create database tables
@@ -128,6 +128,11 @@ def _seed_default_admin():
 async def lifespan(app: FastAPI):
     # Startup
     if SECRET_KEY == "change_this_to_a_long_random_secret_key":
+        if DATABASE_TYPE == "postgresql":
+            raise RuntimeError(
+                "Refusing to start: SECRET_KEY is still the default placeholder. "
+                "Set a strong random SECRET_KEY in your environment before going live."
+            )
         logger.warning("CRITICAL: SECRET_KEY is still the default placeholder! Change it in .env immediately.")
     _seed_default_admin()
 

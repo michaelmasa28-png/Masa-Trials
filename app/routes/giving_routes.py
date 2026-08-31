@@ -13,7 +13,7 @@ import string
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
-from app.mpesa import stk_push as mpesa_stk_push, normalize_callback
+from app.mpesa import stk_push as mpesa_stk_push, normalize_callback, MpesaError
 from app.database import get_db
 from app.models import Member, Giving, Transaction, GivingAccount
 from app.schema import (
@@ -120,13 +120,32 @@ async def stk_push(
         if shortcode.isdigit() and len(shortcode) == 5:
             account_ref = shortcode
 
-    result = await mpesa_stk_push(
-        phone=request.phone_number,
-        amount=request.amount,
-        account_reference=account_ref,
-        transaction_desc=request.category,
-        shortcode=shortcode,
-    )
+    try:
+        result = await mpesa_stk_push(
+            phone=request.phone_number,
+            amount=request.amount,
+            account_reference=account_ref,
+            transaction_desc=request.category,
+            shortcode=shortcode,
+        )
+    except MpesaError as e:
+        logger.error("STK push failed for member %s: %s", member.id, e)
+        return STKPushResponse(
+            success=False,
+            message=str(e),
+            checkout_request_id=None,
+            merchant_request_id=None,
+            customer_message=str(e),
+        )
+    except Exception as e:
+        logger.exception("Unexpected STK push failure for member %s", member.id)
+        return STKPushResponse(
+            success=False,
+            message="We couldn't initiate your M-Pesa request. Please try again.",
+            checkout_request_id=None,
+            merchant_request_id=None,
+            customer_message="Unable to reach M-Pesa right now. Please try again.",
+        )
 
     if result["success"]:
         giving = Giving(
@@ -145,11 +164,39 @@ async def stk_push(
         try:
             db.flush()
             db.commit()
-
         except Exception as e:
             db.rollback()
             logger.error("STK push DB commit failed: %s: %s", type(e).__name__, e)
-            raise
+            # The prompt was sent to the phone, so the user may still pay.
+            # Try to persist the record so it isn't lost.
+            try:
+                fresh_giving = Giving(
+                    member_id=member.id,
+                    phone_number=request.phone_number,
+                    category=request.category,
+                    amount=request.amount,
+                    status="Pending",
+                    checkout_request_id=result["checkout_request_id"],
+                    merchant_request_id=result["merchant_request_id"],
+                    reference=request.reference,
+                )
+                db.add(fresh_giving)
+                db.commit()
+            except Exception as e2:
+                db.rollback()
+                logger.error(
+                    "STK push DB retry commit also failed: %s: %s",
+                    type(e2).__name__, e2,
+                )
+
+            return STKPushResponse(
+                success=True,
+                message=result["response_description"],
+                checkout_request_id=result["checkout_request_id"],
+                merchant_request_id=result["merchant_request_id"],
+                customer_message="Check your phone and complete the payment. "
+                "It may take a moment to appear in your history.",
+            )
 
     return STKPushResponse(
         success=result["success"],

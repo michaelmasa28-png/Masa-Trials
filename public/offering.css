@@ -803,6 +803,99 @@ LOADING SPINNER
 
 
 /*==========================================================
+PAYMENT STEP PROGRESS BAR
+==========================================================*/
+.pay-progress {
+    position: relative;
+    max-width: 520px;
+    margin: 25px auto 0;
+    padding: 4px;
+}
+
+.pay-progress-track {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    position: relative;
+    z-index: 1;
+}
+
+.pay-progress-step {
+    font-size: 12px;
+    font-weight: 600;
+    color: #94a3b8;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.pay-progress-step.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--primary), var(--purple));
+    border-color: transparent;
+    box-shadow: 0 8px 18px rgba(37,99,235,.25);
+}
+
+.pay-progress-step.done {
+    color: var(--success);
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+}
+
+.pay-progress-arrow {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 7px solid #cbd5e1;
+    flex: 0 0 auto;
+}
+
+.pay-progress-fill {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    top: 4px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--purple));
+    border-radius: 6px;
+    transition: width .5s ease;
+    z-index: 0;
+}
+
+
+/*==========================================================
+ELAPSED TIME COUNTER
+==========================================================*/
+.waiting-elapsed {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    background: #f1f5f9;
+    color: var(--text-light);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/*==========================================================
+RETRY HINT
+==========================================================*/
+.retry-hint {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 600;
+}
+
+
+/*==========================================================
 RECEIPT
 ==========================================================*/
 .receipt-details div {

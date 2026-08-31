@@ -1,8 +1,11 @@
 import base64
+import logging
 import httpx
 from datetime import datetime
 
 from app.config import settings
+
+logger = logging.getLogger(__name__)
 
 BASE_URL = (
     "https://sandbox.safaricom.co.ke"
@@ -11,26 +14,82 @@ BASE_URL = (
 )
 
 
+class MpesaError(Exception):
+    """Raised for any M-Pesa API failure with a user-safe message."""
+
+
+def _check_config() -> None:
+    """Fail fast with a clear message when M-Pesa credentials are missing."""
+    missing = [
+        name
+        for name, value in (
+            ("consumer key", settings.MPESA_CONSUMER_KEY),
+            ("consumer secret", settings.MPESA_CONSUMER_SECRET),
+            ("shortcode", settings.MPESA_SHORTCODE),
+            ("passkey", settings.MPESA_PASSKEY),
+            ("callback url", settings.MPESA_CALLBACK_URL),
+        )
+        if not value
+    ]
+    if missing:
+        raise MpesaError(
+            "M-Pesa is not fully configured on the server "
+            f"(missing: {', '.join(missing)}). Please contact the church office."
+        )
+
+
 async def get_access_token() -> str:
     """
     Requests a fresh OAuth token from Daraja.
     Valid for about 1 hour — call this fresh for every STK Push.
+    Raises MpesaError on any failure so callers can show a friendly message.
     """
+    _check_config()
 
     url = f"{BASE_URL}/oauth/v1/generate?grant_type=client_credentials"
 
-    async with httpx.AsyncClient(timeout=15) as client:
-        response = await client.get(
-            url,
-            auth=(
-                settings.MPESA_CONSUMER_KEY,
-                settings.MPESA_CONSUMER_SECRET
+    try:
+        async with httpx.AsyncClient(timeout=15) as client:
+            response = await client.get(
+                url,
+                auth=(
+                    settings.MPESA_CONSUMER_KEY,
+                    settings.MPESA_CONSUMER_SECRET
+                )
             )
+    except httpx.TimeoutException:
+        logger.error("M-Pesa token request timed out")
+        raise MpesaError(
+            "M-Pesa service timed out. Please try again in a moment."
+        )
+    except httpx.HTTPError as e:
+        logger.error("M-Pesa token request network error: %s", e)
+        raise MpesaError(
+            "Could not reach the M-Pesa service. Please try again later."
         )
 
-    response.raise_for_status()
+    if response.status_code != 200:
+        logger.error(
+            "M-Pesa token request failed: HTTP %s - %s",
+            response.status_code, response.text[:200],
+        )
+        raise MpesaError(
+            "M-Pesa authorization failed. The configured credentials may be "
+            "invalid. Please contact the church office."
+        )
 
-    return response.json()["access_token"]
+    try:
+        data = response.json()
+    except ValueError:
+        logger.error("M-Pesa token response was not valid JSON")
+        raise MpesaError("Received an invalid response from M-Pesa. Try again.")
+
+    token = data.get("access_token")
+    if not token:
+        logger.error("M-Pesa token response missing access_token: %s", data)
+        raise MpesaError("M-Pesa did not grant access. Try again later.")
+
+    return token
 
 
 def generate_password(timestamp: str, shortcode: str = None) -> str:
@@ -99,10 +158,30 @@ async def stk_push(
 
     url = f"{BASE_URL}/mpesa/stkpush/v1/processrequest"
 
-    async with httpx.AsyncClient(timeout=30) as client:
-        response = await client.post(url, json=payload, headers=headers)
+    try:
+        async with httpx.AsyncClient(timeout=30) as client:
+            response = await client.post(url, json=payload, headers=headers)
+    except httpx.TimeoutException:
+        logger.error("M-Pesa STK push request timed out")
+        raise MpesaError(
+            "The M-Pesa request timed out. Please try again in a moment."
+        )
+    except httpx.HTTPError as e:
+        logger.error("M-Pesa STK push network error: %s", e)
+        raise MpesaError(
+            "Could not reach the M-Pesa service. Please try again later."
+        )
 
-    data = response.json()
+    try:
+        data = response.json()
+    except ValueError:
+        logger.error(
+            "M-Pesa STK push returned HTTP %s with non-JSON body: %s",
+            response.status_code, response.text[:200],
+        )
+        raise MpesaError(
+            "Received an invalid response from M-Pesa. Please try again."
+        )
 
     return {
         "success": data.get("ResponseCode") == "0",

@@ -1267,11 +1267,29 @@ if (confirmBtn) {
 
 function resetStatusCards() {
 
+    stopElapsedTimer();
+
     waitingCard.classList.remove("active");
 
     successCard.classList.remove("active");
 
     failedCard.classList.remove("active");
+
+    const elapsedEl = document.getElementById("waitingElapsed");
+
+    if (elapsedEl) {
+
+        elapsedEl.parentNode.removeChild(elapsedEl);
+
+    }
+
+    const progressBar = document.getElementById("paymentProgressBar");
+
+    if (progressBar) {
+
+        progressBar.parentNode.removeChild(progressBar);
+
+    }
 
 }
 
@@ -1285,6 +1303,38 @@ function showWaitingCard() {
 
     waitingCard.classList.add("active");
 
+    const existingElapsed = document.getElementById("waitingElapsed");
+
+    if (!existingElapsed) {
+
+        const elapsedEl = document.createElement("p");
+
+        elapsedEl.id = "waitingElapsed";
+
+        elapsedEl.className = "waiting-elapsed";
+
+        elapsedEl.textContent = "Elapsed: 0s";
+
+        waitingCard.appendChild(elapsedEl);
+
+    }
+
+    startElapsedTimer();
+
+    renderProgressBar(
+
+        waitingCard,
+
+        ["Sending request",
+
+        "Check phone & enter PIN",
+
+        "Waiting for confirmation"],
+
+        1
+
+    );
+
 }
 
 // ======================================================
@@ -1293,9 +1343,25 @@ function showWaitingCard() {
 
 function showSuccessCard() {
 
+    stopElapsedTimer();
+
     resetStatusCards();
 
     successCard.classList.add("active");
+
+    renderProgressBar(
+
+        successCard,
+
+        ["Sending request",
+
+        "Check phone & enter PIN",
+
+        "Payment confirmed"],
+
+        3
+
+    );
 
 }
 
@@ -1304,6 +1370,8 @@ function showSuccessCard() {
 // ======================================================
 
 function showFailedCard(message) {
+
+    stopElapsedTimer();
 
     resetStatusCards();
 
@@ -1316,6 +1384,64 @@ function showFailedCard(message) {
         failedMessage.textContent = message;
 
     }
+
+    renderProgressBar(
+
+        failedCard,
+
+        ["Sending request",
+
+        "Check phone & enter PIN",
+
+        "Payment failed"],
+
+        1
+
+    );
+
+    clearRetryHint();
+
+}
+
+// ======================================================
+// RENDER STEP PROGRESS BAR
+// ======================================================
+
+function renderProgressBar(card, steps, currentStep) {
+
+    if (!card) return;
+
+    const existing = document.getElementById("paymentProgressBar");
+
+    if (existing) {
+
+        existing.parentNode.removeChild(existing);
+
+    }
+
+    const stepsEl = steps.map((label, index) => {
+
+        const done = index < currentStep;
+
+        const active = index === currentStep;
+
+        return `<div class="pay-progress-step ${done ? "done" : ""} ${active ? "active" : ""}">${label}</div>`;
+
+    }).join("<div class=\"pay-progress-arrow\"></div>");
+
+    const wrapper = document.createElement("div");
+
+    wrapper.id = "paymentProgressBar";
+
+    wrapper.className = "pay-progress";
+
+    wrapper.innerHTML =
+
+        `<div class="pay-progress-track">${stepsEl}</div>` +
+
+        `<div class="pay-progress-fill" style="width:${Math.min(100, Math.round((currentStep / steps.length) * 100))}%"></div>`;
+
+    card.appendChild(wrapper);
 
 }
 
@@ -1330,6 +1456,126 @@ function updateWaitingMessage(message) {
     if (waitingText) {
 
         waitingText.textContent = message;
+
+    }
+
+    if (waitingText && message.indexOf("PIN") !== -1) {
+
+        const progressBar = document.getElementById("paymentProgressBar");
+
+        if (progressBar) {
+
+            const steps = progressBar.querySelectorAll(".pay-progress-step");
+
+            if (steps.length) {
+
+                steps[1].classList.add("active");
+
+            }
+
+        }
+
+    }
+
+}
+
+// ======================================================
+// ELAPSED TIME COUNTER
+// ======================================================
+
+let elapsedTimer = null;
+
+let elapsedStart = 0;
+
+function startElapsedTimer() {
+
+    stopElapsedTimer();
+
+    const elapsedEl =
+
+        document.getElementById("waitingElapsed");
+
+    if (!elapsedEl) return;
+
+    elapsedStart = Date.now();
+
+    const tick = () => {
+
+        const seconds = Math.floor((Date.now() - elapsedStart) / 1000);
+
+        const display = formatElapsed(seconds);
+
+        if (elapsedEl) {
+
+            elapsedEl.textContent = "Elapsed: " + display;
+
+        }
+
+    };
+
+    tick();
+
+    elapsedTimer = setInterval(tick, 1000);
+
+}
+
+function stopElapsedTimer() {
+
+    if (elapsedTimer) {
+
+        clearInterval(elapsedTimer);
+
+        elapsedTimer = null;
+
+    }
+
+}
+
+function formatElapsed(seconds) {
+
+    const mins = Math.floor(seconds / 60);
+
+    const secs = seconds % 60;
+
+    return mins > 0 ?
+
+        (mins + "m " + secs + "s") :
+
+        (secs + "s");
+
+}
+
+// ======================================================
+// RETRY HINT
+// ======================================================
+
+function showRetryHint() {
+
+    const failedCard = document.getElementById("failedCard");
+
+    if (!failedCard) return;
+
+    const hint = document.createElement("p");
+
+    hint.id = "retryHint";
+
+    hint.className = "retry-hint";
+
+    hint.textContent =
+
+        "Make sure you are online, then use Try Again below.";
+
+    failedCard.appendChild(hint);
+
+}
+
+function clearRetryHint() {
+
+    const hint = document.getElementById("retryHint");
+
+    if (hint) {
+
+        hint.parentNode.removeChild(hint);
 
     }
 
@@ -1423,6 +1669,7 @@ async function requestSTKPush() {
         if (!response.ok) {
 
             let message =
+                (result && result.customer_message) ||
                 (result && result.detail) ||
                 result.message ||
                 "Unable to initiate payment.";
@@ -1510,13 +1757,29 @@ async function requestSTKPush() {
 
         console.error(error);
 
-        paymentFailed(
+        const isNetworkError =
 
-            error.message ||
+            error instanceof TypeError ||
 
-            "Unable to send M-Pesa request."
+            (error && error.name === "TypeError");
 
-        );
+        const message =
+
+            isNetworkError ?
+
+            "Unable to reach the server. Check your internet connection and try again." :
+
+            (error.message ||
+
+            "Unable to send M-Pesa request.");
+
+        paymentFailed(message);
+
+        if (isNetworkError) {
+
+            showRetryHint();
+
+        }
 
     }
 
@@ -1580,9 +1843,33 @@ async function pollPaymentStatus() {
 
         if (!response.ok) {
 
+            if (response.status === 404) {
+
+                stopPaymentPolling();
+
+                paymentFailed(
+
+                    result.customer_message ||
+
+                    result.detail ||
+
+                    result.message ||
+
+                    "Your payment could not be found. It may have expired or failed to start."
+
+                );
+
+                return;
+
+            }
+
             throw new Error(
 
+                result.customer_message ||
+
                 result.detail ||
+
+                result.message ||
 
                 "Unable to verify payment."
 
@@ -1675,6 +1962,42 @@ async function pollPaymentStatus() {
     catch (error) {
 
         console.error(error);
+
+        const isNetworkError =
+
+            error instanceof TypeError ||
+
+            (error && error.name === "TypeError");
+
+        if (isNetworkError) {
+
+            showToast(
+
+                "Connection lost. Retrying to check payment status...",
+
+                "error"
+
+            );
+
+            updateWaitingMessage(
+
+                "Connection lost. Keeping your payment request alive..."
+
+            );
+
+            return;
+
+        }
+
+        stopPaymentPolling();
+
+        paymentFailed(
+
+            error.message ||
+
+            "Unable to verify payment."
+
+        );
 
     }
 
