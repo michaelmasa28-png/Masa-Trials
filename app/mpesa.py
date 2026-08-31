@@ -1,7 +1,7 @@
 import base64
 import logging
+from datetime import datetime, timezone, timedelta
 import httpx
-from datetime import datetime
 
 from app.config import settings
 
@@ -232,10 +232,31 @@ def normalize_callback(callback_data: dict) -> dict:
             if name == "MpesaReceiptNumber":
                 parsed["mpesa_receipt"] = value
             elif name == "TransactionDate":
-                parsed["transaction_date"] = str(value)
+                parsed["transaction_date"] = _parse_mpesa_date(value)
             elif name == "Amount":
                 parsed["amount"] = value
             elif name == "PhoneNumber":
                 parsed["phone_number"] = str(value) if value else None
 
     return parsed
+
+
+def _parse_mpesa_date(value):
+    """
+    Safaricom sends TransactionDate as YYYYMMDDHHMMSS (local time, EAT).
+    Convert to an aware datetime so it can be stored in a DateTime column.
+    Returns None on any unexpected value instead of crashing the callback.
+    """
+    if not value:
+        return None
+
+    try:
+        raw = str(value).strip()
+        if not raw.isdigit():
+            return None
+        # Safaricom timestamp is local East Africa Time (EAT = UTC+3).
+        local = datetime.strptime(raw, "%Y%m%d%H%M%S")
+        return local.replace(tzinfo=timezone(timedelta(hours=3)))
+    except (ValueError, TypeError):
+        logger.warning("Unparseable M-Pesa transaction date: %r", value)
+        return None

@@ -16,6 +16,8 @@ from sqlalchemy.orm import Session
 from app.mpesa import stk_push as mpesa_stk_push, normalize_callback, MpesaError
 from app.database import get_db
 from app.models import Member, Giving, Transaction, GivingAccount
+from app.dependencies import get_current_member
+from app.ratelimit import rate_limit
 from app.schema import (
     STKPushRequest,
     STKPushResponse,
@@ -41,19 +43,27 @@ logger = logging.getLogger(__name__)
 
 @router.post(
     "/stk-push",
-    response_model=STKPushResponse
+    response_model=STKPushResponse,
+    dependencies=[
+        Depends(rate_limit(max_requests=10, window_seconds=60, label="stk-push"))
+    ],
 )
 async def stk_push(
     request: STKPushRequest,
+    current_member: Member = Depends(get_current_member),
     db: Session = Depends(get_db)
 ):
     """
-    Initiate M-Pesa STK Push
+    Initiate M-Pesa STK Push.
+
+    Requires a valid logged-in member session. The member is resolved from the
+    JWT, not from the request body, so a logged-in user cannot initiate a
+    payment on behalf of another member.
     """
 
     member = (
         db.query(Member)
-        .filter(Member.id == request.member_id)
+        .filter(Member.id == current_member.id)
         .first()
     )
 
@@ -305,10 +315,12 @@ def get_receipt(
 )
 def member_history(
     member_number: str,
+    current_member: Member = Depends(get_current_member),
     db: Session = Depends(get_db)
 ):
     """
     All giving records for a member, most recent first.
+    Members may only view their own history.
     """
 
     member = (
@@ -321,6 +333,12 @@ def member_history(
         raise HTTPException(
             status_code=404,
             detail="Member not found."
+        )
+
+    if member.id != current_member.id:
+        raise HTTPException(
+            status_code=403,
+            detail="You are not allowed to view another member's giving history."
         )
 
     records = (
@@ -362,7 +380,10 @@ def member_history(
 
 @router.post(
     "/mpesa-callback",
-    response_model=MpesaCallbackResponse
+    response_model=MpesaCallbackResponse,
+    dependencies=[
+        Depends(rate_limit(max_requests=120, window_seconds=60, label="mpesa-callback"))
+    ],
 )
 async def mpesa_callback(
     request: Request,
@@ -448,15 +469,31 @@ async def mpesa_callback(
 
     except Exception as e:
         db.rollback()
-
         logger.error(
             "CALLBACK DATABASE ERROR: %s: %s",
             type(e).__name__, str(e)
         )
 
-        # Still return 200 — raising here would make Safaricom
-        # retry a webhook whose DB write already failed once,
-        # and per Daraja's contract we must ack receipt regardless.
+        # Neon (serverless Postgres) can drop a connection or cold-start
+        # between requests, causing a transient commit failure. Retry a
+        # couple of times before giving up — but ALWAYS return 200 to
+        # Safaricom per Daraja's contract so it does not retry a webhook
+        # whose write already succeeded.
+        for attempt in range(2):
+            try:
+                db.commit()
+                db.refresh(giving)
+                return MpesaCallbackResponse(
+                    success=True,
+                    message="Callback processed.",
+                )
+            except Exception as retry_err:
+                db.rollback()
+                logger.error(
+                    "CALLBACK DB retry %d failed: %s: %s",
+                    attempt + 1, type(retry_err).__name__, retry_err,
+                )
+
         return MpesaCallbackResponse(
             success=False,
             message="Internal error while processing callback."

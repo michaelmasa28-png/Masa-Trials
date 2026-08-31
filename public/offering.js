@@ -219,6 +219,36 @@ function loadMemberSession(){
 
 
 // ======================================================
+// MEMBER BEARER TOKEN
+// Returns the "Bearer <token>" header value from the
+// saved member session, or "" if none is available.
+// ======================================================
+
+function getMemberBearer(){
+
+    const saved = localStorage.getItem("memberSession");
+
+    if(!saved) return "";
+
+    try{
+
+        const session = JSON.parse(saved);
+
+        const token = session.access_token || "";
+
+        return token ? "Bearer " + token : "";
+
+    }
+    catch(e){
+
+        return "";
+
+    }
+
+}
+
+
+// ======================================================
 // DISPLAY MEMBER
 // ======================================================
 
@@ -1658,7 +1688,15 @@ async function requestSTKPush() {
 
                     account_number: payment.account_number
 
-                })
+                }),
+
+                headers: {
+
+                    "Content-Type": "application/json",
+
+                    "Authorization": getMemberBearer()
+
+                }
 
             }
 
@@ -2389,7 +2427,13 @@ async function loadTransactionHistory(){
 
         const response = await fetch(
 
-            `${API_BASE}/member-history/${payment.member_number}`
+            `${API_BASE}/member-history/${payment.member_number}`,
+
+            {
+                headers: {
+                    "Authorization": getMemberBearer()
+                }
+            }
 
         );
 
