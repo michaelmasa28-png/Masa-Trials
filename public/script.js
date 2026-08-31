@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".card");
     const navLinks = document.querySelectorAll('a[href^="#"]');
 
+    // Safely run an animation step so that a single unsupported API can
+    // never take down every other effect on the page.
+    const safe = (fn) => { try { fn(); } catch (e) { console.warn("skip effect:", e); } };
+
     // ============================================
     // Smooth Scrolling
     // ============================================
@@ -28,16 +32,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // Hero Entrance Animation (fast)
     // ============================================
 
-    if (hero) {
-        hero.animate([
-            { opacity: 0, transform: "translateY(30px)" },
-            { opacity: 1, transform: "translateY(0)" }
-        ], {
-            duration: 600,
-            easing: "ease-out",
-            fill: "forwards"
-        });
-    }
+    safe(() => {
+        if (hero) {
+            if (typeof hero.animate === "function") {
+                hero.animate([
+                    { opacity: 0, transform: "translateY(30px)" },
+                    { opacity: 1, transform: "translateY(0)" }
+                ], {
+                    duration: 600,
+                    easing: "ease-out",
+                    fill: "forwards"
+                });
+            } else {
+                hero.style.opacity = "1";
+                hero.style.transform = "translateY(0)";
+            }
+        }
+    });
 
     // ============================================
     // Button Hover Effects (CSS handles most now)
@@ -52,25 +63,32 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ============================================
-    // Scroll Reveal (fast, using will-change only during animation)
-    // ============================================
+    safe(() => {
+        if (cards.length && typeof IntersectionObserver !== "undefined") {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.10 });
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.10 });
-
-    cards.forEach(card => {
-        card.style.opacity = "0";
-        card.style.transform = "translateY(30px)";
-        card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-        observer.observe(card);
+            cards.forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(30px)";
+                card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                observer.observe(card);
+            });
+        } else if (cards.length) {
+            // Fallback (older browsers / no IntersectionObserver):
+            // never leave the cards hidden.
+            cards.forEach(card => {
+                card.style.opacity = "1";
+                card.style.transform = "translateY(0)";
+            });
+        }
     });
 
     // ============================================
