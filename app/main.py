@@ -149,15 +149,17 @@ async def lifespan(app: FastAPI):
     # Keep Neon DB connection alive (ping every 4 min)
     if os.getenv("DATABASE_URL", "").startswith("postgresql"):
         def _keep_alive():
+            from sqlalchemy import text
+            import time
             while True:
+                time.sleep(240)
+                db = SessionLocal()
                 try:
-                    import time
-                    time.sleep(240)
-                    db = SessionLocal()
-                    db.execute(__import__('sqlalchemy', fromlist=['text']).text("SELECT 1"))
-                    db.close()
+                    db.execute(text("SELECT 1"))
                 except Exception:
                     pass
+                finally:
+                    db.close()
         t = threading.Thread(target=_keep_alive, daemon=True)
         t.start()
         logger.info("DB keep-alive started (pings every 4 min)")
@@ -219,13 +221,14 @@ app.include_router(settings_router)
 def health_check():
     """Health check: verifies app is running and DB is reachable."""
     from sqlalchemy import text
+    db = SessionLocal()
     try:
-        db = SessionLocal()
         db.execute(text("SELECT 1"))
-        db.close()
         db_ok = True
     except Exception:
         db_ok = False
+    finally:
+        db.close()
 
     return {
         "status": "ok" if db_ok else "degraded",
@@ -245,7 +248,6 @@ def memberlogin_redirect():
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse
 from starlette.middleware.base import BaseHTTPMiddleware
-import os
 
 # ===========================================
 # CLEAN URL MIDDLEWARE

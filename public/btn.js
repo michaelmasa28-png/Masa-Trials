@@ -4,7 +4,6 @@
 // PART 1 - INITIALIZATION
 // ======================================================
 
-console.log("✅ BTN.JS Loaded Successfully");
 
 // ======================================================
 // SERVER URL
@@ -195,8 +194,6 @@ function clearMemberSession(){
         return;
 
     }
-
-    console.log("✅ Active member session found");
 
     window.location.href="clientMode.html";
 
@@ -744,29 +741,13 @@ window.addEventListener("offline",()=>{
 
 window.addEventListener("online",()=>{
 
-    console.log("Internet Restored");
-
 });
 
 // ==========================================
 // Console Signature
 // ==========================================
 
-console.log(
 
-"%cKingdom Ways Church",
-
-"color:#D4AF37;font-size:18px;font-weight:bold;"
-
-);
-
-console.log(
-
-"%cMember Authentication Ready",
-
-"color:#103B73;font-size:13px;"
-
-);
 
 // ======================================================
 // PART 5 - SESSION PROTECTION
@@ -945,11 +926,7 @@ const currentSession = getMemberSession();
 
 if(currentSession){
 
-    console.log(
 
-        `Welcome ${currentSession.full_name}`
-
-    );
 
 }
 
@@ -977,10 +954,3 @@ window.memberSession = {
 // Finished
 // ==========================================
 
-console.log(
-
-    "%cMember Authentication System Ready",
-
-    "color:#16a34a;font-size:14px;font-weight:bold;"
-
-);

@@ -478,11 +478,6 @@ function hideLoading(){
 
 async function loadEvents(){
 
-    console.log(
-        "Loading church events..."
-    );
-
-
     // API fetching logic continues
     // in Part 2
 
@@ -2480,11 +2475,3 @@ if (addEventBtn) {
 // FINAL READY MESSAGE
 //=========================================
 
-console.log(`
-=================================
- Kingdom Ways CMS Events Loaded
- CRUD Ready
- API Connected
- Production JS Active
-=================================
-`);

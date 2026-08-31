@@ -85,13 +85,6 @@ async function loadSermons(){
 
 
 
-        console.log(
-            "Sermon API Status:",
-            response.status
-        );
-
-
-
         if(!response.ok){
 
 
@@ -105,13 +98,6 @@ async function loadSermons(){
 
 
         const data = await response.json();
-
-
-
-        console.log(
-            "Sermons Loaded:",
-            data
-        );
 
 
 
@@ -585,7 +571,7 @@ document.addEventListener("click", function (e) {
     video.load();
 
     video.play().catch(err => {
-        console.log("Autoplay blocked:", err);
+
     });
 
 });
@@ -1110,16 +1096,6 @@ async function fetchDailyVerse(){
 
 
 
-        console.log(
-
-            "Using saved verse:",
-
-            error.message
-
-        );
-
-
-
     }
 
 
@@ -1249,16 +1225,11 @@ async function fetchBibleVerse(){
             })
         );
 
-        console.log("Bible verse updated.");
+
 
     }
 
     catch(error){
-
-        console.log(
-            "Using backup verse.",
-            error.message
-        );
 
         rotateBackupVerse();
 
@@ -1321,36 +1292,14 @@ function checkMemberSession(){
 
         try{
 
-
-
             const data =
             JSON.parse(member);
-
-
-
-
-            console.log(
-
-                "Active Member:",
-
-                data.username
-
-            );
-
 
 
 
         }
 
         catch(error){
-
-
-
-            console.log(
-
-                "Invalid member session"
-
-            );
 
 
 
@@ -1517,13 +1466,6 @@ document.addEventListener(
 
 
 
-        console.log(
-
-            "Sermon page active"
-
-        );
-
-
 
     }
 
@@ -1590,19 +1532,11 @@ window.addEventListener(
 
         activateCardAnimation();
 
-
-
     },500);
 
 
 
 
-
-    console.log(
-
-        "Kingdom Ways Sermon System Ready"
-
-    );
 
 
 
@@ -1617,10 +1551,6 @@ window.addEventListener(
 
 window.addEventListener("load", ()=>{
 
-    console.log(
-        "Sermon page fully loaded - checking API"
-    );
-
 
     setTimeout(()=>{
 
@@ -1628,10 +1558,6 @@ window.addEventListener("load", ()=>{
             typeof sermons === "undefined" ||
             sermons.length === 0
         ){
-
-            console.log(
-                "Retrying sermon loading..."
-            );
 
             loadSermons();
 
@@ -1655,9 +1581,6 @@ window.addEventListener(
     "online",
     ()=>{
 
-        console.log(
-            "Internet restored - loading sermons"
-        );
 
         loadSermons();
 

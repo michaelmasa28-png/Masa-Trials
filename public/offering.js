@@ -211,12 +211,9 @@ function loadMemberSession(){
 
     }
 
-    console.log(currentMember);
-
     populateMember();
 
 }
-
 
 // ======================================================
 // MEMBER BEARER TOKEN
@@ -2762,11 +2759,7 @@ function resumePendingPayment() {
 
 function verifySession() {
 
-    console.log("[OFFERING] verifySession checking...");
-
     const saved = localStorage.getItem("memberSession");
-
-    console.log("[OFFERING] memberSession value:", saved ? saved.substring(0, 100) + "..." : "NULL");
 
     if (!saved) {
 
@@ -2775,7 +2768,6 @@ function verifySession() {
         for (const key of oldKeys) {
             const oldVal = localStorage.getItem(key);
             if (oldVal) {
-                console.log("[OFFERING] Found old session key:", key);
                 try {
                     const oldData = JSON.parse(oldVal);
                     const migrated = {
@@ -2784,10 +2776,8 @@ function verifySession() {
                         expiresAt: Date.now() + (6 * 60 * 60 * 1000)
                     };
                     localStorage.setItem("memberSession", JSON.stringify(migrated));
-                    console.log("[OFFERING] Migrated old session to memberSession");
                     return true;
                 } catch(e) {
-                    console.log("[OFFERING] Failed to migrate old session:", e);
                 }
             }
         }
@@ -2811,7 +2801,6 @@ function verifySession() {
 
         const session = JSON.parse(saved);
 
-        console.log("[OFFERING] Session parsed, expiresAt:", session.expiresAt, "now:", Date.now());
 
         if (session.expiresAt && Date.now() > session.expiresAt) {
 
@@ -2833,8 +2822,6 @@ function verifySession() {
         }
 
     } catch(e) {
-
-        console.log("[OFFERING] Session parse error:", e);
 
         localStorage.removeItem("memberSession");
 
@@ -3184,15 +3171,6 @@ document.addEventListener(
 // DEVELOPMENT LOG
 // ======================================================
 
-console.log(
-    "%cKINGDOM WAYS CHURCH CMS",
-    "color:#1d4ed8;font-size:18px;font-weight:bold;"
-);
-
-console.log(
-    "%cGiving Module Ready",
-    "color:#16a34a;font-size:14px;"
-);
 
 // ======================================================
 // REQUIRED FASTAPI ENDPOINTS

@@ -1252,7 +1252,3 @@ loadSermons();
 // =====================================================
 
 
-console.log(
-"Kingdom Ways Sermon Admin Ready"
-);
-

@@ -116,12 +116,6 @@ async function loadChurchContacts(){
 
     catch(error){
 
-        console.log(
-
-            "Using default contact information."
-
-        );
-
         churchContact = DEFAULT_CONTACT;
 
     }
@@ -1049,12 +1043,6 @@ setInterval(async()=>{
 
     catch(error){
 
-        console.log(
-
-            "Automatic refresh skipped."
-
-        );
-
     }
 
 },300000);
@@ -1085,12 +1073,6 @@ document.addEventListener(
             }
 
             catch(error){
-
-                console.log(
-
-                    "Unable to refresh contacts."
-
-                );
 
             }
 
@@ -1164,44 +1146,9 @@ document.querySelectorAll(".openBtn")
 
 });
 
-
-
 //==========================================================
 // VERSION
 //==========================================================
 
-console.log(
 
-"=========================================="
 
-);
-
-console.log(
-
-" Kingdom Ways Church"
-
-);
-
-console.log(
-
-" Connect With Us Client"
-
-);
-
-console.log(
-
-" Version 2.0"
-
-);
-
-console.log(
-
-" Backend Ready"
-
-);
-
-console.log(
-
-"=========================================="
-
-);

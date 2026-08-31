@@ -4,8 +4,6 @@
 // PART 1 - INITIALIZATION & SESSION
 // ======================================================
 
-console.log("CLIENT MODE STARTING...");
-
 // ======================================================
 // API
 // ======================================================
@@ -100,10 +98,6 @@ getMemberSession();
 
 if(!session){
 
-    console.log(
-        "NO ACTIVE SESSION"
-    );
-
     window.location.href =
     "btn.html";
 
@@ -117,10 +111,6 @@ const __sessionValid = session && session.expiresAt && Date.now() < session.expi
 
 if(session && !__sessionValid){
 
-    console.log(
-        "SESSION EXPIRED"
-    );
-
     localStorage.removeItem(
         SESSION_KEY
     );
@@ -133,9 +123,6 @@ if(session && !__sessionValid){
 }
 
 if(!window.__noSession){
-    console.log(
-        "SESSION VERIFIED"
-    );
 }
 
 // ======================================================
@@ -220,28 +207,10 @@ const options={
 
 };
 
-console.log(
-
-    today.toLocaleDateString(
-
-        "en-US",
-
-        options
-
-    )
-
-);
-
 // ======================================================
 // LOGOUT
 // ======================================================
 // Handled in Part 5 (logoutMember + logoutButton)
-
-console.log(
-
-    "CLIENT INITIALIZATION COMPLETE"
-
-);
 
 // ======================================================
 // PART 2 - BIBLE VERSE ROTATION
@@ -408,12 +377,6 @@ document
 
 });
 
-console.log(
-
-    "Bible Verse Rotation Ready"
-
-);
-
 // ======================================================
 // PART 3 - LOAD CHURCH THEME & VISION
 // ======================================================
@@ -574,12 +537,6 @@ Promise.all([
 
 .then(()=>{
 
-    console.log(
-
-        "Theme & Vision Loaded"
-
-    );
-
 });
 
 // ======================================
@@ -602,12 +559,6 @@ setInterval(()=>{
 // ======================================================
 // PART 3 COMPLETE
 // ======================================================
-
-console.log(
-
-    "Church Information Ready"
-
-);
 
 // ======================================================
 // PART 4 - CARDS, NAVIGATION & SECRET ADMIN
@@ -825,14 +776,6 @@ window.addEventListener(
 
                 adminClicks++;
 
-                console.log(
-
-                    "SECRET CLICK:",
-
-                    adminClicks
-
-                );
-
                 clearTimeout(
 
                     resetTimer
@@ -915,12 +858,6 @@ window.addEventListener(
 //
 // ======================================
 
-console.log(
-
-    "Cards & Navigation Ready"
-
-);
-
 // ======================================================
 // PART 5 - SESSION MANAGEMENT & SECURITY
 // ======================================================
@@ -948,10 +885,6 @@ function checkSession(){
 
     if(!activeSession){
 
-        console.log(
-            "No active member session"
-        );
-
         redirectToLogin();
 
         return false;
@@ -967,11 +900,6 @@ function checkSession(){
         Date.now() >= activeSession.expiresAt
 
     ){
-
-        console.log(
-            "Member session expired"
-        );
-
 
         logoutMember();
 
@@ -1005,12 +933,6 @@ function redirectToLogin(){
 // ======================================
 
 function logoutMember(){
-
-    console.log(
-
-        "Logging out member"
-
-    );
 
 
     localStorage.removeItem(
@@ -1204,15 +1126,6 @@ function registerActivity(){
     setTimeout(()=>{
 
 
-        console.log(
-
-            "Session active:",
-
-            formatSessionTime()
-
-        );
-
-
     },1000);
 
 
@@ -1327,12 +1240,6 @@ window.KingdomSession = {
 // ======================================
 
 
-console.log(
-
-    "Session Security Ready"
-
-);
-
 // ======================================================
 // PART 6 - FINAL CLEANUP & FUTURE READY SYSTEM
 // ======================================================
@@ -1367,13 +1274,6 @@ function migrateOldSession(){
 
 
     if(!newSession && oldSession){
-
-
-        console.log(
-
-            "Migrating old member session"
-
-        );
 
 
         try{
@@ -1465,23 +1365,9 @@ function connectionStatus(){
     if(navigator.onLine){
 
 
-        console.log(
-
-            "Internet connection available"
-
-        );
-
-
     }
 
     else{
-
-
-        console.log(
-
-            "Offline mode"
-
-        );
 
 
     }
@@ -1498,13 +1384,6 @@ window.addEventListener(
     ()=>{
 
 
-        console.log(
-
-            "Connection restored"
-
-        );
-
-
     }
 
 );
@@ -1516,13 +1395,6 @@ window.addEventListener(
     "offline",
 
     ()=>{
-
-
-        console.log(
-
-            "No internet connection"
-
-        );
 
 
     }
@@ -1623,14 +1495,6 @@ window.addEventListener(
 // ======================================
 // FINAL READY MESSAGE
 // ======================================
-
-console.log(
-
-"%c KINGDOM WAYS CLIENT MODE READY ",
-
-"background:#0b1f3a;color:#ffd700;font-size:16px;font-weight:bold;"
-
-);
 
 
 

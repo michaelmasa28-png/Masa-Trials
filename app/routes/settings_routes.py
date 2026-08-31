@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, Request, HTTPException
+import hmac
+
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from typing import Optional
@@ -156,7 +158,7 @@ def get_member_presence(member_number: str, db: Session = Depends(get_db)):
 @router.post("/login")
 def portal_login(data: PortalLoginRequest):
     """Simple portal key authentication — checks against SECRET_KEY."""
-    if data.secure_key and data.secure_key == SECRET_KEY:
+    if data.secure_key and hmac.compare_digest(data.secure_key, SECRET_KEY):
         return {"authenticated": True, "redirect": "dashboard.html"}
 
     return {"authenticated": False}

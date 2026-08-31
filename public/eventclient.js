@@ -4,8 +4,6 @@
  MEMBER DISPLAY ONLY
 ==========================================================*/
 
-console.log("eventclient.js loaded");
-
 //==================================
 // CONFIG
 //==================================
@@ -43,15 +41,11 @@ async function loadEvents() {
 
         const response = await fetch(`${API_URL}/api/events/`);
 
-        console.log("Status:", response.status);
-
         if (!response.ok) {
             throw new Error("Unable to load events.");
         }
 
         const data = await response.json();
-
-        console.log("API Response:", data);
 
         allEvents = data.events || [];
 

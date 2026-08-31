@@ -40,8 +40,6 @@ document
 
         const data = await response.json();
 
-        console.log("Login Response:", data);
-
         if (!response.ok || !data.success) {
 
             message.innerText =

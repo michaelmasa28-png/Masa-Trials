@@ -261,12 +261,6 @@ function showSuccess(message){
 BACKEND READY
 ==========================================================*/
 
-console.log(
-
-"Kingdom Ways Communication Center Loaded."
-
-);
-
 /*==========================================================
 KINGDOM WAYS CMS
 COMMUNICATION CENTER
@@ -1195,21 +1189,9 @@ type
 
 );
 
-console.log(
-
-"Notification queued."
-
-);
-
 }
 
 catch(error){
-
-console.log(
-
-"Notification unavailable."
-
-);
 
 }
 
@@ -1809,8 +1791,6 @@ async function checkDeliveryStatus(){
 
     catch(error){
 
-        console.log("Delivery polling skipped.");
-
     }
 
 }
@@ -1929,8 +1909,6 @@ async function updateNotificationBadge(){
 
     catch(error){
 
-        console.log("Notification badge unavailable.");
-
     }
 
 }
@@ -1993,12 +1971,6 @@ async function serverHealth(){
 
         if(response.ok){
 
-            console.log(
-
-                "Backend Connected"
-
-            );
-
         }
 
     }
@@ -2053,8 +2025,6 @@ async function filterMembers(type){
     }
 
     catch(error){
-
-        console.log(error);
 
     }
 
@@ -2167,32 +2137,6 @@ SYSTEM STARTUP
 ==========================================================*/
 
 async function initializeCommunicationCenter(){
-
-    console.log(
-
-        "===================================="
-
-    );
-
-    console.log(
-
-        "KINGDOM WAYS COMMUNICATION CENTER"
-
-    );
-
-    console.log(
-
-        "Production Version 2.0"
-
-    );
-
-    console.log(
-
-        "===================================="
-
-    );
-
-
 
     await Promise.all([
 

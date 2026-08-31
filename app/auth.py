@@ -1,11 +1,9 @@
 from datetime import datetime, timedelta, timezone
-from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
-from app.database import get_db
 from app.config import (
     SECRET_KEY,
     ALGORITHM,

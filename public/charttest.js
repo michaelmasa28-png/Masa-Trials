@@ -108,7 +108,6 @@ function loadMemberSession(){
     const saved = localStorage.getItem("memberSession");
 
     if(!saved){
-        console.log("No member session found");
         window.location.href = "btn.html";
         return;
     }
@@ -116,13 +115,10 @@ function loadMemberSession(){
     currentMember = JSON.parse(saved);
 
     if(currentMember.expiresAt && Date.now() >= currentMember.expiresAt){
-        console.log("Member session expired");
         localStorage.removeItem("memberSession");
         window.location.href = "btn.html";
         return;
     }
-
-    console.log("CURRENT MEMBER:", currentMember);
 
     displayMember();
 
@@ -202,8 +198,6 @@ async function loadConversations(){
     }
 
     catch(error){
-
-        console.log("Using offline conversations");
 
         createDemoConversations();
 
@@ -317,8 +311,6 @@ async function loadMemberDirectory(){
     }
 
     catch(error){
-
-        console.log("Member directory error:", error);
 
         memberDirectoryList.innerHTML =
             `<p class="member-directory-empty">Unable to load members.</p>`;
@@ -503,7 +495,6 @@ async function markConversationRead(conversationId){
 
     catch(error){
 
-        console.log("Mark read error:", error);
 
     }
 
@@ -533,8 +524,6 @@ async function loadMessages(chatId){
     }
 
     catch(error){
-
-        console.log("Using empty conversation");
 
         renderMessages([]);
 
@@ -877,7 +866,6 @@ async function sendHeartbeat(){
 
     catch(error){
 
-        console.log("Heartbeat error:", error);
 
     }
 
@@ -919,8 +907,6 @@ adminButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
-        console.log("Admin action:", button.innerText);
-
         alert(button.innerText + " feature will connect to CMS admin panel");
 
     });
@@ -953,8 +939,6 @@ if(messageInput){
 function updateOnlineStatus(){
 
     if(!currentMember) return;
-
-    console.log("Member active:", currentMember.member_number);
 
 }
 
@@ -1040,8 +1024,6 @@ window.addEventListener("load", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("KINGDOM WAYS CONNECT HUB LOADED");
-
     loadMemberSession();
     loadConversations();
     loadMemberDirectory();
@@ -1060,7 +1042,6 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("beforeunload", () => {
 
     if(currentMember){
-        console.log("Leaving Connect Hub:", currentMember.member_number);
     }
 
 });

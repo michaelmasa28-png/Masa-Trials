@@ -540,14 +540,12 @@ def member_logout(
     data: MemberLogout,
     db: Session = Depends(get_db)
 ):
-    from app.models import Attendance
-
     attendance = (
         db.query(Attendance)
         .filter(
             Attendance.member_id == data.member_id,
             Attendance.attendance_date == date.today(),
-            Attendance.time_out == None
+            Attendance.time_out.is_(None)
         )
         .first()
     )
