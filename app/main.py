@@ -23,6 +23,7 @@ logger = logging.getLogger("churchweb")
 from app.routes.giving_routes import router as giving_router
 from fastapi import FastAPI, Request
 from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.responses import HTMLResponse
 from app.routes.chat_routes import router as chat_router
 from app.routes.websocket_routes import router as websocket_router
 
@@ -241,6 +242,49 @@ def health_check():
 def memberlogin_redirect():
     from starlette.responses import RedirectResponse
     return RedirectResponse(url="/btn.html", status_code=302)
+
+
+# ===========================================
+# PUBLIC SHAREABLE INVITE LINKS
+# /join and /invite serve the public events page
+# with Open Graph / Twitter meta tags filled in
+# using the real request origin, so sharing the
+# link on WhatsApp, Facebook, X, Instagram, etc.
+# shows a nice preview card (title + image).
+# ===========================================
+
+_OG_URL_MARKER = 'property="og:url" content=""'
+_OG_IMAGE_MARKER = 'property="og:image" content=""'
+_PUBLIC_EVENTS_HTML = os.path.join("public", "eventclient.html")
+
+
+def _public_events_html(request: Request) -> HTMLResponse:
+    try:
+        with open(_PUBLIC_EVENTS_HTML, encoding="utf-8") as f:
+            html = f.read()
+    except OSError:
+        return HTMLResponse("Page not found", status_code=404)
+
+    origin = str(request.base_url).rstrip("/")
+    share_url = f"{origin}/join"
+    image_url = f"{origin}/images/church.jpg"
+
+    html = (
+        html
+        .replace(_OG_URL_MARKER, f'property="og:url" content="{share_url}"')
+        .replace(_OG_IMAGE_MARKER, f'property="og:image" content="{image_url}"')
+    )
+    return HTMLResponse(html)
+
+
+@app.get("/join", response_class=HTMLResponse)
+def invite_join(request: Request):
+    return _public_events_html(request)
+
+
+@app.get("/invite", response_class=HTMLResponse)
+def invite_invite(request: Request):
+    return _public_events_html(request)
 
 
 # Frontend with cache headers

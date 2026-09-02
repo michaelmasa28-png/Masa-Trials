@@ -16,6 +16,11 @@
 
 <body>
 
+<!-- Floating gradient blobs for the glass effect -->
+<div class="bg-blob blob-a"></div>
+<div class="bg-blob blob-b"></div>
+<div class="bg-blob blob-c"></div>
+
 <div class="dashboard">
 
     <!-- Sidebar -->
@@ -54,12 +59,12 @@
             </button>
 
             <div>
-                <h1>KINGDOMWAYS MANAGEMENT  DASHBOARD</h1>
+                <h1>KINGDOMWAYS <span>MANAGEMENT</span> DASHBOARD</h1>
                 <p id="date"></p>
             </div>
 
             <div class="admin">
-                <h3>Welcome</h3>
+                <h3><i class="fa-solid fa-user-shield"></i> Welcome</h3>
                 <p>..</p>
             </div>
 
@@ -69,24 +74,39 @@
         <section class="cards">
 
             <div class="card">
-                <h3>Total Members</h3>
-                <h2 id="totalMembers">0</h2>
+                <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="card-body">
+                    <h3>Total Members</h3>
+                    <h2 id="totalMembers">0</h2>
+                    <span class="card-sub"><i class="fa-solid fa-circle-check"></i> Registered congregation</span>
+                </div>
             </div>
 
             <div class="card">
-                <h3>Upcoming Events</h3>
-                <p>5</p>
+                <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                <div class="card-body">
+                    <h3>Upcoming Events</h3>
+                    <h2>5</h2>
+                    <span class="card-sub"><i class="fa-solid fa-bell"></i> On the calendar</span>
+                </div>
             </div>
 
             <div class="card attendance-card" id="attendanceCard" role="button" tabindex="0" title="Open Camera Attendance">
-                <h3>Attendance</h3>
-                <h2 id="attendanceCount">198</h2>
-                <p class="card-hint"><i class="fa-solid fa-video"></i> Tap to open camera attendance</p>
+                <div class="card-icon"><i class="fa-solid fa-camera"></i></div>
+                <div class="card-body">
+                    <h3>Attendance</h3>
+                    <h2 id="attendanceCount">198</h2>
+                    <span class="card-sub"><i class="fa-solid fa-video"></i> Tap to open camera attendance</span>
+                </div>
             </div>
 
             <div class="card">
-                <h3>Offerings</h3>
-                <p>KSh 45,000</p>
+                <div class="card-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                <div class="card-body">
+                    <h3>Offerings</h3>
+                    <h2>KSh 45,000</h2>
+                    <span class="card-sub"><i class="fa-solid fa-chart-line"></i> This month</span>
+                </div>
             </div>
 
         </section>
@@ -110,19 +130,19 @@
                     <tr>
                         <td>27 Jun</td>
                         <td>Sunday Service Added</td>
-                        <td>Completed</td>
+                        <td><span class="status-pill done">Completed</span></td>
                     </tr>
 
                     <tr>
                         <td>28 Jun</td>
                         <td>Youth Event Created</td>
-                        <td>Pending</td>
+                        <td><span class="status-pill pending">Pending</span></td>
                     </tr>
 
                     <tr>
                         <td>29 Jun</td>
                         <td>New Member Registered</td>
-                        <td>Completed</td>
+                        <td><span class="status-pill done">Completed</span></td>
                     </tr>
                 </tbody>
 

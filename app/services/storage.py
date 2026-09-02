@@ -167,6 +167,21 @@ def _optimize_image(data: bytes) -> bytes | None:
     return None
 
 
+def resolve_public_url(value) -> str:
+    """Normalize a stored image value into a browser-loadable URL.
+
+    Full URLs (Cloudinary) and leading-slash paths are returned unchanged.
+    Relative local paths (e.g. "uploads/events/x.jpg") get a leading slash
+    so they resolve against the public static mount.
+    """
+    value = (value or "").strip()
+    if not value:
+        return ""
+    if value.startswith("http://") or value.startswith("https://") or value.startswith("/"):
+        return value
+    return "/" + value
+
+
 # ==========================================================
 # DELETE
 # ==========================================================

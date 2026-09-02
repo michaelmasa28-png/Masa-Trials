@@ -1052,21 +1052,8 @@ function renderEventsTable(){
 function createEventRow(event){
 
 
-    const rawImage =
-    event.banner
-    ||
-    event.image
-    ||
-    "";
-
     const image =
-    rawImage
-    ?
-    (rawImage.startsWith("http") || rawImage.startsWith("/")
-        ? rawImage
-        : "/" + rawImage)
-    :
-    "";
+    getEventImageSrc(event);
 
 
 
@@ -1086,7 +1073,18 @@ image
 <img 
 src="${escapeHTML(image)}"
 class="event-image"
-alt="Event">
+alt="Event"
+onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+
+>
+
+<div
+class="event-placeholder"
+style="display:none;">
+
+<i class="fas fa-calendar"></i>
+
+</div>
 
 `
 
@@ -1220,6 +1218,33 @@ data-id="${event.id}">
 //=========================================
 // SECURITY HELPERS
 //=========================================
+
+
+function getEventImageSrc(event){
+
+
+    const rawImage =
+    event.banner
+    ||
+    event.image
+    ||
+    "";
+
+    if(!rawImage){
+
+        return "";
+
+    }
+
+    return (
+        rawImage.startsWith("http") ||
+        rawImage.startsWith("/")
+    )
+        ? rawImage
+        : "/" + rawImage;
+
+
+}
 
 
 function escapeHTML(value){

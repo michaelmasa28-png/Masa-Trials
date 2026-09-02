@@ -37,6 +37,18 @@ router = APIRouter(
 
 
 # ============================================
+# HELPERS
+# ============================================
+
+def _serialize_event(event: Event) -> dict:
+    """Serialize an event into a JSON-safe dict with browser-loadable media URLs."""
+    data = EventResponse.model_validate(event).model_dump()
+    data["banner"] = storage.resolve_public_url(data.get("banner"))
+    data["attachment"] = storage.resolve_public_url(data.get("attachment"))
+    return data
+
+
+# ============================================
 # ROUTER TEST
 # ============================================
 
@@ -70,7 +82,7 @@ def get_events(
     result = {
         "success": True,
         "message": "Events retrieved successfully",
-        "events": events
+        "events": [_serialize_event(ev) for ev in events]
     }
 
     _cache.set("events:list", result)
@@ -130,13 +142,13 @@ def create_event(
             banner,
             "uploads/events",
             optimize_images=True,
-        ).lstrip("/")
+        )
 
     if attachment:
         attachment_path = storage.upload_file_object(
             attachment,
             "uploads/events",
-        ).lstrip("/")
+        )
 
     new_event = Event(
 
@@ -300,7 +312,7 @@ def update_event(
             banner,
             "uploads/events",
             optimize_images=True,
-        ).lstrip("/")
+        )
 
 
     if attachment:
@@ -309,7 +321,7 @@ def update_event(
         event.attachment = storage.upload_file_object(
             attachment,
             "uploads/events",
-        ).lstrip("/")
+        )
 
 
 

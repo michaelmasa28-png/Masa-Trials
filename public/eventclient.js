@@ -104,21 +104,51 @@ function createEventCard(event) {
 
     card.className = "event-card";
 
-    const rawImage = event.banner || event.image || "";
-    const image = rawImage &&
-                  (rawImage.startsWith("http") || rawImage.startsWith("/"))
-        ? rawImage
-        : "/" + rawImage;
+    const image = resolveEventImage(event);
 
-    card.innerHTML = `
+    if (image) {
 
-        <img
-            class="event-image"
-            src="${image}"
-            onerror="this.onerror=null;this.src='images/default-event.jpg'"
-        >
+        const img = document.createElement("img");
 
-        <div class="event-content">
+        img.className = "event-image";
+
+        img.src = image;
+
+        img.alt = event.title || "Event";
+
+        img.onerror = () => {
+
+            const placeholder = document.createElement("div");
+
+            placeholder.className = "event-image event-image-placeholder";
+
+            placeholder.innerHTML =
+                '<i class="fa-solid fa-calendar-days"></i>';
+
+            img.replaceWith(placeholder);
+
+        };
+
+        card.appendChild(img);
+
+    } else {
+
+        const placeholder = document.createElement("div");
+
+        placeholder.className = "event-image event-image-placeholder";
+
+        placeholder.innerHTML =
+            '<i class="fa-solid fa-calendar-days"></i>';
+
+        card.appendChild(placeholder);
+
+    }
+
+    const content = document.createElement("div");
+
+    content.className = "event-content";
+
+    content.innerHTML = `
 
             ${event.featured ? `
                 <span class="badge">
@@ -156,9 +186,9 @@ function createEventCard(event) {
 
             </div>
 
-        </div>
+        `;
 
-    `;
+    card.appendChild(content);
 
     return card;
 
@@ -245,6 +275,25 @@ searchInput.addEventListener("input", () => {
 });
 
 //==================================
+// IMAGE URL RESOLVER
+//==================================
+
+function resolveEventImage(event) {
+
+    const rawImage = event.banner || event.image || "";
+
+    if (!rawImage) return "";
+
+    return (
+        rawImage.startsWith("http") ||
+        rawImage.startsWith("/")
+    )
+        ? rawImage
+        : "/" + rawImage;
+
+}
+
+//==================================
 // DATE FORMAT
 //==================================
 
@@ -290,5 +339,96 @@ function formatTime(time) {
 document.addEventListener("DOMContentLoaded", () => {
 
     loadEvents();
+
+});
+
+//==================================
+// SHARE / INVITE
+//==================================
+
+function currentPageUrl() {
+    return window.location.origin + window.location.pathname;
+}
+
+function shareMessage() {
+    return "Kingdom Ways Church — join us! Check out our upcoming events.";
+}
+
+function showShareToast(message) {
+
+    let toast = document.getElementById("shareToast");
+
+    if (!toast) {
+
+        toast = document.createElement("div");
+
+        toast.id = "shareToast";
+
+        toast.className = "share-toast";
+
+        document.body.appendChild(toast);
+
+    }
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => toast.classList.remove("show"), 2500);
+
+}
+
+document.getElementById("shareWhatsApp")?.addEventListener("click", () => {
+
+    const url = "https://wa.me/?text=" +
+        encodeURIComponent(shareMessage() + " " + currentPageUrl());
+
+    window.open(url, "_blank", "noopener");
+
+});
+
+document.getElementById("shareFacebook")?.addEventListener("click", () => {
+
+    const url = "https://www.facebook.com/sharer/sharer.php?u=" +
+        encodeURIComponent(currentPageUrl());
+
+    window.open(url, "_blank", "noopener");
+
+});
+
+document.getElementById("shareX")?.addEventListener("click", () => {
+
+    const url = "https://twitter.com/intent/tweet?text=" +
+        encodeURIComponent(shareMessage()) +
+        "&url=" +
+        encodeURIComponent(currentPageUrl());
+
+    window.open(url, "_blank", "noopener");
+
+});
+
+document.getElementById("copyShareLink")?.addEventListener("click", async () => {
+
+    try {
+
+        await navigator.clipboard.writeText(currentPageUrl());
+
+    } catch (err) {
+
+        const input = document.createElement("input");
+
+        input.value = currentPageUrl();
+
+        document.body.appendChild(input);
+
+        input.select();
+
+        document.execCommand("copy");
+
+        document.body.removeChild(input);
+
+    }
+
+    showShareToast("Share link copied!");
 
 });

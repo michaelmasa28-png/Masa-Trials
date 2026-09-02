@@ -249,6 +249,225 @@ body{
 ==========================================================*/
 
 
+.share-section{
+
+    margin:0 0 40px;
+
+}
+
+
+
+.share-box{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    background:white;
+
+    border-radius:var(--radius);
+
+    padding:22px 28px;
+
+    box-shadow:var(--shadow);
+
+    border:1px solid #e2e8f0;
+
+}
+
+
+
+.share-text h3{
+
+    color:var(--primary);
+
+    font-size:1.2rem;
+
+    margin-bottom:4px;
+
+}
+
+
+
+.share-text h3 i{
+
+    margin-right:8px;
+
+}
+
+
+
+.share-text p{
+
+    color:#64748b;
+
+    font-size:.92rem;
+
+}
+
+
+
+.share-buttons{
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.share-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    color:white;
+
+    padding:12px 18px;
+
+    border-radius:50px;
+
+    transition:.3s;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+
+
+.share-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 26px rgba(0,0,0,.16);
+
+}
+
+
+
+.share-btn.whatsapp{
+
+    background:#25d366;
+
+}
+
+
+
+.share-btn.facebook{
+
+    background:#1877f2;
+
+}
+
+
+
+.share-btn.x{
+
+    background:#111111;
+
+}
+
+
+
+.share-btn.copy{
+
+    background:linear-gradient(135deg,var(--primary),var(--purple));
+
+}
+
+
+
+.share-toast{
+
+    position:fixed;
+
+    bottom:30px;
+
+    left:50%;
+
+    transform:translateX(-50%) translateY(20px);
+
+    background:var(--dark);
+
+    color:white;
+
+    padding:14px 26px;
+
+    border-radius:50px;
+
+    font-size:.92rem;
+
+    font-family:'Poppins',sans-serif;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.35s;
+
+    z-index:999;
+
+}
+
+
+
+.share-toast.show{
+
+    opacity:1;
+
+    transform:translateX(-50%) translateY(0);
+
+}
+
+
+
+@media(max-width:640px){
+
+    .share-box{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .share-buttons{
+
+        width:100%;
+
+        justify-content:space-between;
+
+    }
+
+}
+
+
 .hero{
 
 
@@ -467,6 +686,47 @@ body{
 
 
     object-fit:cover;
+
+
+}
+
+
+
+.event-image-placeholder{
+
+
+    width:100%;
+
+
+    height:220px;
+
+
+    background:linear-gradient(135deg,#1e3a8a,#3b82f6);
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    color:#fff;
+
+
+    font-size:3rem;
+
+
+}
+
+
+
+.event-image-placeholder i{
+
+
+    opacity:.85;
 
 
 }

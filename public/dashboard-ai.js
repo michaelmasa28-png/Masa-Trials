@@ -46,6 +46,19 @@ const MIN_BOX_AREA     = 0.01;                   // reject boxes smaller than 1%
 const MAX_BOX_AREA     = 0.85;                   // reject boxes covering nearly the whole frame
 const MIN_ASPECT       = 0.28;                   // ignore boxes wider than tall (not a standing person)
 
+// --- LOW-LIGHT ENHANCEMENT ---
+// When a frame is darker than LOWLIGHT_LUMA, we gamma-brighten it before
+// detection and relax the confidence gate, so people remain detectable even
+// in dim/backlit or overexposed scenes — while the trajectory filters still
+// block false positives.
+const LOWLIGHT_LUMA      = 70;    // avg luminance below this => treat as dark
+const BRIGHT_LUMA        = 165;   // avg luminance above this => treat as overexposed
+const ENHANCE_GAMMA      = 0.55;  // gamma for dark frames (<1 brightens)
+const ENHANCE_GAMMA_HIGH = 1.65;  // gamma for overexposed frames (>1 darkens)
+const CONF_BRIGHT        = 0.50;  // min confidence in normal light
+const CONF_LOWLIGHT      = 0.30;  // min confidence in dark scenes (recover dim people)
+const LUMA_SAMPLE_STEP   = 8;     // downsampling step when measuring luminance
+
 // Robust crossing confidence: a person must be seen consistently on one side,
 // then consistently on the other side, before we count the crossing. This
 // removes jitter/standing-near-line false positives and identity double-counts.
@@ -71,6 +84,14 @@ let nextId = 1;
 let frameCounter = 0;
 
 let videoW = 640, videoH = 480;
+
+// Adaptive detection threshold, adjusted per frame for low-light conditions
+let activeConf = CONF_BRIGHT;
+let lastLuma  = -1;              // average luminance of the latest frame (-1 = unknown)
+
+// Offscreen canvas used to pre-brighten dim frames before recognition
+let enhCanvas = null;
+let enhCtx    = null;
 
 // ---------- CAMERA CONTROL STATE ----------
 let camDevices       = [];       // resolved video input devices
