@@ -12,6 +12,7 @@ import random
 import string
 
 from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from app.mpesa import stk_push as mpesa_stk_push, normalize_callback, MpesaError
 from app.database import get_db
@@ -61,6 +62,26 @@ async def stk_push(
     payment on behalf of another member.
     """
 
+    try:
+        return await _stk_push_impl(request, current_member, db)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception("STK push unhandled error for member %s", getattr(current_member, "id", None))
+        return JSONResponse(
+            status_code=500,
+            content={
+                "success": False,
+                "message": f"Server error ({type(e).__name__}): {e}",
+            },
+        )
+
+
+async def _stk_push_impl(
+    request: STKPushRequest,
+    current_member: Member,
+    db: Session,
+):
     member = (
         db.query(Member)
         .filter(Member.id == current_member.id)
@@ -94,18 +115,29 @@ async def stk_push(
 
     # ---- PHONE account: display-only, record pending giving to pay manually ----
     if account_type == "phone":
-        giving = Giving(
-            member_id=member.id,
-            phone_number=request.phone_number,
-            category=request.category,
-            amount=request.amount,
-            status="Pending",
-            reference=request.reference,
-            safaricom_name=receiving_account.account_name if receiving_account else None,
-            checkout_request_id=f"PHONE-{uuid4().hex[:20]}",
-        )
-        db.add(giving)
-        db.commit()
+        try:
+            giving = Giving(
+                member_id=member.id,
+                phone_number=request.phone_number,
+                category=request.category,
+                amount=request.amount,
+                status="Pending",
+                reference=request.reference,
+                safaricom_name=receiving_account.account_name if receiving_account else None,
+                checkout_request_id=f"PHONE-{uuid4().hex[:20]}",
+            )
+            db.add(giving)
+            db.commit()
+        except Exception as e:
+            db.rollback()
+            logger.exception("STK push PHONE-account DB error for member %s", member.id)
+            return STKPushResponse(
+                success=False,
+                message=f"Server error recording your giving ({type(e).__name__}): {e}",
+                checkout_request_id=None,
+                merchant_request_id=None,
+                customer_message=f"Server error recording your giving ({type(e).__name__}): {e}",
+            )
 
         target = (
             receiving_account.number

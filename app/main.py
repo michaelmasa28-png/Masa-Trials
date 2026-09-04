@@ -71,6 +71,7 @@ def _auto_migrate_postgres():
         "givings": [
             ("safaricom_name", "varchar(150)"),
             ("reference", "varchar(255)"),
+            ("merchant_request_id", "varchar(150)"),
         ],
     }
 
