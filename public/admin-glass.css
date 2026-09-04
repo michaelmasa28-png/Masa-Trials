@@ -310,6 +310,7 @@ select option{ background:#0a1122; color:var(--text); }
 .status-pill.done, .badge-success{ background:rgba(52,211,153,.16); color:var(--green); }
 .status-pill.pending, .badge-warning{ background:rgba(251,191,36,.16); color:var(--gold); }
 .status-pill.failed, .badge-danger{ background:rgba(251,113,133,.16); color:var(--red); }
+.status-pill.info{ background:rgba(56,189,248,.16); color:var(--cyan); }
 
 /* ---------- headings / text ---------- */
 h1,h2,h3,h4{ color:#fff; }

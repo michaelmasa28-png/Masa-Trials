@@ -68,8 +68,42 @@ async function loadDashboardStats() {
 // Fill the stat cards with real numbers, then keep them fresh automatically
 window.addEventListener("DOMContentLoaded", () => {
     loadDashboardStats();
+    loadRecentActivity();
     setInterval(loadDashboardStats, 60000);
 });
+
+async function loadRecentActivity() {
+    try {
+        const session = JSON.parse(localStorage.getItem("adminSession") || "{}");
+        const token = session.token || localStorage.getItem("token") || "";
+        if (!token) return;
+
+        const res = await fetch("/dashboard/activity", {
+            headers: { "Authorization": "Bearer " + token }
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        const tbody = document.getElementById("recentActivityBody");
+        if (!tbody || !data.activities) return;
+
+        tbody.innerHTML = data.activities.map(function (item) {
+            const cls =
+                item.status === "Success" ? "done" :
+                item.status === "Pending" ? "pending" : "info";
+            return `<tr>
+                <td>${item.date || ""}</td>
+                <td>${item.activity || ""}</td>
+                <td><span class="status-pill ${cls}">${item.status}</span></td>
+            </tr>`;
+        }).join("");
+
+        if (!data.activities.length) {
+            tbody.innerHTML = `<tr><td colspan="3">No recent activity yet.</td></tr>`;
+        }
+    } catch (err) {
+        console.error("Failed to load recent activity:", err);
+    }
+}
 
 // Show the admin's name in the welcome area
 (async function(){

@@ -43,10 +43,37 @@ function initPortalAuthenticationWorkflow() {
                 if (responseData.authenticated) {
                     enterButton.innerHTML = `<span>ACCESS GRANTED</span> <i class="fa-solid fa-circle-check"></i>`;
                     enterButton.style.boxShadow = "0 0 30px #22c55e";
-                    
-                    // Route user dynamically based on the authorization rule mapped by the server session parameters
+
+                    // Persist the admin session so protected pages like the
+                    // finance ledger can authenticate their API calls.
+                    const token = responseData.access_token || "";
+                    if (token) {
+                        localStorage.setItem(
+                            "adminSession",
+                            JSON.stringify({
+                                admin: responseData.admin || {},
+                                token: token
+                            })
+                        );
+                        localStorage.setItem("token", token);
+                        if (responseData.admin) {
+                            localStorage.setItem(
+                                "admin_name",
+                                responseData.admin.username ||
+                                responseData.admin.full_name ||
+                                "Administrator"
+                            );
+                            localStorage.setItem(
+                                "admin_role",
+                                responseData.admin.role || ""
+                            );
+                        }
+                    }
+
+                    // Route user dynamically based on the authorization rule
+                    // mapped by the server session parameters
                     setTimeout(() => {
-                        window.location.href = responseData.redirect || 'dashboard.html';
+                        window.location.href = responseData.redirect || 'donations.html';
                     }, 600);
                 } else {
                     triggerAccessKeyDenialFeedback(accessKeyField, enterButton, originalButtonHTMLMarkupInnerContentTextData);

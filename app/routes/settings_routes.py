@@ -9,6 +9,7 @@ from app.database import get_db
 from app.dependencies import get_current_admin
 from app.models import Admin, Member, ChurchContact, GivingAccount
 from app.config import SECRET_KEY
+from app.auth import create_access_token
 
 router = APIRouter(prefix="/api", tags=["Settings"])
 
@@ -156,10 +157,34 @@ def get_member_presence(member_number: str, db: Session = Depends(get_db)):
 
 
 @router.post("/login")
-def portal_login(data: PortalLoginRequest):
+def portal_login(data: PortalLoginRequest, db: Session = Depends(get_db)):
     """Simple portal key authentication — checks against SECRET_KEY."""
     if data.secure_key and hmac.compare_digest(data.secure_key, SECRET_KEY):
-        return {"authenticated": True, "redirect": "dashboard.html"}
+        # Issue a real admin token (bound to the first active admin account)
+        # so the finance pages can call their protected endpoints.
+        admin = (
+            db.query(Admin)
+            .filter(Admin.is_active.is_(True))
+            .order_by(Admin.id.asc())
+            .first()
+        )
+        token = create_access_token(admin.id) if admin else None
+
+        return {
+            "authenticated": True,
+            "redirect": "donations.html",
+            "access_token": token,
+            "admin": (
+                {
+                    "id": admin.id,
+                    "username": admin.username,
+                    "full_name": admin.full_name,
+                    "role": admin.role,
+                }
+                if admin
+                else None
+            ),
+        }
 
     return {"authenticated": False}
 

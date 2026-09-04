@@ -557,6 +557,32 @@
 <script>
 const API_BASE_URL = window.location.origin;
 
+// ---- Auto-attach the admin session token to every API call ----
+(function () {
+    const __fetch = window.fetch;
+    function getAdminToken() {
+        try {
+            const s = JSON.parse(localStorage.getItem("adminSession") || "{}");
+            return s.token || localStorage.getItem("token") || "";
+        } catch (e) {
+            return "";
+        }
+    }
+    window.fetch = function (url, opts) {
+        opts = opts || {};
+        opts.headers = opts.headers || {};
+        const token = getAdminToken();
+        if (token) {
+            if (typeof opts.headers.append === "function") {
+                opts.headers.append("Authorization", "Bearer " + token);
+            } else {
+                opts.headers["Authorization"] = "Bearer " + token;
+            }
+        }
+        return __fetch(url, opts);
+    };
+})();
+
 /**
  * Enterprise Application Runtime State Store
  * Synchronized live against the MySQL database server endpoints.

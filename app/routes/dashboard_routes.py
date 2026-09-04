@@ -10,6 +10,62 @@ from app.models import Member, Event, Attendance, Giving
 router = APIRouter(tags=["Dashboard"])
 
 
+@router.get("/dashboard/activity")
+def dashboard_activity(db: Session = Depends(get_db)):
+    """Real recent activity feed (latest giving, members, events)."""
+
+    items = []
+
+    for m in (
+        db.query(Member)
+        .order_by(Member.created_at.desc())
+        .limit(3)
+        .all()
+    ):
+        items.append({
+            "date": m.created_at.strftime("%d %b") if m.created_at else "",
+            "activity": f"Member {m.full_name or m.member_number or ''} registered",
+            "status": m.status or "Pending",
+        })
+
+    for g in (
+        db.query(Giving)
+        .filter(Giving.status == "Success")
+        .order_by(Giving.created_at.desc())
+        .limit(3)
+        .all()
+    ):
+        items.append({
+            "date": g.created_at.strftime("%d %b") if g.created_at else "",
+            "activity": f"Giving received — KSh {g.amount:.0f} ({g.category or 'Offering'})",
+            "status": "Success",
+        })
+
+    for e in (
+        db.query(Event)
+        .order_by(Event.created_at.desc())
+        .limit(3)
+        .all()
+    ):
+        items.append({
+            "date": e.created_at.strftime("%d %b") if e.created_at else "",
+            "activity": f"Event added — {e.title}",
+            "status": "Scheduled" if (e.start_date and e.start_date >= date.today()) else "Past",
+        })
+
+    seen = set()
+    ordered = []
+    for it in sorted(items, key=lambda x: x["date"], reverse=True):
+        key = (it["activity"], it["date"])
+        if key not in seen:
+            seen.add(key)
+            ordered.append(it)
+        if len(ordered) >= 6:
+            break
+
+    return {"success": True, "activities": ordered}
+
+
 @router.get("/dashboard/stats")
 def dashboard_stats(db: Session = Depends(get_db)):
 
