@@ -72,16 +72,73 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // Show the admin's name in the welcome area
-(function(){
-    const session = JSON.parse(localStorage.getItem("adminSession") || "{}");
-    const admin = session.admin || {};
-    const name = admin.username || admin.name || localStorage.getItem("admin_name") || "Administrator";
+(async function(){
+    try {
+        const session = JSON.parse(localStorage.getItem("adminSession") || "{}");
+        const token = session.token || localStorage.getItem("token") || "";
 
-    const welcome = document.querySelector(".topbar .admin p, .admin p");
-    if (welcome) welcome.textContent = name;
+        const admin = session.admin || {};
+        const name = admin.username || admin.name || localStorage.getItem("admin_name") || "Administrator";
 
-    const welcomeH3 = document.querySelector(".topbar .admin h3");
-    if (welcomeH3 && admin.role) welcomeH3.textContent = welcomeH3.textContent.split(" ")[0] + " " + admin.role;
+        const welcome = document.querySelector(".topbar .admin p, .admin p");
+        if (welcome) welcome.textContent = name;
+
+        const welcomeH3 = document.querySelector(".topbar .admin h3");
+        if (welcomeH3 && admin.role) welcomeH3.textContent = welcomeH3.textContent.split(" ")[0] + " " + admin.role;
+
+        // ---- Live M-Pesa readiness check ----
+        const line = document.getElementById("mpesaStatusLine");
+        const detail = document.getElementById("mpesaStatusDetail");
+        const panel = document.getElementById("mpesaStatus");
+
+        if (!token) {
+            if (line) line.textContent = "Admin token missing";
+            if (detail) detail.textContent = "Log in again to refresh.";
+            if (panel) panel.classList.add("bad");
+            return;
+        }
+
+        const res = await fetch("/api/finance/mpesa-diagnostics", {
+            headers: { "Authorization": "Bearer " + token }
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+            if (line) line.textContent = "Could not check M-Pesa status";
+            if (detail) detail.textContent = "Server returned: " + (data.detail || "unknown error");
+            if (panel) panel.classList.add("bad");
+            return;
+        }
+
+        const cfg = data.config || {};
+        const missing = [];
+        if (!cfg.consumer_key) missing.push("Consumer Key");
+        if (!cfg.consumer_secret) missing.push("Consumer Secret");
+        if (!cfg.shortcode) missing.push("Shortcode");
+        if (!cfg.passkey) missing.push("Passkey");
+        if (!cfg.callback_url) missing.push("Callback URL");
+
+        if (missing.length) {
+            if (line) line.textContent = "M-Pesa NOT configured";
+            if (detail) detail.textContent = "Missing on server: " + missing.join(", ");
+            if (panel) panel.classList.add("bad");
+        } else {
+            const envLabel = (data.env || "sandbox") === "sandbox" ? "TEST MODE (sandbox)" : "LIVE";
+            if (line) line.textContent = "M-Pesa configured — " + envLabel;
+            if (detail) detail.textContent =
+                (data.issues || []).join("; ") ||
+                "Everything is set up. Payments should work.";
+            if (data.env !== "sandbox") {
+                if (panel) panel.classList.add("good");
+            } else {
+                if (panel) panel.classList.add("warn");
+            }
+        }
+    } catch (e) {
+        console.error("M-Pesa status check failed:", e);
+        const line = document.getElementById("mpesaStatusLine");
+        if (line) line.textContent = "Could not reach server";
+    }
 })();
 
 // Sidebar toggle

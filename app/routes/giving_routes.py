@@ -17,7 +17,7 @@ from sqlalchemy.orm import Session
 from app.mpesa import stk_push as mpesa_stk_push, normalize_callback, MpesaError
 from app.database import get_db
 from app.models import Member, Giving, Transaction, GivingAccount
-from app.dependencies import get_current_member
+from app.dependencies import get_current_member, get_current_admin
 from app.ratelimit import rate_limit
 from app.schema import (
     STKPushRequest,
@@ -550,6 +550,65 @@ def finance_health():
         "service": "Finance API",
         "status": "Running",
         "time": datetime.now(timezone.utc)
+    }
+
+
+# =====================================================
+# M-PESA CONFIG DIAGNOSTICS (admin only)
+# Never returns secret values — only whether they are set,
+# and their type/length, so the church can see exactly
+# which step of the M-Pesa setup is missing on the server.
+# =====================================================
+
+from app.config import settings as mpesa_settings
+
+@router.get("/mpesa-diagnostics")
+def mpesa_diagnostics(
+    current_admin = Depends(get_current_admin),
+):
+    def present(value):
+        return bool(value and str(value).strip())
+
+    callback = mpesa_settings.MPESA_CALLBACK_URL or ""
+    shortcode = mpesa_settings.MPESA_SHORTCODE or ""
+
+    issues = []
+    for label, value in (
+        ("consumer key", mpesa_settings.MPESA_CONSUMER_KEY),
+        ("consumer secret", mpesa_settings.MPESA_CONSUMER_SECRET),
+        ("shortcode", mpesa_settings.MPESA_SHORTCODE),
+        ("passkey", mpesa_settings.MPESA_PASSKEY),
+        ("callback url", mpesa_settings.MPESA_CALLBACK_URL),
+    ):
+        if not present(value):
+            issues.append(f"missing {label}")
+
+    if not issues:
+        env_flag = "sandbox" if (mpesa_settings.MPESA_ENV or "sandbox") == "sandbox" else "production"
+        issues.append(
+            f"ENV is '{env_flag}'"
+            + (
+                " (test mode: real phones will NOT receive prompts)" if env_flag == "sandbox" else ""
+            )
+        )
+
+    if callback and "ngrok" in callback.lower():
+        issues.append("callback points at a dead ngrok tunnel, not your live site")
+
+    if shortcode and shortcode == "174379":
+        issues.append("shortcode is the shared public sandbox number (174379)")
+
+    return {
+        "success": True,
+        "env": mpesa_settings.MPESA_ENV or "sandbox",
+        "config": {
+            "consumer_key": present(mpesa_settings.MPESA_CONSUMER_KEY),
+            "consumer_secret": present(mpesa_settings.MPESA_CONSUMER_SECRET),
+            "shortcode": shortcode,
+            "passkey": present(mpesa_settings.MPESA_PASSKEY),
+            "callback_url": callback,
+        },
+        "issues": issues,
     }
 
 
