@@ -151,6 +151,59 @@ def get_members(
         "total": total,
         "members": [serialize_member(m) for m in members]
     }
+
+
+# ==========================================
+# EXPORT ALL MEMBERS (CSV backup)
+# One-click downloadable spreadsheet of the
+# full congregation for offline backup/spreadsheets.
+# ==========================================
+
+@router.get("/members/export")
+def export_members(
+    current_admin: Admin = Depends(get_current_admin),
+    db: Session = Depends(get_db),
+):
+    import csv
+    import io
+
+    members = db.query(Member).order_by(Member.id.asc()).all()
+
+    buffer = io.StringIO()
+    writer = csv.writer(buffer)
+
+    writer.writerow([
+        "Member Number", "Full Name", "Phone", "Email", "Gender",
+        "Date of Birth", "Ministry", "Marital Status", "Occupation",
+        "National ID", "Status", "Registered On",
+    ])
+
+    for m in members:
+        writer.writerow([
+            m.member_number or "",
+            m.full_name,
+            m.phone or "",
+            m.email or "",
+            m.gender or "",
+            m.date_of_birth.strftime("%Y-%m-%d") if m.date_of_birth else "",
+            m.ministry or "",
+            m.marital_status or "",
+            m.occupation or "",
+            m.national_id or "",
+            m.status or "",
+            m.created_at.strftime("%Y-%m-%d") if m.created_at else "",
+        ])
+
+    filename = f"members-{date.today().isoformat()}.csv"
+
+    from fastapi.responses import StreamingResponse
+    return StreamingResponse(
+        iter([buffer.getvalue()]),
+        media_type="text/csv",
+        headers={
+            "Content-Disposition": f'attachment; filename="{filename}"',
+        },
+    )
 # ==========================================
 @router.post("/member/login")
 def member_login(

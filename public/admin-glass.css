@@ -193,6 +193,12 @@ body::after{
 .upcoming-item i{ font-size:1.2rem; color:var(--gold); }
 .upcoming-item strong{ font-weight:700; }
 .upcoming-item span{ display:block; font-size:.82rem; color:var(--muted, #9fb0c3); }
+.upcoming-item.birthday-today{ border-color:rgba(251,191,36,.45); background:rgba(251,191,36,.08); }
+.birthday-panel .upcoming-item i{ color:#fbbf24; }
+
+/* ---------- Export members button ---------- */
+.export-button{ margin-left:8px; background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(34,211,238,.15)); }
+.export-button:disabled{ opacity:.6; cursor:wait; }
 
 /* ---------- M-Pesa readiness panel ---------- */
 .mpesa-status{ grid-column:1 / -1; cursor:default; }

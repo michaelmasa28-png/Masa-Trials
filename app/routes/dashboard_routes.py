@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from fastapi import APIRouter, Depends
 from sqlalchemy import func
@@ -108,6 +108,52 @@ def dashboard_stats(db: Session = Depends(get_db)):
         .all()
     )
 
+    # ---- Birthdays in the next 7 days (Approved members only) ----
+    window_end = today + timedelta(days=7)
+
+    def _next_birthday(dob):
+        yy = today.year
+        try:
+            candidate = dob.replace(year=yy)
+        except ValueError:
+            candidate = dob.replace(year=yy, month=2, day=28)
+        if candidate < today:
+            yy += 1
+            try:
+                candidate = dob.replace(year=yy)
+            except ValueError:
+                candidate = dob.replace(year=yy, month=2, day=28)
+        return candidate
+
+    birthday_items = []
+    for m in (
+        db.query(Member)
+        .filter(Member.status == "Approved", Member.date_of_birth.isnot(None))
+        .all()
+    ):
+        dob = m.date_of_birth
+        if isinstance(dob, datetime):
+            dob = dob.date()
+        nb = _next_birthday(dob)
+        if today <= nb <= window_end:
+            label = (
+                "Today"
+                if nb == today
+                else "Tomorrow"
+                if nb == today + timedelta(days=1)
+                else nb.strftime("%A")
+            )
+            birthday_items.append({
+                "name": m.full_name,
+                "day": nb.strftime("%d %b"),
+                "label": label,
+                "_sort": nb,
+            })
+
+    birthday_items.sort(key=lambda b: b["_sort"])
+    for b in birthday_items:
+        b.pop("_sort", None)
+
     return {
         "success": True,
         "total_members": total_members,
@@ -123,5 +169,6 @@ def dashboard_stats(db: Session = Depends(get_db)):
             }
             for e in upcoming
         ],
+        "upcoming_birthdays": birthday_items,
         "as_of": datetime.now().isoformat(),
     }

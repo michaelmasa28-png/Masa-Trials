@@ -59,7 +59,26 @@ async function loadDashboardStats() {
         set("attendanceCount", stats.today_attendance ?? "0");
         set("offeringsTotal", "KSh " + Number(stats.monthly_offerings ?? 0).toLocaleString());
 
-        // ---- "This Week & Coming Up" real event list ----
+        // ---- Birthdays coming up (next 7 days) ----
+        const birthdayEl = document.getElementById("upcomingBirthdays");
+        if (birthdayEl) {
+            const bdays = stats.upcoming_birthdays || [];
+            if (bdays.length) {
+                birthdayEl.innerHTML = bdays.map(function (b) {
+                    const cls = b.label === "Today" ? "birthday-today" : "";
+                    return `<div class="upcoming-item ${cls}">
+                        <i class="fa-solid fa-cake-candles"></i>
+                        <div>
+                            <strong>${b.name}</strong>
+                            <span>${b.day} &mdash; ${b.label}</span>
+                        </div>
+                    </div>`;
+                }).join("");
+            } else {
+                birthdayEl.innerHTML = `<p class="card-sub">No birthdays in the next 7 days.</p>`;
+            }
+        }
+
         const listEl = document.getElementById("upcomingEventsList");
         if (listEl) {
             const events = stats.upcoming_list || [];
