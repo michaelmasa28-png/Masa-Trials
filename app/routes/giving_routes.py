@@ -156,7 +156,9 @@ async def _stk_push_impl(
 
     # ---- PAYBILL account: real STK push ----
     shortcode = None
-    account_ref = member.member_number
+    account_ref = member.member_number or "GIVING"
+    if account_ref == "GIVING" or not account_ref.strip():
+        account_ref = "GIVING"
     if receiving_account:
         shortcode = receiving_account.number.strip()
         if shortcode.isdigit() and len(shortcode) == 5:

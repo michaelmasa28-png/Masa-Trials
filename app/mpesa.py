@@ -133,7 +133,11 @@ async def stk_push(
 
     token = await get_access_token()
 
-    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    # Daraja requires the timestamp in East Africa Time (UTC+3).
+    # Render servers run on UTC, so datetime.now() alone would be
+    # 3 hours late and M-Pesa would reject the generated password.
+    eat_tz = timezone(timedelta(hours=3))
+    timestamp = datetime.now(eat_tz).strftime("%Y%m%d%H%M%S")
     password = generate_password(timestamp, sc)
     formatted_phone = format_phone(phone)
 
