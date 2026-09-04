@@ -1665,7 +1665,9 @@ async function requestSTKPush() {
 
                 headers: {
 
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+
+                    "Authorization": getMemberBearer()
 
                 },
 
@@ -1685,15 +1687,7 @@ async function requestSTKPush() {
 
                     account_number: payment.account_number
 
-                }),
-
-                headers: {
-
-                    "Content-Type": "application/json",
-
-                    "Authorization": getMemberBearer()
-
-                }
+                })
 
             }
 

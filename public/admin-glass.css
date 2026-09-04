@@ -174,6 +174,26 @@ body::after{
     border:1px solid var(--glass-border);
 }
 
+/* ---------- Quick actions ---------- */
+.quick-actions a.card{ text-decoration:none; }
+.quick-actions .card-body h3{ font-size:.95rem; margin:0; }
+
+/* ---------- Upcoming events panel ---------- */
+.upcoming-panel{ grid-column:1 / -1; cursor:default; padding:18px 20px; }
+.upcoming-panel .card-heading{ margin-bottom:12px; font-size:1rem; }
+.upcoming-panel .card-heading h3 i{ color:var(--cyan); }
+.upcoming-list{ display:flex; flex-direction:column; gap:10px; }
+.upcoming-item{
+    display:flex; align-items:center; gap:14px;
+    padding:10px 14px;
+    border-radius:14px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+}
+.upcoming-item i{ font-size:1.2rem; color:var(--gold); }
+.upcoming-item strong{ font-weight:700; }
+.upcoming-item span{ display:block; font-size:.82rem; color:var(--muted, #9fb0c3); }
+
 /* ---------- M-Pesa readiness panel ---------- */
 .mpesa-status{ grid-column:1 / -1; cursor:default; }
 .mpesa-status h2{ font-size:clamp(1.05rem,2vw,1.4rem); }

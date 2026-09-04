@@ -74,6 +74,31 @@
 
         </header>
 
+        <!-- Quick Actions -->
+        <section class="cards quick-actions">
+
+            <a class="card" href="members.html">
+                <div class="card-icon"><i class="fa-solid fa-user-plus"></i></div>
+                <div class="card-body"><h3>Add Member</h3></div>
+            </a>
+
+            <a class="card" href="events.html">
+                <div class="card-icon"><i class="fa-solid fa-plus"></i></div>
+                <div class="card-body"><h3>Add Event</h3></div>
+            </a>
+
+            <a class="card" href="communication.html">
+                <div class="card-icon"><i class="fa-solid fa-paper-plane"></i></div>
+                <div class="card-body"><h3>Send Message</h3></div>
+            </a>
+
+            <a class="card" href="attendance.html">
+                <div class="card-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                <div class="card-body"><h3>Attendance</h3></div>
+            </a>
+
+        </section>
+
         <!-- Statistics Cards -->
         <section class="cards">
 
@@ -122,6 +147,16 @@
                 <h3>M-Pesa Payment Status</h3>
                 <h2 id="mpesaStatusLine">Checking...</h2>
                 <span class="card-sub" id="mpesaStatusDetail">Contacting the server...</span>
+            </div>
+        </section>
+
+        <!-- Upcoming Events (real data) -->
+        <section class="card upcoming-panel">
+            <div class="card-heading">
+                <h3><i class="fa-solid fa-calendar-day"></i> This Week &amp; Coming Up</h3>
+            </div>
+            <div id="upcomingEventsList" class="upcoming-list">
+                <p class="card-sub">Loading...</p>
             </div>
         </section>
 

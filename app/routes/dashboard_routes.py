@@ -1,6 +1,7 @@
 from datetime import date, datetime
 
 from fastapi import APIRouter, Depends
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -91,12 +92,20 @@ def dashboard_stats(db: Session = Depends(get_db)):
 
     first_of_month = date(today.year, today.month, 1)
     monthly_offerings = (
-        db.query(db.func.coalesce(db.func.sum(Giving.amount), 0.0))
+        db.query(func.coalesce(func.sum(Giving.amount), 0.0))
         .filter(
             Giving.status == "Success",
-            db.func.date(Giving.created_at) >= first_of_month,
+            func.date(Giving.created_at) >= first_of_month,
         )
         .scalar()
+    )
+
+    upcoming = (
+        db.query(Event)
+        .filter(Event.start_date >= today)
+        .order_by(Event.start_date.asc(), Event.start_time.asc())
+        .limit(4)
+        .all()
     )
 
     return {
@@ -105,5 +114,14 @@ def dashboard_stats(db: Session = Depends(get_db)):
         "upcoming_events": upcoming_events,
         "today_attendance": today_attendance,
         "monthly_offerings": round(float(monthly_offerings or 0), 2),
+        "upcoming_list": [
+            {
+                "title": e.title,
+                "date": e.start_date.strftime("%a %d %b") if e.start_date else "",
+                "time": (e.start_time.strftime("%I:%M %p") if e.start_time else ""),
+                "venue": e.venue or "",
+            }
+            for e in upcoming
+        ],
         "as_of": datetime.now().isoformat(),
     }

@@ -59,6 +59,27 @@ async function loadDashboardStats() {
         set("attendanceCount", stats.today_attendance ?? "0");
         set("offeringsTotal", "KSh " + Number(stats.monthly_offerings ?? 0).toLocaleString());
 
+        // ---- "This Week & Coming Up" real event list ----
+        const listEl = document.getElementById("upcomingEventsList");
+        if (listEl) {
+            const events = stats.upcoming_list || [];
+            if (events.length) {
+                listEl.innerHTML = events.map(function (ev) {
+                    const meta = [ev.date, ev.time].filter(Boolean).join(" · ") || "Date TBA";
+                    const venue = ev.venue ? ` — ${ev.venue}` : "";
+                    return `<div class="upcoming-item">
+                        <i class="fa-solid fa-cross"></i>
+                        <div>
+                            <strong>${ev.title}</strong>
+                            <span>${meta}${venue}</span>
+                        </div>
+                    </div>`;
+                }).join("");
+            } else {
+                listEl.innerHTML = `<p class="card-sub">No upcoming events yet. <a href="events.html">Add one</a>.</p>`;
+            }
+        }
+
     } catch (err) {
         console.error("Failed to load dashboard stats:", err);
     }
