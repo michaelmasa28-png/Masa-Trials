@@ -14,7 +14,7 @@ services:
       - key: CORS_ORIGINS
         sync: false
       - key: MPESA_ENV
-        value: production
+        value: sandbox
       - key: SEED_ADMIN
         value: "false"
       - key: CLOUDINARY_CLOUD_NAME
