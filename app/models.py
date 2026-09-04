@@ -1073,3 +1073,22 @@ class AIAttendanceSession(Base):
     ended_at = Column(DateTimeTZ(), nullable=True)
 
     created_at = Column(DateTimeTZ(), server_default=func.now())
+
+
+# ==========================================================
+# RATE LIMIT EVENTS
+# Shared across every instance (load-balanced servers) via the
+# database, so limits are consistently enforced no matter which
+# instance handles a request. In-memory limits would be bypassed
+# once traffic is split across multiple servers.
+# ==========================================================
+
+class RateLimitEvent(Base):
+    __tablename__ = "rate_limit_events"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    label = Column(String(50), nullable=False, index=True)
+    key = Column(String(255), nullable=False, index=True)
+
+    created_at = Column(DateTimeTZ(), server_default=func.now(), index=True)

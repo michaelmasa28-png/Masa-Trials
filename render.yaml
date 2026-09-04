@@ -4,6 +4,20 @@ services:
     runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 2
+
+    # ---- LOAD BALANCING (horizontal scaling) ----
+    # Render automatically balances traffic across multiple instances.
+    # To turn it ON: first upgrade this service to a paid (Starter+) plan
+    # in the Render dashboard (Service -> Settings -> Instance Type), then
+    # uncomment the block below and redeploy, or do it in the dashboard
+    # under Service -> Replicas.
+    # The app is already multi-instance safe: rate limits are stored in the
+    # database and image uploads go through Cloudinary.
+    # scaling:
+    #   minInstanceCount: 1
+    #   maxInstanceCount: 2
+    #   targetMemoryPercent: 75
+    #   targetCPUPercent: 75
     envVars:
       - key: SECRET_KEY
         generateValue: true

@@ -1,30 +1,59 @@
-"""Simple in-memory sliding-window rate limiter keyed by client IP."""
+"""Database-backed sliding-window rate limiter keyed by client IP.
+
+The counts live in the database so limits stay correct even when the
+app is load-balanced across multiple instances/workers (each instance
+would otherwise keep its own private counter and the limits could be
+bypassed by routing traffic to several servers).
+
+Every event is a row; old rows outside the window are pruned lazily
+so the table stays small.
+"""
 
 import time
-import threading
-from collections import defaultdict, deque
+from datetime import datetime, timedelta, timezone
 
-from fastapi import HTTPException, Request
+from fastapi import Depends, HTTPException, Request
 
-_lock = threading.Lock()
-# window_key -> deque of timestamps. Key = (label, client_ip, window_seconds)
-_buckets: dict = defaultdict(lambda: deque())
+from app.database import get_db
+from app.models import RateLimitEvent
 
 
-def _cleanup(labels: set) -> None:
-    """Drop buckets that haven't been touched recently to bound memory."""
-    now = time.time()
-    for key in list(_buckets.keys()):
-        label = key[0]
-        window = key[2]
-        recent = _buckets[key]
-        # Keep the deque user-facing fresh: only retain timestamps
-        # within the window. Then drop empty/large-window buckets.
-        while recent and now - recent[0] > window:
-            recent.popleft()
+def _now_utc():
+    return datetime.now(timezone.utc)
 
-        if label in labels and not recent:
-            _buckets.pop(key, None)
+
+def db_rate_limit(db, label: str, key: str, max_requests: int, window_seconds: int) -> None:
+    """Enforce `max_requests` events for (label, key) per window. Raises 429."""
+    cutoff = _now_utc() - timedelta(seconds=window_seconds)
+
+    # Prune that label's expired rows (bounded work per request).
+    db.query(RateLimitEvent).filter(
+        RateLimitEvent.label == label,
+        RateLimitEvent.created_at < cutoff,
+    ).delete(synchronize_session=False)
+
+    recent = (
+        db.query(RateLimitEvent)
+        .filter(
+            RateLimitEvent.label == label,
+            RateLimitEvent.key == key,
+            RateLimitEvent.created_at >= cutoff,
+        )
+        .count()
+    )
+
+    if recent >= max_requests:
+        db.rollback()
+        raise HTTPException(
+            status_code=429,
+            detail=(
+                "Too many requests. Please wait a moment and try again."
+            ),
+            headers={"Retry-After": str(max(1, window_seconds))},
+        )
+
+    db.add(RateLimitEvent(label=label, key=key, created_at=_now_utc()))
+    db.commit()
 
 
 def rate_limit(max_requests: int, window_seconds: int, label: str = "limit"):
@@ -32,29 +61,28 @@ def rate_limit(max_requests: int, window_seconds: int, label: str = "limit"):
 
     Returns a FastAPI dependency callable.
     """
-    def dependency(request: Request) -> None:
+    def dependency(request: Request, db=Depends(get_db)) -> None:
         client = request.client.host if request.client else "unknown"
-        key = (label, client, window_seconds)
-        now = time.time()
-
-        with _lock:
-            bucket = _buckets[key]
-            while bucket and bucket[0] <= now - window_seconds:
-                bucket.popleft()
-
-            if len(bucket) >= max_requests:
-                _cleanup({label})
-                retry_after = int(bucket[0] + window_seconds - now)
-                raise HTTPException(
-                    status_code=429,
-                    detail=(
-                        "Too many requests. Please wait a moment and try again."
-                    ),
-                    headers={"Retry-After": str(max(1, retry_after))},
-                )
-
-            bucket.append(now)
-            if len(_buckets) > 10_000:
-                _cleanup(set())
+        db_rate_limit(db, label, f"{client}:{request.url.path}", max_requests, window_seconds)
 
     return dependency
+
+
+# Drop-in helper used by the login route (which keeps its own lockout logic
+# in the database for admin accounts).
+def check_login_rate(db, ip: str, max_requests: int = 5, window_seconds: int = 60) -> bool:
+    """Record a login attempt for an IP. Returns True if within the limit."""
+    try:
+        db_rate_limit(db, "login", ip, max_requests, window_seconds)
+        return True
+    except HTTPException:
+        return False
+
+
+def clear_login_rate(db, ip: str, label: str = "login") -> None:
+    """Forget previous attempts for an IP after a successful login."""
+    db.query(RateLimitEvent).filter(
+        RateLimitEvent.label == label,
+        RateLimitEvent.key == ip,
+    ).delete(synchronize_session=False)
+    db.commit()
