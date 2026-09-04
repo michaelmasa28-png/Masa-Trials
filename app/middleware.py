@@ -25,5 +25,6 @@ class ErrorHandlerMiddleware(BaseHTTPMiddleware):
                 content={
                     "success": False,
                     "message": "Internal server error. Please try again later.",
+                    "detail": f"{type(e).__name__}: {e}",
                 },
             )
