@@ -1,3 +1,10 @@
+// XSS sanitize
+function escapeHtml(val) {
+    return String(val == null ? "" : val).replace(/[&<>"']/g, function(c) {
+        return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[c];
+    });
+}
+
 // Load all members when the page opens
 window.addEventListener("DOMContentLoaded", loadMembers);
 
@@ -32,20 +39,20 @@ function loadMembers() {
 
                     <td data-label="Photo">
                         <img
-                            src="${member.photo ? member.photo : 'images/member.png'}"
+                            src="${escapeHtml(member.photo ? member.photo : 'images/member.png')}"
                             class="member-photo"
                             alt="Member">
                     </td>
 
-                    <td data-label="Username">${member.full_name || member.username || '-'}</td>
+                    <td data-label="Username">${escapeHtml(member.full_name || member.username || '-')}</td>
 
-                    <td data-label="Gender">${member.gender ? member.gender : "-"}</td>
+                    <td data-label="Gender">${escapeHtml(member.gender ? member.gender : "-")}</td>
 
-                    <td data-label="Phone">${member.phone}</td>
+                    <td data-label="Phone">${escapeHtml(member.phone)}</td>
 
-                    <td data-label="Ministry">${member.ministry ? member.ministry : "-"}</td>
+                    <td data-label="Ministry">${escapeHtml(member.ministry ? member.ministry : "-")}</td>
 
-                    <td data-label="Status">${member.status}</td>
+                    <td data-label="Status">${escapeHtml(member.status)}</td>
                     <td data-label="Actions">
 
                         <button class="approve-btn" onclick="approveMember(${member.id})">

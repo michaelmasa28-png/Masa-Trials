@@ -29,7 +29,7 @@ async function loadDashboardStats() {
 
     try {
         const session = JSON.parse(localStorage.getItem("adminSession") || "{}");
-        const token = session.token || "";
+        const token = session.token || localStorage.getItem("token") || "";
 
         if (!token) {
             console.warn("No admin token found");
@@ -49,10 +49,15 @@ async function loadDashboardStats() {
 
         const stats = await response.json();
 
-        const totalMembersEl = document.getElementById("totalMembers");
-        if (totalMembersEl) {
-            totalMembersEl.textContent = stats.total_members ?? "0";
-        }
+        const set = (id, value) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = value;
+        };
+
+        set("totalMembers", stats.total_members ?? "0");
+        set("upcomingEvents", stats.upcoming_events ?? "0");
+        set("attendanceCount", stats.today_attendance ?? "0");
+        set("offeringsTotal", "KSh " + Number(stats.monthly_offerings ?? 0).toLocaleString());
 
     } catch (err) {
         console.error("Failed to load dashboard stats:", err);
@@ -60,7 +65,24 @@ async function loadDashboardStats() {
 
 }
 
-window.addEventListener("DOMContentLoaded", loadDashboardStats);
+// Fill the stat cards with real numbers, then keep them fresh automatically
+window.addEventListener("DOMContentLoaded", () => {
+    loadDashboardStats();
+    setInterval(loadDashboardStats, 60000);
+});
+
+// Show the admin's name in the welcome area
+(function(){
+    const session = JSON.parse(localStorage.getItem("adminSession") || "{}");
+    const admin = session.admin || {};
+    const name = admin.username || admin.name || localStorage.getItem("admin_name") || "Administrator";
+
+    const welcome = document.querySelector(".topbar .admin p, .admin p");
+    if (welcome) welcome.textContent = name;
+
+    const welcomeH3 = document.querySelector(".topbar .admin h3");
+    if (welcomeH3 && admin.role) welcomeH3.textContent = welcomeH3.textContent.split(" ")[0] + " " + admin.role;
+})();
 
 // Sidebar toggle
 (function(){

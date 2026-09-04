@@ -10,6 +10,13 @@
 
 const API_URL = "";
 
+// XSS sanitize
+function escapeHtml(val) {
+    return String(val == null ? "" : val).replace(/[&<>"']/g, function(c) {
+        return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[c];
+    });
+}
+
 //==================================
 // ELEMENTS
 //==================================
@@ -156,10 +163,10 @@ function createEventCard(event) {
                 </span>
             ` : ""}
 
-            <h3>${event.title}</h3>
+            <h3>${escapeHtml(event.title)}</h3>
 
             <p class="event-description">
-                ${event.description || ""}
+                ${escapeHtml(event.description || "")}
             </p>
 
             <div class="event-info">
@@ -176,12 +183,12 @@ function createEventCard(event) {
 
                 <div>
                     <i class="fa-solid fa-location-dot"></i>
-                    <span>${event.venue || "Main Church"}</span>
+                    <span>${escapeHtml(event.venue || "Main Church")}</span>
                 </div>
 
                 <div>
                     <i class="fa-solid fa-microphone"></i>
-                    <span>${event.speaker || "To be announced"}</span>
+                    <span>${escapeHtml(event.speaker || "To be announced")}</span>
                 </div>
 
             </div>

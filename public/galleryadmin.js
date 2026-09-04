@@ -4,6 +4,13 @@
 // Drag & Drop + Multiple Upload
 // =====================================
 
+// XSS sanitize
+function escapeHtml(val) {
+    return String(val == null ? "" : val).replace(/[&<>"']/g, function(c) {
+        return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[c];
+    });
+}
+
 const form = document.getElementById("galleryForm");
 
 const titleInput = document.getElementById("title");
@@ -53,11 +60,11 @@ async function displayGallery() {
                 card.className = "gallery-card";
 
                 card.innerHTML = `
-                    <img src="${item.image}" style="width:100%; max-width:200px; display:block; margin-bottom:10px;">
+                    <img src="${escapeHtml(item.image)}" style="width:100%; max-width:200px; display:block; margin-bottom:10px;">
 
-                    <h3>${item.title || "Untitled"}</h3>
+                    <h3>${escapeHtml(item.title || "Untitled")}</h3>
 
-                    <p>${item.category || "General"}</p>
+                    <p>${escapeHtml(item.category || "General")}</p>
 
                     <button type="button" onclick="deleteImage(${item.id})">
                         Delete

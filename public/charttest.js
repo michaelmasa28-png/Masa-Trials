@@ -12,6 +12,16 @@
 
 const API = "";
 
+// ===============================
+// XSS SANITIZE
+// ===============================
+
+function escapeHtml(val) {
+    return String(val == null ? "" : val).replace(/[&<>"']/g, function(c) {
+        return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[c];
+    });
+}
+
 
 // ===============================
 // ELEMENTS
@@ -249,16 +259,16 @@ function renderConversationList(){
 
         item.innerHTML = `
 
-            <img src="${chat.image || 'images/default-avatar.png'}">
+            <img src="${escapeHtml(chat.image || 'images/default-avatar.png')}">
 
             <div>
-                <h4>${chat.name}</h4>
-                <p>${chat.last_message || ""}</p>
+                <h4>${escapeHtml(chat.name)}</h4>
+                <p>${escapeHtml(chat.last_message || "")}</p>
             </div>
 
             ${
                 chat.unread_count > 0
-                ? `<span class="unread-badge">${chat.unread_count}</span>`
+                ? `<span class="unread-badge">${Number(chat.unread_count) || 0}</span>`
                 : ""
             }
 
@@ -351,10 +361,10 @@ function renderMemberDirectory(members){
 
         item.innerHTML = `
             <div class="member-directory-avatar-wrap">
-                <div class="member-directory-avatar">${initials}</div>
-                <span class="status-dot ${statusClass}"></span>
+                <div class="member-directory-avatar">${escapeHtml(initials)}</div>
+                <span class="status-dot ${escapeHtml(statusClass)}"></span>
             </div>
-            <span class="member-directory-name">${member.full_name}</span>
+            <span class="member-directory-name">${escapeHtml(member.full_name)}</span>
         `;
 
         item.onclick = () => {
@@ -586,9 +596,9 @@ function createMessageBubble(message){
 
     bubble.innerHTML = `
 
-        <strong>${message.sender_name || "Member"}</strong>
+        <strong>${escapeHtml(message.sender_name || "Member")}</strong>
 
-        <p>${message.message}</p>
+        <p>${escapeHtml(message.message)}</p>
 
         <span class="message-time">
             ${formatTime(message.created_at)}

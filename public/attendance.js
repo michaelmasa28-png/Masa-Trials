@@ -3,6 +3,13 @@
 // Attendance Management JS
 // =====================================
 
+// XSS sanitize
+function escapeHtml(val) {
+    return String(val == null ? "" : val).replace(/[&<>"']/g, function(c) {
+        return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[c];
+    });
+}
+
 
 // ===============================
 // ELEMENTS
@@ -270,15 +277,15 @@ async function loadAttendance(){
                         <td>${index + 1}</td>
 
                         <td>
-                            ${member.full_name}
+                            ${escapeHtml(member.full_name)}
                         </td>
 
                         <td>
-                            ${member.time_in || "-"}
+                            ${escapeHtml(member.time_in || "-")}
                         </td>
 
                         <td>
-                            ${member.time_out || "-"}
+                            ${escapeHtml(member.time_out || "-")}
                         </td>
 
                         <td>
@@ -337,11 +344,11 @@ async function loadAttendance(){
                         </td>
 
                         <td>
-                            ${member.full_name}
+                            ${escapeHtml(member.full_name)}
                         </td>
 
                         <td>
-                            ${member.last_seen || "Never"}
+                            ${escapeHtml(member.last_seen || "Never")}
                         </td>
 
                     </tr>

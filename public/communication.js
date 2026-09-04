@@ -13,6 +13,13 @@ API
 const API_URL = window.location.origin;
 
 
+// XSS sanitize
+function escapeHtml(val) {
+    return String(val == null ? "" : val).replace(/[&<>"']/g, function(c) {
+        return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[c];
+    });
+
+
 /*==========================================================
 ENDPOINTS
 ==========================================================*/
@@ -393,7 +400,7 @@ function renderMembers(list){
 
             <img
 
-            src="${member.photo}"
+            src="${escapeHtml(member.photo)}"
 
             class="member-photo"
 
@@ -401,11 +408,11 @@ function renderMembers(list){
 
             <div class="member-info">
 
-                <h4>${member.full_name}</h4>
+                <h4>${escapeHtml(member.full_name)}</h4>
 
                 <p>
 
-                ${member.member_number}
+                ${escapeHtml(member.member_number)}
 
                 </p>
 
@@ -453,7 +460,7 @@ function renderInternalMembers(list){
 
             <img
 
-            src="${member.photo}"
+            src="${escapeHtml(member.photo)}"
 
             class="member-photo"
 
@@ -463,13 +470,13 @@ function renderInternalMembers(list){
 
                 <h4>
 
-                ${member.full_name}
+                ${escapeHtml(member.full_name)}
 
                 </h4>
 
                 <p>
 
-                ${member.member_number}
+                ${escapeHtml(member.member_number)}
 
                 </p>
 
@@ -1440,25 +1447,25 @@ function renderHistory(){
 
         <tr>
 
-            <td>${item.date}</td>
+            <td>${escapeHtml(item.date)}</td>
 
-            <td>${item.category}</td>
+            <td>${escapeHtml(item.category)}</td>
 
-            <td>${item.recipients}</td>
+            <td>${escapeHtml(item.recipients)}</td>
 
-            <td>${item.channel}</td>
+            <td>${escapeHtml(item.channel)}</td>
 
             <td>
 
-                <span class="badge ${item.status}">
+                <span class="badge ${escapeHtml(item.status)}">
 
-                    ${item.status}
+                    ${escapeHtml(item.status)}
 
                 </span>
 
             </td>
 
-            <td>${item.sent_by}</td>
+            <td>${escapeHtml(item.sent_by)}</td>
 
         </tr>
 

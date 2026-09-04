@@ -3,6 +3,13 @@
 // Gallery JavaScript
 // =====================================
 
+// XSS sanitize
+function escapeHtml(val) {
+    return String(val == null ? "" : val).replace(/[&<>"']/g, function(c) {
+        return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[c];
+    });
+}
+
 // Global State
 let images = [];
 let activeCategory = "All";
@@ -87,13 +94,13 @@ function displayGallery(items) {
         card.className = "gallery-card";
         card.innerHTML = `
             <img
-                src="${item.image}"
-                alt="${item.title}"
-                data-image="${item.image}"
+                src="${escapeHtml(item.image)}"
+                alt="${escapeHtml(item.title)}"
+                data-image="${escapeHtml(item.image)}"
             >
             <div class="caption">
-                <h3>${item.title}</h3>
-                <p>${item.category}</p>
+                <h3>${escapeHtml(item.title)}</h3>
+                <p>${escapeHtml(item.category)}</p>
             </div>
         `;
         gallery.appendChild(card);
