@@ -261,7 +261,7 @@ currentEditId = null;
 if(thumbnailPreview){
 
 thumbnailPreview.src =
-"../images/default-sermon.jpg";
+"images/default-sermon.jpg";
 
 }
 
