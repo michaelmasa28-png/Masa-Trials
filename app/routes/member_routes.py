@@ -311,6 +311,36 @@ async def upload_member_photo(
     return {"success": True, "photo": photo_url}
 
 
+# ==========================================
+# MY OWN PROFILE (member side)
+# Lets members see their own details and
+# today's attendance inside their portal.
+# ==========================================
+
+@router.get("/member/me")
+def get_my_profile(
+    current_member: Member = Depends(get_current_member),
+    db: Session = Depends(get_db),
+):
+
+    today = date.today()
+
+    checked_today = (
+        db.query(Attendance)
+        .filter(
+            Attendance.member_id == current_member.id,
+            Attendance.attendance_date == today,
+        )
+        .first()
+    )
+
+    return {
+        "success": True,
+        "member": serialize_member(current_member),
+        "checked_in_today": checked_today is not None,
+    }
+
+
 @router.get("/member/{member_id}")
 def get_member(
     member_id: int,

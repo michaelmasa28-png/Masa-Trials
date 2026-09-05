@@ -376,6 +376,60 @@ img{
 }
 
 /* ==========================
+   REMEMBER-ME HINT
+========================== */
+
+.remember-hint{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    margin:14px 0 4px;
+
+    padding:12px 14px;
+
+    border-radius:14px;
+
+    background:rgba(56,189,248,.12);
+
+    border:1px solid rgba(56,189,248,.3);
+
+    font-size:.9rem;
+
+    line-height:1.4;
+
+}
+
+.remember-hint strong{
+
+    color:#38bdf8;
+
+}
+
+.link-btn{
+
+    background:none;
+
+    border:none;
+
+    padding:0;
+
+    cursor:pointer;
+
+    color:#38bdf8;
+
+    font-weight:600;
+
+    font-size:.85rem;
+
+    text-decoration:underline;
+
+}
+
+/* ==========================
    SIGNUP & LOGIN CARDS
 ========================== */
 

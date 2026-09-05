@@ -1176,9 +1176,6 @@ setInterval(()=>{
 
 
 },60000);
-
-
-
 // ======================================
 // LOGOUT BUTTON SUPPORT
 // ======================================
@@ -1191,24 +1188,70 @@ document.getElementById(
 
 );
 
+const logoutModal =
 
+document.getElementById("logoutModal");
 
-if(logoutButton){
+const cancelLogoutBtn =
 
+document.getElementById("cancelLogout");
+
+const confirmLogoutBtn =
+
+document.getElementById("confirmLogout");
+
+// Ask for confirmation before logging out
+if(logoutButton && logoutModal){
 
     logoutButton.onclick =
 
     ()=>{
 
-
-        logoutMember();
-
+        logoutModal.hidden = false;
 
     };
 
+}
+
+if(cancelLogoutBtn && logoutModal){
+
+    cancelLogoutBtn.onclick =
+
+    ()=>{
+
+        logoutModal.hidden = true;
+
+    };
 
 }
 
+if(confirmLogoutBtn){
+
+    confirmLogoutBtn.onclick =
+
+    ()=>{
+
+        if(logoutModal) logoutModal.hidden = true;
+
+        logoutMember();
+
+    };
+
+}
+
+if(logoutModal){
+
+    logoutModal.addEventListener("click", function(e){
+
+        if(e.target === logoutModal){
+
+            logoutModal.hidden = true;
+
+        }
+
+    });
+
+}
 
 
 // ======================================
@@ -1503,6 +1546,111 @@ window.addEventListener(
 // ======================================
 
 // ======================================================
+// HOME HUB: GREETING, DATE & SESSION COUNTDOWN
+// ======================================================
+
+(function(){
+
+    const greetEl = document.getElementById("greetingText");
+
+    const dateEl = document.getElementById("todayDate");
+
+    const sessionChip = document.getElementById("sessionChip");
+
+    const checkinPill = document.getElementById("checkinPill");
+
+    const cur = getMemberSession();
+
+    const first =
+    (cur && cur.full_name || "Member").split(" ")[0];
+
+    // Time-of-day greeting + today's date
+    if(greetEl){
+        const hour = new Date().getHours();
+        const part =
+            hour < 12 ? "Good morning" :
+            hour < 17 ? "Good afternoon" : "Good evening";
+        greetEl.textContent = part + ", " + first + " ";
+    }
+
+    if(dateEl){
+        dateEl.textContent =
+        new Date().toLocaleDateString([], {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        });
+    }
+
+    // Ticking session countdown
+    let expiredHandled = false;
+
+    function formatCountdown(ms){
+        const totalMin = Math.floor(ms / 60000);
+        const h = Math.floor(totalMin / 60);
+        const m = totalMin % 60;
+        if(h > 0) return h + "h " + m + "m left";
+        return m + "m " + Math.floor((ms % 60000) / 1000) + "s left";
+    }
+
+    function tickCountdown(){
+
+        if(!sessionChip) return;
+
+        const ms = sessionRemaining();
+
+        if(ms <= 0){
+
+            if(!expiredHandled){
+                expiredHandled = true;
+                window.location.href = "btn.html";
+            }
+            sessionChip.textContent = "Session expired";
+            sessionChip.classList.add("session-warn");
+            return;
+        }
+
+        sessionChip.textContent = formatCountdown(ms);
+
+        if(ms < 10 * 60000){
+            sessionChip.classList.add("session-warn");
+        }
+        else{
+            sessionChip.classList.remove("session-warn");
+        }
+
+    }
+
+    tickCountdown();
+
+    setInterval(tickCountdown, 30000);
+
+    // Checked-in-today pill from the member's own profile
+    if(checkinPill){
+
+        const tok = (getMemberSession().access_token || "");
+
+        if(tok){
+
+            fetch(API + "/member/me", {
+                headers: { "Authorization": "Bearer " + tok }
+            })
+            .then(function(res){ return res.json(); })
+            .then(function(data){
+                if(data && data.success && data.checked_in_today){
+                    checkinPill.classList.remove("hidden");
+                }
+            })
+            .catch(function(){});
+
+        }
+
+    }
+
+})();
+
+// ======================================================
 // MY PROFILE PICTURE
 // Every member can upload their own photo.
 // It is saved to the server and shared everywhere.
@@ -1622,4 +1770,8 @@ window.addEventListener(
 
     });
 
-})();================
+})();
+
+// ======================================================
+// END CLIENT MODE
+// ======================================================

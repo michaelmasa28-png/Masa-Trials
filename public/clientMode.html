@@ -100,6 +100,28 @@
     <input type="file" id="profilePhotoInput" accept="image/*" hidden>
 </div>
 
+<div class="member-strip">
+
+    <div class="member-greeting">
+
+        <span id="greetingText">Hello</span>
+
+        <span id="todayDate" class="member-date"></span>
+
+    </div>
+
+    <div class="member-badges">
+
+        <span id="sessionChip" class="session-chip" title="Your session length"></span>
+
+        <span id="checkinPill" class="checkin-pill hidden">
+            <i class="fa-solid fa-circle-check"></i> Checked in today
+        </span>
+
+    </div>
+
+</div>
+
 <div class="theme-vision">
 
     <div class="info-box" id="infoBox">
@@ -134,6 +156,26 @@
     ========================== -->
 
     <main>
+
+        <div class="quick-actions">
+
+            <a class="quick-chip" href="offerings.html">
+                <i class="fa-solid fa-hand-holding-heart"></i><span>Give</span>
+            </a>
+
+            <a class="quick-chip" href="charttest.html">
+                <i class="fa-solid fa-comments"></i><span>Chat</span>
+            </a>
+
+            <a class="quick-chip" href="sermonsclient.html">
+                <i class="fa-solid fa-book-bible"></i><span>Sermons</span>
+            </a>
+
+            <a class="quick-chip" href="eventclient.html">
+                <i class="fa-solid fa-calendar-days"></i><span>Notices</span>
+            </a>
+
+        </div>
 
         <section class="cards">
 
@@ -376,6 +418,38 @@
         </div>
 
     </footer>
+
+    <!-- ==========================
+         LOGOUT CONFIRM MODAL
+    ========================== -->
+
+    <div id="logoutModal" class="logout-modal" hidden>
+
+        <div class="logout-modal-box">
+
+            <i class="fa-solid fa-arrow-right-from-bracket logout-modal-icon"></i>
+
+            <h3>Log out of KingdomWays?</h3>
+
+            <p>
+                You'll need to sign in again to access your member portal.
+            </p>
+
+            <div class="logout-modal-actions">
+
+                <button id="cancelLogout" class="logout-cancel" type="button">
+                    Stay
+                </button>
+
+                <button id="confirmLogout" class="logout-confirm" type="button">
+                    Log out
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <script src="clientMode.js"></script>
 

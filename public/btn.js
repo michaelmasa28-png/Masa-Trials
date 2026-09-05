@@ -40,6 +40,90 @@ const loginLoader = document.getElementById("loginLoader");
 const year = document.getElementById("year");
 
 // ======================================================
+// REMEMBER ME (convenience prefill)
+// ======================================================
+
+const REMEMBER_KEY = "rememberedMember";
+
+const rememberedHint = document.getElementById("rememberedHint");
+
+const rememberedName = document.getElementById("rememberedName");
+
+const clearRemembered = document.getElementById("clearRemembered");
+
+function rememberMember(name, phone) {
+
+    localStorage.setItem(
+
+        REMEMBER_KEY,
+
+        JSON.stringify({ full_name: name, phone: phone })
+
+    );
+
+    prefillRemembered();
+
+}
+
+function prefillRemembered() {
+
+    if (!rememberedHint) return;
+
+    let remembered = null;
+
+    try {
+
+        remembered = JSON.parse(
+
+            localStorage.getItem(REMEMBER_KEY) || "null"
+
+        );
+
+    }
+
+    catch (e) {
+
+        remembered = null;
+
+    }
+
+    if (!remembered || !remembered.phone) {
+
+        rememberedHint.style.display = "none";
+
+        return;
+
+    }
+
+    const phoneInput = document.getElementById("loginPhone");
+
+    const nameInput = document.getElementById("loginUsername");
+
+    if (phoneInput && !phoneInput.value) phoneInput.value = remembered.phone || "";
+
+    if (nameInput && !nameInput.value) nameInput.value = remembered.full_name || "";
+
+    if (rememberedName) rememberedName.textContent = remembered.full_name || "friend";
+
+    rememberedHint.style.display = "block";
+
+}
+
+if (clearRemembered) {
+
+    clearRemembered.addEventListener("click", function () {
+
+        localStorage.removeItem(REMEMBER_KEY);
+
+        if (rememberedHint) rememberedHint.style.display = "none";
+
+    });
+
+}
+
+document.addEventListener("DOMContentLoaded", prefillRemembered);
+
+// ======================================================
 // FOOTER YEAR
 // ======================================================
 
@@ -502,6 +586,8 @@ if (loginForm) {
                 access_token:data.access_token
 
             });
+
+            rememberMember(data.full_name || full_name, data.phone || phone);
 
             showSuccess(
 
