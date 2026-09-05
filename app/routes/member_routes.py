@@ -1,10 +1,11 @@
 import logging
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, File, UploadFile, HTTPException
 from sqlalchemy.orm import Session
 from datetime import datetime, date, timezone
 
-from app.dependencies import get_current_admin
+from app.dependencies import get_current_admin, get_current_member
+from app.services import storage
 
 logger = logging.getLogger(__name__)
 from app.auth import hash_password
@@ -42,6 +43,7 @@ def serialize_member(member: Member):
             member.date_of_birth.isoformat()
             if member.date_of_birth else None
         ),
+        "photo": member.photo or None,
         "email": member.email,
         "national_id": member.national_id,
         "occupation": member.occupation,
@@ -272,9 +274,42 @@ def member_login(
         "full_name": member.full_name,
         "phone": member.phone,
         "gender": member.gender,
+        "photo": member.photo or None,
         "is_active": member.is_active,
         "profile_completed": member.profile_completed
     }
+
+# ==========================================
+# UPLOAD OWN PROFILE PICTURE (member side)
+# Every member can set their own photo; it is
+# used everywhere (admin table, chat, giving).
+# ==========================================
+
+@router.put("/member/profile/photo")
+async def upload_member_photo(
+    image: UploadFile = File(...),
+    current_member: Member = Depends(get_current_member),
+    db: Session = Depends(get_db),
+):
+
+    if not image.content_type or not image.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="Please upload an image file.")
+
+    try:
+        photo_url = storage.upload_file_object(
+            image,
+            "profile_photos",
+            optimize_images=True,
+        )
+    except Exception as e:
+        logger.error("Profile photo upload failed: %s", e)
+        raise HTTPException(status_code=500, detail="Could not save the photo.")
+
+    current_member.photo = photo_url
+    db.commit()
+
+    return {"success": True, "photo": photo_url}
+
 
 @router.get("/member/{member_id}")
 def get_member(

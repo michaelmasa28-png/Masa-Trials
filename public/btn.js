@@ -493,6 +493,8 @@ if (loginForm) {
 
                 gender:data.gender,
 
+                photo:data.photo,
+
                 is_active:data.is_active,
 
                 profile_completed:data.profile_completed,

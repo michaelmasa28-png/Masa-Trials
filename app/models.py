@@ -245,6 +245,9 @@ class Member(Base):
 
     date_of_birth = Column(DateTime, nullable=True)
 
+    # Member-uploaded profile picture (Cloudinary URL or local path)
+    photo = Column(String(500), nullable=True)
+
     email = Column(String(120), unique=True, nullable=True)
 
     national_id = Column(String(30), nullable=True)

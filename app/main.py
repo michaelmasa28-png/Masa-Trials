@@ -62,8 +62,9 @@ Base.metadata.create_all(bind=engine)
 
 
 def _auto_migrate_postgres():
-    """Idempotently add columns missing from existing tables (PostgreSQL only)."""
-    if engine.dialect.name != "postgresql":
+    """Idempotently add columns missing from existing tables (PostgreSQL + SQLite)."""
+    dialect = engine.dialect.name
+    if dialect not in ("postgresql", "sqlite"):
         return
     from sqlalchemy import text
 
@@ -73,17 +74,26 @@ def _auto_migrate_postgres():
             ("reference", "varchar(255)"),
             ("merchant_request_id", "varchar(150)"),
         ],
+        "members": [
+            ("photo", "varchar(500)"),
+        ],
     }
+
+    def _existing_columns(conn, table):
+        if dialect == "sqlite":
+            rows = conn.execute(text(f'PRAGMA table_info("{table}")')).fetchall()
+            return {row[1] for row in rows}
+        return {
+            row[0] for row in conn.execute(text(
+                "SELECT column_name FROM information_schema.columns "
+                "WHERE table_name = :t"
+            ), {"t": table})
+        }
 
     with engine.begin() as conn:
         for table, columns in migration_sql.items():
             try:
-                existing = {
-                    row[0] for row in conn.execute(text(
-                        "SELECT column_name FROM information_schema.columns "
-                        "WHERE table_name = :t"
-                    ), {"t": table})
-                }
+                existing = _existing_columns(conn, table)
             except Exception:
                 continue
             for col, ddl in columns:

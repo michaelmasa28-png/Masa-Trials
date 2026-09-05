@@ -1500,4 +1500,126 @@ window.addEventListener(
 
 // ======================================================
 // END CLIENT MODE
+// ======================================
+
 // ======================================================
+// MY PROFILE PICTURE
+// Every member can upload their own photo.
+// It is saved to the server and shared everywhere.
+// ======================================================
+
+(function(){
+
+    const SESSION_KEY_LOCAL = SESSION_KEY;
+
+    const avatarBox =
+    document.getElementById("profilePhotoBox");
+
+    const avatarImg =
+    document.getElementById("memberAvatar");
+
+    const avatarInput =
+    document.getElementById("profilePhotoInput");
+
+    if(!avatarBox || !avatarImg || !avatarInput){
+        return;
+    }
+
+    const getSessionData = function(){
+        try{
+            return JSON.parse(
+                localStorage.getItem(SESSION_KEY_LOCAL) || "{}"
+            );
+        }
+        catch(e){
+            return {};
+        }
+    };
+
+    const defaultPhoto =
+    "images/member.png";
+
+    const showPhoto = function(url){
+        avatarImg.src = url || defaultPhoto;
+    };
+
+    const current =
+    getSessionData();
+
+    showPhoto(current.photo);
+
+    avatarBox.addEventListener("click", function(){
+        avatarInput.click();
+    });
+
+    avatarInput.addEventListener("change", async function(){
+
+        const file = avatarInput.files && avatarInput.files[0];
+
+        if(!file){
+            return;
+        }
+
+        if(file.size > 5 * 1024 * 1024){
+            alert("Photo must be smaller than 5 MB.");
+            avatarInput.value = "";
+            return;
+        }
+
+        avatarBox.classList.add("uploading");
+
+        try{
+
+            const s =
+            getSessionData();
+
+            const token =
+            s.access_token || "";
+
+            if(!token){
+                alert("Your session expired. Please log in again.");
+                window.location.href = "btn.html";
+                return;
+            }
+
+            const form = new FormData();
+            form.append("image", file, file.name);
+
+            const res = await fetch(
+                API + "/member/profile/photo",
+                {
+                    method: "PUT",
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    },
+                    body: form
+                }
+            );
+
+            const data = await res.json().catch(function(){
+                return {};
+            });
+
+            if(!res.ok || !data.success){
+                alert(data.detail || data.message || "Could not save your photo.");
+                return;
+            }
+
+            s.photo = data.photo;
+            localStorage.setItem(SESSION_KEY_LOCAL, JSON.stringify(s));
+
+            showPhoto(data.photo);
+
+        }
+        catch(e){
+            console.error("Photo upload failed:", e);
+            alert("Upload failed. Check your connection and try again.");
+        }
+        finally{
+            avatarBox.classList.remove("uploading");
+            avatarInput.value = "";
+        }
+
+    });
+
+})();================
